@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const db = "";
+require("dotenv").config();
+const db = process.env.MONGO_URI;
 mongoose.set("strictQuery", true, "useNewUrlParser", true);
 
 const connectDB = async () => {
