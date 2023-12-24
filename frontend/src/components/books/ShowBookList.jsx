@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BookCard from "./BookCard";
@@ -24,7 +24,7 @@ function ShowBookList() {
       : books.map((book, k) => <BookCard book={book} key={k} />);
 
   return (
-    <div className="ShowBookList">
+    <div className="ShowEntryList">
       <div className="container">
         <div className="row">
           <div className="col-md-12">

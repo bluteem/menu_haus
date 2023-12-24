@@ -4,7 +4,6 @@ require("dotenv").config();
 const db = process.env.MONGO_URI;
 const dbName = process.env.MONGO_DB_NAME || "test"; // Use "test" as a default if not specified
 
-
 mongoose.set("strictQuery", true, "useNewUrlParser", true);
 
 const connectDB = async () => {
