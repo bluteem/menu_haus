@@ -1,6 +1,8 @@
 // frontend/src/App.js
 // import logo from './logo.svg';
 // import './App.css';
+import './tailwind.css'; // Import Tailwind CSS
+
 import Menu from './components/Menu';
 import AddMenuItemForm from './components/AddMenuItemForm'; // Import the AddMenuItemForm component
 
