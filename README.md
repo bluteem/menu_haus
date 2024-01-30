@@ -37,8 +37,4 @@ Setup: Clone the repository and follow the installation instructions in the READ
 
 Menu Haus is an open-source project! We welcome contributions from the community.
 
-Note: Initial code is based on:
-
-https://blog.logrocket.com/mern-stack-tutorial/
-
 Join the Menu Haus experience and transform your restaurant into a haven of convenience and personalized service!
