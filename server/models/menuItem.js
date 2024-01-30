@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const menuItemSchema = new mongoose.Schema({
     name: {
@@ -6,7 +6,7 @@ const menuItemSchema = new mongoose.Schema({
         required: true,
     },
     images: {
-        type: [String],
+        type: [String], // Changed to an array of strings
         required: true,
     },
     category: {
@@ -23,6 +23,6 @@ const menuItemSchema = new mongoose.Schema({
     },
 });
 
-const menuItem = mongoose.model("MenuItem", menuItemSchema);
+const MenuItem = mongoose.model("MenuItem", menuItemSchema); // Changed to MenuItem
 
-export default menuItem;
+export default MenuItem; // Changed to MenuItem
