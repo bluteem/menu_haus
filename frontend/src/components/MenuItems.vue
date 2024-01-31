@@ -79,10 +79,10 @@
         <div
           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">Add New Menu Item</h3>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Menu Item</h3>
             <div class="mt-5">
               <!-- Add Menu Item Form -->
-              <form @submit.prevent="addMenuItem">
+              <form @submit.prevent="updateMenuItem">
                 <!-- Form fields go here -->
                 <div class="mb-4">
                   <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
@@ -117,7 +117,7 @@
 
                 <button type="submit"
                   class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
-                  Add Item
+                  Edit Item
                 </button>
               </form>
             </div>
@@ -146,7 +146,7 @@
           <p class="text-gray-600">Price: ${{ menuItem.price }}</p>
           <!-- Edit and Delete buttons -->
           <div class="flex">
-            <button @click="showModal2 = true; getMenuItem(menuItem._id)" type="button"
+            <button @click="getMenuItem(menuItem._id)" type="button"
               class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Edit</button>
             <button @click="deleteMenuItem(menuItem._id)"
               class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">Delete</button>
@@ -188,23 +188,57 @@ export default {
     },
     async getMenuItem(itemId) {
       try {
-        await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
-        // Filter out the deleted menu item from the menuItems array
-        this.menuItems = this.menuItems.filter(item => item._id !== itemId);
+        const response = await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
+        const menuItem = response.data.menuItem;
+
+        // Populate the form fields with the retrieved menu item data
+        this.newMenuItem = {
+          _id: menuItem._id,
+          name: menuItem.name,
+          images: menuItem.images.join(','),
+          category: menuItem.category,
+          description: menuItem.description,
+          price: menuItem.price
+        };
+
+        this.showModal2 = true;
       } catch (error) {
-        console.error('Error deleting menu item:', error);
-        alert('Failed to get menu item. Please try again later.');
+        console.error('Error fetching menu item:', error);
+        alert('Failed to fetch menu item details. Please try again later.');
+      }
+    },
+    async updateMenuItem() {
+      try {
+        const response = await axios.put(`http://localhost:5000/api/menuitems/${this.newMenuItem._id}`, this.newMenuItem);
+
+        // Retrieve the updated menu item from the response
+        const updatedMenuItem = response.data.menuItem;
+
+        // Find the index of the updated menu item in the menuItems array
+        const updatedItemIndex = this.menuItems.findIndex(item => item._id === updatedMenuItem._id);
+
+        // If the updated menu item exists in the array, replace it with the updated version
+        if (updatedItemIndex !== -1) {
+          this.menuItems.splice(updatedItemIndex, 1, updatedMenuItem);
+        }
+
+        this.showModal2 = false;
+        this.resetForm();
+
+        alert('Menu item updated successfully!');
+      } catch (error) {
+        console.error('Error updating menu item:', error);
+        alert('Failed to update menu item. Please try again later.');
       }
     },
     async addMenuItem() {
       try {
         const response = await axios.post('http://localhost:5000/api/menuitems', this.newMenuItem);
         this.menuItems.push(response.data.menuItem);
-        // Close the modal after adding the menu item
-        this.showModal = false;
-        // Reset form fields
-        this.newMenuItem.name = '';
-        // Reset other form fields for images, category, description, and price
+
+        this.showModal1 = false;
+        this.resetForm();
+
         alert('Menu item added successfully!');
       } catch (error) {
         console.error('Error adding menu item:', error);
@@ -222,6 +256,16 @@ export default {
         alert('Failed to delete menu item. Please try again later.');
       }
     },
+    resetForm() {
+    this.newMenuItem = {
+      _id: null,
+      name: '',
+      images: '',
+      category: '',
+      description: '',
+      price: null,
+    };
+  },
   },
   mounted() {
     this.fetchMenuItems(); // Fetch menu items when the component is mounted
