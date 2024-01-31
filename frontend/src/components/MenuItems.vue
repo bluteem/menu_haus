@@ -1,3 +1,4 @@
+<!-- MenuItems.vue -->
 <template>
   <div class="container mx-auto py-6">
     <h1 class="text-3xl font-bold mb-4">Menu Items</h1>
@@ -27,10 +28,8 @@
                   <input type="text" v-model="newMenuItem.name" id="name" required
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                 </div>
-
                 <div class="mb-4">
-                  <label for="images" class="block text-sm font-medium text-gray-700">Images (Separate with commas if
-                    multiple):</label>
+                  <label for="images" class="block text-sm font-medium text-gray-700">Images (Separate with commas if multiple):</label>
                   <input type="text" v-model="newMenuItem.images" id="images" required
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                 </div>
@@ -117,7 +116,7 @@
 
                 <button type="submit"
                   class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
-                  Edit Item
+                  Save
                 </button>
               </form>
             </div>
@@ -162,6 +161,7 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
 import axios from 'axios'; // Import the Axios library
 import Alert from '@/components/Alert.vue';
 
@@ -172,7 +172,7 @@ export default {
       showModal2: false,
       newMenuItem: {
         name: '',
-        images: '', // Add an empty string for images
+        images: [], // Add an empty string for images
         category: '', // Add an empty string for category
         description: '', // Add an empty string for description
         price: null, // Add null for price, assuming it's a number
