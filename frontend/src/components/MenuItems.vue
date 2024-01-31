@@ -157,10 +157,13 @@
     <!-- Show message if there are no menu items -->
     <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
   </div>
+
+  <Alert ref="Alert" />
 </template>
 
 <script>
 import axios from 'axios'; // Import the Axios library
+import Alert from '@/components/Alert.vue';
 
 export default {
   data() {
@@ -176,6 +179,9 @@ export default {
       },
       menuItems: [] // Initialize an empty array to store menu items
     };
+  },
+  components: {
+    Alert
   },
   methods: {
     async fetchMenuItems() {
@@ -204,7 +210,7 @@ export default {
         this.showModal2 = true;
       } catch (error) {
         console.error('Error fetching menu item:', error);
-        alert('Failed to fetch menu item details. Please try again later.');
+        this.$refs.Alert.showAlert('Failed to fetch menu item details. Please try again later.');
       }
     },
     async updateMenuItem() {
@@ -225,10 +231,10 @@ export default {
         this.showModal2 = false;
         this.resetForm();
 
-        alert('Menu item updated successfully!');
+        this.$refs.Alert.showAlert('Menu item updated successfully!');
       } catch (error) {
         console.error('Error updating menu item:', error);
-        alert('Failed to update menu item. Please try again later.');
+        this.$refs.Alert.showAlert('Failed to update menu item. Please try again later.');
       }
     },
     async addMenuItem() {
@@ -239,10 +245,10 @@ export default {
         this.showModal1 = false;
         this.resetForm();
 
-        alert('Menu item added successfully!');
+        this.$refs.Alert.showAlert('Menu item added successfully!');
       } catch (error) {
         console.error('Error adding menu item:', error);
-        alert('Failed to add menu item. Please try again later.');
+        this.$refs.Alert.showAlert('Failed to add menu item. Please try again later.!');
       }
     },
     async deleteMenuItem(itemId) {
@@ -250,22 +256,22 @@ export default {
         await axios.delete(`http://localhost:5000/api/menuitems/${itemId}`);
         // Filter out the deleted menu item from the menuItems array
         this.menuItems = this.menuItems.filter(item => item._id !== itemId);
-        alert('Menu item deleted successfully!');
+        this.$refs.Alert.showAlert('Menu item deleted successfully!');
       } catch (error) {
         console.error('Error deleting menu item:', error);
-        alert('Failed to delete menu item. Please try again later.');
+        this.$refs.Alert.showAlert('Failed to delete menu item. Please try again later.');
       }
     },
     resetForm() {
-    this.newMenuItem = {
-      _id: null,
-      name: '',
-      images: '',
-      category: '',
-      description: '',
-      price: null,
-    };
-  },
+      this.newMenuItem = {
+        _id: null,
+        name: '',
+        images: '',
+        category: '',
+        description: '',
+        price: null,
+      };
+    },
   },
   mounted() {
     this.fetchMenuItems(); // Fetch menu items when the component is mounted
