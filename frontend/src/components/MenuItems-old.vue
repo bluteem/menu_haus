@@ -21,7 +21,7 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900">Add New Menu Item</h3>
             <div class="mt-5">
               <!-- Add Menu Item Form -->
-              <form @submit.prevent="addMenuItem($refs.Alert)">
+              <form @submit.prevent="addMenuItem">
                 <!-- Form fields go here -->
                 <div class="mb-4">
                   <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
@@ -81,7 +81,7 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Menu Item</h3>
             <div class="mt-5">
               <!-- Add Menu Item Form -->
-              <form @submit.prevent="updateMenuItem($refs.Alert)">
+              <form @submit.prevent="updateMenuItem">
                 <!-- Form fields go here -->
                 <div class="mb-4">
                   <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
@@ -145,9 +145,9 @@
           <p class="text-gray-600">Price: ${{ menuItem.price }}</p>
           <!-- Edit and Delete buttons -->
           <div class="flex">
-            <button @click="getMenuItem(menuItem._id, $refs.Alert)" type="button"
+            <button @click="getMenuItem(menuItem._id)" type="button"
               class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Edit</button>
-            <button @click="deleteMenuItem(menuItem._id, $refs.Alert)"
+            <button @click="deleteMenuItem(menuItem._id)"
               class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">Delete</button>
           </div>
         </div>
@@ -162,42 +162,43 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import axios from 'axios'; // Import the Axios library
 import Alert from '@/components/Alert.vue';
 
 export default {
+  data() {
+    return {
+      showModal1: false,
+      showModal2: false,
+      newMenuItem: {
+        name: '',
+        images: [], // Add an empty string for images
+        category: '', // Add an empty string for category
+        description: '', // Add an empty string for description
+        price: null, // Add null for price, assuming it's a number
+      },
+      menuItems: [] // Initialize an empty array to store menu items
+    };
+  },
   components: {
     Alert
   },
-  setup() {
-    // Reactive variables
-    const showModal1 = ref(false);
-    const showModal2 = ref(false);
-    const newMenuItem = ref({
-      name: '',
-      images: [],
-      category: '',
-      description: '',
-      price: null,
-    });
-    const menuItems = ref([]);
-
-    // Fetch menu items when the component is mounted
-    onMounted(async () => {
+  methods: {
+    async fetchMenuItems() {
       try {
         const response = await axios.get('http://localhost:5000/api/menuitems');
-        menuItems.value = response.data.menuItems;
+        this.menuItems = response.data.menuItems;
       } catch (error) {
         console.error('Error fetching menu items:', error);
       }
-    });
-
-    // Fetch a single menu item
-    const getMenuItem = async (itemId, alertRef) => {
+    },
+    async getMenuItem(itemId) {
       try {
         const response = await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
         const menuItem = response.data.menuItem;
-        newMenuItem.value = {
+
+        // Populate the form fields with the retrieved menu item data
+        this.newMenuItem = {
           _id: menuItem._id,
           name: menuItem.name,
           images: menuItem.images.join(','),
@@ -205,67 +206,64 @@ export default {
           description: menuItem.description,
           price: menuItem.price
         };
-        showModal2.value = true;
+
+        this.showModal2 = true;
       } catch (error) {
         console.error('Error fetching menu item:', error);
-        // Show alert if failed to fetch menu item details
-        alertRef.showAlert('Failed to fetch menu item details. Please try again later.');
+        this.$refs.Alert.showAlert('Failed to fetch menu item details. Please try again later.');
       }
-    };
-
-    // Update a menu item
-    const updateMenuItem = async (alertRef) => {
+    },
+    async updateMenuItem() {
       try {
-        const response = await axios.put(`http://localhost:5000/api/menuitems/${newMenuItem.value._id}`, newMenuItem.value);
+        const response = await axios.put(`http://localhost:5000/api/menuitems/${this.newMenuItem._id}`, this.newMenuItem);
+
+        // Retrieve the updated menu item from the response
         const updatedMenuItem = response.data.menuItem;
-        const updatedItemIndex = menuItems.value.findIndex(item => item._id === updatedMenuItem._id);
+
+        // Find the index of the updated menu item in the menuItems array
+        const updatedItemIndex = this.menuItems.findIndex(item => item._id === updatedMenuItem._id);
+
+        // If the updated menu item exists in the array, replace it with the updated version
         if (updatedItemIndex !== -1) {
-          menuItems.value.splice(updatedItemIndex, 1, updatedMenuItem);
+          this.menuItems.splice(updatedItemIndex, 1, updatedMenuItem);
         }
-        showModal2.value = false;
-        resetForm();
-        // Show success alert
-        alertRef.showAlert('Menu item updated successfully!');
+
+        this.showModal2 = false;
+        this.resetForm();
+
+        this.$refs.Alert.showAlert('Menu item updated successfully!');
       } catch (error) {
         console.error('Error updating menu item:', error);
-        // Show error alert if failed to update menu item
-        alertRef.showAlert('Failed to update menu item. Please try again later.');
+        this.$refs.Alert.showAlert('Failed to update menu item. Please try again later.');
       }
-    };
-
-    // Add a new menu item
-    const addMenuItem = async (alertRef) => {
+    },
+    async addMenuItem() {
       try {
-        const response = await axios.post('http://localhost:5000/api/menuitems', newMenuItem.value);
-        menuItems.value.push(response.data.menuItem);
-        showModal1.value = false;
-        resetForm();
-        // Show success alert using the passed alertRef
-        alertRef.showAlert('Menu item added successfully!');
+        const response = await axios.post('http://localhost:5000/api/menuitems', this.newMenuItem);
+        this.menuItems.push(response.data.menuItem);
+
+        this.showModal1 = false;
+        this.resetForm();
+
+        this.$refs.Alert.showAlert('Menu item added successfully!');
       } catch (error) {
         console.error('Error adding menu item:', error);
-        // Show error alert using the passed alertRef if failed to add menu item
-        alertRef.showAlert('Failed to add menu item. Please try again later.');
+        this.$refs.Alert.showAlert('Failed to add menu item. Please try again later.!');
       }
-    };
-
-    // Delete a menu item
-    const deleteMenuItem = async (itemId, alertRef) => {
+    },
+    async deleteMenuItem(itemId) {
       try {
         await axios.delete(`http://localhost:5000/api/menuitems/${itemId}`);
-        menuItems.value = menuItems.value.filter(item => item._id !== itemId);
-        // Show success alert
-        alertRef.showAlert('Menu item deleted successfully!');
+        // Filter out the deleted menu item from the menuItems array
+        this.menuItems = this.menuItems.filter(item => item._id !== itemId);
+        this.$refs.Alert.showAlert('Menu item deleted successfully!');
       } catch (error) {
         console.error('Error deleting menu item:', error);
-        // Show error alert if failed to delete menu item
-        alertRef.showAlert('Failed to delete menu item. Please try again later.');
+        this.$refs.Alert.showAlert('Failed to delete menu item. Please try again later.');
       }
-    };
-
-    // Reset form fields
-    const resetForm = () => {
-      newMenuItem.value = {
+    },
+    resetForm() {
+      this.newMenuItem = {
         _id: null,
         name: '',
         images: '',
@@ -273,19 +271,10 @@ export default {
         description: '',
         price: null,
       };
-    };
-
-    return {
-      showModal1,
-      showModal2,
-      newMenuItem,
-      menuItems,
-      getMenuItem,
-      updateMenuItem,
-      addMenuItem,
-      deleteMenuItem,
-      resetForm
-    };
+    },
+  },
+  mounted() {
+    this.fetchMenuItems(); // Fetch menu items when the component is mounted
   }
 };
 </script>
