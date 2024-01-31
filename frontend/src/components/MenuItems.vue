@@ -1,6 +1,6 @@
 <!-- MenuItems.vue -->
 <template>
-  <div class="container mx-auto py-6">
+  <div class="container mx-auto py-6 px-6">
     <h1 class="text-3xl font-bold mb-4">Menu Items</h1>
 
     <!-- Add Menu Item Button -->
@@ -10,7 +10,7 @@
     </button>
 
     <!-- Modal for adding a new menu item -->
-    <div v-if="showModal1" class="fixed z-10 inset-0 overflow-y-auto">
+    <div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
       <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
@@ -28,8 +28,10 @@
                   <input type="text" v-model="newMenuItem.name" id="name" required
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                 </div>
+                
                 <div class="mb-4">
-                  <label for="images" class="block text-sm font-medium text-gray-700">Images (Separate with commas if multiple):</label>
+                  <label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
+                  <div id="my-dropzone" class="border-gray-300 dropzone"></div>
                   <input type="text" v-model="newMenuItem.images" id="images" required
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                 </div>
@@ -70,7 +72,7 @@
     </div>
 
     <!-- Modal for editing menu item -->
-    <div v-if="showModal2" class="fixed z-10 inset-0 overflow-y-auto">
+    <div :style="{ display: showModal2 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
       <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
@@ -165,6 +167,9 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import Alert from '@/components/Alert.vue';
 
+import Dropzone from 'dropzone';
+import 'dropzone/dist/dropzone.css';
+
 export default {
   components: {
     Alert
@@ -189,6 +194,34 @@ export default {
         menuItems.value = response.data.menuItems;
       } catch (error) {
         console.error('Error fetching menu items:', error);
+      }
+      try {
+        const dropzoneElement = document.getElementById("my-dropzone");
+        if (!dropzoneElement) {
+          console.error('Dropzone element not found.');
+          return;
+        }
+
+        const myDropzone = new Dropzone(dropzoneElement, {
+          url: 'http://localhost:5000/api/upload', // Your upload endpoint
+          paramName: 'file', // Name of the file parameter
+          maxFilesize: 10, // Maximum file size in MB
+          acceptedFiles: 'image/*', // Accepted file types
+          autoProcessQueue: true, // Disable auto upload
+        });
+
+        // Event listeners
+        myDropzone.on('addedfile', (file) => {
+          // File added
+          console.log('Added file:', file);
+        });
+
+        myDropzone.on('error', (file, message) => {
+          // Error handling
+          console.error('Error uploading file:', message);
+        });
+      } catch (error) {
+        console.error('Error initiating dropzone:', error);
       }
     });
 
@@ -248,6 +281,7 @@ export default {
         alertRef.showAlert('Failed to add menu item. Please try again later.');
       }
     };
+
 
     // Delete a menu item
     const deleteMenuItem = async (itemId, alertRef) => {

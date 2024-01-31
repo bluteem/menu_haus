@@ -18,26 +18,23 @@ app.use(express.json());
 app.use(cors());
 
 
-// handle file uploads
+// Set up Multer storage
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../frontend/public/images'); // Destination folder for uploaded images
+      cb(null, './frontend/public/images'); // Destination directory where files will be saved
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname); // Use the original filename
+      cb(null, Date.now() + '-' + file.originalname); // File naming strategy (e.g., appending timestamp to filename)
     }
-  });
+});
 
 const upload = multer({ storage: storage });
 
-app.post('/api/upload', upload.single('images'), (req, res) => {
-    try {
-      res.status(201).json({ message: 'File uploaded successfully' });
-    } catch (error) {
-      console.error('Error uploading file:', error);
-      res.status(500).json({ error: 'Failed to upload file' });
-    }
-});
+// Define route to handle file uploads
+app.post('/api/upload', upload.single('file'), (req, res) => {
+    // Handle file upload here
+    res.status(200).json({ message: 'File uploaded successfully' });
+  });
   
 
 // Use existing menu item routes
