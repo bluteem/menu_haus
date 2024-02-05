@@ -36,6 +36,7 @@
     <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
   </div>
 
+ 
   <!-- Modal for adding a new menu item -->
   <div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -125,8 +126,15 @@
               </div>
 
               <div class="mb-4">
-                <label for="images" class="block text-sm font-medium text-gray-700">Images (Separate with commas if
-                  multiple):</label>
+                <!-- Display images -->
+                <div v-if="newMenuItem.images && newMenuItem.images.length">
+                  <p class="block text-sm font-medium text-gray-700 mb-1 mt-3">Previews:</p>
+                  <div class="flex mb-4">
+                    <img v-for="(image, index) in newMenuItem.images.split(',')" :key="index"
+                      :src="'/images/' + image.trim()" :alt="newMenuItem.name" class="w-24 h-24 object-cover rounded-md mr-2">
+                  </div>
+                </div>
+                <label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
                 <input type="text" v-model="newMenuItem.images" id="images" required
                   class="mt-1 p-2 border border-gray-300 rounded-md w-full">
               </div>
