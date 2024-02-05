@@ -18,23 +18,25 @@ app.use(express.json());
 app.use(cors());
 
 
-// Set up Multer storage
+// Set up Multer storage for handling multiple files
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './frontend/public/images'); // Destination directory where files will be saved
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' + file.originalname); // File naming strategy (e.g., appending timestamp to filename)
-    }
+  destination: function (req, file, cb) {
+    cb(null, './frontend/public/images'); // Destination directory where files will be saved
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9); // Adding random suffix to avoid filename conflicts
+    cb(null, uniqueSuffix + '-' + file.originalname); // File naming strategy
+  }
 });
 
 const upload = multer({ storage: storage });
 
 // Define route to handle file uploads
-app.post('/api/upload', upload.single('file'), (req, res) => {
-    // Handle file upload here
-    res.status(200).json({ message: 'File uploaded successfully' });
-  });
+app.post('/api/upload', upload.array('files'), (req, res) => {
+  // Handle file upload here
+  const fileNames = req.files.map(file => file.filename);
+  res.status(200).json({ fileNames: fileNames });
+});
   
 
 // Use existing menu item routes

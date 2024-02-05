@@ -15,7 +15,7 @@
       <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
         <!-- Left column for the image -->
         <div class="w-32 mr-4">
-          <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
+          <img :src="menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
         </div>
         <!-- Right column for the text content -->
         <div class="flex-grow">
@@ -58,15 +58,12 @@
             
               <div class="mb-4">
                 <label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
-                <input type="file" ref="fileInputRef" multiple @change="handleFileUpload">
-                <div v-if="uploadedFiles.length > 0">
-                  <p>Uploaded Files:</p>
-                  <ul>
-                    <li v-for="(fileName, index) in uploadedFiles" :key="index">{{ fileName }}</li>
-                  </ul>
+                <div id="my-dropzone" class="border-gray-300 dropzone"></div>
+                <div>
+                  <p v-for="imageName in newMenuItem.images" :key="imageName">{{ imageName }}</p>
                 </div>
-                <!-- Hidden input to store file names for submission -->
-                <input type="hidden" name="fileNames" :value="fileNamesString">
+                <input type="hidden" v-model="newMenuItem.images" id="images"
+                  class="mt-1 p-2 border border-gray-300 rounded-md w-full">
               </div>
 
               <div class="mb-4">
@@ -95,7 +92,7 @@
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button @click="showModal1 = false ; resetForm()" type="button"
+          <button @click="showModal1 = false" type="button"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
             Close
           </button>
@@ -157,7 +154,7 @@
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button @click="showModal2 = false; resetForm()" type="button"
+          <button @click="showModal2 = false" type="button"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
             Close
           </button>
@@ -170,9 +167,11 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import axios from 'axios';
 import Alert from '@/components/Alert.vue';
+import Dropzone from 'dropzone';
+import 'dropzone/dist/dropzone.css';
 
 export default {
   components: {
@@ -190,8 +189,6 @@ export default {
       price: null,
     });
     const menuItems = ref([]);
-    const uploadedFiles = ref([]);
-    const fileInputRef = ref(null);    
 
     // Fetch menu items when the component is mounted
     onMounted(async () => {
@@ -200,6 +197,42 @@ export default {
         menuItems.value = response.data.menuItems;
       } catch (error) {
         console.error('Error fetching menu items:', error);
+      }
+
+      try {
+        const dropzoneElement = document.getElementById("my-dropzone");
+        if (!dropzoneElement) {
+          console.error('Dropzone element not found.');
+          return;
+        }
+
+        const myDropzone = new Dropzone(dropzoneElement, {
+          url: 'http://localhost:5000/api/upload', // Your upload endpoint
+          paramName: 'file', // Name of the file parameter
+          maxFilesize: 10, // Maximum file size in MB
+          acceptedFiles: 'image/*', // Accepted file types
+          autoProcessQueue: true, // Disable auto upload
+        });
+
+        // Event listener for when a file is added
+        myDropzone.on("addedfile", function (file) {
+          // Update newMenuItem.images with the new file name
+          if (!newMenuItem.images) {
+            newMenuItem.images = [];
+          } else {
+            newMenuItem.images.push(file.name);
+          }
+        });
+
+        // Event listener for when a file is removed
+        myDropzone.on("removedfile", function (file) {
+          // Update newMenuItem.images by removing the file name
+          const fileName = file.name;
+          newMenuItem.images = newMenuItem.images.filter(name => name !== fileName);
+        });
+
+      } catch (error) {
+        console.error('Error initiating dropzone:', error);
       }
     });
 
@@ -249,7 +282,7 @@ export default {
       try {
         const response = await axios.post('http://localhost:5000/api/menuitems', {
           name: newMenuItem.value.name,
-          images: uploadedFiles.value, // Include the images field
+          images: newMenuItem.value.images, // Include the images field
           category: newMenuItem.value.category,
           description: newMenuItem.value.description,
           price: newMenuItem.value.price
@@ -279,7 +312,7 @@ export default {
         // Show error alert if failed to delete menu item
         alertRef.showAlert('Failed to delete menu item. Please try again later.');
       }
-    };
+    };  
 
     // Reset form fields
     const resetForm = () => {
@@ -291,38 +324,7 @@ export default {
         description: '',
         price: null,
       };
-      uploadedFiles.value = []; // Clear the uploaded files
-
-      // Reset the file input field
-      if (fileInputRef.value) {
-        fileInputRef.value.value = ''; // Reset the value of the file input field
-      }
     };
-
-    // Handle file upload
-    const handleFileUpload = async () => {
-      const files = fileInputRef.value.files;
-      const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        formData.append('files', files[i]);
-      }
-      try {
-        const response = await axios.post('http://localhost:5000/api/upload', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        const uploadedFileNames = response.data.fileNames;
-        uploadedFiles.value = uploadedFileNames;
-        newMenuItem.value.images = uploadedFileNames;
-        console.log('Files uploaded successfully:', uploadedFileNames);
-      } catch (error) {
-        console.error('Error uploading files:', error);
-      }
-    };
-
-    // Computed property to generate comma-separated string of file names
-    const fileNamesString = computed(() => uploadedFiles.value.join(','));
 
     return {
       showModal1,
@@ -333,11 +335,7 @@ export default {
       updateMenuItem,
       addMenuItem,
       deleteMenuItem,
-      resetForm,
-      uploadedFiles,
-      fileInputRef,
-      handleFileUpload,
-      fileNamesString
+      resetForm
     };
   }
 };
