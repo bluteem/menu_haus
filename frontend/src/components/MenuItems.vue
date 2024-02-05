@@ -32,8 +32,8 @@
                 <div class="mb-4">
                   <label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
                   <div id="my-dropzone" class="border-gray-300 dropzone"></div>
-                  <input type="text" v-model="newMenuItem.images" id="images" required
-                    class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                  <input type="text" v-model="newMenuItem.images" id="images"
+                    class="mt-1 p-2 border border-gray-300 rounded-md w-full invisible">
                 </div>
 
                 <div class="mb-4">
@@ -163,7 +163,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import axios from 'axios';
 import Alert from '@/components/Alert.vue';
 
@@ -210,15 +210,21 @@ export default {
           autoProcessQueue: true, // Disable auto upload
         });
 
-        // Event listeners
-        myDropzone.on('addedfile', (file) => {
-          // File added
-          console.log('Added file:', file);
+        // Event listener for when a file is added
+        myDropzone.on("addedfile", function (file) {
+          // Update newMenuItem.images with the new file name
+          if (!newMenuItem.images) {
+            Vue.set(newMenuItem, 'images', [file.name]);
+          } else {
+            newMenuItem.images.push(file.name);
+          }
         });
 
-        myDropzone.on('error', (file, message) => {
-          // Error handling
-          console.error('Error uploading file:', message);
+        // Event listener for when a file is removed
+        myDropzone.on("removedfile", function (file) {
+          // Update newMenuItem.images by removing the file name
+          const fileName = file.name;
+          newMenuItem.images = newMenuItem.images.filter(name => name !== fileName);
         });
       } catch (error) {
         console.error('Error initiating dropzone:', error);
