@@ -66,6 +66,15 @@
                     <li v-for="(fileName, index) in uploadedFiles" :key="index">{{ fileName }}</li>
                   </ul>
                 </div>
+                <!-- added here temporarily -->
+                <div v-if="newMenuItem.images && newMenuItem.images.length">
+                  <p class="block text-sm font-medium text-gray-700 mb-1 mt-3">Previews:</p>
+                  <div class="flex mb-4">
+                    <img v-for="(image, index) in newMenuItem.images" :key="index"
+                      :src="'/images/' + image" :alt="newMenuItem.name" class="w-24 h-24 object-cover rounded-md mr-2">
+                  </div>
+                </div>
+
                 <!-- Hidden input to store file names for submission -->
                 <input type="hidden" name="fileNames" :value="fileNamesString">
               </div>
@@ -130,8 +139,8 @@
                 <div v-if="newMenuItem.images && newMenuItem.images.length">
                   <p class="block text-sm font-medium text-gray-700 mb-1 mt-3">Previews:</p>
                   <div class="flex mb-4">
-                    <img v-for="(image, index) in newMenuItem.images.split(',')" :key="index"
-                      :src="'/images/' + image.trim()" :alt="newMenuItem.name" class="w-24 h-24 object-cover rounded-md mr-2">
+                    <img v-for="(image, index) in newMenuItem.images" :key="index"
+                      :src="'/images/' + image" :alt="newMenuItem.name" class="w-24 h-24 object-cover rounded-md mr-2">
                   </div>
                 </div>
                 <label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
