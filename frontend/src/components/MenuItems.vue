@@ -33,7 +33,7 @@
                   <label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
                   <div id="my-dropzone" class="border-gray-300 dropzone"></div>
                   <input type="text" v-model="newMenuItem.images" id="images"
-                    class="mt-1 p-2 border border-gray-300 rounded-md w-full invisible">
+                    class="mt-1 p-2 border border-gray-300 rounded-md w-full hidden">
                 </div>
 
                 <div class="mb-4">
