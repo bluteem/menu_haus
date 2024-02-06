@@ -1,6 +1,6 @@
 <!-- MenuItems.vue -->
 <template>
-  <div>
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <h1 class="text-3xl font-bold mb-4">Menu Items</h1>
 
     <!-- Add Menu Item Button -->

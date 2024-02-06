@@ -1,22 +1,29 @@
-// index.js
+// Import required modules
+import express from 'express'; // Express.js framework for Node.js
+import dotenv from 'dotenv'; // Load environment variables from a .env file
+import connectToDatabase from './db.js'; // Custom module to connect to the database
+import cors from 'cors'; // Cross-Origin Resource Sharing middleware for Express.js
+import multer from 'multer'; // Middleware for handling file uploads
+import menuItemRoutes from './routes/menuItemRoutes.js'; // Routes for menu items
+import menuItemController from './controllers/menuItemController.js'; // Controller for menu items
 
-import express from 'express';
-import dotenv from 'dotenv';
-import connectToDatabase from './db.js';
-import cors from 'cors';
-import multer from 'multer';
-import menuItemRoutes from './routes/menuItemRoutes.js';
-import menuItemController from './controllers/menuItemController.js';
-
+// Load environment variables from .env file
 dotenv.config();
+
+// Connect to the MongoDB database
 connectToDatabase();
 
+// Create an instance of Express
 const app = express();
+
+// Set the port number from environment variable or default to 5000
 const port = process.env.PORT || 5000;
 
+// Middleware to parse JSON bodies of requests
 app.use(express.json());
-app.use(cors());
 
+// Middleware to enable Cross-Origin Resource Sharing (CORS)
+app.use(cors());
 
 // Set up Multer storage for handling multiple files
 const storage = multer.diskStorage({
@@ -29,15 +36,15 @@ const storage = multer.diskStorage({
   }
 });
 
+// Initialize Multer with the defined storage configuration
 const upload = multer({ storage: storage });
 
 // Define route to handle file uploads
 app.post('/api/upload', upload.array('files'), (req, res) => {
   // Handle file upload here
-  const fileNames = req.files.map(file => file.filename);
-  res.status(200).json({ fileNames: fileNames });
+  const fileNames = req.files.map(file => file.filename); // Extract file names from uploaded files
+  res.status(200).json({ fileNames: fileNames }); // Respond with JSON containing uploaded file names
 });
-  
 
 // Use existing menu item routes
 app.use('/api/menuitems', menuItemRoutes);
@@ -45,10 +52,12 @@ app.use('/api/menuitems', menuItemRoutes);
 // Use the menu item controller
 app.use('/api/menuitems', menuItemController);
 
+// Default route to indicate API is running
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
+// Start the server and listen on the specified port
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
