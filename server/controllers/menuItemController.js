@@ -1,4 +1,3 @@
-// menuItemController.js
 import express from 'express';
 import MenuItem from '../models/menuItem.js';
 

@@ -14,7 +14,7 @@ const menuCategorySchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-}, { collection: 'menuCategories' }); // Specify your collection name here
+}, { collection: 'menucategories' }); // Specify your collection name here
 
 const MenuCategory = mongoose.model('MenuCategory', menuCategorySchema);
 

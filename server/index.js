@@ -6,6 +6,8 @@ import cors from 'cors'; // Cross-Origin Resource Sharing middleware for Express
 import multer from 'multer'; // Middleware for handling file uploads
 import menuItemRoutes from './routes/menuItemRoutes.js'; // Routes for menu items
 import menuItemController from './controllers/menuItemController.js'; // Controller for menu items
+import menuCategoryRoutes from './routes/menuCategoryRoutes.js'; // Routes for menu items
+import menuCategoryController from './controllers/menuCategoryController.js'; // Controller for menu items
 
 // Load environment variables from .env file
 dotenv.config();
@@ -51,6 +53,12 @@ app.use('/api/menuitems', menuItemRoutes);
 
 // Use the menu item controller
 app.use('/api/menuitems', menuItemController);
+
+// Use existing menu category routes
+app.use('/api/menucategories', menuCategoryRoutes);
+
+// Use the menu category controller
+app.use('/api/menucategories', menuCategoryController);
 
 // Default route to indicate API is running
 app.get('/', (req, res) => {

@@ -1,11 +1,10 @@
-// menuItemController.js
 import express from 'express';
-import MenuItem from '../models/menuCategory.js';
+import MenuCategory from '../models/menuCategory.js';
 
 const router = express.Router();
 
-// Route: GET /api/menuitems
-// Description: Get all menu items
+// Route: GET /api/menucategories
+// Description: Get all menu categories
 router.get('/', async (req, res) => {
     try {
         const menuCategories = await MenuCategory.find();
@@ -16,23 +15,23 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Route: GET /api/menuitems/:id
-// Description: Get a menu item by ID
+// Route: GET /api/menucategories/:id
+// Description: Get a menu category by ID
 router.get('/:id', async (req, res) => {
     try {
         const menuCategory = await MenuCategory.findById(req.params.id);
         if (!menuCategory) {
             return res.status(404).json({ error: 'Menu category not found' });
         }
-        res.status(200).json({ menuItem });
+        res.status(200).json({ menuCategory });
     } catch (error) {
         console.error('Error fetching menu category:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });
 
-// Route: POST /api/menuitems
-// Description: Add a new menu item
+// Route: POST /api/menucategories
+// Description: Add a new menu category
 router.post('/', async (req, res) => {
     try {
         const { name, description } = req.body;
@@ -48,8 +47,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Route: PUT /api/menuitems/:id
-// Description: Update a menu item by ID
+// Route: PUT /api/menucategories/:id
+// Description: Update a menu category by ID
 router.put('/:id', async (req, res) => {
     try {
         const { name, description } = req.body;
@@ -67,7 +66,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Route: DELETE /api/menuitems/:id
+// Route: DELETE /api/menucategories/:id
 // Description: Delete a menu item by ID
 router.delete('/:id', async (req, res) => {
     try {

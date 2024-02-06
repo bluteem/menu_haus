@@ -15,7 +15,6 @@ import Navbar from '../components/Navbar.vue';
 import MenuItems from '../components/MenuItems.vue';
 
 export default {
-  name: "App",
   components: {
     Navbar,
     MenuItems
