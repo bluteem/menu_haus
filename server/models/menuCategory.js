@@ -4,7 +4,6 @@ const menuCategorySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true // Ensure each category name is unique
     },
     description: {
         type: String,
