@@ -1,6 +1,6 @@
 <!-- MenuItems.vue -->
 <template>
-  <div class="container mx-auto py-6 px-6">
+  <div>
     <h1 class="text-3xl font-bold mb-4">Menu Items</h1>
 
     <!-- Add Menu Item Button -->
@@ -20,11 +20,11 @@
         <!-- Right column for the text content -->
         <div class="flex-grow">
           <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
-          <p class="text-gray-600">Category: {{ menuItem.category }}</p>
-          <p class="text-gray-600">Price: ${{ menuItem.price }}</p>
+          <p class="text-gray-600"><span class="font-bold">Category:</span> {{ menuItem.category }}</p>
+          <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
           <!-- Edit and Delete buttons -->
           <div class="flex">
-            <button @click="getMenuItem(menuItem._id, $refs.Alert)" type="button"
+            <button @click="getMenuItem(menuItem._id, $refs.Alert); imageDisplayOn()" type="button"
               class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Edit</button>
             <button @click="deleteMenuItem(menuItem._id, $refs.Alert)"
               class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">Delete</button>
@@ -59,22 +59,13 @@
             
               <div class="mb-4">
                 <label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
-                <input type="file" ref="fileInputRef" multiple @change="handleFileUpload">
+                <input type="file" id="images" ref="fileInputRef" multiple @change="handleFileUpload" class="block w-full mt-2 py-2 px-4 bg-white text-gray-700 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500">
                 <div v-if="uploadedFiles.length > 0">
-                  <p>Uploaded Files:</p>
+                  <p class="block text-sm font-medium text-gray-700 my-2">Uploaded Files:</p>
                   <ul>
                     <li v-for="(fileName, index) in uploadedFiles" :key="index">{{ fileName }}</li>
                   </ul>
-                </div>
-                <!-- added here temporarily -->
-                <div v-if="newMenuItem.images && newMenuItem.images.length">
-                  <p class="block text-sm font-medium text-gray-700 mb-1 mt-3">Previews:</p>
-                  <div class="flex mb-4">
-                    <img v-for="(image, index) in newMenuItem.images" :key="index"
-                      :src="'/images/' + image" :alt="newMenuItem.name" class="w-24 h-24 object-cover rounded-md mr-2">
-                  </div>
-                </div>
-
+                </div>           
                 <!-- Hidden input to store file names for submission -->
                 <input type="hidden" name="fileNames" :value="fileNamesString">
               </div>
@@ -93,7 +84,7 @@
 
               <div class="mb-4">
                 <label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
-                <input type="number" v-model.number="newMenuItem.price" id="price" required
+                <input type="number" step="0.01" v-model.number="newMenuItem.price" id="price" required
                   class="mt-1 p-2 border border-gray-300 rounded-md w-full">
               </div>
 
@@ -135,17 +126,25 @@
               </div>
 
               <div class="mb-4">
-                <!-- Display images -->
-                <div v-if="newMenuItem.images && newMenuItem.images.length">
-                  <p class="block text-sm font-medium text-gray-700 mb-1 mt-3">Previews:</p>
-                  <div class="flex mb-4">
-                    <img v-for="(image, index) in newMenuItem.images" :key="index"
-                      :src="'/images/' + image" :alt="newMenuItem.name" class="w-24 h-24 object-cover rounded-md mr-2">
-                  </div>
+                <label for="images" class="block text-sm font-medium text-gray-700 mb-1">Current Images:</label>
+                <div class="flex mb-4" v-show="showImages">
+                  <img v-for="(image, index) in newMenuItem.images" :key="index"
+                    :src="'/images/' + image" :alt="newMenuItem.name" class="w-24 h-18 object-cover rounded-md mr-2">
                 </div>
-                <label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
-                <input type="text" v-model="newMenuItem.images" id="images" required
-                  class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+
+                <p class="block text-sm font-medium text-gray-700 mb-1">Replace the Images:</p>
+
+                <input type="file" ref="fileInputRef2" multiple @change="editFileUpload" @click="imageDisplayOff" class="block w-full mt-2 py-2 px-4 bg-white text-gray-700 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500">                
+
+                <div v-if="uploadedFiles2.length > 0">
+                  <p class="block text-sm font-medium text-gray-700 my-2">Uploaded Files:</p>
+                  <ul>
+                    <li v-for="(fileName, index) in uploadedFiles2" :key="index">{{ fileName }}</li>
+                  </ul>
+                </div>           
+                <!-- Hidden input to store file names for submission -->
+                <input type="hidden" name="fileNames" :value="fileNamesString2">
+           
               </div>
 
               <div class="mb-4">
@@ -162,7 +161,7 @@
 
               <div class="mb-4">
                 <label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
-                <input type="number" v-model.number="newMenuItem.price" id="price" required
+                <input type="number" step="0.01" v-model.number="newMenuItem.price" id="price" required
                   class="mt-1 p-2 border border-gray-300 rounded-md w-full">
               </div>
 
@@ -206,9 +205,7 @@ export default {
       description: '',
       price: null,
     });
-    const menuItems = ref([]);
-    const uploadedFiles = ref([]);
-    const fileInputRef = ref(null);    
+    const menuItems = ref([]);   
 
     // Fetch menu items when the component is mounted
     onMounted(async () => {
@@ -220,6 +217,28 @@ export default {
       }
     });
 
+    // Add a new menu item
+    const addMenuItem = async (alertRef) => {
+      try {
+        const response = await axios.post('http://localhost:5000/api/menuitems', {
+          name: newMenuItem.value.name,
+          images: uploadedFiles.value, // Include the images field
+          category: newMenuItem.value.category,
+          description: newMenuItem.value.description,
+          price: newMenuItem.value.price
+        });
+        menuItems.value.push(response.data.menuItem);
+        showModal1.value = false;
+        resetForm();
+        // Show success alert using the passed alertRef
+        alertRef.showAlert('Menu item added successfully!');
+      } catch (error) {
+        console.error('Error adding menu item:', error);
+        // Show error alert using the passed alertRef if failed to add menu item
+        alertRef.showAlert('Failed to add menu item. Please try again later.');
+      }
+    };    
+
     // Fetch a single menu item
     const getMenuItem = async (itemId, alertRef) => {
       try {
@@ -228,7 +247,7 @@ export default {
         newMenuItem.value = {
           _id: menuItem._id,
           name: menuItem.name,
-          images: menuItem.images.join(','),
+          images: menuItem.images,
           category: menuItem.category,
           description: menuItem.description,
           price: menuItem.price
@@ -261,29 +280,6 @@ export default {
       }
     };
 
-    // Add a new menu item
-    const addMenuItem = async (alertRef) => {
-      try {
-        const response = await axios.post('http://localhost:5000/api/menuitems', {
-          name: newMenuItem.value.name,
-          images: uploadedFiles.value, // Include the images field
-          category: newMenuItem.value.category,
-          description: newMenuItem.value.description,
-          price: newMenuItem.value.price
-        });
-        menuItems.value.push(response.data.menuItem);
-        showModal1.value = false;
-        resetForm();
-        // Show success alert using the passed alertRef
-        alertRef.showAlert('Menu item added successfully!');
-      } catch (error) {
-        console.error('Error adding menu item:', error);
-        // Show error alert using the passed alertRef if failed to add menu item
-        alertRef.showAlert('Failed to add menu item. Please try again later.');
-      }
-    };
-
-
     // Delete a menu item
     const deleteMenuItem = async (itemId, alertRef) => {
       try {
@@ -306,20 +302,28 @@ export default {
         images: '',
         category: '',
         description: '',
-        price: null,
+        price: 0.00,
       };
       uploadedFiles.value = []; // Clear the uploaded files
+      uploadedFiles2.value = []; // Clear the uploaded files
 
       // Reset the file input field
       if (fileInputRef.value) {
         fileInputRef.value.value = ''; // Reset the value of the file input field
       }
+      if (fileInputRef2.value) {
+        fileInputRef2.value.value = ''; // Reset the value of the file input field
+      }
     };
+
+    const uploadedFiles = ref([]);
+    const fileInputRef = ref(null);     
 
     // Handle file upload
     const handleFileUpload = async () => {
       const files = fileInputRef.value.files;
       const formData = new FormData();
+
       for (let i = 0; i < files.length; i++) {
         formData.append('files', files[i]);
       }
@@ -333,6 +337,7 @@ export default {
         uploadedFiles.value = uploadedFileNames;
         newMenuItem.value.images = uploadedFileNames;
         console.log('Files uploaded successfully:', uploadedFileNames);
+
       } catch (error) {
         console.error('Error uploading files:', error);
       }
@@ -340,6 +345,45 @@ export default {
 
     // Computed property to generate comma-separated string of file names
     const fileNamesString = computed(() => uploadedFiles.value.join(','));
+
+    const uploadedFiles2 = ref([]);
+    const fileInputRef2 = ref(null); 
+
+    // Edit file upload
+    const editFileUpload = async () => {
+      const files = fileInputRef2.value.files;
+      const formData = new FormData();
+
+      for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+      }
+      try {
+        const response = await axios.post('http://localhost:5000/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        const uploadedFileNames2 = response.data.fileNames;
+        uploadedFiles2.value = uploadedFileNames2;
+        newMenuItem.value.images = uploadedFileNames2;
+        console.log('Files uploaded successfully:', uploadedFileNames2);
+
+      } catch (error) {
+        console.error('Error uploading files:', error);
+      }
+    };    
+
+    // Computed property to generate comma-separated string of file names
+    const fileNamesString2 = computed(() => uploadedFiles2.value.join(','));
+
+    const showImages = ref(true);
+
+    const imageDisplayOff = () => {
+      showImages.value = false;
+    }
+    const imageDisplayOn = () => {
+      showImages.value = true;
+    }
 
     return {
       showModal1,
@@ -354,7 +398,14 @@ export default {
       uploadedFiles,
       fileInputRef,
       handleFileUpload,
-      fileNamesString
+      fileNamesString,
+      uploadedFiles2,
+      fileInputRef2,
+      editFileUpload,
+      fileNamesString2,
+      showImages,
+      imageDisplayOff,
+      imageDisplayOn
     };
   }
 };
