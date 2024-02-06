@@ -14,5 +14,5 @@ export default {
 </script>
 
 <style>
-/* Add your Tailwind CSS styles here */
+
 </style>
