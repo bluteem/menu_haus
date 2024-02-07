@@ -53,7 +53,9 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900">{{ selectedMenuItem.name }}</h3>
                 <div class="mt-2">
 
-                    <carousel style="width: 100%; height: 100%;">
+                    <fwb-carousel :pictures="pictures" slide />
+
+<!--                     <carousel style="width: 100%; height: 100%;">
                         <slide v-for="(image, index) in selectedMenuItem.images" :key="index">
                             <div class="carousel__item">
                                 <img :src="'/images/' + image" :alt="selectedMenuItem.name" class="w-full h-full object-cover rounded-md">
@@ -63,7 +65,7 @@
                             <navigation />
                             <pagination />
                         </template>
-                    </carousel>
+                    </carousel> -->
              
                     <p class="text-gray-600 mt-4"><span class="font-bold">Category:</span> {{ selectedMenuItem.category }}</p>
                     <p class="text-gray-600"><span class="font-bold">Description:</span> {{ selectedMenuItem.description }}</p>
@@ -86,15 +88,12 @@
 <script>
 import { ref, onMounted, defineComponent } from 'vue';
 import axios from 'axios';
-import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel';
-import '../../node_modules/vue3-carousel/dist/carousel.css';
+import { FwbCarousel } from 'flowbite-vue';
+import { Carousel } from 'flowbite';
 
 export default defineComponent({
     components: {
-        Carousel,
-        Slide,
-        Pagination,
-        Navigation,
+        FwbCarousel,
     },
     setup() {
         const menuCategories = ref([]);
@@ -144,22 +143,24 @@ export default defineComponent({
                 alertRef.showAlert('Failed to fetch menu item details. Please try again later.');
             }
         };
-        
-        const settings = ref({
-            itemsToShow: 1,
-            wrapAround: true,
-        });      
 
+        const pictures = [
+            {src: '/images/caprese-1.jpg', alt: 'Image 1'},
+            {src: '/images/caprese-2.jpg', alt: 'Image 2'},
+            {src: '/images/carbonara-1.jpg', alt: 'Image 3'},
+        ]
+        
         return {
             menuCategories,
             menuItems,
             showModal1,
             selectedMenuItem,
             getMenuItem,
-            settings,
+            pictures,
         };       
     }
 });
+
 </script>
 
 <style scoped>
