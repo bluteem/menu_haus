@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-gray-800">
+    <nav class="bg-gray-800 py-3">
         <div class="max-w-7xl mx-auto px-8 sm:px-8 lg:px-8">
             <div class="flex justify-center h-16">
                 <!-- Navbar Items Container -->
