@@ -6,9 +6,9 @@
                 <div class="flex items-center space-x-4" ref="navbarContainer">
                     <!-- Navbar Items -->
                     <ul class="flex" ref="navbarList">
-                        <li v-for="menuCategory in menuCategories" :key="menuCategory._id" class="items-center">
+                        <li v-for="menuCategory in menuCategories" :key="menuCategory._id" class="flex items-center">
                             <a :href="`#${menuCategory.name}`"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium text-center">{{
                                     menuCategory.name }}</a>
                         </li>
                     </ul>
