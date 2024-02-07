@@ -89,7 +89,7 @@
 import { ref, onMounted, defineComponent } from 'vue';
 import axios from 'axios';
 import { FwbCarousel } from 'flowbite-vue';
-import { Carousel } from 'flowbite';
+import { Tooltip, initTE } from "tw-elements";
 
 export default defineComponent({
     components: {
@@ -121,6 +121,7 @@ export default defineComponent({
             } catch (error) {
                 console.error('Error fetching menu items:', error);
             }
+            initTE({ Tooltip });
         });
 
         // Fetch a single menu item
@@ -164,25 +165,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.carousel__item {
-  min-height: 200px;
-  width: 100%;
-  background-color: var(--vc-clr-primary);
-  color: var(--vc-clr-white);
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.carousel__slide {
-  padding: 0px;
-}
-
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  border: 5px solid white;
-}
 </style>
