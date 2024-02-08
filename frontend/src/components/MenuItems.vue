@@ -211,7 +211,7 @@ export default {
     onMounted(async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/menuitems');
-        menuItems.value = response.data.menuItems;
+        menuItems.value = response.data.menuItemsWithCategories;
       } catch (error) {
         console.error('Error fetching menu items:', error);
       }
@@ -243,7 +243,7 @@ export default {
     const getMenuItem = async (itemId, alertRef) => {
       try {
         const response = await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
-        const menuItem = response.data.menuItem;
+        const menuItem = response.data.menuItemsWithCategories;
         newMenuItem.value = {
           _id: menuItem._id,
           name: menuItem.name,

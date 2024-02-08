@@ -120,7 +120,7 @@ export default {
             }
             try {
                 const response = await axios.get('http://localhost:5000/api/menuitems');
-                menuItems.value = response.data.menuItems;
+                menuItems.value = response.data.menuItemsWithCategories;
             } catch (error) {
                 console.error('Error fetching menu items:', error);
             }

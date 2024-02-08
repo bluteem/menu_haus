@@ -18,7 +18,9 @@ async function getMenuItems(req, res) {
                 }
             }
         ]);
-        res.status(200).json({ menuItemsWithCategories });
+        res.status(200).json({
+            menuItemsWithCategories
+        });
     } catch (error) {
         console.error('Error fetching menu items with categories:', error);
         res.status(500).json({ error: 'Server error' });

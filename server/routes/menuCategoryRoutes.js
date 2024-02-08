@@ -1,21 +1,21 @@
 import express from "express";
 import MenuCategory from "../models/menuCategory.js";;
 
-const menuCategoryRoutes = express.Router();
+const router = express.Router();
 
-const getMenuCategories = async (req, res) => {
+// Route: GET /api/menuitems
+router.get("/", getMenuCategories);
+
+async function getMenuCategories(req, res) {
     try {
         const menuCategories = await MenuCategory.find({});
         res.json({
-            menuCategories,
-            pagination: {} // Add pagination logic if required
+            menuCategories
         });
     } catch (error) {
         console.error("Error fetching menu categories:", error);
         res.status(500).json({ error: "Server error" });
     }
-};
+}
 
-menuCategoryRoutes.route("/").get(getMenuCategories);
-
-export default menuCategoryRoutes;
+export default router;

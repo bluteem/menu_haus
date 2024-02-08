@@ -22,6 +22,10 @@ const menuItemSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    isDeleted: {
+        type: Boolean,
+        default: false, // Set the default value to false
+    }
 }, { collection: 'menuitems' }); // Specify your collection name here
 
 const MenuItem = mongoose.model('MenuItem', menuItemSchema);
