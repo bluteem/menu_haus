@@ -16,6 +16,10 @@ const menuCategorySchema = new mongoose.Schema({
     sortNo: {
         type: Number,
         required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false, // Set the default value to false
     }
 }, { collection: 'menucategories' }); // Specify your collection name here
 
