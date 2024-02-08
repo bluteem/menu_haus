@@ -8,6 +8,7 @@
 
 <!-- Items in the category -->
 <div class="mx-auto max-w-xl mt-6 px-6 mb-6 border-blue-500 rounded">
+    <h2></h2>
     <ul id="items-list">
     <li v-for="menuItem in filteredMenuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
         <!-- Left column for the image -->

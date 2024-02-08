@@ -5,12 +5,34 @@ const router = express.Router();
 
 // Route: GET /api/menuitems
 // Description: Get all menu items
-router.get('/', async (req, res) => {
+/* router.get('/', async (req, res) => {
     try {
         const menuItems = await MenuItem.find().populate('category');
         res.status(200).json({ menuItems });
     } catch (error) {
         console.error('Error fetching menu items:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+}); */
+
+
+// Route: GET /api/menuitems
+// Description: Get all menu items with their corresponding category information
+router.get('/', async (req, res) => {
+    try {
+        const menuItemsWithCategories = await MenuItem.aggregate([
+            {
+                $lookup: {
+                    from: 'menucategories',
+                    localField: 'category',
+                    foreignField: '_id',
+                    as: 'categoryInfo'
+                }
+            }
+        ]);
+        res.status(200).json({ menuItemsWithCategories });
+    } catch (error) {
+        console.error('Error fetching menu items with categories:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });
