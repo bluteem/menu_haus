@@ -18,24 +18,41 @@
     </nav>
 
 
-<nav class="relative flex w-full items-center justify-between bg-neutral-50 py-2 text-neutral-600 shadow-lg dark:bg-neutral-700 dark:text-neutral-300 dark:shadow-black/5 lg:flex-wrap lg:justify-start" data-te-navbar-ref>
-  <div class="px-6">
-    <button class="border-0 bg-transparent py-3 text-xl leading-none transition-shadow duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:hidden" type="button" data-te-collapse-init data-te-target="#navbarSupportedContentX" aria-controls="navbarSupportedContentX" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="[&>svg]:w-8">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-      </span>
-    </button>
-    <div class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto" id="navbarSupportedContentX" data-te-collapse-item>
-      <ul class="mr-auto flex flex-row" data-te-navbar-nav-ref>
-        <li data-te-nav-item-ref>
-          <a class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2" href="#!" data-te-ripple-init data-te-ripple-color="light">Regular link</a>
-        </li>
-      </ul>
+<!--Tabs navigation-->
+<ul class="mb-5 flex list-none flex-row flex-wrap border-b-0 pl-0" role="tablist" data-te-nav-ref>
+
+    <li v-for="category in menuCategories" :key="category._id" role="presentation">
+        <a :href="`#tabs-${getFormattedCategoryName(category.name)}`"
+            class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent"
+            :data-te-toggle="'pill'"
+            :role="'tab'"
+            :data-te-target="`#tabs-${getFormattedCategoryName(category.name)}`"
+            :aria-controls="`tabs-${getFormattedCategoryName(category.name)}`"
+            :aria-selected="isActiveCategory(category)"
+            :data-te-nav-active="isActiveCategory(category) ? 'data-te-nav-active' : null">
+        {{ category.name }}
+        </a>
+    </li>
+
+</ul>
+<!--Tabs content-->
+<div class="mb-6">
+
+    <div v-for="category in menuCategories" :key="category._id" 
+         :id="`tabs-${getFormattedCategoryName(category.name)}`"
+         class="hidden opacity-0 transition-opacity duration-150 ease-linear"
+         :class="{ 'data-[te-tab-active]': isActiveCategory(category) }"
+         role="tabpanel"
+         :aria-labelledby="`tabs-${getFormattedCategoryName(category.name)}`">
+      <!-- Display menu items corresponding to the category -->
+      <div v-for="menuItem in getMenuItemsByCategory(category)" :key="menuItem._id">
+        <!-- Display menu item details -->
+        <p>{{ menuItem.name }}</p>
+        <!-- Add more details as needed -->
+      </div>
     </div>
-  </div>
-</nav>
 
-
+</div>
 
 
 
@@ -125,16 +142,11 @@
 </template>
 
 <script>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick, computed } from 'vue';
 import axios from 'axios';
-import { Carousel, initTE } from "tw-elements";
-// Initialization for ES Users
-import { Collapse, Dropdown, Ripple } from "tw-elements";
+import { Carousel, Tab, initTE } from "tw-elements";
 
 export default {
-    components: {
-
-    },
     setup() {
         const menuCategories = ref([]);
         const menuItems = ref([]);
@@ -161,7 +173,25 @@ export default {
             } catch (error) {
                 console.error('Error fetching menu items:', error);
             }
+
+            initTE({ Tab });
         });
+
+        // Filter menu items by category
+        const getMenuItemsByCategory = (category) => {
+        return menuItems.value.filter(item => item.category === category.name);
+        };
+
+        // Check if a category is currently active
+        const isActiveCategory = (categoryElement) => {
+        // Check if the category element has the attribute indicating it is active
+        return categoryElement.getAttribute('data-te-nav-active') === 'true';
+        };
+
+        // Format category name by replacing spaces with hyphens
+        const getFormattedCategoryName = (name) => {
+        return name.toLowerCase().replace(/\s+/g, '-');
+        };        
 
         // Fetch a single menu item
         const getMenuItem = async (itemId) => {
@@ -191,8 +221,6 @@ export default {
                 console.error('Failed to fetch menu item details. Please try again later.');
             }
         };
-
-        initTE({ Collapse, Dropdown, Ripple });
         
         return {
             menuCategories,
@@ -200,6 +228,9 @@ export default {
             showModal1,
             selectedMenuItem,
             getMenuItem,
+            getMenuItemsByCategory,
+            isActiveCategory,
+            getFormattedCategoryName,        
         };       
     }
 };
