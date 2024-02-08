@@ -1,52 +1,35 @@
 <template>
-    <!-- Category links -->
-    <div class="max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 mt-4">
-        <a v-for="menuCategory in menuCategories" :key="menuCategory._id" href="" @click="selectCategory(menuCategory)" :class="{ 'bg-blue-500 text-white': selectedCategory === menuCategory._id }" class="text-blue-500 border border-blue-500 rounded hover:underline focus:outline-none whitespace-no-wrap inline-block px-3 py-2 mr-2 mb-2">{{ menuCategory.name }}</a>
-    </div>
+<!-- Category links -->
+<div class="max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 mt-4">
+    <a v-for="menuCategory in menuCategories" :key="menuCategory._id" href="#" 
+    class="text-blue-500 border border-blue-500 rounded hover:underline focus:outline-none whitespace-no-wrap inline-block px-3 py-2 mr-2 mb-2">
+    {{ menuCategory.name }}</a>
+</div>
 
-    <div class="mx-auto max-w-xl mt-6 px-6 mb-6">
-        <ul v-if="filteredMenuItems.length > 0">
-          <li v-for="menuItem in filteredMenuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
+<!-- Items in the category -->
+<div class="mx-auto max-w-xl mt-6 px-6 mb-6 border-blue-500 rounded">
+    <ul>
+        <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
             <!-- Left column for the image -->
             <div class="w-32 mr-4">
-              <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
+                <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
             </div>
             <!-- Right column for the text content -->
             <div class="flex-grow">
-              <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
-              <p class="text-gray-600"><span class="font-bold">Category:</span> {{ menuItem.category }}</p>
-              <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
-              <!-- Edit and Delete buttons -->
-              <div class="flex">
-                <button @click="getMenuItem(menuItem._id)" type="button"
-                  class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
-              </div>
+                <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
+                <p class="text-gray-600"><span class="font-bold">Category:</span> {{ getCategoryName(menuItem.category) }}</p>
+                <!-- Display the category name by its ID -->
+                <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
+                <!-- Edit and Delete buttons -->
+                <div class="flex">
+                    <button @click="getMenuItem(menuItem._id)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
+                </div>
             </div>
-          </li>
-        </ul>
-        <!-- Show message if there are no menu items -->
-        <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
-    </div>    
-
-<!--     <div class="mx-auto max-w-xl mt-6 px-6">
-        <ul>
-          <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
-            <div class="w-32 mr-4">
-              <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
-            </div>
-            <div class="flex-grow">
-              <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
-              <p class="text-gray-600"><span class="font-bold">Category:</span> {{ menuItem.category }}</p>
-              <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
-              <div class="flex">
-                <button @click="getMenuItem(menuItem._id)" type="button"
-                  class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
-    </div> -->
+        </li>
+    </ul>
+    <!-- Show message if there are no menu items -->
+    <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
+</div>   
 
     <!-- Modal for adding a new menu item -->
     <div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
@@ -90,7 +73,7 @@
                         </button>
                     </div>             
              
-                    <p class="text-gray-600 mt-4"><span class="font-bold">Category:</span> {{ selectedMenuItem.category }}</p>
+                    <p class="text-gray-600 mt-4"><span class="font-bold">Category:</span> {{ getCategoryName(selectedMenuItem.category) }}</p>
                     <p class="text-gray-600"><span class="font-bold">Description:</span> {{ selectedMenuItem.description }}</p>
                     <p class="text-gray-600"><span class="font-bold">Price:</span> {{ selectedMenuItem.price }}</p>
 
@@ -109,7 +92,7 @@
 </template>
 
 <script>
-import { ref, onMounted, nextTick, computed } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios';
 import { Carousel, initTE } from "tw-elements";
 
@@ -147,6 +130,7 @@ export default {
             try {
                 const response = await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
                 const menuItem = response.data.menuItem;
+
                 selectedMenuItem.value = {
                     _id: menuItem._id,
                     name: menuItem.name,
@@ -170,28 +154,12 @@ export default {
                 console.error('Failed to fetch menu item details. Please try again later.');
             }
         };
-
-        // Define selectedCategory as a reactive ref
-        const selectedCategory = ref(null);
-
-        // Define selectCategory function to update the selectedCategory
-        const selectCategory = (category) => {
-            selectedCategory.value = category._id;
-        };
-
-        // Define getMenuItemsByCategory function to filter menu items based on the selected category
-        const getMenuItemsByCategory = (categoryId, menuItems) => {
-            return menuItems.filter(item => item.categoryId === categoryId);
-        };
-
-        // Define computed property filteredMenuItems to get the filtered menu items based on the selected category
-        const filteredMenuItems = computed(() => {
-            if (!selectedCategory.value) {
-                return [];
-            } else {
-                return getMenuItemsByCategory(selectedCategory.value, menuItems.value);
-            }
-        });        
+        
+        // Method to get category name by ID
+        const getCategoryName = (categoryId) => {
+                const category = menuCategories.value.find(cat => cat._id === categoryId);
+                return category ? category.name : 'Unknown'; // Return 'Unknown' if category not found
+            };        
         
         return {
             menuCategories,
@@ -199,9 +167,7 @@ export default {
             showModal1,
             selectedMenuItem,
             getMenuItem,
-            selectedCategory,
-            selectCategory,
-            filteredMenuItems   
+            getCategoryName,
         };       
     }
 };
