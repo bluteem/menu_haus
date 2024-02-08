@@ -1,12 +1,60 @@
 <template>
-    <!-- Category links -->
-    <div class="max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 mt-4">
-        <a v-for="menuCategory in menuCategories" :key="menuCategory._id" href="" @click="selectCategory(menuCategory)" :class="{ 'bg-blue-500 text-white': selectedCategory === menuCategory._id }" class="text-blue-500 border border-blue-500 rounded hover:underline focus:outline-none whitespace-no-wrap inline-block px-3 py-2 mr-2 mb-2">{{ menuCategory.name }}</a>
+    <nav class="bg-gray-800 py-3">
+        <div class="max-w-7xl mx-auto px-8 sm:px-8 lg:px-8">
+            <div class="flex justify-center h-16">
+                <!-- Navbar Items Container -->
+                <div class="flex items-center space-x-4" ref="navbarContainer">
+                    <!-- Navbar Items -->
+                    <ul class="flex" ref="navbarList">
+                        <li v-for="menuCategory in menuCategories" :key="menuCategory._id" class="flex items-center">
+                            <a :href="`#${menuCategory.name}`"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium text-center">{{
+                                    menuCategory.name }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+<!--Tabs navigation-->
+<ul class="mb-5 flex list-none flex-row flex-wrap border-b-0 pl-0" role="tablist" data-te-nav-ref>
+
+    <li v-for="(category, index) in menuCategories" :key="category._id" role="presentation">
+        <a :href="`#tabs-${getFormattedCategoryName(category.name)}`"
+            class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent"
+            :data-te-toggle="'pill'"
+            :role="'tab'"
+            :data-te-target="`#tabs-${getFormattedCategoryName(category.name)}`"
+            :aria-controls="`tabs-${getFormattedCategoryName(category.name)}`"
+            :aria-selected="index === 0 ? true : false"
+            :data-te-nav-active="index === 0 ? '' : null">
+        {{ category.name }}
+        </a>
+    </li>
+
+</ul>
+<!--Tabs content-->
+<div class="mb-6">
+
+    <div v-for="(category, index) in menuCategories" :key="category._id" :id="`tabs-${getFormattedCategoryName(category.name)}`" class="hidden opacity-0 transition-opacity duration-150 ease-linear" role="tabpanel" :aria-labelledby="`tabs-${getFormattedCategoryName(category.name)}-tab`" :data-te-tab-active="index === 0 ? '' : null" :class="{ 'hidden': index !== 0 }">
+      <!-- Display menu items corresponding to the category -->
+      <div v-for="menuItem in getMenuItemsByCategory(category)" :key="menuItem._id">
+        <!-- Display menu item details -->
+        <p>{{ menuItem.name }}</p>
+        <!-- Add more details as needed -->
+      </div>
     </div>
 
-    <div class="mx-auto max-w-xl mt-6 px-6 mb-6">
-        <ul v-if="filteredMenuItems.length > 0">
-          <li v-for="menuItem in filteredMenuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
+</div>
+
+
+
+
+    <div class="mx-auto max-w-xl mt-6 px-6">
+        <ul>
+          <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
             <!-- Left column for the image -->
             <div class="w-32 mr-4">
               <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
@@ -26,27 +74,7 @@
         </ul>
         <!-- Show message if there are no menu items -->
         <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
-    </div>    
-
-<!--     <div class="mx-auto max-w-xl mt-6 px-6">
-        <ul>
-          <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
-            <div class="w-32 mr-4">
-              <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
-            </div>
-            <div class="flex-grow">
-              <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
-              <p class="text-gray-600"><span class="font-bold">Category:</span> {{ menuItem.category }}</p>
-              <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
-              <div class="flex">
-                <button @click="getMenuItem(menuItem._id)" type="button"
-                  class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
-    </div> -->
+    </div>
 
     <!-- Modal for adding a new menu item -->
     <div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
@@ -111,7 +139,7 @@
 <script>
 import { ref, onMounted, nextTick, computed } from 'vue';
 import axios from 'axios';
-import { Carousel, initTE } from "tw-elements";
+import { Carousel, Tab, initTE } from "tw-elements";
 
 export default {
     setup() {
@@ -140,7 +168,19 @@ export default {
             } catch (error) {
                 console.error('Error fetching menu items:', error);
             }
-        });     
+
+            initTE({ Tab });
+        });
+
+        // Filter menu items by category
+        const getMenuItemsByCategory = (category) => {
+        return menuItems.value.filter(item => item.category === category.name);
+        };
+
+        // Format category name by replacing spaces with hyphens
+        const getFormattedCategoryName = (name) => {
+        return name.toLowerCase().replace(/\s+/g, '-');
+        };        
 
         // Fetch a single menu item
         const getMenuItem = async (itemId) => {
@@ -170,28 +210,6 @@ export default {
                 console.error('Failed to fetch menu item details. Please try again later.');
             }
         };
-
-        // Define selectedCategory as a reactive ref
-        const selectedCategory = ref(null);
-
-        // Define selectCategory function to update the selectedCategory
-        const selectCategory = (category) => {
-            selectedCategory.value = category._id;
-        };
-
-        // Define getMenuItemsByCategory function to filter menu items based on the selected category
-        const getMenuItemsByCategory = (categoryId, menuItems) => {
-            return menuItems.filter(item => item.categoryId === categoryId);
-        };
-
-        // Define computed property filteredMenuItems to get the filtered menu items based on the selected category
-        const filteredMenuItems = computed(() => {
-            if (!selectedCategory.value) {
-                return [];
-            } else {
-                return getMenuItemsByCategory(selectedCategory.value, menuItems.value);
-            }
-        });        
         
         return {
             menuCategories,
@@ -199,9 +217,8 @@ export default {
             showModal1,
             selectedMenuItem,
             getMenuItem,
-            selectedCategory,
-            selectCategory,
-            filteredMenuItems   
+            getMenuItemsByCategory,
+            getFormattedCategoryName,        
         };       
     }
 };
