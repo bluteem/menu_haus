@@ -7,7 +7,7 @@ const router = express.Router();
 // Description: Get all menu items
 router.get('/', async (req, res) => {
     try {
-        const menuItems = await MenuItem.find();
+        const menuItems = await MenuItem.find().populate('category');
         res.status(200).json({ menuItems });
     } catch (error) {
         console.error('Error fetching menu items:', error);

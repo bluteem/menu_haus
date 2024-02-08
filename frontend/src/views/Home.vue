@@ -1,31 +1,31 @@
 <template>
 <!-- Category links -->
 <div class="max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 mt-4">
-    <a v-for="menuCategory in menuCategories" :key="menuCategory._id" href="#" 
+    <a v-for="menuCategory in menuCategories" :key="menuCategory._id" href="#" @click="handleMenuCategoryClick(menuCategory._id)" 
     class="text-blue-500 border border-blue-500 rounded hover:underline focus:outline-none whitespace-no-wrap inline-block px-3 py-2 mr-2 mb-2">
     {{ menuCategory.name }}</a>
 </div>
 
 <!-- Items in the category -->
 <div class="mx-auto max-w-xl mt-6 px-6 mb-6 border-blue-500 rounded">
-    <ul>
-        <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
-            <!-- Left column for the image -->
-            <div class="w-32 mr-4">
-                <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
+    <ul id="items-list">
+    <li v-for="menuItem in filteredMenuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
+        <!-- Left column for the image -->
+        <div class="w-32 mr-4">
+            <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
+        </div>
+        <!-- Right column for the text content -->
+        <div class="flex-grow">
+            <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
+            <p class="text-gray-600"><span class="font-bold">Category:</span> {{ getCategoryName(menuItem.category) }}</p>
+            <!-- Display the category name by its ID -->
+            <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
+            <!-- Edit and Delete buttons -->
+            <div class="flex">
+                <button @click="getMenuItem(menuItem._id)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
             </div>
-            <!-- Right column for the text content -->
-            <div class="flex-grow">
-                <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
-                <p class="text-gray-600"><span class="font-bold">Category:</span> {{ getCategoryName(menuItem.category) }}</p>
-                <!-- Display the category name by its ID -->
-                <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
-                <!-- Edit and Delete buttons -->
-                <div class="flex">
-                    <button @click="getMenuItem(menuItem._id)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
-                </div>
-            </div>
-        </li>
+        </div>
+    </li>
     </ul>
     <!-- Show message if there are no menu items -->
     <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick, computed } from 'vue';
 import axios from 'axios';
 import { Carousel, initTE } from "tw-elements";
 
@@ -157,9 +157,30 @@ export default {
         
         // Method to get category name by ID
         const getCategoryName = (categoryId) => {
-                const category = menuCategories.value.find(cat => cat._id === categoryId);
-                return category ? category.name : 'Unknown'; // Return 'Unknown' if category not found
-            };        
+            const category = menuCategories.value.find(cat => cat._id === categoryId);
+            return category ? category.name : 'Unknown'; // Return 'Unknown' if category not found
+        };
+
+        const handleMenuCategoryClick = async (categoryId) => {
+            try {
+                // Clear the contents of the items-list div
+                const itemsList = document.getElementById('items-list');
+                itemsList.innerHTML = '';
+
+                // Fetch menu items by category ID
+                const response = await axios.get(`http://localhost:5000/api/menuitems/category/${categoryId}`);
+                menuItems.value = response.data.menuItems;
+            } catch (error) {
+                console.error('Error fetching menu items by category:', error);
+            }
+        };
+        
+        const filteredMenuItems = computed(() => {
+            return menuItems.value.filter(menuItem => {
+                // Change 'Appetizers' to the actual category name
+                return getCategoryName(menuItem.category) === 'Appetizers';
+            });
+        });
         
         return {
             menuCategories,
@@ -168,6 +189,8 @@ export default {
             selectedMenuItem,
             getMenuItem,
             getCategoryName,
+            handleMenuCategoryClick,
+            filteredMenuItems,
         };       
     }
 };

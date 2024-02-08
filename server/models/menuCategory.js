@@ -12,6 +12,10 @@ const menuCategorySchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    sortNo: {
+        type: Number,
+        required: true
     }
 }, { collection: 'menucategories' }); // Specify your collection name here
 
