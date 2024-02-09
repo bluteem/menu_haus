@@ -1,35 +1,33 @@
 <template>
 <!-- Category links -->
 <div class="max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 mt-4">
-    <a v-for="menuCategory in menuCategories" :key="menuCategory._id" href="#" @click="handleMenuCategoryClick(menuCategory._id)" 
+    <a href="#" @click="handleMenuCategoryClick()" 
+    class="text-blue-500 border border-blue-500 rounded hover:underline focus:outline-none whitespace-no-wrap inline-block px-3 py-2 mr-2 mb-2">All Items</a>
+    <a v-for="menuCategory in menuCategories" :key="menuCategory._id" href="#" @click="handleMenuCategoryClick()" 
     class="text-blue-500 border border-blue-500 rounded hover:underline focus:outline-none whitespace-no-wrap inline-block px-3 py-2 mr-2 mb-2">
     {{ menuCategory.name }}</a>
 </div>
 
 <!-- Items in the category -->
-<div v-for="(categoryItems, index) in menuItems" :key="index" class="mx-auto max-w-xl mt-6 px-6 mb-6 border-blue-500 rounded">
-    <h2>{{ menuCategories[index].name }}</h2>
+<div v-for="(categoryItems, categoryName) in groupedMenuItems" :key="categoryName" class="mx-auto max-w-xl mt-6 px-6 mb-6 border-blue-500 rounded">
+    <h2 class="text-xl font-bold">{{ categoryName }}</h2>
     <ul id="items-list">
-        <li v-for="menuItem in categoryItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
-            <!-- Left column for the image -->
-            <div class="w-32 mr-4">
-                <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
-            </div>
-            <!-- Right column for the text content -->
-            <div class="flex-grow">
-                <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
-                <p class="text-gray-600"><span class="font-bold">Category:</span> {{ menuCategories[index].name }}</p>
-                <!-- Display the category name by its ID -->
-                <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
-                <!-- Edit and Delete buttons -->
-                <div class="flex">
-                    <button @click="getMenuItem(menuItem._id)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
-                </div>
-            </div>
-        </li>
+      <li v-for="menuItem in categoryItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
+        <div class="w-32 mr-4">
+          <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
+        </div>
+        <div class="flex-grow">
+          <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
+          <p class="text-gray-600"><span class="font-bold">Category:</span> {{ categoryName }}</p>
+          <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
+          <div class="flex">
+            <button @click="getMenuItem(menuItem._id)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
+          </div>
+        </div>
+      </li>
     </ul>
     <!-- Show message if there are no menu items -->
-    <p v-if="categoryItems.length === 0" class="text-gray-600">No menu items available</p>
+    <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
 </div>  
 
     <!-- Modal for adding a new menu item -->
@@ -120,19 +118,7 @@ export default {
             }
             try {
                 const response = await axios.get('http://localhost:5000/api/menuitems');
-                const menuItemsWithCategories = response.data.menuItemsWithCategories;
-
-                // Group menu items by category
-                menuItems.value = menuItemsWithCategories.reduce((acc, menuItem) => {
-                    const index = menuItem.categoryInfo.findIndex(category => category._id === menuItem.categoryId);
-                    if (index !== -1) {
-                        if (!acc[index]) {
-                            acc[index] = [];
-                        }
-                        acc[index].push(menuItem);
-                    }
-                    return acc;
-                }, []);
+                menuItems.value = response.data.menuItemsWithCategories;
             } catch (error) {
                 console.error('Error fetching menu items:', error);
             }
@@ -143,6 +129,7 @@ export default {
             try {
                 const response = await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
                 selectedMenuItem.value = response.data.menuItemWithCategory;
+                console.log(selectedMenuItem.value);
                 showModal1.value = true;
 
                 // Use Vue.nextTick() to ensure that the carousel initialization
@@ -160,9 +147,21 @@ export default {
         };
 
         // Method to handle category click event
-        const handleMenuCategoryClick = (categoryId) => {
-        selectedCategory.value = categoryId;
-        };   
+        const handleMenuCategoryClick = () => {
+            console.log("message");
+        };
+        
+        const groupedMenuItems = computed(() => {
+        const groupedItems = {};
+        menuItems.value.forEach(menuItem => {
+            const categoryName = menuItem.categoryInfo && menuItem.categoryInfo.length > 0 ? menuItem.categoryInfo[0].name : 'Uncategorized';
+            if (!groupedItems[categoryName]) {
+            groupedItems[categoryName] = [];
+            }
+            groupedItems[categoryName].push(menuItem);
+        });
+        return groupedItems;
+        });        
  
         return {
             menuCategories,
@@ -171,6 +170,7 @@ export default {
             selectedMenuItem,
             getMenuItem,
             handleMenuCategoryClick,
+            groupedMenuItems,
         };       
     }
 };

@@ -330,7 +330,9 @@
   "description": "Classic Thai stir-fried rice noodles with tofu, bean sprouts, peanuts, and a tangy tamarind sauce.",
   "price": 13.5,
   "isDeleted": false,
-  "categoryId": "65c2b9a033dbaaa4f4ca13d4"
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d4"
+  }
 },
 {
   "_id": {
@@ -344,7 +346,9 @@
   "description": "Decadent chocolate cake made without any animal products, perfect for vegans and chocolate lovers.",
   "price": 8.99,
   "isDeleted": false,
-  "categoryId": "65c2b9a033dbaaa4f4ca13d4"
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d4"
+  }
 },
 {
   "_id": {
@@ -358,7 +362,9 @@
   "description": "Decadent chocolate brownie served warm with vanilla ice cream and chocolate sauce.",
   "price": 7.25,
   "isDeleted": false,
-  "categoryId": "65c2b9a033dbaaa4f4ca13d5"
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d5"
+  }
 },
 {
   "_id": {
@@ -372,7 +378,9 @@
   "description": "Creamy cheesecake on a graham cracker crust, topped with strawberry sauce.",
   "price": 8.99,
   "isDeleted": false,
-  "categoryId": "65c2b9a033dbaaa4f4ca13d5"
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d5"
+  }
 },
 {
   "_id": {
@@ -386,7 +394,9 @@
   "description": "Refreshing iced tea served with lemon slices and mint leaves.",
   "price": 2.75,
   "isDeleted": false,
-  "categoryId": "65c2b9a033dbaaa4f4ca13d6"
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d6"
+  }
 },
 {
   "_id": {
@@ -400,7 +410,9 @@
   "description": "Refreshing yogurt-based drink blended with ripe mangoes and a hint of cardamom.",
   "price": 4.25,
   "isDeleted": false,
-  "categoryId": "65c2b9a033dbaaa4f4ca13d6"
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d6"
+  }
 },
 {
   "_id": {
@@ -414,5 +426,7 @@
   "description": "Deluxe seafood platter featuring lobster, shrimp, crab legs, and scallops, served with garlic butter sauce.",
   "price": 39.99,
   "isDeleted": false,
-  "categoryId": "65c2b9a033dbaaa4f4ca13d7"
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d7"
+  }
 }]

@@ -1,5 +1,6 @@
 import express from 'express';
 import MenuItem from '../models/menuItem.js';
+import mongoose from 'mongoose';
 
 const router = express.Router();
 
@@ -41,7 +42,13 @@ router.get('/', async (req, res) => {
 // Description: Get a menu item by ID
 router.get('/:id', async (req, res) => {
     try {
+        const menuItemId = req.params.id;
+
+        // Find the menu item by its ID using findOne
         const menuItemWithCategory = await MenuItem.aggregate([
+            {
+                $match: { _id: new mongoose.Types.ObjectId(menuItemId) }
+            },
             {
                 $lookup: {
                     from: 'menucategories',
