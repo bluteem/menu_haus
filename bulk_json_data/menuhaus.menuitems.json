@@ -12,7 +12,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cb"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -28,7 +29,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cb"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -44,7 +46,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cc"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -60,7 +63,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cc"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -76,7 +80,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cd"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -92,7 +97,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cd"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -108,7 +114,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13ce"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -124,7 +131,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13ce"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -140,7 +148,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13ce"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -156,7 +165,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cf"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -172,7 +182,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cf"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -188,7 +199,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13cf"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -204,7 +216,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d0"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -220,7 +233,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d0"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -236,7 +250,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d1"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -252,7 +267,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d1"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -268,7 +284,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d2"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -284,7 +301,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d2"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -300,7 +318,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d3"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -316,7 +335,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d3"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -332,7 +352,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d4"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -348,7 +369,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d4"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -364,7 +386,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d5"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -380,7 +403,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d5"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -396,7 +420,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d6"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -412,7 +437,8 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d6"
-  }
+  },
+  "__v": 0
 },
 {
   "_id": {
@@ -428,5 +454,20 @@
   "isDeleted": false,
   "categoryId": {
     "$oid": "65c2b9a033dbaaa4f4ca13d7"
-  }
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c6157632e789977bace8fe"
+  },
+  "name": "111www",
+  "images": [],
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d6"
+  },
+  "description": "11",
+  "price": 1,
+  "isDeleted": false,
+  "__v": 0
 }]

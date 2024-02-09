@@ -74,13 +74,13 @@ router.get('/:id', async (req, res) => {
 // Description: Add a new menu item
 router.post('/', async (req, res) => {
     try {
-        const { name, images, category, description, price } = req.body;
+        const { name, images, description, price, categoryId } = req.body;
         const menuItem = new MenuItem({
             name,
             images,
-            category,
             description,
-            price
+            price,
+            categoryId,
         });
         await menuItem.save();
         res.status(201).json({ message: 'Menu item created successfully', menuItem });
@@ -94,13 +94,13 @@ router.post('/', async (req, res) => {
 // Description: Update a menu item by ID
 router.put('/:id', async (req, res) => {
     try {
-        const { name, images, category, description, price } = req.body;
+        const { name, images, description, price, categoryId } = req.body;
         const updatedMenuItem = await MenuItem.findByIdAndUpdate(req.params.id, {
             name,
             images,
-            category,
             description,
-            price
+            price,
+            categoryId,
         }, { new: true }); // { new: true } returns the updated document
         if (!updatedMenuItem) {
             return res.status(404).json({ error: 'Menu item not found' });

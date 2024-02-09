@@ -72,8 +72,10 @@
 
               <div class="mb-4">
                 <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
-                <input type="text" v-model="newMenuItem.category" id="category" required
-                  class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                <select v-model="newMenuItem.categoryId" id="category" required class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                  <option disabled selected>Select Category</option>
+                  <option v-for="category in menuCategories" :key="category._id" :value="category._id">{{ category.name }}</option>
+                </select>
               </div>
 
               <div class="mb-4">
@@ -149,8 +151,16 @@
 
               <div class="mb-4">
                 <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
-                <input type="text" v-model="newMenuItem.category" id="category" required
-                  class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+
+                <select v-model="newMenuItem.categoryId" id="category" required class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                  <option disabled selected>Select Category</option>
+                  <option v-for="category in menuCategories" :key="category._id" :value="category._id">{{ category.name }}</option>
+                </select>
+
+                <!-- <input type="text" v-model="newMenuItem.category" id="category" required
+                  class="mt-1 p-2 border border-gray-300 rounded-md w-full"> -->
+
+
               </div>
 
               <div class="mb-4">
@@ -204,8 +214,10 @@ export default {
       category: '',
       description: '',
       price: null,
+      categoryId: '',
     });
-    const menuItems = ref([]);   
+    const menuItems = ref([]);
+    const menuCategories = ref([]);   
 
     // Fetch menu items when the component is mounted
     onMounted(async () => {
@@ -215,6 +227,12 @@ export default {
       } catch (error) {
         console.error('Error fetching menu items:', error);
       }
+      try {
+          const response = await axios.get('http://localhost:5000/api/menucategories');
+          menuCategories.value = response.data.menuCategories;
+      } catch (error) {
+          console.error('Error fetching menu categories:', error);
+      }      
     });
 
     // Add a new menu item
@@ -223,9 +241,9 @@ export default {
         const response = await axios.post('http://localhost:5000/api/menuitems', {
           name: newMenuItem.value.name,
           images: uploadedFiles.value, // Include the images field
-          category: newMenuItem.value.category,
           description: newMenuItem.value.description,
-          price: newMenuItem.value.price
+          price: newMenuItem.value.price,
+          categoryId: newMenuItem.value.categoryId
         });
         menuItems.value.push(response.data.menuItem);
         showModal1.value = false;
@@ -243,12 +261,12 @@ export default {
     const getMenuItem = async (itemId, alertRef) => {
       try {
         const response = await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
-        const menuItem = response.data.menuItemsWithCategories;
+        const menuItem = response.data.menuItemWithCategory;
         newMenuItem.value = {
           _id: menuItem._id,
           name: menuItem.name,
           images: menuItem.images,
-          category: menuItem.category,
+          categoryId: menuItem.categoryId,
           description: menuItem.description,
           price: menuItem.price
         };
@@ -390,6 +408,7 @@ export default {
       showModal2,
       newMenuItem,
       menuItems,
+      menuCategories,
       getMenuItem,
       updateMenuItem,
       addMenuItem,

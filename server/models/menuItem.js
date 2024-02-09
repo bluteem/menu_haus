@@ -9,11 +9,6 @@ const menuItemSchema = new mongoose.Schema({
         type: [String],
         required: true,
     },
-    categoryId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'MenuCategory', // Reference to the Category model
-        required: true,
-    },
     description: {
         type: String,
         required: true,
@@ -25,6 +20,12 @@ const menuItemSchema = new mongoose.Schema({
     isDeleted: {
         type: Boolean,
         default: false, // Set the default value to false
+    },
+    categoryId: {
+        // type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'MenuCategory', // Reference to the Category model
+        required: true,
     }
 }, { collection: 'menuitems' }); // Specify your collection name here
 
