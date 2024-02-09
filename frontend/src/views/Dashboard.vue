@@ -1,6 +1,6 @@
 <template>
     <div>
-      <Navbar />
+      <DashboardNavbar />
 
       <main class="container mx-auto px-4 py-8">
         <MenuItems />
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue';
+import DashboardNavbar from '../components/DashboardNavbar.vue';
 import MenuItems from '../components/MenuItems.vue';
 
 export default {
   components: {
-    Navbar,
+    DashboardNavbar,
     MenuItems
   }
 };
