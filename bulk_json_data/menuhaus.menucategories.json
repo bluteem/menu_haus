@@ -1,0 +1,130 @@
+[{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cb"
+  },
+  "name": "Appetizers",
+  "description": "Start your meal with our delicious appetizers.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 1,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cc"
+  },
+  "name": "Soups and Salads",
+  "description": "Offerings of different types of soups and salads.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 2,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cd"
+  },
+  "name": "Main Courses",
+  "description": "The main dishes of the meal, including various proteins.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 3,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13ce"
+  },
+  "name": "Pasta and Noodles",
+  "description": "A selection of pasta dishes with various sauces and toppings.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 4,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cf"
+  },
+  "name": "Sandwiches and Wraps",
+  "description": "A variety of sandwiches and wraps with different fillings.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 5,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d0"
+  },
+  "name": "Burgers",
+  "description": "Different types of burgers with various toppings.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 6,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d1"
+  },
+  "name": "Pizza",
+  "description": "Offerings of different types of pizzas with various toppings and crust styles.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 7,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d2"
+  },
+  "name": "Seafood",
+  "description": "A selection of seafood dishes, including fish, shrimp, crab, lobster, etc.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 8,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d3"
+  },
+  "name": "Steaks and Grills",
+  "description": "Various cuts of meat, often grilled or cooked to order, with different sauces and sides.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 9,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d4"
+  },
+  "name": "Vegetarian and Vegan",
+  "description": "Options catering to vegetarian and vegan diets, including plant-based dishes.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 10,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d5"
+  },
+  "name": "Desserts",
+  "description": "Sweet dishes served at the end of the meal, including cakes, pastries, and ice creams.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 11,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d6"
+  },
+  "name": "Beverages",
+  "description": "A variety of drinks, including alcoholic and non-alcoholic beverages.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 12,
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d7"
+  },
+  "name": "Specials",
+  "description": "Special dishes offered for a limited time or as chef's specials.",
+  "createdAt": "YYYY-MM-DD HH:MM:SS",
+  "sortNo": 13,
+  "isDeleted": false
+}]

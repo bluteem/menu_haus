@@ -9,7 +9,7 @@ const menuItemSchema = new mongoose.Schema({
         type: [String],
         required: true,
     },
-    category: {
+    categoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'MenuCategory', // Reference to the Category model
         required: true,

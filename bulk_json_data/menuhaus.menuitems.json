@@ -1,0 +1,418 @@
+[{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f5104f8"
+  },
+  "name": "Spinach Artichoke Dip",
+  "images": [
+    "spinach-dip-1.jpg",
+    "spinach-dip-2.jpg"
+  ],
+  "description": "Creamy spinach and artichoke dip served with tortilla chips and salsa.",
+  "price": 9.99,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cb"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f5104f9"
+  },
+  "name": "Mozzarella Sticks",
+  "images": [
+    "mozzarella-sticks-1.jpg",
+    "mozzarella-sticks-2.jpg"
+  ],
+  "description": "Golden fried mozzarella sticks served with marinara sauce for dipping.",
+  "price": 8.5,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cb"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f5104fa"
+  },
+  "name": "Caprese Salad",
+  "images": [
+    "caprese-1.jpg",
+    "caprese-2.jpg"
+  ],
+  "description": "Fresh salad made with ripe tomatoes, mozzarella cheese, basil leaves, olive oil, and balsamic glaze.",
+  "price": 9.5,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cc"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f5104fb"
+  },
+  "name": "Tomato Basil Soup",
+  "images": [
+    "tomato-basil-soup-1.jpg",
+    "tomato-basil-soup-2.jpg"
+  ],
+  "description": "Homemade tomato basil soup garnished with fresh basil leaves and served with garlic bread.",
+  "price": 6.99,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cc"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f5104fc"
+  },
+  "name": "Lamb Shank",
+  "images": [
+    "lamb-shank-1.jpg",
+    "lamb-shank-2.jpg"
+  ],
+  "description": "Slow-cooked lamb shank seasoned with aromatic spices and served with creamy mashed potatoes and roasted vegetables.",
+  "price": 26.5,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cd"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f5104fd"
+  },
+  "name": "Beef Tenderloin Steak",
+  "images": [
+    "beef-tenderloin-steak-1.jpg",
+    "beef-tenderloin-steak-2.jpg"
+  ],
+  "description": "Tender beef tenderloin steak cooked to your liking and served with mashed potatoes and sautéed spinach.",
+  "price": 22.99,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cd"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f5104fe"
+  },
+  "name": "Spaghetti Bolognese",
+  "images": [
+    "spaghetti-bolognese-1.jpg",
+    "spaghetti-bolognese-2.jpg"
+  ],
+  "description": "Spaghetti pasta served with classic Bolognese sauce made with ground beef, tomatoes, onions, and herbs.",
+  "price": 14.75,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13ce"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f5104ff"
+  },
+  "name": "Spaghetti Carbonara",
+  "images": [
+    "carbonara-1.jpg",
+    "carbonara-2.jpg"
+  ],
+  "description": "Spaghetti pasta tossed in a creamy sauce with bacon, eggs, Parmesan cheese, and black pepper.",
+  "price": 15.25,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13ce"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510500"
+  },
+  "name": "Pad Thai Noodles",
+  "images": [
+    "pad-thai-noodles-1.jpg",
+    "pad-thai-noodles-2.jpg"
+  ],
+  "description": "Stir-fried rice noodles with shrimp, tofu, bean sprouts, peanuts, and egg, flavored with tamarind sauce.",
+  "price": 14.5,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13ce"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510501"
+  },
+  "name": "Grilled Chicken Sandwich",
+  "images": [
+    "grilled-chicken-sandwich-1.jpg",
+    "grilled-chicken-sandwich-2.jpg"
+  ],
+  "description": "Grilled chicken breast served on toasted bread with lettuce, tomato, and mayonnaise.",
+  "price": 11.25,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cf"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510502"
+  },
+  "name": "Club Sandwich",
+  "images": [
+    "club-sandwich-1.jpg",
+    "club-sandwich-2.jpg"
+  ],
+  "description": "Triple-decker sandwich with layers of turkey, bacon, lettuce, tomato, and mayonnaise.",
+  "price": 12.5,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cf"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510503"
+  },
+  "name": "Mediterranean Chicken Wrap",
+  "images": [
+    "mediterranean-chicken-wrap-1.jpg",
+    "mediterranean-chicken-wrap-2.jpg"
+  ],
+  "description": "Grilled chicken, feta cheese, lettuce, tomato, cucumber, and tzatziki sauce wrapped in a soft tortilla.",
+  "price": 11.75,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13cf"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510504"
+  },
+  "name": "Classic Beef Burger",
+  "images": [
+    "classic-beef-burger-1.jpg",
+    "classic-beef-burger-2.jpg"
+  ],
+  "description": "Juicy beef patty topped with lettuce, tomato, onion, and special sauce, served on a sesame seed bun.",
+  "price": 10.5,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d0"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510505"
+  },
+  "name": "Crispy Chicken Burger",
+  "images": [
+    "crispy-chicken-burger-1.jpg",
+    "crispy-chicken-burger-2.jpg"
+  ],
+  "description": "Juicy, breaded chicken breast fried to perfection, topped with lettuce, tomato slices, pickles, and mayonnaise, served on a soft sesame seed bun.",
+  "price": 10.99,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d0"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510506"
+  },
+  "name": "Margherita Pizza",
+  "images": [
+    "margherita-1.jpg",
+    "margherita-2.jpg"
+  ],
+  "description": "Classic pizza topped with tomato sauce, mozzarella cheese, and fresh basil leaves.",
+  "price": 12,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d1"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510507"
+  },
+  "name": "Pepperoni Pizza",
+  "images": [
+    "pepperoni-1.jpg",
+    "pepperoni-2.jpg"
+  ],
+  "description": "Pizza topped with spicy pepperoni slices and melted mozzarella cheese.",
+  "price": 14.5,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d1"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510508"
+  },
+  "name": "Grilled Salmon Fillet",
+  "images": [
+    "grilled-salmon-fillet-1.jpg",
+    "grilled-salmon-fillet-2.jpg"
+  ],
+  "description": "Fresh salmon fillet seasoned and grilled to perfection, served with a side of roasted vegetables.",
+  "price": 18.5,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510509"
+  },
+  "name": "Shrimp Scampi Pasta",
+  "images": [
+    "shrimp-scampi-pasta-1.jpg",
+    "shrimp-scampi-pasta-2.jpg"
+  ],
+  "description": "Tender shrimp sautéed in garlic butter sauce, tossed with linguine pasta and garnished with fresh parsley.",
+  "price": 16.99,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f51050a"
+  },
+  "name": "Prime Rib Steak",
+  "images": [
+    "prime-rib-steak-1.jpg",
+    "prime-rib-steak-2.jpg"
+  ],
+  "description": "Juicy prime rib steak seasoned with herbs and spices, cooked to perfection and served with mashed potatoes and gravy.",
+  "price": 28.99,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d3"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f51050b"
+  },
+  "name": "Grilled Ribeye Steak",
+  "images": [
+    "grilled-ribeye-steak-1.jpg",
+    "grilled-ribeye-steak-2.jpg"
+  ],
+  "description": "Juicy ribeye steak seasoned with a blend of spices and grilled to perfection, served with your choice of side dishes.",
+  "price": 22.75,
+  "isDeleted": false,
+  "categoryId": {
+    "$oid": "65c2b9a033dbaaa4f4ca13d3"
+  }
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f51050c"
+  },
+  "name": "Vegetarian Pad Thai",
+  "images": [
+    "vegetarian-pad-thai-1.jpg",
+    "vegetarian-pad-thai-2.jpg"
+  ],
+  "description": "Classic Thai stir-fried rice noodles with tofu, bean sprouts, peanuts, and a tangy tamarind sauce.",
+  "price": 13.5,
+  "isDeleted": false,
+  "categoryId": "65c2b9a033dbaaa4f4ca13d4"
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f51050d"
+  },
+  "name": "Vegan Chocolate Cake",
+  "images": [
+    "vegan-chocolate-cake-1.jpg",
+    "vegan-chocolate-cake-2.jpg"
+  ],
+  "description": "Decadent chocolate cake made without any animal products, perfect for vegans and chocolate lovers.",
+  "price": 8.99,
+  "isDeleted": false,
+  "categoryId": "65c2b9a033dbaaa4f4ca13d4"
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f51050e"
+  },
+  "name": "Chocolate Brownie",
+  "images": [
+    "chocolate-brownie-1.jpg",
+    "chocolate-brownie-2.jpg"
+  ],
+  "description": "Decadent chocolate brownie served warm with vanilla ice cream and chocolate sauce.",
+  "price": 7.25,
+  "isDeleted": false,
+  "categoryId": "65c2b9a033dbaaa4f4ca13d5"
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f51050f"
+  },
+  "name": "New York Cheesecake",
+  "images": [
+    "cheesecake-1.jpg",
+    "cheesecake-2.jpg"
+  ],
+  "description": "Creamy cheesecake on a graham cracker crust, topped with strawberry sauce.",
+  "price": 8.99,
+  "isDeleted": false,
+  "categoryId": "65c2b9a033dbaaa4f4ca13d5"
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510510"
+  },
+  "name": "Iced Tea",
+  "images": [
+    "iced-tea-1.jpg",
+    "iced-tea-2.jpg"
+  ],
+  "description": "Refreshing iced tea served with lemon slices and mint leaves.",
+  "price": 2.75,
+  "isDeleted": false,
+  "categoryId": "65c2b9a033dbaaa4f4ca13d6"
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510511"
+  },
+  "name": "Mango Lassi",
+  "images": [
+    "mango-lassi-1.jpg",
+    "mango-lassi-2.jpg"
+  ],
+  "description": "Refreshing yogurt-based drink blended with ripe mangoes and a hint of cardamom.",
+  "price": 4.25,
+  "isDeleted": false,
+  "categoryId": "65c2b9a033dbaaa4f4ca13d6"
+},
+{
+  "_id": {
+    "$oid": "65c4c0cfca423dc29f510512"
+  },
+  "name": "Special Seafood Platter",
+  "images": [
+    "special-seafood-platter-1.jpg",
+    "special-seafood-platter-2.jpg"
+  ],
+  "description": "Deluxe seafood platter featuring lobster, shrimp, crab legs, and scallops, served with garlic butter sauce.",
+  "price": 39.99,
+  "isDeleted": false,
+  "categoryId": "65c2b9a033dbaaa4f4ca13d7"
+}]

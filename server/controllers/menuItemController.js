@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
             {
                 $lookup: {
                     from: 'menucategories',
-                    localField: 'category',
+                    localField: 'categoryId',
                     foreignField: '_id',
                     as: 'categoryInfo'
                 }
@@ -41,13 +41,24 @@ router.get('/', async (req, res) => {
 // Description: Get a menu item by ID
 router.get('/:id', async (req, res) => {
     try {
-        const menuItem = await MenuItem.findById(req.params.id);
-        if (!menuItem) {
+        const menuItemWithCategory = await MenuItem.aggregate([
+            {
+                $lookup: {
+                    from: 'menucategories',
+                    localField: 'categoryId',
+                    foreignField: '_id',
+                    as: 'categoryInfo'
+                }
+            }
+        ]);
+
+        if (!menuItemWithCategory || menuItemWithCategory.length === 0) {
             return res.status(404).json({ error: 'Menu item not found' });
         }
-        res.status(200).json({ menuItem });
+
+        res.status(200).json({ menuItemWithCategory: menuItemWithCategory[0] });
     } catch (error) {
-        console.error('Error fetching menu item:', error);
+        console.error('Error fetching menu item with category:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });

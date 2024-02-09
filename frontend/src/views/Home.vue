@@ -10,7 +10,10 @@
 <div class="mx-auto max-w-xl mt-6 px-6 mb-6 border-blue-500 rounded">
     <h2></h2>
     <ul id="items-list">
-    <li v-for="menuItem in filteredMenuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
+    <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
+
+
+    <template v-if="getCategoryName(menuItem.categoryId) === 'Appetizers'">
         <!-- Left column for the image -->
         <div class="w-32 mr-4">
             <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
@@ -26,6 +29,9 @@
                 <button @click="getMenuItem(menuItem._id)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
             </div>
         </div>
+
+    </template>
+
     </li>
     </ul>
     <!-- Show message if there are no menu items -->

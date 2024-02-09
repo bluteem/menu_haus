@@ -12,7 +12,7 @@ async function getMenuItems(req, res) {
             {
                 $lookup: {
                     from: 'menucategories',
-                    localField: 'category',
+                    localField: 'categoryId',
                     foreignField: '_id',
                     as: 'categoryInfo'
                 }
