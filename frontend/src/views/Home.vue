@@ -1,36 +1,37 @@
 <template>
-<!-- Category links -->
-<div class="menu-nav max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 mt-4 flex overflow-x-auto">
-    <a href="#" @click="handleMenuCategoryClick()" 
-    class="border-2 border-orange-500 rounded focus:outline-none hover:bg-gray-200 transition duration-300 px-3 py-2 mr-2 mb-2 flex items-center justify-center">All Items</a>
-    <a v-for="menuCategory in menuCategories" :key="menuCategory._id" href="#" @click="handleMenuCategoryClick()" 
-    class="border-2 border-orange-500 rounded focus:outline-none hover:bg-gray-200 transition duration-300 px-3 py-2 mr-2 mb-2 flex items-center justify-center text-center">
-    {{ menuCategory.name }}</a>
-</div>
-
-<!-- Items in the category -->
-<div v-for="(categoryItems, categoryName) in groupedMenuItems" :key="categoryName" class="mx-auto max-w-xl mt-6 px-6 mb-6 border-blue-500 rounded">
-    <div :id="categoryName">
-        <h2 class="text-xl font-bold mb-2">{{ categoryName }}</h2>
-        <ul>
-        <li v-for="menuItem in categoryItems" :key="menuItem._id" class="flex items-center mb-4 border-2 border-orange-500 rounded-xl hover:bg-gray-200 transition duration-300 p-4">
-            <div class="w-32 mr-4">
-            <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
-            </div>
-            <div class="flex-grow">
-            <h2 class="text-xl font-semibold mb-2">{{ menuItem.name }}</h2>
-            <p class="text-gray-600 mb-1">Category: <span class="font-bold">{{ categoryName }}</span></p>
-            <p class="text-gray-600">Price: <span class="font-bold text-xl">${{ menuItem.price.toFixed(2) }}</span></p>
-            <div class="flex">
-                <button @click="getMenuItem(menuItem._id)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
-            </div>
-            </div>
-        </li>
-        </ul>
+    <!-- Category links -->
+    <div class="sticky top-0 w-full bg-white shadow-md menu-nav px-8 py-6 flex overflow-x-auto">
+        <a href="#" class="border-2 border-orange-500 rounded-xl focus:outline-none hover:bg-gray-200 transition duration-300 px-3 py-2 mr-2 flex items-center justify-center font-semibold min-w-48">All Items</a>
+        <a v-for="menuCategory in menuCategories" :key="menuCategory._id" :href="'#' + toFriendlyURL(menuCategory.name)"
+        class="border-2 border-orange-500 rounded-xl focus:outline-none hover:bg-gray-200 transition duration-300 px-3 py-2 mr-2 flex items-center justify-center text-center font-semibold min-w-48">
+        {{ menuCategory.name }}</a>
     </div>
-    <!-- Show message if there are no menu items -->
-    <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
-</div>  
+
+    <!-- Items in the category -->
+    <div v-for="(categoryItems, categoryName) in groupedMenuItems" :key="categoryName" :id="toFriendlyURL(categoryName)" class="mx-auto max-w-xl px-6 pt-40 mb-4">
+        <div>
+            <h2 class="text-xl font-bold mb-4">{{ categoryName }}</h2>
+            <ul>
+            <li v-for="menuItem in categoryItems" :key="menuItem._id" class="flex items-center mb-4 border-2 border-orange-500 rounded-xl hover:bg-gray-200 transition duration-300 p-4">
+                <div class="w-32 mr-4">
+                <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
+                </div>
+                <div class="flex-grow">
+                <h2 class="text-xl font-semibold mb-2">{{ menuItem.name }}</h2>
+                <p class="text-gray-600 mb-1">Category: <span class="font-bold">{{ categoryName }}</span></p>
+                <p class="text-gray-600">Price: <span class="font-bold text-xl">${{ menuItem.price.toFixed(2) }}</span></p>
+                <div class="flex">
+                    <button @click="getMenuItem(menuItem._id)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Details</button>
+                </div>
+                </div>
+            </li>
+            </ul>
+        </div>
+        <!-- Show message if there are no menu items -->
+        <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
+    </div>
+
+    <div class="my-64"></div>
 
     <!-- Modal for adding a new menu item -->
     <div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
@@ -163,7 +164,15 @@ export default {
                     groupedItems[categoryName].push(menuItem);
                 });
             return groupedItems;
-        });        
+        });
+
+        // Define the function to convert string to a friendly URL
+        const toFriendlyURL = (str) => {
+            str = str.toLowerCase();
+            str = str.replace(/\s+/g, '-');
+            str = str.replace(/[^\w\-]+/g, '');
+            return str;
+        };
  
         return {
             menuCategories,
@@ -173,6 +182,7 @@ export default {
             getMenuItem,
             handleMenuCategoryClick,
             groupedMenuItems,
+            toFriendlyURL,
         };       
     }
 };
@@ -185,10 +195,6 @@ export default {
     .menu-nav .overflow-x {
         overflow-x: auto;
   }
-}
-
-.menu-nav a {
-    min-width: 10rem;
 }
 
 /* Scoped styles (within your component's <style> tag) */

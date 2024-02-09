@@ -7,7 +7,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 1,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "appetizers"
 },
 {
   "_id": {
@@ -18,7 +19,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 2,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "soups-and-salads"
 },
 {
   "_id": {
@@ -29,7 +31,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 3,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "main-courses"
 },
 {
   "_id": {
@@ -40,7 +43,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 4,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "pasta-and-noodles"
 },
 {
   "_id": {
@@ -51,7 +55,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 5,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "sandwiches-and-wraps"
 },
 {
   "_id": {
@@ -62,7 +67,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 6,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "burgers"
 },
 {
   "_id": {
@@ -73,7 +79,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 7,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "pizza"
 },
 {
   "_id": {
@@ -84,7 +91,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 8,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "seafood"
 },
 {
   "_id": {
@@ -95,7 +103,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 9,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "steaks-and-grills"
 },
 {
   "_id": {
@@ -106,7 +115,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 10,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "vegetarian-and-vegan"
 },
 {
   "_id": {
@@ -117,7 +127,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 11,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "desserts"
 },
 {
   "_id": {
@@ -128,7 +139,8 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 12,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "beverages"
 },
 {
   "_id": {
@@ -139,5 +151,6 @@
   "createdAt": "YYYY-MM-DD HH:MM:SS",
   "sortNo": 13,
   "isDeleted": false,
-  "__v": 0
+  "__v": 0,
+  "friendlyURL": "specials"
 }]
