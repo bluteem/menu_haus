@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from "../views/Home.vue";
 import Dashboard from '../views/Dashboard.vue';
+import DashboardMenuCategories from '../views/DashboardMenuCategories.vue';
 import NotFound from '../views/NotFound.vue';
 
 const routes = [
@@ -11,6 +12,13 @@ const routes = [
       title: 'Menu.Haus Dashboard'
     }
   },
+  {
+    path: '/dashboard/menu-categories',
+    component: DashboardMenuCategories,
+    meta: {
+      title: 'Menu.Haus Dashboard'
+    }
+  },  
   {
     path: '/',
     component: Home,

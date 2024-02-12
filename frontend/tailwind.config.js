@@ -5,7 +5,11 @@ export default {
     "./node_modules/tw-elements/dist/js/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      scrollbar: {
+        thin: '1px',
+      },
+    },
   },
   darkMode: "class",
   plugins: [

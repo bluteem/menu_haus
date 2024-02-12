@@ -1,15 +1,24 @@
 <template>
-    <aside
-        class="absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden lg:static lg:translate-x-0 -translate-x-full">
-        <div class="flex items-center justify-between gap-2 px-6 py-6">
-            <h1 class="rounded-md py-2 px-4 bg-gray-700">Menu.Haus Dashboard</h1>
+    <aside class="relative left-0 top-0 flex flex-col h-screen overflow-y-hidden">
+        <div class="flex items-center justify-between px-3 py-3">
+            <p class="rounded-md font-medium py-2 px-3 bg-gray-700 mr-1 hidden md:block">
+                Menu.Haus Dashboard</p>
+            <a href="#" @click="toggleHiddenClass" class="rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                title="Shrink">
+                <svg class="w-5 h-5" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M4.707 17H21v1H4.707l2.646 2.646-.707.707L2.793 17.5l3.854-3.854.707.707zm11.94-13.646L19.292 6H3v1h16.293l-2.647 2.646.707.707L21.207 6.5l-3.853-3.854z" />
+                    <path fill="none" d="M0 0h24v24H0z" />
+                </svg>
+            </a>
         </div>
-        <div class="no-scrollbar flex flex-col overflow-y-auto px-6 py-6">
+        <div class="flex flex-col overflow-y-auto px-3 py-3">
             <ul>
                 <li>
-                    <a href="#"
-                        class="group relative flex items-center gap-2.5 rounded-md py-2 px-4 duration-300 ease-in-out hover:bg-gray-700">
-                        <svg class="w-4 h-4 mr-2" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                    <a href="dashboard/tables"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                        title="Tables">
+                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512">
                             <g>
                                 <g>
@@ -33,13 +42,14 @@
                                 </g>
                             </g>
                         </svg>
-                        Tables
+                        <span class="ml-3 hidden md:block">Tables</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="group relative flex items-center gap-2.5 rounded-md py-2 px-4 duration-300 ease-in-out hover:bg-gray-700">
-                        <svg class="w-4 h-4 mr-2" fill="#fff" height="24" width="24" viewBox="0 0 48 48"
+                    <a href="dashboard/menu-categories"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                        title="Menu Categories">
+                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" viewBox="0 0 48 48"
                             xmlns="http://www.w3.org/2000/svg">
                             <g id="Layer_2" data-name="Layer 2">
                                 <g id="invisible_box" data-name="invisible box">
@@ -56,13 +66,14 @@
                                 </g>
                             </g>
                         </svg>
-                        Menu Categories
+                        <span class="ml-3 hidden md:block">Menu Categories</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="group relative flex items-center gap-2.5 rounded-md py-2 px-4 duration-300 ease-in-out hover:bg-gray-700">
-                        <svg class="w-4 h-4 mr-2" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                    <a href="dashboard/menu-items"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                        title="Menu Items">
+                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512.075 512.075">
                             <g>
                                 <g>
@@ -120,13 +131,14 @@
                                 </g>
                             </g>
                         </svg>
-                        Menu Items
+                        <span class="ml-3 hidden md:block">Menu Items</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="group relative flex items-center gap-2.5 rounded-md py-2 px-4 duration-300 ease-in-out hover:bg-gray-700">
-                        <svg class="w-4 h-4 mr-2" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                    <a href="dashboard/team"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                        title="Team">
+                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.067 460.067" xml:space="preserve">
                             <g>
                                 <path
@@ -159,13 +171,14 @@
 		c10.09-0.051,18.23-8.271,18.179-18.362v-0.001l-0.674-134.227C322.194,107.083,302.779,87.803,279.077,87.803z" />
                             </g>
                         </svg>
-                        Team
+                        <span class="ml-3 hidden md:block">Team</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="group relative flex items-center gap-2.5 rounded-md py-2 px-4 duration-300 ease-in-out hover:bg-gray-700">
-                        <svg class="w-4 h-4 mr-2" fill="#fff" height="32" width="32" xmlns="http://www.w3.org/2000/svg"
+                    <a href="dashboard/settings"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                        title="Settings">
+                        <svg class="w-5 h-5" fill="#fff" height="32" width="32" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512">
                             <g>
                                 <path class="st0" d="M502.325,307.303l-39.006-30.805c-6.215-4.908-9.665-12.429-9.668-20.348c0-0.084,0-0.168,0-0.252
@@ -189,31 +202,29 @@
 		C339.815,267.771,320.972,313.262,281.292,329.698z" />
                             </g>
                         </svg>
-                        Settings
+                        <span class="ml-3 hidden md:block">Settings</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <div class="absolute left-0 bottom-0 w-full items-center justify-between gap-2 px-6 py-6 border-t border-gray-300">
+        <div class="flex flex-col px-3 py-3 border-t border-gray-300">
             <ul>
                 <li>
-                    <a href="#"
-                        class="group relative flex items-center gap-2.5 rounded-md py-2 px-4 duration-300 ease-in-out hover:bg-gray-700">
-
-
-                        <svg class="w-4 h-4 mr-2" fill="#fff" height="24" width="24" viewBox="-17 0 512 512"
+                    <a href="dashboard/account"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700" title="User">
+                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" viewBox="-17 0 512 512"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M341 138C341 67.3075 300.856 16 239 16C177.144 16 137 67.3075 137 138C137 231.394 189 221.676 189 269C189 287.649 139 288 139 288C59.471 288 0 352.471 0 432V464C0 490.51 21.4903 512 48 512H431C457.51 512 479 490.51 479 464V432C479 352.471 418.529 288 339 288C339 288 289 287.649 289 269C289 221.676 341 231.394 341 138Z">
                             </path>
                         </svg>
-                        User
+                        <span class="ml-3 hidden md:block">User</span>
                     </a>
                 </li>
                 <li>
                     <a href="#"
-                        class="group relative flex items-center gap-2.5 rounded-md py-2 px-4 duration-300 ease-in-out hover:bg-gray-700">
-                        <svg class="w-4 h-4 mr-2" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700" title="Logout">
+                        <svg class="w-5 h-5" fill="#fff" height="32" width="32" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 96.943 96.943">
                             <g>
                                 <g>
@@ -226,7 +237,7 @@
                                 </g>
                             </g>
                         </svg>
-                        Logout
+                        <span class="ml-3 hidden md:block">Logout</span>
                     </a>
                 </li>
             </ul>
@@ -238,7 +249,32 @@
 
 </script>
 
-<style>aside {
+<style>
+aside {
     background-color: #1c2434;
     color: #dee4ee;
+}
+
+/* Scoped styles (within your component's <style> tag) */
+::-webkit-scrollbar {
+    width: 20px;
+    /* Increase scrollbar width */
+    background-color: rgba(28, 36, 52);
+    /* Semi-transparent background */
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    /* Rounded corners */
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
 }</style>
