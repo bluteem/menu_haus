@@ -5,7 +5,7 @@
       
       <DashboardSidebar />
 
-      <Settings />
+      <Account />
       
     </div>
 </template>
@@ -13,13 +13,13 @@
 <script>
 // import DashboardNavbar from '../components/DashboardNavbar.vue';
 import DashboardSidebar from "../components/DashboardSidebar.vue";
-import Settings from "../components/Settings.vue";
+import Account from "../components/Account.vue";
 
 export default {
   components: {
     // DashboardNavbar,
     DashboardSidebar,
-    Settings
+    Account
   }
 };
 
