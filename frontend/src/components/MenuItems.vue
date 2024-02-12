@@ -1,7 +1,7 @@
 <!-- MenuItems.vue -->
 <template>
-<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden py-6">
+  <div class="mx-auto px-2">
     <h1 class="text-3xl font-bold mb-4">Menu Items</h1>
 
     <!-- Add Menu Item Button -->
