@@ -12,27 +12,27 @@
 
   <div class="border-b border-gray-300 mt-6"></div>
 
-  <Datatable :columns="data.columns" :rows="data.rows" />
-
   <ul>
     <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
-      <!-- Left column for the image -->
-      <div class="w-32 mr-4">
-        <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
-      </div>
-      <!-- Right column for the text content -->
-      <div class="flex-grow">
-        <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
-        <p class="text-gray-600"><span class="font-bold">Category:</span> {{ menuItem.category }}</p>
-        <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
-        <!-- Edit and Delete buttons -->
-        <div class="flex">
+      <div class="flex">  
+        <!-- Left column for the image -->
+        <div class=" w-1/6 px-4">
+          <img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full h-full object-cover rounded-md">
+        </div>
+        <!-- Right column for the text content -->
+        <div class="w-3/6 px-4">
+          <h2 class="text-xl font-semibold">{{ menuItem.name }}</h2>
+          <p class="text-gray-600"><span class="font-bold">Category:</span> {{ menuItem.category }}</p>
+          <p class="text-gray-600"><span class="font-bold">Price:</span> ${{ menuItem.price.toFixed(2) }}</p>
+          <!-- Edit and Delete buttons -->
+        </div>
+        <div class="w-1/6">
           <button @click="getMenuItem(menuItem._id, $refs.Alert); imageDisplayOn()" type="button"
             class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Edit</button>
           <button @click="deleteMenuItem(menuItem._id, $refs.Alert)"
             class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">Delete</button>
         </div>
-      </div>
+      </div>      
     </li>
   </ul>
   <!-- Show message if there are no menu items -->
@@ -203,7 +203,6 @@
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import Alert from '@/components/Alert.vue';
-import DataTable from "@/components/DataTable.vue";
 
 export default {
   components: {
@@ -222,7 +221,7 @@ export default {
       categoryId: '',
     });
     const menuItems = ref([]);
-    const menuCategories = ref([]);   
+    const menuCategories = ref([]);
 
     // Fetch menu items when the component is mounted
     onMounted(async () => {
@@ -237,7 +236,7 @@ export default {
           menuCategories.value = response.data.menuCategories;
       } catch (error) {
           console.error('Error fetching menu categories:', error);
-      }      
+      } 
     });
 
     // Add a new menu item
