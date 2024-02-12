@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from "../views/Home.vue";
-import Dashboard from '../views/Dashboard.vue';
+import FrontendHome from "../views/FrontendHome.vue";
+import DashboardHome from '../views/DashboardHome.vue';
 import DashboardTables from '../views/DashboardTables.vue';
 import DashboardMenuCategories from '../views/DashboardMenuCategories.vue';
 import DashboardMenuItems from '../views/DashboardMenuItems.vue';
@@ -10,7 +10,7 @@ import NotFound from '../views/NotFound.vue';
 const routes = [
   {
     path: '/dashboard',
-    component: Dashboard,
+    component: DashboardHome,
     meta: {
       title: 'Menu.Haus Dashboard'
     }
@@ -44,8 +44,15 @@ const routes = [
     }
   },
   {
+    path: '/dashboard/settings',
+    component: DashboardSettings,
+    meta: {
+      title: 'Menu.Haus Dashboard'
+    }
+  },
+  {
     path: '/',
-    component: Home,
+    component: FrontendHome,
     meta: {
       title: 'Menu.Haus Home' // Meta title for the Home page
     }
