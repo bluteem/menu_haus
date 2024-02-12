@@ -2,7 +2,7 @@
     <aside class="relative left-0 top-0 flex flex-col h-screen overflow-y-hidden">
         <div class="flex items-center justify-between px-3 py-3">
             <p class="rounded-md font-medium py-2 px-3 bg-gray-700 mr-1 hidden md:block">
-                Menu.Haus Dashboard</p>
+                Menu.Haus</p>
             <a href="#" @click="toggleHiddenClass" class="rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
                 title="Shrink">
                 <svg class="w-5 h-5" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +15,29 @@
         <div class="flex flex-col overflow-y-auto px-3 py-3">
             <ul>
                 <li>
-                    <a href="dashboard/tables"
+                    <a href="/dashboard"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                        title="Tables">
+                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" viewBox="0 0 448 448"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1"
+                                transform="translate(0,-604.36224)">
+                                <rect style="fill-opacity:1;stroke:none;stroke-opacity:1" id="rect3334" width="192"
+                                    height="256" x="0" y="604.36224" />
+                                <rect y="796.36224" x="256" height="255.99995" width="192" id="rect3336"
+                                    style="fill-opacity:1;stroke:none;stroke-opacity:1" />
+                                <rect y="924.36224" x="0" height="127.99995" width="192" id="rect3338"
+                                    style="fill-opacity:1;stroke:none;stroke-opacity:1" />
+                                <rect style="fill-opacity:1;stroke:none;stroke-opacity:1" id="rect3340" width="192"
+                                    height="128.00002" x="256" y="604.36224" />
+                            </g>
+                        </svg>
+
+                        <span class="ml-3 hidden md:block">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/tables"
                         class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
                         title="Tables">
                         <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +68,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="dashboard/menu-categories"
+                    <a href="/dashboard/menu-categories"
                         class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
                         title="Menu Categories">
                         <svg class="w-5 h-5" fill="#fff" height="24" width="24" viewBox="0 0 48 48"
@@ -70,7 +92,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="dashboard/menu-items"
+                    <a href="/dashboard/menu-items"
                         class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
                         title="Menu Items">
                         <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -135,11 +157,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="dashboard/team"
+                    <a href="/dashboard/team"
                         class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
                         title="Team">
                         <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.067 460.067" xml:space="preserve">
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.067 460.067">
                             <g>
                                 <path
                                     d="M454.165,154.398c-0.111-22.012-18.11-39.92-40.122-39.92c-7.096,0-67.007,0-73.949,0
@@ -175,7 +197,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="dashboard/settings"
+                    <a href="/dashboard/settings"
                         class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
                         title="Settings">
                         <svg class="w-5 h-5" fill="#fff" height="32" width="32" xmlns="http://www.w3.org/2000/svg"
@@ -210,8 +232,9 @@
         <div class="flex flex-col px-3 py-3 border-t border-gray-300">
             <ul>
                 <li>
-                    <a href="dashboard/account"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700" title="User">
+                    <a href="/dashboard/account"
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                        title="User">
                         <svg class="w-5 h-5" fill="#fff" height="24" width="24" viewBox="-17 0 512 512"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -222,8 +245,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700" title="Logout">
+                    <a href=""
+                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+                        title="Logout">
                         <svg class="w-5 h-5" fill="#fff" height="32" width="32" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 96.943 96.943">
                             <g>

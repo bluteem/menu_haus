@@ -7,10 +7,12 @@
   <!-- Add Menu Item Button -->
   <button @click="showModal1 = true"
     class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300 border-b border-gray-300">
-    Add Menu Item
+    Add New Category
   </button>
 
   <div class="border-b border-gray-300 mt-6"></div>
+
+  <Datatable :columns="data.columns" :rows="data.rows" />
 
   <ul>
     <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
@@ -201,6 +203,7 @@
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import Alert from '@/components/Alert.vue';
+import DataTable from "@/components/DataTable.vue";
 
 export default {
   components: {
@@ -426,7 +429,7 @@ export default {
       fileNamesString2,
       showImages,
       imageDisplayOff,
-      imageDisplayOn
+      imageDisplayOn,
     };
   }
 };
