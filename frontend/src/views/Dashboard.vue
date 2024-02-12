@@ -1,22 +1,24 @@
 <template>
-    <div>
-      <DashboardNavbar />
+    <div class="flex h-screen overflow-hidden">
 
-      <main class="container mx-auto px-4 py-8">
-        <MenuItems />
-      </main>
-    
+      <!-- <DashboardNavbar /> -->
+      
+      <DashboardSidebar />
+
+      <MenuItems />
       
     </div>
 </template>
 
 <script>
-import DashboardNavbar from '../components/DashboardNavbar.vue';
+// import DashboardNavbar from '../components/DashboardNavbar.vue';
 import MenuItems from '../components/MenuItems.vue';
+import DashboardSidebar from "../components/DashboardSidebar.vue";
 
 export default {
   components: {
-    DashboardNavbar,
+    // DashboardNavbar,
+    DashboardSidebar,
     MenuItems
   }
 };

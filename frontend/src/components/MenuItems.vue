@@ -1,5 +1,6 @@
 <!-- MenuItems.vue -->
 <template>
+<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <h1 class="text-3xl font-bold mb-4">Menu Items</h1>
 
@@ -41,6 +42,7 @@
   <div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
 
       <!-- Modal content -->
       <div
@@ -106,93 +108,95 @@
       </div>
     </div>
   </div>
+</main>
 
-  <!-- Modal for editing menu item -->
-  <div :style="{ display: showModal2 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-      <!-- Modal content -->
-      <div
-        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Menu Item</h3>
-          <div class="mt-5">
-            <!-- Add Menu Item Form -->
-            <form @submit.prevent="updateMenuItem($refs.Alert)">
-              <!-- Form fields go here -->
-              <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
-                <input type="text" v-model="newMenuItem.name" id="name" required
-                  class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+<!-- Modal for editing menu item -->
+<div :style="{ display: showModal2 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
+  <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+    <!-- Modal content -->
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Menu Item</h3>
+        <div class="mt-5">
+          <!-- Add Menu Item Form -->
+          <form @submit.prevent="updateMenuItem($refs.Alert)">
+            <!-- Form fields go here -->
+            <div class="mb-4">
+              <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+              <input type="text" v-model="newMenuItem.name" id="name" required
+                class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+            </div>
+
+            <div class="mb-4">
+              <label for="images" class="block text-sm font-medium text-gray-700 mb-1">Current Images:</label>
+              <div class="flex mb-4" v-show="showImages">
+                <img v-for="(image, index) in newMenuItem.images" :key="index"
+                  :src="'/images/' + image" :alt="newMenuItem.name" class="w-24 h-18 object-cover rounded-md mr-2">
               </div>
 
-              <div class="mb-4">
-                <label for="images" class="block text-sm font-medium text-gray-700 mb-1">Current Images:</label>
-                <div class="flex mb-4" v-show="showImages">
-                  <img v-for="(image, index) in newMenuItem.images" :key="index"
-                    :src="'/images/' + image" :alt="newMenuItem.name" class="w-24 h-18 object-cover rounded-md mr-2">
-                </div>
+              <p class="block text-sm font-medium text-gray-700 mb-1">Replace the Images:</p>
 
-                <p class="block text-sm font-medium text-gray-700 mb-1">Replace the Images:</p>
+              <input type="file" ref="fileInputRef2" multiple @change="editFileUpload" @click="imageDisplayOff" class="block w-full mt-2 py-2 px-4 bg-white text-gray-700 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500">                
 
-                <input type="file" ref="fileInputRef2" multiple @change="editFileUpload" @click="imageDisplayOff" class="block w-full mt-2 py-2 px-4 bg-white text-gray-700 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500">                
+              <div v-if="uploadedFiles2.length > 0">
+                <p class="block text-sm font-medium text-gray-700 my-2">Uploaded Files:</p>
+                <ul>
+                  <li v-for="(fileName, index) in uploadedFiles2" :key="index">{{ fileName }}</li>
+                </ul>
+              </div>           
+              <!-- Hidden input to store file names for submission -->
+              <input type="hidden" name="fileNames" :value="fileNamesString2">
+          
+            </div>
 
-                <div v-if="uploadedFiles2.length > 0">
-                  <p class="block text-sm font-medium text-gray-700 my-2">Uploaded Files:</p>
-                  <ul>
-                    <li v-for="(fileName, index) in uploadedFiles2" :key="index">{{ fileName }}</li>
-                  </ul>
-                </div>           
-                <!-- Hidden input to store file names for submission -->
-                <input type="hidden" name="fileNames" :value="fileNamesString2">
-           
-              </div>
+            <div class="mb-4">
+              <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
 
-              <div class="mb-4">
-                <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
+              <select v-model="newMenuItem.categoryId" id="category" required class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                <option disabled selected>Select Category</option>
+                <option v-for="category in menuCategories" :key="category._id" :value="category._id">{{ category.name }}</option>
+              </select>
 
-                <select v-model="newMenuItem.categoryId" id="category" required class="mt-1 p-2 border border-gray-300 rounded-md w-full">
-                  <option disabled selected>Select Category</option>
-                  <option v-for="category in menuCategories" :key="category._id" :value="category._id">{{ category.name }}</option>
-                </select>
-
-                <!-- <input type="text" v-model="newMenuItem.category" id="category" required
-                  class="mt-1 p-2 border border-gray-300 rounded-md w-full"> -->
+              <!-- <input type="text" v-model="newMenuItem.category" id="category" required
+                class="mt-1 p-2 border border-gray-300 rounded-md w-full"> -->
 
 
-              </div>
+            </div>
 
-              <div class="mb-4">
-                <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
-                <textarea v-model="newMenuItem.description" id="description" required
-                  class="mt-1 p-2 border border-gray-300 rounded-md w-full"></textarea>
-              </div>
+            <div class="mb-4">
+              <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
+              <textarea v-model="newMenuItem.description" id="description" required
+                class="mt-1 p-2 border border-gray-300 rounded-md w-full"></textarea>
+            </div>
 
-              <div class="mb-4">
-                <label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
-                <input type="number" step="0.01" v-model.number="newMenuItem.price" id="price" required
-                  class="mt-1 p-2 border border-gray-300 rounded-md w-full">
-              </div>
+            <div class="mb-4">
+              <label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
+              <input type="number" step="0.01" v-model.number="newMenuItem.price" id="price" required
+                class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+            </div>
 
-              <button type="submit"
-                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
-                Save
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button @click="showModal2 = false; resetForm()" type="button"
-            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-            Close
-          </button>
+            <button type="submit"
+              class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
+              Save
+            </button>
+          </form>
         </div>
       </div>
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <button @click="showModal2 = false; resetForm()" type="button"
+          class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+          Close
+        </button>
+      </div>
     </div>
-  </div>  
+  </div>
+</div>  
 
-  <Alert ref="Alert" />
+<Alert ref="Alert" />
 </template>
 
 <script>
