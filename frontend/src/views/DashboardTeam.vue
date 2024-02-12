@@ -5,7 +5,7 @@
       
       <DashboardSidebar />
 
-      <Tables />
+      <Team />
       
     </div>
 </template>
@@ -13,13 +13,13 @@
 <script>
 // import DashboardNavbar from '../components/DashboardNavbar.vue';
 import DashboardSidebar from "../components/DashboardSidebar.vue";
-import Tables from "../components/Tables.vue";
+import Team from "../components/Team.vue";
 
 export default {
   components: {
     // DashboardNavbar,
     DashboardSidebar,
-    Tables
+    Team
   }
 };
 

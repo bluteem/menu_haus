@@ -4,6 +4,7 @@ import Dashboard from '../views/Dashboard.vue';
 import DashboardTables from '../views/DashboardTables.vue';
 import DashboardMenuCategories from '../views/DashboardMenuCategories.vue';
 import DashboardMenuItems from '../views/DashboardMenuItems.vue';
+import DashboardTeam from '../views/DashboardTeam.vue';
 import NotFound from '../views/NotFound.vue';
 
 const routes = [
@@ -34,7 +35,14 @@ const routes = [
     meta: {
       title: 'Menu.Haus Dashboard'
     }
-  },  
+  },
+  {
+    path: '/dashboard/team',
+    component: DashboardTeam,
+    meta: {
+      title: 'Menu.Haus Dashboard'
+    }
+  },
   {
     path: '/',
     component: Home,
