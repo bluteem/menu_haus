@@ -8,8 +8,16 @@ import DashboardTeam from '../views/DashboardTeam.vue';
 import DashboardSettings from '../views/DashboardSettings.vue';
 import DashboardAccount from '../views/DashboardAccount.vue';
 import NotFound from '../views/NotFound.vue';
+import Login from '../components/Login.vue';
 
 const routes = [
+  {
+    path: '/login',
+    component: Login,
+    meta: {
+      title: 'Menu.Haus Login'
+    }
+  },
   {
     path: '/dashboard',
     component: DashboardHome,
