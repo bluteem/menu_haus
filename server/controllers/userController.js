@@ -7,8 +7,8 @@ const router = express.Router();
 // Description: Get all menu categories
 router.get('/', async (req, res) => {
     try {
-        const Users = await User.find();
-        res.status(200).json({ Users });
+        const userData = await User.find();
+        res.status(200).json({ userData });
     } catch (error) {
         console.error('Error fetching users:', error);
         res.status(500).json({ error: 'Server error' });
@@ -19,30 +19,30 @@ router.get('/', async (req, res) => {
 // Description: Get a user by ID
 router.get('/:id', async (req, res) => {
     try {
-        const User = await User.findById(req.params.id);
-        if (!User) {
+        const userData = await User.findById(req.params.id);
+        if (!userData) {
             return res.status(404).json({ error: 'User not found' });
         }
-        res.status(200).json({ User });
+        res.status(200).json({ userData });
     } catch (error) {
         console.error('Error fetching user:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });
 
-// Route: POST /api/menucategories
-// Description: Add a new menu category
+// Route: POST /api/users
+// Description: Add a new user
 router.post('/', async (req, res) => {
     try {
         const { email, password, fullName, profilePicture } = req.body;
-        const menuCategory = new MenuCategory({
+        const userData = new User({
             email,
             password, 
             fullName, 
             profilePicture
         });
-        await User.save();
-        res.status(201).json({ message: 'User created successfully', User });
+        await userData.save();
+        res.status(201).json({ message: 'User created successfully', userData });
     } catch (error) {
         console.error('Error creating user:', error);
         res.status(500).json({ error: 'Server error' });
@@ -54,16 +54,16 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const { email, password, fullName, profilePicture } = req.body;
-        const User = await User.findByIdAndUpdate(req.params.id, {
+        const userData = await User.findByIdAndUpdate(req.params.id, {
             email,
             password,
             fullName,
             profilePicture
         }, { new: true }); // { new: true } returns the updated document
-        if (!updatedUser) {
+        if (!userData) {
             return res.status(404).json({ error: 'User not found' });
         }
-        res.json({ message: 'User updated successfully', User: updatedUser });
+        res.json({ message: 'User updated successfully', userData: userData });
     } catch (error) {
         console.error('Error updating user:', error);
         res.status(500).json({ error: 'Server error' });
@@ -74,8 +74,8 @@ router.put('/:id', async (req, res) => {
 // Description: Delete a menu item by ID
 router.delete('/:id', async (req, res) => {
     try {
-        const User = await User.findByIdAndDelete(req.params.id);
-        if (!User) {
+        const userData = await User.findByIdAndDelete(req.params.id);
+        if (!userData) {
             return res.status(404).json({ error: 'User not found' });
         }
         res.json({ message: 'User deleted successfully' });

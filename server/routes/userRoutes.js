@@ -8,9 +8,9 @@ router.get("/", getUsers);
 
 async function getUsers(req, res) {
     try {
-        const Users = await User.find({});
+        const UsersGot = await User.find({});
         res.json({
-            Users
+            UsersGot
         });
     } catch (error) {
         console.error("Error fetching users:", error);
