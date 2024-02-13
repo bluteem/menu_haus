@@ -8,6 +8,8 @@ import menuItemRoutes from './routes/menuItemRoutes.js'; // Routes for menu item
 import menuItemController from './controllers/menuItemController.js'; // Controller for menu items
 import menuCategoryRoutes from './routes/menuCategoryRoutes.js'; // Routes for menu items
 import menuCategoryController from './controllers/menuCategoryController.js'; // Controller for menu items
+import UserRoutes from './routes/userRoutes.js'; // Routes for menu items
+import userController from './controllers/userController.js'; // Controller for menu items
 
 // Load environment variables from .env file
 dotenv.config();
@@ -59,6 +61,13 @@ app.use('/api/menucategories', menuCategoryRoutes);
 
 // Use the menu category controller
 app.use('/api/menucategories', menuCategoryController);
+
+// Use existing menu category routes
+app.use('/api/users', userRoutes);
+
+// Use the menu category controller
+app.use('/api/users', userController);
+
 
 // Default route to indicate API is running
 app.get('/', (req, res) => {

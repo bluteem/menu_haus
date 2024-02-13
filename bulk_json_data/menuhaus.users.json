@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "65cb5ab56474f7f776dc3a9b"
+  },
+  "email": "contact@bluteem.com",
+  "password": "adminpassword",
+  "fullName": "Admin User",
+  "profilePicture": "admin.jpg",
+  "accountStatus": "active",
+  "role": "admin",
+  "dateCreated": "2024-02-12T00:00:00.000Z",
+  "lastLogin": null
+},
+{
+  "_id": {
+    "$oid": "65cb5ab56474f7f776dc3a9c"
+  },
+  "email": "contact@bluteem.com",
+  "password": "teampassword",
+  "fullName": "Team Member User",
+  "profilePicture": "team.jpg",
+  "accountStatus": "active",
+  "role": "team",
+  "dateCreated": "2024-02-12T00:00:00.000Z",
+  "lastLogin": null
+},
+{
+  "_id": {
+    "$oid": "65cb5ab56474f7f776dc3a9d"
+  },
+  "email": "contact@bluteem.com",
+  "password": "clientpassword",
+  "fullName": "Client User",
+  "profilePicture": "client.jpg",
+  "accountStatus": "active",
+  "role": "client",
+  "dateCreated": "2024-02-12T00:00:00.000Z",
+  "lastLogin": null
+}]
