@@ -3,23 +3,23 @@
 
       <!-- <DashboardNavbar /> -->
       
-      <DashboardSidebar />
+      <Sidebar />
 
-      <DashboardHome />
+      <Home />
       
     </div>
 </template>
 
 <script>
 // import DashboardNavbar from '../components/DashboardNavbar.vue';
-import DashboardSidebar from "../components/DashboardSidebar.vue";
-import DashboardHome from "../components/DashboardHome.vue";
+import Sidebar from "../components/Sidebar.vue";
+import Home from "../components/Home.vue";
 
 export default {
   components: {
     // DashboardNavbar,
-    DashboardSidebar,
-    DashboardHome
+    Sidebar,
+    Home
   }
 };
 

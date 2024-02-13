@@ -3,7 +3,7 @@
 
       <!-- <DashboardNavbar /> -->
       
-      <DashboardSidebar />
+      <Sidebar />
 
       <MenuItems />
       
@@ -12,13 +12,13 @@
 
 <script>
 // import DashboardNavbar from '../components/DashboardNavbar.vue';
-import DashboardSidebar from "../components/DashboardSidebar.vue";
+import Sidebar from "../components/Sidebar.vue";
 import MenuItems from '../components/MenuItems.vue';
 
 export default {
   components: {
     // DashboardNavbar,
-    DashboardSidebar,
+    Sidebar,
     MenuItems
   }
 };
