@@ -51,7 +51,7 @@ app.post('/api/upload', upload.array('files'), (req, res) => {
 });
 
 // Use existing menu item routes
-app.use('/api/menuitems', menuItemRoutes);
+// app.use('/api/menuitems', menuItemRoutes);
 
 // Use the menu item controller
 app.use('/api/menuitems', menuItemController);

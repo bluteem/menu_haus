@@ -11,38 +11,51 @@
       </button>
     
       <div class="border-b border-gray-300 mt-6"></div>
-    
-      <ul>
-        <li v-for="user in users" :key="user._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
-          <div class="flex">  
-            <!-- Left column for the image -->
-            <div class=" w-1/6 px-4">
-              <p class="text-gray-600"><span class="font-bold">Name:</span> {{ user.fullName }}</p>
-            </div>
-            <!-- Right column for the text content -->
-            <div class="w-3/6 px-4">
-              <p class="text-gray-600"><span class="font-bold">Name:</span> {{ user.fullName }}</p>
-              <!-- Edit and Delete buttons -->
-            </div>
-            <div class="w-1/6">
-              <button @click="getUser(user._id, $refs.Alert)" type="button"
-                class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Edit</button>
-              <button @click="deleteUser(user._id, $refs.Alert)"
-                class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">Delete</button>
-            </div>
-          </div>      
-        </li>
-      </ul>
+
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
+          <thead class="border-b font-medium dark:border-neutral-500">
+            <tr>
+              <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Email</th>
+              <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Email</th>
+              <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Role</th>
+              <th scope="col" class="px-6 py-4">#</th>            
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in allUsersData" :key="user._id" class="border-b dark:border-neutral-500">
+              <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                  <div class="text-gray-900">{{ user.fullName }}</div>
+              </td>
+              <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                  <div class="text-gray-900">{{ user.email }}</div>
+              </td>
+              <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                  <span class="px-2 inline-flex leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ user.role }}</span>
+              </td>
+              <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                <button @click="getUser(user._id, $refs.Alert)" type="button" class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Edit</button>
+                <button @click="deleteUser(user._id, $refs.Alert)" class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">Delete</button>
+              </td>            
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
       <!-- Show message if there are no menu items -->
-      <p v-if="users.length === 0" class="text-gray-600">No user available</p>
+      <p v-if="allUsersData.length === 0" class="text-gray-600">No user available</p>
     </main>
      
       <!-- Modal for adding a new user -->
       <div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-    
-    
           <!-- Modal content -->
           <div
             class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
@@ -51,30 +64,30 @@
               <div class="mt-5">
                 <!-- Add User Form -->
                 <form @submit.prevent="addUser($refs.Alert)">
-                  <!-- Form fields go here -->
+
                   <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name:</label>
-                    <input type="text" v-model="newUser.fullName" id="name" required
+                    <label for="newName" class="block text-sm font-medium text-gray-700">Full Name:</label>
+                    <input type="text" v-model="newUser.fullName" id="newName" required
                       class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                   </div>
 
                   <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
-                    <input type="email" v-model="newUser.email" id="email" required
+                    <label for="newEmail" class="block text-sm font-medium text-gray-700">Email:</label>
+                    <input type="email" v-model="newUser.email" id="newEmail" required
                       class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                   </div>                  
     
                   <div class="mb-4">
-                    <label for="role" class="block text-sm font-medium text-gray-700">Role:</label>
-                    <select v-model="newUser.role" id="role" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                    <label for="newRole" class="block text-sm font-medium text-gray-700">Role:</label>
+                    <select v-model="newUser.role" id="newRole" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                       <option disabled selected>Select Role</option>
-                      <option v-for="role in users.role" :key="role._id" :value="role._id">{{ user.role }}</option>
+                      <option v-for="roleOption in roleOptions" :key="roleOption" :value="roleOption">{{ roleOption }}</option>
                     </select>
                   </div>
     
                   <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
-                    <input type="password" v-model="newUser.password" id="password" required
+                    <label for="newPassword" class="block text-sm font-medium text-gray-700">Password:</label>
+                    <input type="password" v-model="newUser.password" id="newPassword" required
                       class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                   </div>
     
@@ -100,45 +113,36 @@
     <div :style="{ display: showModal2 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
       <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-    
-        <!-- Modal content -->
         <div
           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <h3 class="text-lg leading-6 font-medium text-gray-900">Edit User Info</h3>
             <div class="mt-5">
-              <!-- Add Menu Item Form -->
               <form @submit.prevent="updateUser($refs.Alert)">
-                <!-- Form fields go here -->
                 <div class="mb-4">
-                  <label for="name" class="block text-sm font-medium text-gray-700">Full Name:</label>
-                  <input type="text" v-model="newUser.fullName" id="name" required
+                  <label for="editName" class="block text-sm font-medium text-gray-700">Full Name:</label>
+                  <input type="text" v-model="newUser.fullName" id="editName" required
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                 </div>
 
                 <div class="mb-4">
-                  <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
-                  <input type="email" v-model="newUser.email" id="email" required
+                  <label for="editEmail" class="block text-sm font-medium text-gray-700">Email:</label>
+                  <input type="email" v-model="newUser.email" id="editEmail" required
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                 </div>
     
                 <div class="mb-4">
-                  <label for="email" class="block text-sm font-medium text-gray-700">Role:</label>
+                  <label for="editRole" class="block text-sm font-medium text-gray-700">Role:</label>
     
-                  <select v-model="newUser.role" id="role" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                  <select v-model="newUser.role" id="editRole" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                     <option disabled selected>Select Role</option>
-                    <option v-for="role in users.role" :key="role._id" :value="role._id">{{ role.name }}</option>
+                    <option v-for="roleOption in roleOptions" :key="roleOption" :value="roleOption">{{ roleOption }}</option>
                   </select>
-    
-                  <!-- <input type="text" v-model="newMenuItem.category" id="category" required
-                    class="mt-1 p-2 border border-gray-300 rounded-md w-full"> -->
-    
-    
                 </div>
     
                 <div class="mb-4">
-                  <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
-                  <input type="password" v-model.number="newUser.password" id="password" required
+                  <label for="editPassword" class="block text-sm font-medium text-gray-700">Password:</label>
+                  <input type="password" v-model.number="newUser.password" id="editPassword" required
                     class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                 </div>
     
@@ -163,7 +167,7 @@
     </template>
     
     <script>
-    import { ref, onMounted } from 'vue';
+    import { ref, computed, onMounted } from 'vue';
     import axios from 'axios';
     import Alert from '@/components/Alert.vue';
     
@@ -181,17 +185,22 @@
           fullName: '',
           role: '',
         });
-        const users = ref([]);
+        const allUsersData = ref([]);
     
         // Fetch menu items when the component is mounted
         onMounted(async () => {
           try {
             const response = await axios.get('http://localhost:5000/api/users');
-            users.value = response.data.userData;
+            allUsersData.value = response.data.userData;
           } catch (error) {
             console.error('Error fetching users:', error);
           } 
         });
+
+        // Define a computed property to return the array of available roles
+        const roleOptions = computed(() => {
+          return ['Admin', 'Team'];
+        });        
     
         // Add a new menu item
         const addUser = async (alertRef) => {
@@ -202,7 +211,7 @@
               fullName: newUser.value.fullName,
               role: newUser.value.role
             });
-            users.value.push(response.data.userData);
+            allUsersData.value.push(response.data.userData);
             showModal1.value = false;
             resetForm();
             // Show success alert using the passed alertRef
@@ -242,11 +251,10 @@
             // Extract updated user data from the response
             const updatedUser = response.data.userData;
             // Find the index of the updated user in the users array
-            console.log(updatedUser);
-            const updatedUserIndex = userData.value.findIndex(item => item._id === userData._id);
+            const updatedUserIndex = allUsersData.value.findIndex(item => item._id === updatedUser._id);
             // If the updated user index is found
             if (updatedUserIndex !== -1) {
-              users.value.splice(updatedUserIndex, 1, userData);
+              allUsersData.value.splice(updatedUserIndex, 1, updatedUser);
             }
             // Hide the modal for editing user info
             showModal2.value = false;
@@ -264,7 +272,7 @@
         const deleteUser = async (itemId, alertRef) => {
           try {
             await axios.delete(`http://localhost:5000/api/users/${itemId}`);
-            users.value = users.value.filter(item => item._id !== itemId);
+            allUsersData.value = allUsersData.value.filter(item => item._id !== itemId);
             // Show success alert
             alertRef.showAlert('User deleted successfully!');
           } catch (error) {
@@ -289,7 +297,8 @@
           showModal1,
           showModal2,
           newUser,
-          users,
+          allUsersData,
+          roleOptions,
           getUser,
           updateUser,
           addUser,

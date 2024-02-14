@@ -54,16 +54,16 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const { email, password, fullName, profilePicture } = req.body;
-        const userData = await User.findByIdAndUpdate(req.params.id, {
+        const updatedUserData = await User.findByIdAndUpdate(req.params.id, {
             email,
             password,
             fullName,
             profilePicture
         }, { new: true }); // { new: true } returns the updated document
-        if (!userData) {
+        if (!updatedUserData) {
             return res.status(404).json({ error: 'User not found' });
         }
-        res.json({ message: 'User updated successfully', userData: userData });
+        res.json({ message: 'User updated successfully', userData: updatedUserData });
     } catch (error) {
         console.error('Error updating user:', error);
         res.status(500).json({ error: 'Server error' });
