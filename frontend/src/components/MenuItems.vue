@@ -36,7 +36,7 @@
     </li>
   </ul>
   <!-- Show message if there are no menu items -->
-  <p v-if="allMenuItemsData.length === 0" class="text-gray-600">No menu items available</p>
+  <p v-if="allMenuItemsData.length === 0" class="text-gray-600 mt-3">No menu items available</p>
 </main>
  
   <!-- Modal for adding a new menu item -->

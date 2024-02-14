@@ -6,11 +6,9 @@
   
     <!-- Add Menu Item Button -->
     <button @click="showModal1 = true"
-      class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300 border-b border-gray-300">
+      class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300 border-b border-gray-300 mb-4">
       Add New Category
     </button>
-  
-    <div class="border-b border-gray-300 mt-6"></div>
 
 <div class="flex flex-col">
 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -45,7 +43,7 @@
 </div>
 
     <!-- Show message if there are no menu items -->
-    <p v-if="allMenuCategoriesData.length === 0" class="text-gray-600">No category available</p>
+    <p v-if="allMenuCategoriesData.length === 0" class="text-gray-600 mt-3">No category available</p>
   </main>
    
     <!-- Modal for adding a new user -->

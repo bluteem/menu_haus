@@ -6,11 +6,9 @@
     
       <!-- Add Menu Item Button -->
       <button @click="showModal1 = true"
-        class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300 border-b border-gray-300">
+        class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300 border-b border-gray-300 mb-4">
         Add New User
       </button>
-    
-      <div class="border-b border-gray-300 mt-6"></div>
 
 <div class="flex flex-col">
   <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -19,7 +17,7 @@
         <table class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
           <thead class="border-b font-medium dark:border-neutral-500">
             <tr>
-              <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Email</th>
+              <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Full Name</th>
               <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Email</th>
               <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Role</th>
               <th scope="col" class="px-6 py-4"></th>            
@@ -49,7 +47,7 @@
 </div>
 
       <!-- Show message if there are no menu items -->
-      <p v-if="allUsersData.length === 0" class="text-gray-600">No user available</p>
+      <p v-if="allUsersData.length === 0" class="text-gray-600 mt-3">No user available</p>
     </main>
      
       <!-- Modal for adding a new user -->

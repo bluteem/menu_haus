@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "65ccbd75405dd139cf2c1176"
+  },
+  "tableName": "VIP Table",
+  "tableNumber": 1,
+  "qrCode": "",
+  "status": "available",
+  "orders": [],
+  "__v": 0
+}]

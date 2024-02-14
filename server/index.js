@@ -4,9 +4,11 @@ import dotenv from 'dotenv'; // Load environment variables from a .env file
 import connectToDatabase from './db.js'; // Custom module to connect to the database
 import cors from 'cors'; // Cross-Origin Resource Sharing middleware for Express.js
 import multer from 'multer'; // Middleware for handling file uploads
-import menuItemController from './controllers/menuItemController.js'; // Controller for menu items
-import menuCategoryController from './controllers/menuCategoryController.js'; // Controller for menu items
-import userController from './controllers/userController.js'; // Controller for menu items
+
+import tableController from './controllers/tableController.js';
+import menuCategoryController from './controllers/menuCategoryController.js';
+import menuItemController from './controllers/menuItemController.js';
+import userController from './controllers/userController.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -48,14 +50,13 @@ app.post('/api/upload', upload.array('files'), (req, res) => {
 });
 
 // Use the menu item controller
+app.use('/api/tables', tableController);
+// Use the menu item controller
 app.use('/api/menuitems', menuItemController);
-
 // Use the menu category controller
 app.use('/api/menucategories', menuCategoryController);
-
 // Use the menu category controller
 app.use('/api/users', userController);
-
 // Default route to indicate API is running
 app.get('/', (req, res) => {
     res.send('API is running...');
