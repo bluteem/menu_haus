@@ -13,7 +13,7 @@
   <div class="border-b border-gray-300 mt-6"></div>
 
   <ul>
-    <li v-for="menuItem in menuItems" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
+    <li v-for="menuItem in allMenuItemsData" :key="menuItem._id" class="flex items-center border-b border-gray-300 pt-2 pb-4">
       <div class="flex">  
         <!-- Left column for the image -->
         <div class="xs:w-2/6 md:w-1/6 px-4">
@@ -36,7 +36,7 @@
     </li>
   </ul>
   <!-- Show message if there are no menu items -->
-  <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
+  <p v-if="allMenuItemsData.length === 0" class="text-gray-600">No menu items available</p>
 </main>
  
   <!-- Modal for adding a new menu item -->
@@ -77,7 +77,7 @@
                 <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
                 <select v-model="newMenuItem.categoryId" id="category" required class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                   <option disabled selected>Select Category</option>
-                  <option v-for="category in menuCategories" :key="category._id" :value="category._id">{{ category.name }}</option>
+                  <option v-for="category in allMenuCategoriesData" :key="category._id" :value="category._id">{{ category.name }}</option>
                 </select>
               </div>
 
@@ -158,7 +158,7 @@
 
               <select v-model="newMenuItem.categoryId" id="category" required class="mt-1 p-2 border border-gray-300 rounded-md w-full">
                 <option disabled selected>Select Category</option>
-                <option v-for="category in menuCategories" :key="category._id" :value="category._id">{{ category.name }}</option>
+                <option v-for="category in allMenuCategoriesData" :key="category._id" :value="category._id">{{ category.name }}</option>
               </select>
 
               <!-- <input type="text" v-model="newMenuItem.category" id="category" required
@@ -220,20 +220,20 @@ export default {
       price: null,
       categoryId: '',
     });
-    const menuItems = ref([]);
-    const menuCategories = ref([]);   
+    const allMenuItemsData = ref([]);
+    const allMenuCategoriesData = ref([]);   
 
     // Fetch menu items when the component is mounted
     onMounted(async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/menuitems');
-        menuItems.value = response.data.menuItemsWithCategories;
+        allMenuItemsData.value = response.data.menuItemData;
       } catch (error) {
         console.error('Error fetching menu items:', error);
       }
       try {
           const response = await axios.get('http://localhost:5000/api/menucategories');
-          menuCategories.value = response.data.menuCategories;
+          allMenuCategoriesData.value = response.data.menuCategoryData;
       } catch (error) {
           console.error('Error fetching menu categories:', error);
       }      
@@ -249,7 +249,7 @@ export default {
           price: newMenuItem.value.price,
           categoryId: newMenuItem.value.categoryId
         });
-        menuItems.value.push(response.data.menuItem);
+        allMenuItemsData.value.push(response.data.menuItemData);
         showModal1.value = false;
         resetForm();
         // Show success alert using the passed alertRef
@@ -265,14 +265,14 @@ export default {
     const getMenuItem = async (itemId, alertRef) => {
       try {
         const response = await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
-        const menuItem = response.data.menuItemWithCategory;
+        const variable = response.data.menuItemData;
         newMenuItem.value = {
-          _id: menuItem._id,
-          name: menuItem.name,
-          images: menuItem.images,
-          categoryId: menuItem.categoryId,
-          description: menuItem.description,
-          price: menuItem.price
+          _id: variable._id,
+          name: variable.name,
+          images: variable.images,
+          categoryId: variable.categoryId,
+          description: variable.description,
+          price: variable.price
         };
         showModal2.value = true;
       } catch (error) {
@@ -286,10 +286,10 @@ export default {
     const updateMenuItem = async (alertRef) => {
       try {
         const response = await axios.put(`http://localhost:5000/api/menuitems/${newMenuItem.value._id}`, newMenuItem.value);
-        const updatedMenuItem = response.data.menuItem;
-        const updatedItemIndex = menuItems.value.findIndex(item => item._id === updatedMenuItem._id);
+        const updatedMenuItem = response.data.menuItemData;
+        const updatedItemIndex = allMenuItemsData.value.findIndex(item => item._id === updatedMenuItem._id);
         if (updatedItemIndex !== -1) {
-          menuItems.value.splice(updatedItemIndex, 1, updatedMenuItem);
+          allMenuItemsData.value.splice(updatedItemIndex, 1, updatedMenuItem);
         }
         showModal2.value = false;
         resetForm();
@@ -306,7 +306,7 @@ export default {
     const deleteMenuItem = async (itemId, alertRef) => {
       try {
         await axios.delete(`http://localhost:5000/api/menuitems/${itemId}`);
-        menuItems.value = menuItems.value.filter(item => item._id !== itemId);
+        allMenuItemsData.value = allMenuItemsData.value.filter(item => item._id !== itemId);
         // Show success alert
         alertRef.showAlert('Menu item deleted successfully!');
       } catch (error) {
@@ -411,8 +411,8 @@ export default {
       showModal1,
       showModal2,
       newMenuItem,
-      menuItems,
-      menuCategories,
+      allMenuItemsData,
+      allMenuCategoriesData,
       getMenuItem,
       updateMenuItem,
       addMenuItem,

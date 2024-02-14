@@ -1,27 +1,14 @@
 import express from 'express';
-import MenuItem from '../models/menuItem.js';
 import mongoose from 'mongoose';
+import MenuItem from '../models/menuItem.js';
 
 const router = express.Router();
-
-// Route: GET /api/menuitems
-// Description: Get all menu items
-/* router.get('/', async (req, res) => {
-    try {
-        const menuItems = await MenuItem.find().populate('category');
-        res.status(200).json({ menuItems });
-    } catch (error) {
-        console.error('Error fetching menu items:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-}); */
-
 
 // Route: GET /api/menuitems
 // Description: Get all menu items with their corresponding category information
 router.get('/', async (req, res) => {
     try {
-        const menuItemsWithCategories = await MenuItem.aggregate([
+        const menuItemData = await MenuItem.aggregate([
             {
                 $lookup: {
                     from: 'menucategories',
@@ -31,7 +18,7 @@ router.get('/', async (req, res) => {
                 }
             }
         ]);
-        res.status(200).json({ menuItemsWithCategories });
+        res.status(200).json({ menuItemData });
     } catch (error) {
         console.error('Error fetching menu items with categories:', error);
         res.status(500).json({ error: 'Server error' });
@@ -45,7 +32,7 @@ router.get('/:id', async (req, res) => {
         const menuItemId = req.params.id;
 
         // Find the menu item by its ID using findOne
-        const menuItemWithCategory = await MenuItem.aggregate([
+        const menuItemData = await MenuItem.aggregate([
             {
                 $match: { _id: new mongoose.Types.ObjectId(menuItemId) }
             },
@@ -59,11 +46,11 @@ router.get('/:id', async (req, res) => {
             }
         ]);
 
-        if (!menuItemWithCategory || menuItemWithCategory.length === 0) {
+        if (!menuItemData || menuItemData.length === 0) {
             return res.status(404).json({ error: 'Menu item not found' });
         }
 
-        res.status(200).json({ menuItemWithCategory: menuItemWithCategory[0] });
+        res.status(200).json({ menuItemData: menuItemData[0] });
     } catch (error) {
         console.error('Error fetching menu item with category:', error);
         res.status(500).json({ error: 'Server error' });
@@ -75,15 +62,15 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const { name, images, description, price, categoryId } = req.body;
-        const menuItem = new MenuItem({
+        const menuItemData = new MenuItem({
             name,
             images,
             description,
             price,
             categoryId,
         });
-        await menuItem.save();
-        res.status(201).json({ message: 'Menu item created successfully', menuItem });
+        await menuItemData.save();
+        res.status(201).json({ message: 'Menu item created successfully', menuItemData });
     } catch (error) {
         console.error('Error creating menu item:', error);
         res.status(500).json({ error: 'Server error' });
@@ -95,17 +82,17 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const { name, images, description, price, categoryId } = req.body;
-        const updatedMenuItem = await MenuItem.findByIdAndUpdate(req.params.id, {
+        const updatedMenuItemData = await MenuItem.findByIdAndUpdate(req.params.id, {
             name,
             images,
             description,
             price,
             categoryId,
         }, { new: true }); // { new: true } returns the updated document
-        if (!updatedMenuItem) {
+        if (!updatedMenuItemData) {
             return res.status(404).json({ error: 'Menu item not found' });
         }
-        res.json({ message: 'Menu item updated successfully', menuItem: updatedMenuItem });
+        res.json({ message: 'Menu item updated successfully', menuItemData: updatedMenuItemData });
     } catch (error) {
         console.error('Error updating menu item:', error);
         res.status(500).json({ error: 'Server error' });
@@ -116,8 +103,8 @@ router.put('/:id', async (req, res) => {
 // Description: Delete a menu item by ID
 router.delete('/:id', async (req, res) => {
     try {
-        const menuItem = await MenuItem.findByIdAndDelete(req.params.id);
-        if (!menuItem) {
+        const menuItemData = await MenuItem.findByIdAndDelete(req.params.id);
+        if (!menuItemData) {
             return res.status(404).json({ error: 'Menu item not found' });
         }
         res.json({ message: 'Menu item deleted successfully' });

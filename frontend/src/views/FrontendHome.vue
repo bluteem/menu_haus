@@ -2,7 +2,7 @@
     <!-- Category links -->
     <div class="sticky top-0 w-full bg-white shadow-md menu-nav px-8 py-6 flex overflow-x-auto">
         <a href="#" class="border-2 border-orange-500 rounded-xl focus:outline-none hover:bg-gray-200 transition duration-300 px-3 py-2 mr-2 flex items-center justify-center font-semibold min-w-48">All Items</a>
-        <a v-for="menuCategory in menuCategories" :key="menuCategory._id" :href="'#' + toFriendlyURL(menuCategory.name)"
+        <a v-for="menuCategory in allMenuCategoriesData" :key="menuCategory._id" :href="'#' + toFriendlyURL(menuCategory.name)"
         class="border-2 border-orange-500 rounded-xl focus:outline-none hover:bg-gray-200 transition duration-300 px-3 py-2 mr-2 flex items-center justify-center text-center font-semibold min-w-48">
         {{ menuCategory.name }}</a>
     </div>
@@ -28,7 +28,7 @@
             </ul>
         </div>
         <!-- Show message if there are no menu items -->
-        <p v-if="menuItems.length === 0" class="text-gray-600">No menu items available</p>
+        <p v-if="allMenuItemsData.length === 0" class="text-gray-600">No menu items available</p>
     </div>
 
     <div class="my-64"></div>
@@ -100,8 +100,8 @@ import { Carousel, initTE } from "tw-elements";
 
 export default {
     setup() {
-        const menuCategories = ref([]);
-        const menuItems = ref([]);
+        const allMenuCategoriesData = ref([]);
+        const allMenuItemsData = ref([]);
         const showModal1 = ref(false);
         const selectedMenuItem = ref({
             name: '',
@@ -115,13 +115,13 @@ export default {
         onMounted(async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/menucategories');
-                menuCategories.value = response.data.menuCategories;
+                allMenuCategoriesData.value = response.data.menuCategoryData;
             } catch (error) {
                 console.error('Error fetching menu categories:', error);
             }
             try {
                 const response = await axios.get('http://localhost:5000/api/menuitems');
-                menuItems.value = response.data.menuItemsWithCategories;
+                allMenuItemsData.value = response.data.menuItemData;
             } catch (error) {
                 console.error('Error fetching menu items:', error);
             }
@@ -131,7 +131,7 @@ export default {
         const getMenuItem = async (itemId) => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/menuitems/${itemId}`);
-                selectedMenuItem.value = response.data.menuItemWithCategory;
+                selectedMenuItem.value = response.data.menuItemData;
                 console.log(selectedMenuItem.value);
                 showModal1.value = true;
 
@@ -156,7 +156,7 @@ export default {
         
         const groupedMenuItems = computed(() => {
             const groupedItems = {};
-                menuItems.value.forEach(menuItem => {
+                allMenuItemsData.value.forEach(menuItem => {
                     const categoryName = menuItem.categoryInfo && menuItem.categoryInfo.length > 0 ? menuItem.categoryInfo[0].name : 'Uncategorized';
                     if (!groupedItems[categoryName]) {
                         groupedItems[categoryName] = [];
@@ -175,8 +175,8 @@ export default {
         };
  
         return {
-            menuCategories,
-            menuItems,
+            allMenuCategoriesData,
+            allMenuItemsData,
             showModal1,
             selectedMenuItem,
             getMenuItem,
