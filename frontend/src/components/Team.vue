@@ -22,18 +22,18 @@
               <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Email</th>
               <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Email</th>
               <th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Role</th>
-              <th scope="col" class="px-6 py-4">#</th>            
+              <th scope="col" class="px-6 py-4"></th>            
             </tr>
           </thead>
           <tbody>
             <tr v-for="user in allUsersData" :key="user._id" class="border-b dark:border-neutral-500">
-              <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+              <td class="border-r px-6 py-4 dark:border-neutral-500">
                   <div class="text-gray-900">{{ user.fullName }}</div>
               </td>
-              <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+              <td class="border-r px-6 py-4 dark:border-neutral-500">
                   <div class="text-gray-900">{{ user.email }}</div>
               </td>
-              <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+              <td class="border-r px-6 py-4 dark:border-neutral-500">
                   <span class="px-2 inline-flex leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ user.role }}</span>
               </td>
               <td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
