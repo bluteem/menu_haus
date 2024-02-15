@@ -76,39 +76,40 @@
 
               <div class="mb-4">
 
-                <div class="container mx-auto">
+                <div class="container mx-auto border border-gray-300 rounded-md">
                   <div class="grid grid-cols-2 gap-4">
                     <!-- First column -->
-                    <div class="col-span-1 bg-gray-200 p-4 rounded-md">
+                    <div class="col-span-1 px-4 pt-6 pb-5">
                       <a href="#" @click="generateQrCode"
                         class="px-4 py-2 my-10 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">Generate
                         QR Code</a>
                     </div>
                     <!-- Second column -->
-                    <div class="col-span-1 bg-gray-200 p-4 rounded-md">
+                    <div class="col-span-1 p-4">
                       <QRCodeVue3 v-if="showQRCode" :width="1000" :height="1000" :value="urlForQrCode" :qrOptions="{
                         typeNumber: 0,
                         mode: 'Byte',
                         errorCorrectionLevel: 'H'
-                      }" :imageOptions="{
-  hideBackgroundDots: true,
-  imageSize: 0.4,
-  margin: 10
-}" :dotsOptions="{
-  type: 'extra-rounded',
-  color: '#6A1A4C',
-  gradient: {
-    type: 'linear',
-    rotation: 0,
-    colorStops: [
-      { offset: 0, color: '#6A1A4C' },
-      { offset: 1, color: '#6A1A4C' },
-    ],
-  },
-}" :backgroundOptions="{ color: '#ffffff' }"
-                        :cornersSquareOptions="{ type: 'extra-rounded', color: '#000000' }"
-                        :cornersDotOptions="{ type: 'radial', color: '#000000' }" fileExt="png" :download="true"
-                        myclass="my-qur my-6" imgclass="img-qr"
+                      }" 
+                      :imageOptions="{
+                        hideBackgroundDots: true,
+                        imageSize: 0.4,
+                        margin: 10
+                      }"
+                      :dotsOptions="{
+                        type: 'extra-rounded',
+                        color: '#6A1A4C',
+                        gradient: {
+                          type: 'linear',
+                          rotation: 0,
+                          colorStops: [
+                            { offset: 0, color: '#6A1A4C' },
+                            { offset: 1, color: '#6A1A4C' },
+                          ],
+                        }, }"
+                        :backgroundOptions="{ color: '#ffffff' }" :cornersSquareOptions="{ type: 'extra-rounded', color: '#000000' }"
+                        :cornersDotOptions="{ type: 'extra-rounded', color: '#000000' }" fileExt="png" :download="true"
+                        myclass="my-qur mb-4" imgclass="img-qr"
                         downloadButton="my-button px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
                         :downloadOptions="{ name: 'vqr', extension: 'png' }" />
                     </div>
@@ -130,7 +131,7 @@
             </form>
           </div>
         </div>
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <div class="bg-gray-50 px-5 py-5 sm:px-6 sm:flex sm:flex-row-reverse">
           <button @click="showModal1 = false; resetForm()" type="button"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
             Close
