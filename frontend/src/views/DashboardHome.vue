@@ -1,13 +1,11 @@
 <template>
-    <div class="flex h-screen overflow-hidden">
+	<div class="flex h-screen overflow-hidden">
+		<!-- <DashboardNavbar /> -->
 
-      <!-- <DashboardNavbar /> -->
-      
-      <Sidebar />
+		<Sidebar />
 
-      <Home />
-      
-    </div>
+		<Home />
+	</div>
 </template>
 
 <script>
@@ -16,14 +14,12 @@ import Sidebar from "../components/Sidebar.vue";
 import Home from "../components/Home.vue";
 
 export default {
-  components: {
-    // DashboardNavbar,
-    Sidebar,
-    Home
-  }
+	components: {
+		// DashboardNavbar,
+		Sidebar,
+		Home,
+	},
 };
-
 </script>
 
-<style>
-</style>
+<style></style>

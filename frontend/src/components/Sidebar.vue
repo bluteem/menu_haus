@@ -1,105 +1,152 @@
 <template>
-    <aside class="relative left-0 top-0 flex flex-col h-screen overflow-y-hidden">
-        <div class="flex items-center justify-between px-3 py-3">
-            <p class="rounded-md font-medium py-2 px-3 bg-gray-700 mr-1 hidden md:block">
-                Menu.Haus</p>
-            <a href="#" @click="toggleHiddenClass" class="rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                title="Shrink">
-                <svg class="w-5 h-5" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M4.707 17H21v1H4.707l2.646 2.646-.707.707L2.793 17.5l3.854-3.854.707.707zm11.94-13.646L19.292 6H3v1h16.293l-2.647 2.646.707.707L21.207 6.5l-3.853-3.854z" />
-                    <path fill="none" d="M0 0h24v24H0z" />
-                </svg>
-            </a>
-        </div>
-        <div class="flex flex-col overflow-y-auto px-3 py-3">
-            <ul>
-                <li>
-                    <a href="/dashboard"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                        title="Tables">
-                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" viewBox="0 0 448 448"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1"
-                                transform="translate(0,-604.36224)">
-                                <rect style="fill-opacity:1;stroke:none;stroke-opacity:1" id="rect3334" width="192"
-                                    height="256" x="0" y="604.36224" />
-                                <rect y="796.36224" x="256" height="255.99995" width="192" id="rect3336"
-                                    style="fill-opacity:1;stroke:none;stroke-opacity:1" />
-                                <rect y="924.36224" x="0" height="127.99995" width="192" id="rect3338"
-                                    style="fill-opacity:1;stroke:none;stroke-opacity:1" />
-                                <rect style="fill-opacity:1;stroke:none;stroke-opacity:1" id="rect3340" width="192"
-                                    height="128.00002" x="256" y="604.36224" />
-                            </g>
-                        </svg>
+	<aside class="relative left-0 top-0 flex flex-col h-screen overflow-y-hidden">
+		<div class="flex items-center justify-between px-3 py-3">
+			<p class="rounded-md font-medium py-2 px-3 bg-gray-700 mr-1 hidden md:block">Menu.Haus</p>
+			<a
+				href="#"
+				@click="toggleHiddenClass"
+				class="rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+				title="Shrink">
+				<svg class="w-5 h-5" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M4.707 17H21v1H4.707l2.646 2.646-.707.707L2.793 17.5l3.854-3.854.707.707zm11.94-13.646L19.292 6H3v1h16.293l-2.647 2.646.707.707L21.207 6.5l-3.853-3.854z" />
+					<path fill="none" d="M0 0h24v24H0z" />
+				</svg>
+			</a>
+		</div>
+		<div class="flex flex-col overflow-y-auto px-3 py-3">
+			<ul>
+				<li>
+					<a
+						href="/dashboard"
+						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+						title="Tables">
+						<svg
+							class="w-5 h-5"
+							fill="#fff"
+							height="24"
+							width="24"
+							viewBox="0 0 448 448"
+							xmlns="http://www.w3.org/2000/svg">
+							<g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-604.36224)">
+								<rect
+									style="fill-opacity: 1; stroke: none; stroke-opacity: 1"
+									id="rect3334"
+									width="192"
+									height="256"
+									x="0"
+									y="604.36224" />
+								<rect
+									y="796.36224"
+									x="256"
+									height="255.99995"
+									width="192"
+									id="rect3336"
+									style="fill-opacity: 1; stroke: none; stroke-opacity: 1" />
+								<rect
+									y="924.36224"
+									x="0"
+									height="127.99995"
+									width="192"
+									id="rect3338"
+									style="fill-opacity: 1; stroke: none; stroke-opacity: 1" />
+								<rect
+									style="fill-opacity: 1; stroke: none; stroke-opacity: 1"
+									id="rect3340"
+									width="192"
+									height="128.00002"
+									x="256"
+									y="604.36224" />
+							</g>
+						</svg>
 
-                        <span class="ml-3 hidden md:block">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/dashboard/tables"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                        title="Tables">
-                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512">
-                            <g>
-                                <g>
-                                    <g>
-                                        <path
-                                            d="M149.333,341.333H42.667v-128c0-11.776-9.536-21.333-21.333-21.333C9.536,192,0,201.557,0,213.333v149.333v128
+						<span class="ml-3 hidden md:block">Dashboard</span>
+					</a>
+				</li>
+				<li>
+					<a
+						href="/dashboard/tables"
+						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+						title="Tables">
+						<svg
+							class="w-5 h-5"
+							fill="#fff"
+							height="24"
+							width="24"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 512 512">
+							<g>
+								<g>
+									<g>
+										<path
+											d="M149.333,341.333H42.667v-128c0-11.776-9.536-21.333-21.333-21.333C9.536,192,0,201.557,0,213.333v149.333v128
 				C0,502.443,9.536,512,21.333,512c11.797,0,21.333-9.557,21.333-21.333V384h42.667v106.667c0,11.776,9.536,21.333,21.333,21.333
 				c11.797,0,21.333-9.557,21.333-21.333V384h21.333c11.797,0,21.333-9.557,21.333-21.333S161.131,341.333,149.333,341.333z" />
-                                        <path
-                                            d="M490.667,192c-11.797,0-21.333,9.557-21.333,21.333v128H362.667c-11.797,0-21.333,9.557-21.333,21.333
+										<path
+											d="M490.667,192c-11.797,0-21.333,9.557-21.333,21.333v128H362.667c-11.797,0-21.333,9.557-21.333,21.333
 				S350.869,384,362.667,384H384v106.667c0,11.776,9.536,21.333,21.333,21.333c11.797,0,21.333-9.557,21.333-21.333V384h42.667
 				v106.667c0,11.776,9.536,21.333,21.333,21.333S512,502.443,512,490.667v-128V213.333C512,201.557,502.464,192,490.667,192z" />
-                                        <path d="M284.672,298.667h56.661c35.285,0,64-28.715,64-64c0-30.997-22.144-56.875-51.456-62.741l27.883-55.723
+										<path
+											d="M284.672,298.667h56.661c35.285,0,64-28.715,64-64c0-30.997-22.144-56.875-51.456-62.741l27.883-55.723
 				c3.307-6.613,2.944-14.464-0.939-20.757c-3.904-6.272-10.752-10.112-18.155-10.112h-21.333C341.333,38.272,303.061,0,256,0
 				s-85.333,38.272-85.333,85.333h-21.333c-7.403,0-14.251,3.84-18.155,10.112c-3.883,6.293-4.245,14.144-0.939,20.757
 				l27.883,55.723c-29.312,5.867-51.456,31.744-51.456,62.741c0,35.285,28.715,64,64,64h56.661l-55.765,185.877
 				c-3.371,11.285,3.029,23.168,14.315,26.56c2.048,0.619,4.096,0.896,6.123,0.896c9.195,0,17.664-5.952,20.437-15.211L256,351.573
 				l43.563,145.216C302.336,506.048,310.805,512,320,512c2.027,0,4.075-0.299,6.123-0.896c11.285-3.392,17.685-15.275,14.315-26.56
 				L284.672,298.667z M213.333,85.333c0-23.531,19.136-42.667,42.667-42.667s42.667,19.136,42.667,42.667H213.333z" />
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                        <span class="ml-3 hidden md:block">Tables</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/dashboard/menu-categories"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                        title="Menu Categories">
-                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" viewBox="0 0 48 48"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g id="Layer_2" data-name="Layer 2">
-                                <g id="invisible_box" data-name="invisible box">
-                                    <rect width="48" height="48" fill="none" />
-                                </g>
-                                <g id="icons_Q2" data-name="icons Q2">
-                                    <path d="M24,10h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,10Z" />
-                                    <path d="M24,24h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,24Z" />
-                                    <path d="M24,38h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,38Z" />
-                                    <path
-                                        d="M12,2a2.1,2.1,0,0,0-1.7,1L4.2,13a2.3,2.3,0,0,0,0,2,1.9,1.9,0,0,0,1.7,1H18a2.1,2.1,0,0,0,1.7-1,1.8,1.8,0,0,0,0-2l-6-10A1.9,1.9,0,0,0,12,2Z" />
-                                    <path d="M12,30a6,6,0,1,1,6-6A6,6,0,0,1,12,30Z" />
-                                    <path d="M16,44H8a2,2,0,0,1-2-2V34a2,2,0,0,1,2-2h8a2,2,0,0,1,2,2v8A2,2,0,0,1,16,44Z" />
-                                </g>
-                            </g>
-                        </svg>
-                        <span class="ml-3 hidden md:block">Menu Categories</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/dashboard/menu-items"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                        title="Menu Items">
-                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512.075 512.075">
-                            <g>
-                                <g>
-                                    <path d="M456.133,416.202H407.96c2.308-6.512,3.602-13.375,3.602-20.633c0-3.71-0.296-7.42-0.746-11.129l20.157,20.148
+									</g>
+								</g>
+							</g>
+						</svg>
+						<span class="ml-3 hidden md:block">Tables</span>
+					</a>
+				</li>
+				<li>
+					<a
+						href="/dashboard/menu-categories"
+						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+						title="Menu Categories">
+						<svg
+							class="w-5 h-5"
+							fill="#fff"
+							height="24"
+							width="24"
+							viewBox="0 0 48 48"
+							xmlns="http://www.w3.org/2000/svg">
+							<g id="Layer_2" data-name="Layer 2">
+								<g id="invisible_box" data-name="invisible box">
+									<rect width="48" height="48" fill="none" />
+								</g>
+								<g id="icons_Q2" data-name="icons Q2">
+									<path d="M24,10h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,10Z" />
+									<path d="M24,24h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,24Z" />
+									<path d="M24,38h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,38Z" />
+									<path
+										d="M12,2a2.1,2.1,0,0,0-1.7,1L4.2,13a2.3,2.3,0,0,0,0,2,1.9,1.9,0,0,0,1.7,1H18a2.1,2.1,0,0,0,1.7-1,1.8,1.8,0,0,0,0-2l-6-10A1.9,1.9,0,0,0,12,2Z" />
+									<path d="M12,30a6,6,0,1,1,6-6A6,6,0,0,1,12,30Z" />
+									<path d="M16,44H8a2,2,0,0,1-2-2V34a2,2,0,0,1,2-2h8a2,2,0,0,1,2,2v8A2,2,0,0,1,16,44Z" />
+								</g>
+							</g>
+						</svg>
+						<span class="ml-3 hidden md:block">Menu Categories</span>
+					</a>
+				</li>
+				<li>
+					<a
+						href="/dashboard/menu-items"
+						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+						title="Menu Items">
+						<svg
+							class="w-5 h-5"
+							fill="#fff"
+							height="24"
+							width="24"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 512.075 512.075">
+							<g>
+								<g>
+									<path
+										d="M456.133,416.202H407.96c2.308-6.512,3.602-13.375,3.602-20.633c0-3.71-0.296-7.42-0.746-11.129l20.157,20.148
 			c1.752,1.761,4.051,2.632,6.351,2.632s4.599-0.871,6.351-2.632c44.113-44.104,68.401-102.75,68.401-165.133
 			c0-47.266-13.968-92.367-39.909-130.65c1.105-0.898,2.273-1.743,3.27-2.74c8.479-8.479,13.15-19.752,13.15-31.753
 			s-4.671-23.274-13.15-31.753c-17.507-17.507-46.008-17.507-63.524,0c-1.006,1.006-1.868,2.192-2.776,3.315
@@ -150,40 +197,52 @@
 			c-4.195-2.65-5.452-8.201-2.803-12.396c2.65-4.195,8.21-5.434,12.396-2.794c12.315,7.788,23.884,17.049,34.376,27.54
 			c3.503,3.512,3.503,9.198,0,12.701c-1.761,1.752-4.06,2.632-6.36,2.632c-2.291,0-4.59-0.88-6.351-2.632
 			C396.013,102.867,385.495,94.432,374.302,87.363z" />
-                                </g>
-                            </g>
-                        </svg>
-                        <span class="ml-3 hidden md:block">Menu Items</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/dashboard/team"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                        title="Team">
-                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.067 460.067">
-                            <g>
-                                <path
-                                    d="M454.165,154.398c-0.111-22.012-18.11-39.92-40.122-39.92c-7.096,0-67.007,0-73.949,0
+								</g>
+							</g>
+						</svg>
+						<span class="ml-3 hidden md:block">Menu Items</span>
+					</a>
+				</li>
+				<li>
+					<a
+						href="/dashboard/team"
+						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+						title="Team">
+						<svg
+							class="w-5 h-5"
+							fill="#fff"
+							height="24"
+							width="24"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink"
+							viewBox="0 0 460.067 460.067">
+							<g>
+								<path
+									d="M454.165,154.398c-0.111-22.012-18.11-39.92-40.122-39.92c-7.096,0-67.007,0-73.949,0
 		c1.413,5.186,2.191,10.629,2.22,16.245l0.674,134.227c0.073,14.404-7.867,27.011-19.623,33.599v141.027
 		c0,11.236,9.109,20.345,20.345,20.345c11.236,0,20.345-9.108,20.345-20.345V281.348c0-2.426,1.967-4.392,4.393-4.392
 		c2.426,0,4.393,1.967,4.393,4.393v158.229c0,11.236,9.108,20.345,20.345,20.345c11.236,0,20.345-9.108,20.345-20.345
 		c0-269.024-0.36-115.048-0.369-284.913c0-1.941,1.56-3.523,3.501-3.549c1.941-0.026,3.542,1.513,3.595,3.454l0,0l0.626,124.557
 		c0.047,9.335,7.628,16.869,16.952,16.869c0.028,0,0.059,0,0.087,0c9.363-0.047,16.916-7.676,16.869-17.039L454.165,154.398z" />
-                                <path d="M368.676,103.277c19.39,0,35.138-15.746,35.138-35.138c0-19.407-15.732-35.139-35.138-35.139
+								<path
+									d="M368.676,103.277c19.39,0,35.138-15.746,35.138-35.138c0-19.407-15.732-35.139-35.138-35.139
 		c-19.406,0-35.138,15.732-35.138,35.139C333.538,87.538,349.294,103.277,368.676,103.277z" />
-                                <path d="M117.079,264.95l0.674-134.227c0.028-5.617,0.806-11.06,2.219-16.245c-6.939,0-66.854,0-73.95,0
+								<path
+									d="M117.079,264.95l0.674-134.227c0.028-5.617,0.806-11.06,2.219-16.245c-6.939,0-66.854,0-73.95,0
 		c-22.013,0-40.011,17.908-40.121,39.921L5.276,278.955c-0.047,9.363,7.505,16.992,16.869,17.039c0.029,0,0.058,0,0.087,0
 		c9.323,0,16.905-7.534,16.952-16.869l0.626-124.557c0.016-3.163,2.445-6.183,6.547-6.183l0.008,291.19
 		c0,11.236,9.109,20.345,20.345,20.345c11.236,0,20.345-9.108,20.345-20.345V281.348c0-2.426,1.967-4.392,4.393-4.392
 		c2.426,0,4.393,1.967,4.393,4.393v158.229c0,11.236,9.108,20.345,20.345,20.345c11.236,0,20.345-9.108,20.345-20.345V298.449
 		C124.869,291.833,117.007,279.283,117.079,264.95z" />
-                                <path d="M56.538,68.139c0,10.49,4.602,19.9,11.892,26.339h0c6.195,5.472,14.33,8.799,23.246,8.799
+								<path
+									d="M56.538,68.139c0,10.49,4.602,19.9,11.892,26.339h0c6.195,5.472,14.33,8.799,23.246,8.799
 		c19.405,0,35.138-15.731,35.138-35.138C126.815,48.732,111.083,33,91.676,33C72.265,33,56.538,48.738,56.538,68.139z" />
-                                <path d="M207.013,67.803L207.013,67.803c6.406,4.966,14.442,7.93,23.174,7.93c20.839,0,37.866-16.906,37.866-37.866
+								<path
+									d="M207.013,67.803L207.013,67.803c6.406,4.966,14.442,7.93,23.174,7.93c20.839,0,37.866-16.906,37.866-37.866
 		C268.054,16.877,250.991,0,230.187,0l0,0l0,0c-20.907,0-37.866,16.948-37.866,37.867C192.321,49.509,197.614,60.519,207.013,67.803
 		z" />
-                                <path d="M279.077,87.803c-10.17,0-87.895,0-98.087,0c-17.792,0-33.149,10.856-39.767,26.291c-2.266,5.285-3.441,10.95-3.47,16.729
+								<path
+									d="M279.077,87.803c-10.17,0-87.895,0-98.087,0c-17.792,0-33.149,10.856-39.767,26.291c-2.266,5.285-3.441,10.95-3.47,16.729
 		l-0.674,134.227v0.001c-0.051,10.091,8.088,18.311,18.179,18.362c0.031,0,0.063,0,0.094,0c10.047,0,18.218-8.12,18.269-18.179
 		l0.674-134.228c0-0.005,0-0.011,0-0.016c0.015-1.943,1.598-3.508,3.541-3.501c1.943,0.007,3.514,1.585,3.514,3.528l0.008,307.125
 		v0.001c0,12.108,9.816,21.925,21.925,21.925s21.925-9.816,21.925-21.925v-0.001V267.629c0-2.614,2.119-4.733,4.733-4.733
@@ -191,19 +250,27 @@
 		c0-78.408-0.376-225.029-0.397-307.113c0-2.105,1.701-3.815,3.807-3.824c2.105-0.009,3.822,1.685,3.84,3.791
 		c0,0.004,0,0.007,0,0.011l0.674,134.228c0.051,10.06,8.22,18.179,18.268,18.179c0.031,0,0.063,0,0.094,0
 		c10.09-0.051,18.23-8.271,18.179-18.362v-0.001l-0.674-134.227C322.194,107.083,302.779,87.803,279.077,87.803z" />
-                            </g>
-                        </svg>
-                        <span class="ml-3 hidden md:block">Team</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/dashboard/settings"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                        title="Settings">
-                        <svg class="w-5 h-5" fill="#fff" height="32" width="32" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512">
-                            <g>
-                                <path class="st0" d="M502.325,307.303l-39.006-30.805c-6.215-4.908-9.665-12.429-9.668-20.348c0-0.084,0-0.168,0-0.252
+							</g>
+						</svg>
+						<span class="ml-3 hidden md:block">Team</span>
+					</a>
+				</li>
+				<li>
+					<a
+						href="/dashboard/settings"
+						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+						title="Settings">
+						<svg
+							class="w-5 h-5"
+							fill="#fff"
+							height="32"
+							width="32"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 512 512">
+							<g>
+								<path
+									class="st0"
+									d="M502.325,307.303l-39.006-30.805c-6.215-4.908-9.665-12.429-9.668-20.348c0-0.084,0-0.168,0-0.252
 		c-0.014-7.936,3.44-15.478,9.667-20.396l39.007-30.806c8.933-7.055,12.093-19.185,7.737-29.701l-17.134-41.366
 		c-4.356-10.516-15.167-16.86-26.472-15.532l-49.366,5.8c-7.881,0.926-15.656-1.966-21.258-7.586
 		c-0.059-0.06-0.118-0.119-0.177-0.178c-5.597-5.602-8.476-13.36-7.552-21.225l5.799-49.363
@@ -222,83 +289,95 @@
 		c11.305,1.328,22.117-5.015,26.472-15.531l17.134-41.365C514.418,326.488,511.258,314.358,502.325,307.303z M281.292,329.698
 		c-39.68,16.436-85.172-2.407-101.607-42.087c-16.436-39.68,2.407-85.171,42.087-101.608c39.68-16.436,85.172,2.407,101.608,42.088
 		C339.815,267.771,320.972,313.262,281.292,329.698z" />
-                            </g>
-                        </svg>
-                        <span class="ml-3 hidden md:block">Settings</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="flex flex-col px-3 py-3 border-t border-gray-300">
-            <ul>
-                <li>
-                    <a href="/dashboard/account"
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                        title="User">
-                        <svg class="w-5 h-5" fill="#fff" height="24" width="24" viewBox="-17 0 512 512"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M341 138C341 67.3075 300.856 16 239 16C177.144 16 137 67.3075 137 138C137 231.394 189 221.676 189 269C189 287.649 139 288 139 288C59.471 288 0 352.471 0 432V464C0 490.51 21.4903 512 48 512H431C457.51 512 479 490.51 479 464V432C479 352.471 418.529 288 339 288C339 288 289 287.649 289 269C289 221.676 341 231.394 341 138Z">
-                            </path>
-                        </svg>
-                        <span class="ml-3 hidden md:block">User</span>
-                    </a>
-                </li>
-                <li>
-                    <a href=""
-                        class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-                        title="Logout">
-                        <svg class="w-5 h-5" fill="#fff" height="32" width="32" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 96.943 96.943">
-                            <g>
-                                <g>
-                                    <path d="M61.168,83.92H11.364V13.025H61.17c1.104,0,2-0.896,2-2V3.66c0-1.104-0.896-2-2-2H2c-1.104,0-2,0.896-2,2v89.623
+							</g>
+						</svg>
+						<span class="ml-3 hidden md:block">Settings</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="flex flex-col px-3 py-3 border-t border-gray-300">
+			<ul>
+				<li>
+					<a
+						href="/dashboard/account"
+						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+						title="User">
+						<svg
+							class="w-5 h-5"
+							fill="#fff"
+							height="24"
+							width="24"
+							viewBox="-17 0 512 512"
+							xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M341 138C341 67.3075 300.856 16 239 16C177.144 16 137 67.3075 137 138C137 231.394 189 221.676 189 269C189 287.649 139 288 139 288C59.471 288 0 352.471 0 432V464C0 490.51 21.4903 512 48 512H431C457.51 512 479 490.51 479 464V432C479 352.471 418.529 288 339 288C339 288 289 287.649 289 269C289 221.676 341 231.394 341 138Z"></path>
+						</svg>
+						<span class="ml-3 hidden md:block">User</span>
+					</a>
+				</li>
+				<li>
+					<a
+						href=""
+						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
+						title="Logout">
+						<svg
+							class="w-5 h-5"
+							fill="#fff"
+							height="32"
+							width="32"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 96.943 96.943">
+							<g>
+								<g>
+									<path
+										d="M61.168,83.92H11.364V13.025H61.17c1.104,0,2-0.896,2-2V3.66c0-1.104-0.896-2-2-2H2c-1.104,0-2,0.896-2,2v89.623
 			c0,1.104,0.896,2,2,2h59.168c1.105,0,2-0.896,2-2V85.92C63.168,84.814,62.274,83.92,61.168,83.92z" />
-                                    <path d="M96.355,47.058l-26.922-26.92c-0.75-0.751-2.078-0.75-2.828,0l-6.387,6.388c-0.781,0.781-0.781,2.047,0,2.828
+									<path
+										d="M96.355,47.058l-26.922-26.92c-0.75-0.751-2.078-0.75-2.828,0l-6.387,6.388c-0.781,0.781-0.781,2.047,0,2.828
 			l12.16,12.162H19.737c-1.104,0-2,0.896-2,2v9.912c0,1.104,0.896,2,2,2h52.644L60.221,67.59c-0.781,0.781-0.781,2.047,0,2.828
 			l6.387,6.389c0.375,0.375,0.885,0.586,1.414,0.586c0.531,0,1.039-0.211,1.414-0.586l26.922-26.92
 			c0.375-0.375,0.586-0.885,0.586-1.414C96.943,47.941,96.73,47.433,96.355,47.058z" />
-                                </g>
-                            </g>
-                        </svg>
-                        <span class="ml-3 hidden md:block">Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </aside>
+								</g>
+							</g>
+						</svg>
+						<span class="ml-3 hidden md:block">Logout</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</aside>
 </template>
 
-<script>
-
-</script>
+<script></script>
 
 <style>
 aside {
-    background-color: #1c2434;
-    color: #dee4ee;
+	background-color: #1c2434;
+	color: #dee4ee;
 }
 
 /* Scoped styles (within your component's <style> tag) */
 ::-webkit-scrollbar {
-    width: 20px;
-    /* Increase scrollbar width */
-    background-color: rgba(28, 36, 52);
-    /* Semi-transparent background */
+	width: 20px;
+	/* Increase scrollbar width */
+	background-color: rgba(28, 36, 52);
+	/* Semi-transparent background */
 }
 
 ::-webkit-scrollbar-track {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 20px;
-    /* Rounded corners */
-    border: 6px solid transparent;
-    background-clip: content-box;
+	background-color: #d6dee1;
+	border-radius: 20px;
+	/* Rounded corners */
+	border: 6px solid transparent;
+	background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #a8bbbf;
-}</style>
+	background-color: #a8bbbf;
+}
+</style>
