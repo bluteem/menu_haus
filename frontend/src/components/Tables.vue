@@ -76,50 +76,48 @@
 
               <div class="mb-4">
 
-<div class="container mx-auto">
-  <div class="grid grid-cols-2 gap-4">
-    <!-- First column -->
-    <div class="col-span-1 bg-gray-200 p-4 rounded-md">
-      <a href="#" @click="generateQrCode" class="px-4 py-2 my-10 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">Generate QR Code</a>
-    </div>
-    <!-- Second column -->
-    <div class="col-span-1 bg-gray-200 p-4 rounded-md">
-      <QRCodeVue3 v-if="showQRCode"
-        :width="1000"
-        :height="1000"
-        :value="urlForQrCode"
-        :qrOptions="{ 
-          typeNumber: 0,
-          mode: 'Byte',
-          errorCorrectionLevel: 'H' }"
-        :imageOptions="{ 
-          hideBackgroundDots: true, 
-          imageSize: 0.4, 
-          margin: 10 }"
-        :dotsOptions="{
-          type: 'extra-rounded',
-          color: '#6A1A4C',
-          gradient: {
-            type: 'linear',
-            rotation: 0,
-            colorStops: [
-              { offset: 0, color: '#6A1A4C' },
-              { offset: 1, color: '#6A1A4C' },
-            ],
-          },
-        }"
-        :backgroundOptions="{ color: '#ffffff' }"
-        :cornersSquareOptions="{ type: 'extra-rounded', color: '#000000' }"
-        :cornersDotOptions="{ type: 'radial', color: '#000000' }" fileExt="png" :download="true"
-        myclass="my-qur my-6" imgclass="img-qr" downloadButton="my-button px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
-        :downloadOptions="{ name: 'vqr', extension: 'png' }" />
-    </div>
-  </div>
-</div>
+                <div class="container mx-auto">
+                  <div class="grid grid-cols-2 gap-4">
+                    <!-- First column -->
+                    <div class="col-span-1 bg-gray-200 p-4 rounded-md">
+                      <a href="#" @click="generateQrCode"
+                        class="px-4 py-2 my-10 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">Generate
+                        QR Code</a>
+                    </div>
+                    <!-- Second column -->
+                    <div class="col-span-1 bg-gray-200 p-4 rounded-md">
+                      <QRCodeVue3 v-if="showQRCode" :width="1000" :height="1000" :value="urlForQrCode" :qrOptions="{
+                        typeNumber: 0,
+                        mode: 'Byte',
+                        errorCorrectionLevel: 'H'
+                      }" :imageOptions="{
+  hideBackgroundDots: true,
+  imageSize: 0.4,
+  margin: 10
+}" :dotsOptions="{
+  type: 'extra-rounded',
+  color: '#6A1A4C',
+  gradient: {
+    type: 'linear',
+    rotation: 0,
+    colorStops: [
+      { offset: 0, color: '#6A1A4C' },
+      { offset: 1, color: '#6A1A4C' },
+    ],
+  },
+}" :backgroundOptions="{ color: '#ffffff' }"
+                        :cornersSquareOptions="{ type: 'extra-rounded', color: '#000000' }"
+                        :cornersDotOptions="{ type: 'radial', color: '#000000' }" fileExt="png" :download="true"
+                        myclass="my-qur my-6" imgclass="img-qr"
+                        downloadButton="my-button px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+                        :downloadOptions="{ name: 'vqr', extension: 'png' }" />
+                    </div>
+                  </div>
+                </div>
 
-                
 
-                <div >
+
+                <div>
 
                 </div>
 
