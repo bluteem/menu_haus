@@ -1,5 +1,5 @@
 <template>
-	<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden py-10 px-10">
+	<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden py-10 px-10 bg-gray-100">
 		<h1 class="text-3xl font-bold mb-4">Tables</h1>
 
 		<!-- Add Menu Item Button -->
