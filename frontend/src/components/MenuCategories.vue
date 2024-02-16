@@ -14,11 +14,11 @@
 			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
 					<div class="overflow-hidden">
-						<table class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
-							<thead class="border-b font-medium dark:border-neutral-500">
+						<table class="min-w-full border text-center text-sm font-light border-neutral-300">
+							<thead class="border-b font-medium border-neutral-300">
 								<tr>
-									<th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Name</th>
-									<th scope="col" class="border-r px-6 py-4 dark:border-neutral-500">Description</th>
+									<th scope="col" class="border-r px-6 py-4 border-neutral-300">Name</th>
+									<th scope="col" class="border-r px-6 py-4 border-neutral-300">Description</th>
 									<th scope="col" class="px-6 py-4"></th>
 								</tr>
 							</thead>
@@ -26,14 +26,14 @@
 								<tr
 									v-for="menuCategory in allMenuCategoriesData"
 									:key="menuCategory._id"
-									class="border-b dark:border-neutral-500">
-									<td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+									class="border-b border-neutral-300">
+									<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
 										<div class="text-gray-900">{{ menuCategory.name }}</div>
 									</td>
-									<td class="border-r px-6 py-4 dark:border-neutral-500">
+									<td class="border-r px-6 py-4 border-neutral-300">
 										<div class="text-gray-900">{{ menuCategory.description }}</div>
 									</td>
-									<td class="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+									<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
 										<button
 											@click="getUser(menuCategory._id, $refs.Alert)"
 											type="button"

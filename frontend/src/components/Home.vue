@@ -3,7 +3,7 @@
 	<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden py-10 px-10 bg-gray-200">
 		<h1 class="text-3xl font-bold mb-4">Dashboard</h1>
 
-		<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+		<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
 			<!-- Box for Number of Tables -->
 			<div class="bg-white px-6 py-6 rounded-md shadow-md flex items-center justify-between">
 				<div>
