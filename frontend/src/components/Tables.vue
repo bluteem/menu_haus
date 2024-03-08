@@ -13,7 +13,7 @@
 			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
 					<div class="overflow-hidden">
-						<table class="min-w-full border text-center text-sm font-light border-neutral-300">
+						<table class="min-w-full border text-center font-light border-neutral-300">
 							<thead class="border-b font-medium border-neutral-300">
 								<tr>
 									<th scope="col" class="border-r px-6 py-4 border-neutral-300">Name</th>
