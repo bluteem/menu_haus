@@ -35,13 +35,13 @@
 									</td>
 									<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
 										<button
-											@click="getUser(menuCategory._id, $refs.Alert)"
+											@click="getMenuCategory(menuCategory._id, $refs.Alert)"
 											type="button"
 											class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
 											Edit
 										</button>
 										<button
-											@click="deleteUser(menuCategory._id, $refs.Alert)"
+											@click="deleteMenuCategory(menuCategory._id, $refs.Alert)"
 											class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
 											Delete
 										</button>
@@ -66,12 +66,12 @@
 			<div
 				class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 				<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-					<h3 class="text-lg leading-6 font-medium text-gray-900">Add New Category</h3>
+					<h3 class="text-lg leading-6 font-medium text-gray-900">Add New Menu Category</h3>
 					<div class="mt-5">
 						<!-- Add User Form -->
-						<form @submit.prevent="addUser($refs.Alert)">
+						<form @submit.prevent="addMenuCategory($refs.Alert)">
 							<div class="mb-4">
-								<label for="newName" class="block text-sm font-medium text-gray-700">Name:</label>
+								<label for="newName" class="block font-medium text-gray-700">Name:</label>
 								<input
 									type="text"
 									v-model="newMenuCategory.name"
@@ -81,19 +81,18 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="newEmail" class="block text-sm font-medium text-gray-700">Email:</label>
-								<input
-									type="email"
+								<label for="newDescription" class="block font-medium text-gray-700">Description:</label>
+								<textarea
 									v-model="newMenuCategory.description"
-									id="newEmail"
+									id="newDescription"
 									required
-									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+									class="mt-1 p-2 border border-gray-300 rounded-md w-full"></textarea>
 							</div>
 
 							<button
 								type="submit"
 								class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
-								Add Category
+								Add Menu Category
 							</button>
 						</form>
 					</div>
@@ -120,9 +119,9 @@
 			<div
 				class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 				<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-					<h3 class="text-lg leading-6 font-medium text-gray-900">Edit Category Info</h3>
+					<h3 class="text-lg leading-6 font-medium text-gray-900">Edit Menu Category Info</h3>
 					<div class="mt-5">
-						<form @submit.prevent="updateUser($refs.Alert)">
+						<form @submit.prevent="updateMenuCategory($refs.Alert)">
 							<div class="mb-4">
 								<label for="editName" class="block text-sm font-medium text-gray-700">Full Name:</label>
 								<input
@@ -134,13 +133,12 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="editEmail" class="block text-sm font-medium text-gray-700">Email:</label>
-								<input
-									type="email"
+								<label for="editDescription" class="block text-sm font-medium text-gray-700">Description:</label>
+								<textarea
 									v-model="newMenuCategory.desription"
-									id="editEmail"
+									id="editDescription"
 									required
-									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+									class="mt-1 p-2 border border-gray-300 rounded-md w-full"></textarea>
 							</div>
 
 							<button
@@ -199,53 +197,49 @@ export default {
 		});
 
 		// Add a new menu item
-		const addCategory = async (alertRef) => {
+		const addMenuCategory = async (alertRef) => {
 			try {
 				const response = await axios.post("http://localhost:5000/api/menucategories", {
-					email: newUser.value.email,
-					password: newUser.value.password,
-					fullName: newUser.value.fullName,
-					role: newUser.value.role,
+					name: newMenuCategory.value.name,
+					description: newMenuCategory.value.description,
 				});
 				allMenuCategoriesData.value.push(response.data.menuCategoryData);
 				showModal1.value = false;
 				resetForm();
 				// Show success alert using the passed alertRef
-				alertRef.showAlert("User added successfully!");
+				alertRef.showAlert("Menu category added successfully!");
 			} catch (error) {
-				console.error("Error adding user:", error);
+				console.error("Error adding menu category:", error);
 				// Show error alert using the passed alertRef if failed to add menu item
-				alertRef.showAlert("Failed to add user. Please try again later.");
+				alertRef.showAlert("Failed to add menu category. Please try again later.");
 			}
 		};
 
 		// Fetch a single menu item
-		const getCategory = async (itemId, alertRef) => {
+		const getMenuCategory = async (itemId, alertRef) => {
 			try {
 				const response = await axios.get(`http://localhost:5000/api/menucategories/${itemId}`);
 				const variable = response.data.menuCategoryData;
 				newMenuCategory.value = {
 					_id: variable._id,
-					email: variable.email,
-					password: variable.password,
-					fullName: variable.fullName,
-					role: variable.role,
+					name: variable.name,
+					descriotion: variable.description,
 				};
 				showModal2.value = true;
 			} catch (error) {
-				console.error("Error fetching user:", error);
-				// Show alert if failed to fetch menu item details
-				alertRef.showAlert("Failed to fetch user details. Please try again later.");
+				console.error("Error fetching menu category:", error);
+				// Show alert if failed to fetch menu categroy details
+				alertRef.showAlert("Failed to fetch menu categroy details. Please try again later.");
 			}
 		};
 
 		// Update a user info
-		const updateCategory = async (alertRef) => {
+		const updateMenuCategory = async (alertRef) => {
 			try {
 				// Send a PUT request to update user info
 				const response = await axios.put(
 					`http://localhost:5000/api/menucategories/${newMenuCategory.value._id}`,
-					newUser.value
+					newMenuCategory.value
 				);
 				// Extract updated user data from the response
 				const updatedMenuCategory = response.data.menuCategoryData;
@@ -261,36 +255,34 @@ export default {
 				showModal2.value = false;
 				resetForm();
 				// Show success alert
-				alertRef.showAlert("User info updated successfully!");
+				alertRef.showAlert("Menu category info updated successfully!");
 			} catch (error) {
-				console.error("Error updating user info:", error);
-				// Show error alert if failed to update menu item
-				alertRef.showAlert("Failed to update user info. Please try again later.");
+				console.error("Error updating menu category info:", error);
+				// Show error alert if failed to update menu category
+				alertRef.showAlert("Failed to update menu category info. Please try again later.");
 			}
 		};
 
-		// Delete a menu item
-		const deleteCategory = async (itemId, alertRef) => {
+		// Delete a menu category
+		const deleteMenuCategory = async (itemId, alertRef) => {
 			try {
 				await axios.delete(`http://localhost:5000/api/menucategories/${itemId}`);
 				allMenuCategoriesData.value = allMenuCategoriesData.value.filter((item) => item._id !== itemId);
 				// Show success alert
-				alertRef.showAlert("User deleted successfully!");
+				alertRef.showAlert("Menu category deleted successfully!");
 			} catch (error) {
-				console.error("Error deleting user:", error);
-				// Show error alert if failed to delete menu item
-				alertRef.showAlert("Failed to delete user. Please try again later.");
+				console.error("Error deleting menu category:", error);
+				// Show error alert if failed to delete menu category
+				alertRef.showAlert("Failed to delete menu category. Please try again later.");
 			}
 		};
 
 		// Reset form fields
 		const resetForm = () => {
-			newUser.value = {
+			newMenuCategory.value = {
 				_id: null,
-				email: "",
-				password: "",
-				fullName: "",
-				role: "",
+				name: "",
+				description: "",
 			};
 		};
 
@@ -299,10 +291,10 @@ export default {
 			showModal2,
 			newMenuCategory,
 			allMenuCategoriesData,
-			getCategory,
-			updateCategory,
-			addCategory,
-			deleteCategory,
+			getMenuCategory,
+			updateMenuCategory,
+			addMenuCategory,
+			deleteMenuCategory,
 			resetForm,
 		};
 	},

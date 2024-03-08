@@ -17,7 +17,6 @@ const menuCategorySchema = new mongoose.Schema(
 		},
 		sortNo: {
 			type: Number,
-			required: true,
 		},
 		isDeleted: {
 			type: Boolean,
