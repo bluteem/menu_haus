@@ -9,6 +9,7 @@ import tableController from "./controllers/tableController.js";
 import menuCategoryController from "./controllers/menuCategoryController.js";
 import menuItemController from "./controllers/menuItemController.js";
 import userController from "./controllers/userController.js";
+import businessController from "./controllers/businessController.js";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -57,6 +58,8 @@ app.use("/api/menuitems", menuItemController);
 app.use("/api/menucategories", menuCategoryController);
 // Use the menu category controller
 app.use("/api/users", userController);
+// Use the business controller
+app.use("/api/businesses", businessController);
 // Default route to indicate API is running
 app.get("/", (req, res) => {
 	res.send("API is running...");
