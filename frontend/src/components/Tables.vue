@@ -58,7 +58,7 @@
 		<p v-if="allTablesData.length === 0" class="text-gray-600 mt-3">No table available</p>
 	</main>
 
-	<!-- Modal for adding a new table -->
+	<!-- Modal for adding -->
 	<div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
 		<div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 			<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -69,7 +69,7 @@
 					<div class="mt-5">
 						<form @submit.prevent="addTable($refs.Alert)">
 							<div class="mb-4">
-								<label for="newTableName" class="block text-sm font-medium text-gray-700">Table Name:</label>
+								<label for="newTableName" class="block font-medium text-gray-700">Table Name:</label>
 								<input
 									type="text"
 									v-model="newTable.tableName"
@@ -79,7 +79,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="newTableNumber" class="block text-sm font-medium text-gray-700">Table Number:</label>
+								<label for="newTableNumber" class="block font-medium text-gray-700">Table Number:</label>
 								<input
 									type="text"
 									v-model="newTable.tableNumber"
@@ -166,7 +166,7 @@
 		</div>
 	</div>
 
-	<!-- Modal for editing menu item -->
+	<!-- Modal for editing -->
 	<div :style="{ display: showModal2 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
 		<div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 			<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -177,7 +177,7 @@
 					<div class="mt-5">
 						<form @submit.prevent="updateTable($refs.Alert)">
 							<div class="mb-4">
-								<label for="editTableName" class="block text-sm font-medium text-gray-700">Table Name:</label>
+								<label for="editTableName" class="block font-medium text-gray-700">Table Name:</label>
 								<input
 									type="text"
 									v-model="newTable.tableName"
@@ -187,7 +187,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="editTableNumber" class="block text-sm font-medium text-gray-700">Table Number:</label>
+								<label for="editTableNumber" class="block font-medium text-gray-700">Table Number:</label>
 								<input
 									type="text"
 									v-model="newTable.tableNumber"

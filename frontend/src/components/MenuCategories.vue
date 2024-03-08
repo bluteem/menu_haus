@@ -58,17 +58,16 @@
 		<p v-if="allMenuCategoriesData.length === 0" class="text-gray-600 mt-3">No category available</p>
 	</main>
 
-	<!-- Modal for adding a new user -->
+	<!-- Modal for adding -->
 	<div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
 		<div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 			<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-			<!-- Modal content -->
+
 			<div
 				class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 				<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 					<h3 class="text-lg leading-6 font-medium text-gray-900">Add New Menu Category</h3>
 					<div class="mt-5">
-						<!-- Add User Form -->
 						<form @submit.prevent="addMenuCategory($refs.Alert)">
 							<div class="mb-4">
 								<label for="newName" class="block font-medium text-gray-700">Name:</label>
@@ -112,7 +111,7 @@
 		</div>
 	</div>
 
-	<!-- Modal for editing menu item -->
+	<!-- Modal for editing -->
 	<div :style="{ display: showModal2 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
 		<div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 			<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -123,7 +122,7 @@
 					<div class="mt-5">
 						<form @submit.prevent="updateMenuCategory($refs.Alert)">
 							<div class="mb-4">
-								<label for="editName" class="block text-sm font-medium text-gray-700">Full Name:</label>
+								<label for="editName" class="block font-medium text-gray-700">Full Name:</label>
 								<input
 									type="text"
 									v-model="newMenuCategory.name"
@@ -133,9 +132,9 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="editDescription" class="block text-sm font-medium text-gray-700">Description:</label>
+								<label for="editDescription" class="block font-medium text-gray-700">Description:</label>
 								<textarea
-									v-model="newMenuCategory.desription"
+									v-model="newMenuCategory.description"
 									id="editDescription"
 									required
 									class="mt-1 p-2 border border-gray-300 rounded-md w-full"></textarea>
@@ -223,12 +222,12 @@ export default {
 				newMenuCategory.value = {
 					_id: variable._id,
 					name: variable.name,
-					descriotion: variable.description,
+					description: variable.description,
 				};
 				showModal2.value = true;
 			} catch (error) {
 				console.error("Error fetching menu category:", error);
-				// Show alert if failed to fetch menu categroy details
+				// Show alert if failed to fetch menu category details
 				alertRef.showAlert("Failed to fetch menu categroy details. Please try again later.");
 			}
 		};

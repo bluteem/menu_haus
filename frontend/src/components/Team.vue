@@ -61,20 +61,19 @@
 		<p v-if="allUsersData.length === 0" class="text-gray-600 mt-3">No user available</p>
 	</main>
 
-	<!-- Modal for adding a new user -->
+	<!-- Modal for adding -->
 	<div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
 		<div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 			<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-			<!-- Modal content -->
+
 			<div
 				class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 				<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 					<h3 class="text-lg leading-6 font-medium text-gray-900">Add New User</h3>
 					<div class="mt-5">
-						<!-- Add User Form -->
 						<form @submit.prevent="addUser($refs.Alert)">
 							<div class="mb-4">
-								<label for="newName" class="block text-sm font-medium text-gray-700">Full Name:</label>
+								<label for="newName" class="block font-medium text-gray-700">Full Name:</label>
 								<input
 									type="text"
 									v-model="newUser.fullName"
@@ -84,7 +83,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="newEmail" class="block text-sm font-medium text-gray-700">Email:</label>
+								<label for="newEmail" class="block font-medium text-gray-700">Email:</label>
 								<input
 									type="email"
 									v-model="newUser.email"
@@ -94,7 +93,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="newRole" class="block text-sm font-medium text-gray-700">Role:</label>
+								<label for="newRole" class="block font-medium text-gray-700">Role:</label>
 								<select v-model="newUser.role" id="newRole" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
 									<option disabled selected>Select Role</option>
 									<option v-for="roleOption in roleOptions" :key="roleOption" :value="roleOption">
@@ -104,7 +103,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="newPassword" class="block text-sm font-medium text-gray-700">Password:</label>
+								<label for="newPassword" class="block font-medium text-gray-700">Password:</label>
 								<input
 									type="password"
 									v-model="newUser.password"
@@ -147,7 +146,7 @@
 					<div class="mt-5">
 						<form @submit.prevent="updateUser($refs.Alert)">
 							<div class="mb-4">
-								<label for="editName" class="block text-sm font-medium text-gray-700">Full Name:</label>
+								<label for="editName" class="block font-medium text-gray-700">Full Name:</label>
 								<input
 									type="text"
 									v-model="newUser.fullName"
@@ -157,7 +156,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="editEmail" class="block text-sm font-medium text-gray-700">Email:</label>
+								<label for="editEmail" class="block font-medium text-gray-700">Email:</label>
 								<input
 									type="email"
 									v-model="newUser.email"
@@ -167,7 +166,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="editRole" class="block text-sm font-medium text-gray-700">Role:</label>
+								<label for="editRole" class="block font-medium text-gray-700">Role:</label>
 
 								<select v-model="newUser.role" id="editRole" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
 									<option disabled selected>Select Role</option>
@@ -178,7 +177,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="editPassword" class="block text-sm font-medium text-gray-700">Password:</label>
+								<label for="editPassword" class="block font-medium text-gray-700">Password:</label>
 								<input
 									type="password"
 									v-model.number="newUser.password"

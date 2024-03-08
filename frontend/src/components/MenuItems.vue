@@ -52,22 +52,19 @@
 		<p v-if="allMenuItemsData.length === 0" class="text-gray-600 mt-3">No menu items available</p>
 	</main>
 
-	<!-- Modal for adding a new menu item -->
+	<!-- Modal for adding -->
 	<div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
 		<div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 			<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-			<!-- Modal content -->
 			<div
 				class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 				<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 					<h3 class="text-lg leading-6 font-medium text-gray-900">Add New Menu Item</h3>
 					<div class="mt-5">
-						<!-- Add Menu Item Form -->
 						<form @submit.prevent="addMenuItem($refs.Alert)">
-							<!-- Form fields go here -->
 							<div class="mb-4">
-								<label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+								<label for="name" class="block font-medium text-gray-700">Name:</label>
 								<input
 									type="text"
 									v-model="newMenuItem.name"
@@ -77,7 +74,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="images" class="block text-sm font-medium text-gray-700">Images:</label>
+								<label for="images" class="block font-medium text-gray-700">Images:</label>
 								<input
 									type="file"
 									id="images"
@@ -86,7 +83,7 @@
 									@change="handleFileUpload"
 									class="block w-full mt-2 py-2 px-4 bg-white text-gray-700 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500" />
 								<div v-if="uploadedFiles.length > 0">
-									<p class="block text-sm font-medium text-gray-700 my-2">Uploaded Files:</p>
+									<p class="block font-medium text-gray-700 my-2">Uploaded Files:</p>
 									<ul>
 										<li v-for="(fileName, index) in uploadedFiles" :key="index">{{ fileName }}</li>
 									</ul>
@@ -96,7 +93,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
+								<label for="category" class="block font-medium text-gray-700">Category:</label>
 								<select
 									v-model="newMenuItem.categoryId"
 									id="category"
@@ -110,7 +107,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
+								<label for="description" class="block font-medium text-gray-700">Description:</label>
 								<textarea
 									v-model="newMenuItem.description"
 									id="description"
@@ -119,7 +116,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
+								<label for="price" class="block font-medium text-gray-700">Price:</label>
 								<input
 									type="number"
 									step="0.01"
@@ -152,22 +149,20 @@
 		</div>
 	</div>
 
-	<!-- Modal for editing menu item -->
+	<!-- Modal for editing -->
 	<div :style="{ display: showModal2 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
 		<div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 			<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-			<!-- Modal content -->
 			<div
 				class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 				<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 					<h3 class="text-lg leading-6 font-medium text-gray-900">Edit Menu Item</h3>
 					<div class="mt-5">
-						<!-- Add Menu Item Form -->
 						<form @submit.prevent="updateMenuItem($refs.Alert)">
 							<!-- Form fields go here -->
 							<div class="mb-4">
-								<label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+								<label for="name" class="block font-medium text-gray-700">Name:</label>
 								<input
 									type="text"
 									v-model="newMenuItem.name"
@@ -177,7 +172,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="images" class="block text-sm font-medium text-gray-700 mb-1">Current Images:</label>
+								<label for="images" class="block font-medium text-gray-700 mb-1">Current Images:</label>
 								<div class="flex mb-4" v-show="showImages">
 									<img
 										v-for="(image, index) in newMenuItem.images"
@@ -187,7 +182,7 @@
 										class="w-24 h-18 object-cover rounded-md mr-2" />
 								</div>
 
-								<p class="block text-sm font-medium text-gray-700 mb-1">Replace the Images:</p>
+								<p class="block font-medium text-gray-700 mb-1">Replace the Images:</p>
 
 								<input
 									type="file"
@@ -198,7 +193,7 @@
 									class="block w-full mt-2 py-2 px-4 bg-white text-gray-700 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500" />
 
 								<div v-if="uploadedFiles2.length > 0">
-									<p class="block text-sm font-medium text-gray-700 my-2">Uploaded Files:</p>
+									<p class="block font-medium text-gray-700 my-2">Uploaded Files:</p>
 									<ul>
 										<li v-for="(fileName, index) in uploadedFiles2" :key="index">{{ fileName }}</li>
 									</ul>
@@ -208,7 +203,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="category" class="block text-sm font-medium text-gray-700">Category:</label>
+								<label for="category" class="block font-medium text-gray-700">Category:</label>
 
 								<select
 									v-model="newMenuItem.categoryId"
@@ -220,13 +215,10 @@
 										{{ category.name }}
 									</option>
 								</select>
-
-								<!-- <input type="text" v-model="newMenuItem.category" id="category" required
-                class="mt-1 p-2 border border-gray-300 rounded-md w-full"> -->
 							</div>
 
 							<div class="mb-4">
-								<label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
+								<label for="description" class="block font-medium text-gray-700">Description:</label>
 								<textarea
 									v-model="newMenuItem.description"
 									id="description"
@@ -235,7 +227,7 @@
 							</div>
 
 							<div class="mb-4">
-								<label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
+								<label for="price" class="block font-medium text-gray-700">Price:</label>
 								<input
 									type="number"
 									step="0.01"
