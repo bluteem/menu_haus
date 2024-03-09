@@ -33,7 +33,7 @@ export default {
 		// Reactive variables
 		const blank = ref([]);
 
-		// Fetch menu items when the component is mounted
+		// Fetch business info when the component is mounted
 		onMounted(async () => {
 			try {
 				const response = await axios.get("http://localhost:5000/api/businesses");
@@ -62,8 +62,8 @@ export default {
 		};
 
 		return {
+			blank,
 			newBusinessInfo,
-			getBusinessInfo,
 			updateBusinessInfo,
 		};
 	},
