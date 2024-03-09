@@ -8,7 +8,7 @@ import DashboardTeam from "../views/DashboardTeam.vue";
 import DashboardSettings from "../views/DashboardSettings.vue";
 import DashboardAccount from "../views/DashboardAccount.vue";
 import NotFound from "../views/NotFound.vue";
-import Login from "../components/Login.vue";
+import Login from "../views/Login.vue";
 
 const routes = [
 	{
