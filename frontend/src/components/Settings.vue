@@ -3,15 +3,15 @@
 	<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden py-10 px-10 bg-gray-200">
 		<h1 class="text-3xl font-bold mb-4">Settings</h1>
 
-		<div class="border-b border-gray-300 mt-6"></div>
+		<div class="border-b border-gray-300 mt-1"></div>
 
 		<ul>
 			<li
-				v-for="businessInfo in businessInfo"
-				:key="menuItem._id"
+				v-for="businessInfo in allBusinessData"
+				:key="businessInfo._id"
 				class="flex items-center border-b border-gray-300 pt-2 pb-4">
 				<div class="flex">
-					{{ menuItem.name }}
+					{{ businessInfo.name }}
 				</div>
 			</li>
 		</ul>
@@ -31,13 +31,23 @@ export default {
 	},
 	setup() {
 		// Reactive variables
-		const blank = ref([]);
+		const allBusinessData = ref([]);
+		const newBusinessInfo = ref({
+			name: "",
+			type: "",
+			address: "",
+			phones: "",
+			emails: "",
+			website: "",
+			socials: "",
+			images: "",
+		});
 
 		// Fetch business info when the component is mounted
 		onMounted(async () => {
 			try {
 				const response = await axios.get("http://localhost:5000/api/businesses");
-				allB.value = response.data.menuItemsWithCategories;
+				allBusinessData.value = response.data.businessData;
 			} catch (error) {
 				console.error("Error fetching menu items:", error);
 			}
@@ -62,7 +72,6 @@ export default {
 		};
 
 		return {
-			blank,
 			newBusinessInfo,
 			updateBusinessInfo,
 		};
