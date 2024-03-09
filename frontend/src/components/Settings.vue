@@ -31,57 +31,19 @@ export default {
 	},
 	setup() {
 		// Reactive variables
-		const newMenuItem = ref({
-			name: "",
-			images: [],
-			category: "",
-			description: "",
-			price: null,
-			categoryId: "",
-		});
-		const menuItems = ref([]);
-		const menuCategories = ref([]);
+		const blank = ref([]);
 
 		// Fetch menu items when the component is mounted
 		onMounted(async () => {
 			try {
-				const response = await axios.get("http://localhost:5000/api/menuitems");
-				menuItems.value = response.data.menuItemsWithCategories;
+				const response = await axios.get("http://localhost:5000/api/businesses");
+				allB.value = response.data.menuItemsWithCategories;
 			} catch (error) {
 				console.error("Error fetching menu items:", error);
 			}
-			try {
-				const response = await axios.get("http://localhost:5000/api/menucategories");
-				menuCategories.value = response.data.menuCategories;
-			} catch (error) {
-				console.error("Error fetching menu categories:", error);
-			}
 		});
 
-		// Fetch business info
-		const getBusinessInfo = async (itemId, alertRef) => {
-			try {
-				const response = await axios.get(`http://localhost:5000/api/businesses/${itemId}`);
-				const businessInfo = response.data.businessData;
-				newBusinessInfo.value = {
-					_id: businessInfo._id,
-					name: businessInfo.name,
-					type: businessInfo.businessType,
-					address: businessInfo.businessAddress,
-					phones: businessInfo.businessPhones,
-					emails: businessInfo.businessEmails,
-					website: businessInfo.businessWebsite,
-					socials: businessInfo.businessSocials,
-					images: businessInfo.businessImages,
-				};
-			} catch (error) {
-				console.error("Error fetching business info:", error);
-				// Show alert if failed to fetch business info
-				alertRef.showAlert("Failed to fetch business info. Please try again later.");
-			}
-		};
-
-		// Update a menu item
+		// Update business info
 		const updateBusinessInfo = async (alertRef) => {
 			try {
 				const response = await axios.put(`http://localhost:5000/api/businesses/${itemId}`, newBusinessInfo.value);
