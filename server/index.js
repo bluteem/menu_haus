@@ -6,6 +6,7 @@ import cors from "cors"; // Cross-Origin Resource Sharing middleware for Express
 import multer from "multer"; // Middleware for handling file uploads
 
 import authController from "./controllers/authController.js";
+import { authMiddleware } from "./controllers/authController.js";
 import tableController from "./controllers/tableController.js";
 import menuCategoryController from "./controllers/menuCategoryController.js";
 import menuItemController from "./controllers/menuItemController.js";
@@ -28,7 +29,12 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 
 // Middleware to enable Cross-Origin Resource Sharing (CORS)
-app.use(cors());
+app.use(
+	cors({
+		origin: "http://localhost:5173", // Replace this with your client's origin
+		credentials: true,
+	})
+);
 
 // Set up Multer storage for handling multiple files
 const storage = multer.diskStorage({
@@ -51,8 +57,13 @@ app.post("/api/upload", upload.array("files"), (req, res) => {
 	res.status(200).json({ fileNames: fileNames }); // Respond with JSON containing uploaded file names
 });
 
-// Use the auth router
+// Use the auth controller
 app.use("/auth", authController);
+// Protected route
+app.get("/protected-route", authMiddleware, (req, res) => {
+	// Access user information from req.user
+	res.status(200).json({ message: "Access granted" });
+});
 
 // Use the menu item controller
 app.use("/api/tables", tableController);
@@ -67,6 +78,12 @@ app.use("/api/businesses", businessController);
 // Default route to indicate API is running
 app.get("/", (req, res) => {
 	res.send("API is running...");
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).json({ message: "Internal server error" });
 });
 
 // Start the server and listen on the specified port

@@ -11,27 +11,46 @@ router.post("/login", async (req, res) => {
 		const { email, password } = req.body;
 		const user = await User.findOne({ email });
 
-		if (!user) {
-			return res.status(404).json({ message: "User not found" });
+		if (!user || !bcrypt.compareSync(password, user.password)) {
+			return res.status(401).json({ message: "Invalid email or password" });
 		}
 
-		const isPasswordValid = await bcrypt.compare(password, user.password);
-		if (!isPasswordValid) {
-			return res.status(401).json({ message: "Invalid password" });
-		}
+		// Generate JWT token
+		const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-		const token = jwt.sign({ userId: user._id }, "your_secret_key", { expiresIn: "1h" });
-		res.status(200).json({ token });
+		// Set HTTPOnly cookie
+		res.cookie("token", token, { httpOnly: true });
+
+		return res.status(200).json({ message: "Login successful" });
 	} catch (error) {
 		console.error("Login failed", error);
 		res.status(500).json({ message: "Internal server error" });
 	}
 });
 
-// Logout endpoint
+// Logout route
 router.post("/logout", (req, res) => {
-	// Clear session or JWT token, if applicable
+	// Clear the token cookie
+	res.clearCookie("token");
 	res.status(200).json({ message: "Logout successful" });
 });
+
+// Middleware to verify JWT token
+export const authMiddleware = (req, res, next) => {
+	const token = req.cookies.token;
+
+	if (!token) {
+		return res.status(401).json({ message: "Unauthorized" });
+	}
+
+	try {
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		req.user = decoded; // Attach user information to the request object
+		next();
+	} catch (error) {
+		console.error("Invalid token", error);
+		return res.status(401).json({ message: "Unauthorized" });
+	}
+};
 
 export default router;

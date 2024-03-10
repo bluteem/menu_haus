@@ -13,13 +13,13 @@
 					<!-- Tab Buttons -->
 					<div class="flex justify-between mb-8 border-b">
 						<button
-							@click="activeTab = 'signin'"
+							@click="activeTab = 'login'"
 							class="pb-3 w-1/2 text-center"
 							:class="{
-								'font-semibold border-b-2 border-zinc-700': activeTab === 'signin',
-								'text-gray-600': activeTab !== 'signin',
+								'font-semibold border-b-2 border-zinc-700': activeTab === 'login',
+								'text-gray-600': activeTab !== 'login',
 							}">
-							Sign In
+							Login
 						</button>
 						<button
 							@click="activeTab = 'signup'"
@@ -50,8 +50,10 @@
 									</svg>
 									<input
 										type="text"
+										v-model="newLogin.email"
 										id="email"
 										name="email"
+										autocomplete="email"
 										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 										placeholder="Enter your email"
 										required />
@@ -79,8 +81,10 @@
 									</svg>
 									<input
 										type="password"
+										v-model="newLogin.password"
 										id="password"
 										name="password"
+										autocomplete="current-password"
 										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 										placeholder="Enter your password"
 										required />
@@ -98,7 +102,7 @@
 							<button
 								type="submit"
 								class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
-								Sign In
+								Login
 							</button>
 						</form>
 						<div class="text-sm text-center text-gray-600 mt-4">
@@ -125,6 +129,7 @@
 										type="text"
 										id="name"
 										name="name"
+										autocomplete="name"
 										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 										placeholder="Enter your full name"
 										required />
@@ -160,6 +165,7 @@
 										type="email"
 										id="email"
 										name="email"
+										autocomplete="email"
 										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 										placeholder="Enter your email"
 										required />
@@ -189,6 +195,7 @@
 										type="password"
 										id="password"
 										name="password"
+										autocomplete="current-password"
 										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 										placeholder="Enter your password"
 										required />
@@ -218,6 +225,7 @@
 										type="password"
 										id="confirmPassword"
 										name="confirmPassword"
+										autocomplete="current-password"
 										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 										placeholder="Re-enter your password"
 										required />
@@ -230,7 +238,7 @@
 							</button>
 						</form>
 						<div class="text-sm text-center text-gray-600 mt-4">
-							Already have an account? <a href="#" @click="activeTab = 'signin'" class="text-blue-500">Sign In</a>
+							Already have an account? <a href="#" @click="activeTab = 'login'" class="text-blue-500">Login</a>
 						</div>
 					</div>
 				</div>
@@ -241,25 +249,36 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router"; // Import useRouter from vue-router
 import axios from "axios";
 
 export default {
 	setup() {
-		// Data variables
-		const activeTab = ref("login");
-		const email = ref("");
-		const password = ref("");
+		const router = useRouter(); // Initialize router
 
-		// Methods for handling sign in and sign up logic
+		const activeTab = ref("login");
+		const newLogin = ref({
+			name: "",
+			password: "",
+		});
+
+		// Methods for handling login and sign up logic
 		const login = async () => {
 			try {
-				const response = await axios.post("/api/login", {
-					email: email.value,
-					password: password.value,
-				});
+				const response = await axios.post(
+					"http://localhost:5000/auth/login",
+					{
+						email: newLogin.value.email,
+						password: newLogin.value.password,
+					},
+					{
+						withCredentials: true, // Send cookies with the request
+					}
+				);
 				const token = response.data.token;
 				localStorage.setItem("token", token);
-				// Redirect to the dashboard or protected route
+				// Redirect to the dashboard
+				router.push("/dashboard");
 			} catch (error) {
 				console.error("Login failed", error);
 			}
@@ -271,8 +290,7 @@ export default {
 
 		return {
 			activeTab,
-			email,
-			password,
+			newLogin,
 			login,
 			signUp,
 		};
