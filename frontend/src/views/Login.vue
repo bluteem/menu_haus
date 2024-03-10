@@ -33,8 +33,8 @@
 					</div>
 
 					<!-- Tab Contents -->
-					<div v-if="activeTab === 'signin'">
-						<form @submit.prevent="signIn">
+					<div v-if="activeTab === 'login'">
+						<form @submit.prevent="login">
 							<div class="mb-4">
 								<label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
 								<div class="relative">
@@ -240,19 +240,42 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import axios from "axios";
+
 export default {
-	data() {
-		return {
-			activeTab: "signin", // To manage which tab is active (signin or signup)
+	setup() {
+		// Data variables
+		const activeTab = ref("login");
+		const email = ref("");
+		const password = ref("");
+
+		// Methods for handling sign in and sign up logic
+		const login = async () => {
+			try {
+				const response = await axios.post("/api/login", {
+					email: email.value,
+					password: password.value,
+				});
+				const token = response.data.token;
+				localStorage.setItem("token", token);
+				// Redirect to the dashboard or protected route
+			} catch (error) {
+				console.error("Login failed", error);
+			}
 		};
-	},
-	methods: {
-		signIn() {
-			// Handle sign in logic
-		},
-		signUp() {
+
+		const signUp = () => {
 			// Handle sign up logic
-		},
+		};
+
+		return {
+			activeTab,
+			email,
+			password,
+			login,
+			signUp,
+		};
 	},
 };
 </script>
