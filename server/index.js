@@ -5,7 +5,7 @@ import connectToDatabase from "./db.js"; // Custom module to connect to the data
 import cors from "cors"; // Cross-Origin Resource Sharing middleware for Express.js
 import multer from "multer"; // Middleware for handling file uploads
 
-import authRoutes from "./routes/auth";
+import authController from "./controllers/authController.js";
 import tableController from "./controllers/tableController.js";
 import menuCategoryController from "./controllers/menuCategoryController.js";
 import menuItemController from "./controllers/menuItemController.js";
@@ -51,8 +51,8 @@ app.post("/api/upload", upload.array("files"), (req, res) => {
 	res.status(200).json({ fileNames: fileNames }); // Respond with JSON containing uploaded file names
 });
 
-// Use the auth controller
-app.use("/auth", authRoutes);
+// Use the auth router
+app.use("/auth", authController);
 
 // Use the menu item controller
 app.use("/api/tables", tableController);

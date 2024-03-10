@@ -1,8 +1,12 @@
+import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import User from "../models/user.js";
 
-export const login = async (req, res) => {
+const router = express.Router();
+
+// Login endpoint
+router.post("/login", async (req, res) => {
 	try {
 		const { email, password } = req.body;
 		const user = await User.findOne({ email });
@@ -22,9 +26,12 @@ export const login = async (req, res) => {
 		console.error("Login failed", error);
 		res.status(500).json({ message: "Internal server error" });
 	}
-};
+});
 
-export const logout = (req, res) => {
+// Logout endpoint
+router.post("/logout", (req, res) => {
 	// Clear session or JWT token, if applicable
 	res.status(200).json({ message: "Logout successful" });
-};
+});
+
+export default router;
