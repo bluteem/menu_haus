@@ -275,12 +275,15 @@ export default {
 						withCredentials: true, // Send cookies with the request
 					}
 				);
-				const token = response.data.token;
-				localStorage.setItem("token", token);
-				// Redirect to the dashboard
-				router.push("/dashboard");
+				// Check if the login was successful (status code 200)
+				if (response.status === 200) {
+					// Redirect to the dashboard
+					router.push("/dashboard");
+				} else {
+					console.error("Login failed:", response.data.message);
+				}
 			} catch (error) {
-				console.error("Login failed", error);
+				console.error("Login failed:", error);
 			}
 		};
 
