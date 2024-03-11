@@ -36,7 +36,7 @@ router.post("/logout", (req, res) => {
 });
 
 // Middleware to verify JWT token
-export const authMiddleware = (req, res, next) => {
+export const authMiddleware = async (req, res, next) => {
 	const token = req.cookies.token;
 
 	if (!token) {
@@ -45,7 +45,13 @@ export const authMiddleware = (req, res, next) => {
 
 	try {
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-		req.user = decoded; // Attach user information to the request object
+		req.user = decoded; // Attach user information for further use
+
+		// Check if the token is still valid based on expiration time (optional)
+		if (decoded.exp < Date.now() / 1000) {
+			return res.status(401).json({ message: "Token expired" });
+		}
+
 		next();
 	} catch (error) {
 		console.error("Invalid token", error);

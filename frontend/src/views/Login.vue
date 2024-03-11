@@ -278,7 +278,15 @@ export default {
 				// Check if the login was successful (status code 200)
 				if (response.status === 200) {
 					// Redirect to the dashboard
-					router.push("/dashboard");
+					router.push("/dashboard").catch((error) => {
+						// Handle potential authorization errors (e.g., 401 Unauthorized)
+						if (error.response && error.response.status === 401) {
+							console.error("Unauthorized access to protected route");
+							// Redirect to login or handle error message as needed
+						} else {
+							// Handle other navigation errors
+						}
+					});
 				} else {
 					console.error("Login failed:", response.data.message);
 				}
