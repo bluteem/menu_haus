@@ -1,4 +1,5 @@
 # Menu Haus
+
 Ultimate self-service web app for restaurants
 
 Menu Haus is a modern restaurant web app that empowers customers to take control of their dining experience through the power of their smartphones. Using QR codes, Menu Haus allows your guests to:
@@ -20,21 +21,6 @@ Built with the MERN stack, Menu Haus delivers a smooth and intuitive experience 
 
 ## Technology:
 
-Front-end: React.js
+Front-end: Vue.js
 Back-end: Node.js (Express.js)
 Database: MongoDB
-Additional libraries:
-
-## License:
-
-MIT
-
-## Get Started:
-
-Setup: Clone the repository and follow the installation instructions in the README.md file.
-
-## Contribute:
-
-Menu Haus is an open-source project! We welcome contributions from the community.
-
-Join the Menu Haus experience and transform your restaurant into a haven of convenience and personalized service!
