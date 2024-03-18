@@ -262,7 +262,7 @@ export default {
 			password: "",
 		});
 
-		// Methods for handling login and sign up logic
+		// Method for handling login logic
 		const login = async () => {
 			try {
 				const response = await axios.post(
@@ -295,6 +295,7 @@ export default {
 			}
 		};
 
+		// Method for handling signup logic
 		const signUp = () => {
 			// Handle sign up logic
 		};
