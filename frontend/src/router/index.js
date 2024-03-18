@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import authService from "../services/authService.js";
 import Login from "../views/Login.vue";
 import DashboardHome from "../views/DashboardHome.vue";
 import DashboardTables from "../views/DashboardTables.vue";
@@ -17,6 +16,7 @@ const routes = [
 		component: Login,
 		meta: {
 			title: "Menu.Haus Login",
+			requiresAuth: false, // This route does not require authentication
 		},
 	},
 	{
@@ -24,62 +24,24 @@ const routes = [
 		component: DashboardHome,
 		meta: {
 			title: "Menu.Haus Dashboard",
-			requiresAuth: true,
+			requiresAuth: true, // This route requires authentication
 		},
-	},
-	{
-		path: "/dashboard/tables",
-		component: DashboardTables,
-		meta: {
-			title: "Menu.Haus Dashboard",
-			requiresAuth: true,
-		},
-	},
-	{
-		path: "/dashboard/menu-categories",
-		component: DashboardMenuCategories,
-		meta: {
-			title: "Menu.Haus Dashboard",
-			requiresAuth: true,
-		},
-	},
-	{
-		path: "/dashboard/menu-items",
-		component: DashboardMenuItems,
-		meta: {
-			title: "Menu.Haus Dashboard",
-			requiresAuth: true,
-		},
-	},
-	{
-		path: "/dashboard/team",
-		component: DashboardTeam,
-		meta: {
-			title: "Menu.Haus Dashboard",
-			requiresAuth: true,
-		},
-	},
-	{
-		path: "/dashboard/settings",
-		component: DashboardSettings,
-		meta: {
-			title: "Menu.Haus Dashboard",
-			requiresAuth: true,
-		},
-	},
-	{
-		path: "/dashboard/account",
-		component: DashboardAccount,
-		meta: {
-			title: "Menu.Haus Dashboard",
-			requiresAuth: true,
-		},
+		children: [
+			// Nested routes for dashboard pages
+			{ path: "tables", component: DashboardTables },
+			{ path: "menu-categories", component: DashboardMenuCategories },
+			{ path: "menu-items", component: DashboardMenuItems },
+			{ path: "team", component: DashboardTeam },
+			{ path: "settings", component: DashboardSettings },
+			{ path: "account", component: DashboardAccount },
+		],
 	},
 	{
 		path: "/",
 		component: FrontendHome,
 		meta: {
 			title: "Menu.Haus Home", // Meta title for the Home page
+			requiresAuth: false, // This route does not require authentication
 		},
 	},
 	{
@@ -88,6 +50,7 @@ const routes = [
 		component: NotFound,
 		meta: {
 			title: "Page Not Found", // Meta title for the 404 page
+			requiresAuth: false, // This route does not require authentication
 		},
 	},
 ];
@@ -106,12 +69,14 @@ router.beforeEach((to, from, next) => {
 
 	// Check if the route requires authentication
 	if (to.meta.requiresAuth) {
-		// Check if the user is authenticated
-		if (!authService.isAuthenticated()) {
-			// Redirect to the login page if not authenticated
+		// Check if the user is authenticated (you can implement your own logic here)
+		const isAuthenticated = localStorage.getItem("token"); // Assuming you store the token in localStorage
+
+		if (!isAuthenticated) {
+			// If the user is not authenticated, redirect to the login page
 			next("/login");
 		} else {
-			// Proceed to the route if authenticated
+			// If the user is authenticated, proceed to the route
 			next();
 		}
 	} else {

@@ -2,11 +2,11 @@
 import express from "express"; // Express.js framework for Node.js
 import dotenv from "dotenv"; // Load environment variables from a .env file
 import connectToDatabase from "./db.js"; // Custom module to connect to the database
+import cookieParser from "cookie-parser";
 import cors from "cors"; // Cross-Origin Resource Sharing middleware for Express.js
 import multer from "multer"; // Middleware for handling file uploads
 
-import authController from "./controllers/authController.js";
-import { authMiddleware } from "./controllers/authController.js";
+import authController, { authMiddleware } from "./controllers/authController.js";
 import tableController from "./controllers/tableController.js";
 import menuCategoryController from "./controllers/menuCategoryController.js";
 import menuItemController from "./controllers/menuItemController.js";
@@ -24,6 +24,9 @@ const app = express();
 
 // Set the port number from environment variable or default to 5000
 const port = process.env.PORT || 5000;
+
+// Middleware to parse incoming request cookies
+app.use(cookieParser());
 
 // Middleware to parse JSON bodies of requests
 app.use(express.json());

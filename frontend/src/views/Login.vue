@@ -258,11 +258,10 @@ export default {
 
 		const activeTab = ref("login");
 		const newLogin = ref({
-			name: "",
+			email: "",
 			password: "",
 		});
 
-		// Method for handling login logic
 		const login = async () => {
 			try {
 				const response = await axios.post(
@@ -272,7 +271,7 @@ export default {
 						password: newLogin.value.password,
 					},
 					{
-						withCredentials: true, // Send cookies with the request
+						withCredentials: true,
 					}
 				);
 				// Check if the login was successful (status code 200)
@@ -295,16 +294,10 @@ export default {
 			}
 		};
 
-		// Method for handling signup logic
-		const signUp = () => {
-			// Handle sign up logic
-		};
-
 		return {
 			activeTab,
 			newLogin,
 			login,
-			signUp,
 		};
 	},
 };
