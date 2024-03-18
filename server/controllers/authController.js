@@ -19,7 +19,12 @@ router.post("/login", async (req, res) => {
 		const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
 		// Set HTTPOnly cookie
-		res.cookie("token", token, { httpOnly: true });
+		res.cookie("token", token, {
+			httpOnly: true,
+			sameSite: "Lax",
+			// If the application requires the cookie to be sent in cross-site requests initiated by third-party websites, we should set the SameSite attribute to "None"; also include the Secure attribute to ensure that the cookie is only sent over HTTPS connections.
+			// sameSite: 'None', secure: true
+		});
 
 		return res.status(200).json({ message: "Login successful" });
 	} catch (error) {
