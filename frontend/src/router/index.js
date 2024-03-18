@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import authService from "../services/authService.js";
-import FrontendHome from "../views/FrontendHome.vue";
+import Login from "../views/Login.vue";
 import DashboardHome from "../views/DashboardHome.vue";
 import DashboardTables from "../views/DashboardTables.vue";
 import DashboardMenuCategories from "../views/DashboardMenuCategories.vue";
@@ -8,8 +8,8 @@ import DashboardMenuItems from "../views/DashboardMenuItems.vue";
 import DashboardTeam from "../views/DashboardTeam.vue";
 import DashboardSettings from "../views/DashboardSettings.vue";
 import DashboardAccount from "../views/DashboardAccount.vue";
+import FrontendHome from "../views/FrontendHome.vue";
 import NotFound from "../views/NotFound.vue";
-import Login from "../views/Login.vue";
 
 const routes = [
 	{
