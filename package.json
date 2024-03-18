@@ -1,26 +1,26 @@
 {
-  "type": "module",
-  "name": "menu_haus",
-  "version": "1.0.0",
-  "description": "Ultimate self-service web app for restaurants",
-  "main": "index.js",
-  "scripts": {
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-    "start:backend": "node server/index.js",
-    "start:frontend": "npm run dev" 
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "concurrently": "^8.2.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.1",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.1.1",
-    "multer": "^1.4.5-lts.1",
-    "slugify": "^1.6.6"
-  }
+	"type": "module",
+	"name": "menu_haus",
+	"version": "1.0.0",
+	"description": "Ultimate self-service web app for restaurants",
+	"main": "index.js",
+	"scripts": {
+		"start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+		"start:backend": "node server/index.js",
+		"start:frontend": "cd frontend && npm run dev"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.1.1",
+		"concurrently": "^8.2.2",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.1",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.1.1",
+		"multer": "^1.4.5-lts.1",
+		"slugify": "^1.6.6"
+	}
 }
