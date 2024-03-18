@@ -2,7 +2,7 @@
 
 Ultimate self-service web app for restaurants
 
-Menu Haus is a modern restaurant web app that empowers customers to take control of their dining experience through the power of their smartphones. Using QR codes, Menu Haus allows your guests to:
+Menu Haus is a modern restaurant web app that empowers both the businesses and customers to take control of their dining experience through the power of their smartphones. Using QR codes, Menu Haus allows your guests to:
 
 - Browse your menu: View your delicious offerings with vibrant images and detailed descriptions, all from the comfort of their seats.
 - Order seamlessly: Place orders directly from their smartphone, eliminating the need to wait for a server.
