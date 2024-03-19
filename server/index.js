@@ -1,7 +1,7 @@
 // Import required modules
 import express from "express"; // Express.js framework for Node.js
 import dotenv from "dotenv"; // Load environment variables from a .env file
-import connectToDatabase from "./db.js"; // Custom module to connect to the database
+import mongoose from "mongoose"; // Load mongoose for database connection
 import cookieParser from "cookie-parser";
 import cors from "cors"; // Cross-Origin Resource Sharing middleware for Express.js
 import multer from "multer"; // Middleware for handling file uploads
@@ -15,6 +15,21 @@ import businessController from "./controllers/businessController.js";
 
 // Load environment variables from .env file
 dotenv.config();
+
+const connectToDatabase = async () => {
+	try {
+		await mongoose.connect(process.env.MONGO_URI, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		});
+		console.log("MongoDB Connected");
+	} catch (error) {
+		console.error("Error connecting to MongoDB:", error.message);
+		process.exit(1);
+	}
+};
+
+export default connectToDatabase;
 
 // Connect to the MongoDB database
 connectToDatabase();
