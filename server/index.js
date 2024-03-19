@@ -25,11 +25,11 @@ const app = express();
 // Set the port number from environment variable or default to 5000
 const port = process.env.PORT || 5000;
 
-// Middleware to parse incoming request cookies
-app.use(cookieParser());
-
 // Middleware to parse JSON bodies of requests
 app.use(express.json());
+
+// Middleware to parse incoming request cookies
+app.use(cookieParser());
 
 // Middleware to enable Cross-Origin Resource Sharing (CORS)
 app.use(

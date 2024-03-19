@@ -251,12 +251,17 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router"; // Import useRouter from vue-router
 import axios from "axios";
+import { reactive } from "vue";
 
 export default {
 	setup() {
 		const router = useRouter(); // Initialize router
 
 		const activeTab = ref("login");
+		const state = reactive({
+			username: "",
+			password: "",
+		});
 		const newLogin = ref({
 			email: "",
 			password: "",
@@ -267,34 +272,45 @@ export default {
 				const response = await axios.post(
 					"http://localhost:5000/auth/login",
 					{
-						email: newLogin.value.email,
-						password: newLogin.value.password,
+						email: state.value.email,
+						password: state.value.password,
 					},
 					{
 						withCredentials: true, // Include cookies in the request
 					}
 				);
 
-				if (response.status === 200) {
-					console.log("Frontend Login successful:", response.data);
+				console.log("Login successful", response.data);
 
-					// Redirect to dashboard and handle potential errors
-					router.push("/dashboard").catch((error) => {
-						console.error("Navigation error:", error);
-						// Handle specific errors like 401 Unauthorized if needed
-					});
-				} else {
-					console.error("Login failed:", response.data.message);
-				}
+				// Redirect to dashboard and handle potential errors
+				router.push("/dashboard").catch((error) => {
+					console.error("Navigation error:", error);
+					// Handle specific errors like 401 Unauthorized if needed
+				});
 			} catch (error) {
-				console.error("Login failed:", error);
+				console.error("Login failed", error.response.data.message);
+			}
+		};
+
+		const signup = async () => {
+			try {
+				const response = await axios.post("http://localhost:5000/auth/signup", {
+					username: state.username,
+					password: state.password,
+				});
+				console.log("Registration successful", response.data);
+				// Redirect to login or other route upon successful registration
+			} catch (error) {
+				console.error("Registration failed", error.response.data.message);
 			}
 		};
 
 		return {
 			activeTab,
 			newLogin,
+			state,
 			login,
+			signup,
 		};
 	},
 };

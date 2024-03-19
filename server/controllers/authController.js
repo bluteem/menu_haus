@@ -16,7 +16,7 @@ router.post("/login", async (req, res) => {
 		}
 
 		// Generate JWT token
-		const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+		const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
 
 		// Set HTTPOnly cookie
 		res.cookie("token", token, {
@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
 			// sameSite: 'None', secure: true
 		});
 
-		return res.status(200).json({ message: "Backend Login successful" });
+		return res.status(200).json({ token });
 	} catch (error) {
 		console.error("Login failed", error);
 		res.status(500).json({ message: "Internal server error" });
@@ -40,9 +40,35 @@ router.post("/logout", (req, res) => {
 	res.status(200).json({ message: "Logout successful" });
 });
 
+// Register a new user
+router.post("/signup", async (req, res) => {
+	try {
+		// Check if username already exists
+		const existingUser = await User.findOne({ username: req.body.username });
+		if (existingUser) {
+			return res.status(400).json({ message: "Username already exists" });
+		}
+
+		// Hash the password
+		const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+		// Create a new user
+		const newUser = new User({
+			username: req.body.username,
+			password: hashedPassword,
+		});
+		await newUser.save();
+
+		res.status(201).json({ message: "User registered successfully" });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: "Internal server error" });
+	}
+});
+
 // Middleware to verify JWT token
 export const authMiddleware = async (req, res, next) => {
-	const { token } = req.cookies;
+	const token = req.cookies.token;
 
 	if (!token) {
 		return res.status(401).json({ message: "Missing authentication token" });
@@ -50,7 +76,7 @@ export const authMiddleware = async (req, res, next) => {
 
 	try {
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-		req.user = decoded; // Attach user information for further use
+		req.userId = decoded.userId; // Attach user information for further use
 		next();
 	} catch (error) {
 		console.error("Token verification failed", error.message);

@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
 import { useRouter } from "vue-router"; // Import useRouter from vue-router
 import axios from "axios";
 
@@ -15,23 +14,17 @@ export default {
 
 		const logout = async () => {
 			try {
-				// Send a request to logout endpoint on the backend
 				await axios.post(
 					"http://localhost:5000/auth/logout",
 					{},
 					{
-						withCredentials: true, // Include cookies in the request
+						withCredentials: true, // Send cookies with the request
 					}
 				);
-
-				// Clear any local storage or session data related to authentication
-				localStorage.removeItem("token"); // Clear token stored in localStorage
-
-				// Redirect the user to the login page
-				router.push("/login");
+				console.log("Logout successful");
+				// Redirect to login or other route upon successful logout
 			} catch (error) {
-				console.error("Logout failed:", error);
-				// Handle logout failure if needed
+				console.error("Logout failed", error.response.data.message);
 			}
 		};
 
