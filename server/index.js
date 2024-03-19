@@ -1,10 +1,12 @@
 // Import required modules
 import express from "express"; // Express.js framework for Node.js
-import dotenv from "dotenv"; // Load environment variables from a .env file
 import mongoose from "mongoose"; // Load mongoose for database connection
 import cookieParser from "cookie-parser";
 import cors from "cors"; // Cross-Origin Resource Sharing middleware for Express.js
 import multer from "multer"; // Middleware for handling file uploads
+import dotenv from "dotenv"; // Load environment variables from a .env file
+import path from "path"; // Import the 'path' module for file uploads
+import { fileURLToPath } from "url"; // Import 'fileURLToPath' function to handle __filename
 
 import authController, { authMiddleware } from "./controllers/authController.js";
 import tableController from "./controllers/tableController.js";
@@ -16,6 +18,7 @@ import businessController from "./controllers/businessController.js";
 // Load environment variables from .env file
 dotenv.config();
 
+// Database settings
 const connectToDatabase = async () => {
 	try {
 		await mongoose.connect(process.env.MONGO_URI, {
@@ -28,8 +31,6 @@ const connectToDatabase = async () => {
 		process.exit(1);
 	}
 };
-
-export default connectToDatabase;
 
 // Connect to the MongoDB database
 connectToDatabase();
@@ -77,25 +78,23 @@ app.post("/api/upload", upload.array("files"), (req, res) => {
 
 // Use the auth controller
 app.use("/auth", authController);
+
 // Protected route
 app.get("/auth/verify-token", authMiddleware, (req, res) => {
 	// Access user information from req.user
 	res.status(200).json({ message: "Token is valid" });
 });
 
-// Use the menu item controller
+// Use other controllers
 app.use("/api/tables", tableController);
-// Use the menu item controller
 app.use("/api/menuitems", menuItemController);
-// Use the menu category controller
 app.use("/api/menucategories", menuCategoryController);
-// Use the menu category controller
 app.use("/api/users", userController);
-// Use the business controller
 app.use("/api/businesses", businessController);
-// Default route to indicate API is running
+
+// Default route to indicate server is running
 app.get("/", (req, res) => {
-	res.send("API is running...");
+	res.send("Server is running...");
 });
 
 // Error handling middleware
