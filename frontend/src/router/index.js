@@ -13,17 +13,32 @@ import NotFound from "../views/NotFound.vue";
 
 const isTokenValid = async () => {
 	try {
-		// Send a request to your backend server to validate the token
 		const response = await axios.get("http://localhost:5000/auth/verify-token", {
-			withCredentials: true, // Include cookies in the request
+			withCredentials: true,
 		});
-
-		// Check if the response indicates that the token is valid
 		return response.status === 200;
 	} catch (error) {
-		// If there's an error or the token is invalid, return false
 		console.error("Token validation failed:", error);
 		return false;
+	}
+};
+
+const requireAuth = async (to, from, next) => {
+	try {
+		if (to.meta.requiresAuth) {
+			const isAuthenticated = await isTokenValid();
+			if (isAuthenticated) {
+				// If user is already authenticated, redirect to the dashboard
+				next("/dashboard");
+			} else {
+				next("/login");
+			}
+		} else {
+			next();
+		}
+	} catch (error) {
+		console.error("Error:", error);
+		next("/login");
 	}
 };
 
@@ -33,7 +48,7 @@ const routes = [
 		component: Login,
 		meta: {
 			title: "Menu.Haus Login",
-			requiresAuth: false, // This route does not require authentication
+			requiresAuth: false,
 		},
 	},
 	{
@@ -41,10 +56,9 @@ const routes = [
 		component: DashboardHome,
 		meta: {
 			title: "Menu.Haus Dashboard",
-			requiresAuth: true, // This route requires authentication
+			requiresAuth: true,
 		},
 		children: [
-			// Nested routes for dashboard pages
 			{ path: "tables", component: DashboardTables },
 			{ path: "menu-categories", component: DashboardMenuCategories },
 			{ path: "menu-items", component: DashboardMenuItems },
@@ -57,17 +71,16 @@ const routes = [
 		path: "/",
 		component: FrontendHome,
 		meta: {
-			title: "Menu.Haus Home", // Meta title for the Home page
-			requiresAuth: false, // This route does not require authentication
+			title: "Menu.Haus Home",
+			requiresAuth: false,
 		},
 	},
 	{
-		// Catch-all route for 404 errors
 		path: "/:catchAll(.*)",
 		component: NotFound,
 		meta: {
-			title: "Page Not Found", // Meta title for the 404 page
-			requiresAuth: false, // This route does not require authentication
+			title: "Page Not Found",
+			requiresAuth: false,
 		},
 	},
 ];
@@ -77,26 +90,11 @@ const router = createRouter({
 	routes,
 });
 
-// Set up navigation guards to update the meta title and check authentication status for each route
 router.beforeEach((to, from, next) => {
-	// Update the document title if the route has a meta title defined
 	if (to.meta.title) {
 		document.title = to.meta.title;
 	}
-
-	// Check if the route requires authentication
-	if (to.meta.requiresAuth) {
-		const isAuthenticated = isTokenValid();
-
-		if (!isAuthenticated) {
-			next("/login");
-		} else {
-			next();
-		}
-	} else {
-		// If the route does not require authentication, proceed to the route
-		next();
-	}
+	requireAuth(to, from, next);
 });
 
 export default router;
