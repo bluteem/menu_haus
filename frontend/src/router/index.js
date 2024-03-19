@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "../store";
 import axios from "axios";
 import Login from "../views/Login.vue";
 import DashboardHome from "../views/DashboardHome.vue";
@@ -10,41 +11,6 @@ import DashboardSettings from "../views/DashboardSettings.vue";
 import DashboardAccount from "../views/DashboardAccount.vue";
 import FrontendHome from "../views/FrontendHome.vue";
 import NotFound from "../views/NotFound.vue";
-
-const isTokenValid = async () => {
-	try {
-		const response = await axios.get("http://localhost:5000/auth/verify-token", {
-			withCredentials: true,
-		});
-		return response.status === 200;
-	} catch (error) {
-		console.error("Token validation failed:", error);
-		return false;
-	}
-};
-
-const requireAuth = async (to, from, next) => {
-	try {
-		if (to.meta.requiresAuth) {
-			const isAuthenticated = await isTokenValid();
-			if (isAuthenticated) {
-				// If user is already authenticated and trying to access the login page, redirect to dashboard
-				if (to.path === "/login") {
-					next("/dashboard");
-				} else {
-					next();
-				}
-			} else {
-				next("/login");
-			}
-		} else {
-			next();
-		}
-	} catch (error) {
-		console.error("Error:", error);
-		next("/login");
-	}
-};
 
 const routes = [
 	{
@@ -95,10 +61,14 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-	if (to.meta.title) {
-		document.title = to.meta.title;
+	const isAuthenticated = store.state.isAuthenticated;
+	const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+
+	if (requiresAuth && !isAuthenticated) {
+		next("/login");
+	} else {
+		next();
 	}
-	requireAuth(to, from, next);
 });
 
 export default router;
