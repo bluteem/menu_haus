@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import axios from "axios";
 import Login from "../views/Login.vue";
 import DashboardHome from "../views/DashboardHome.vue";
 import DashboardTables from "../views/DashboardTables.vue";
@@ -9,6 +10,34 @@ import DashboardSettings from "../views/DashboardSettings.vue";
 import DashboardAccount from "../views/DashboardAccount.vue";
 import FrontendHome from "../views/FrontendHome.vue";
 import NotFound from "../views/NotFound.vue";
+
+const isTokenValid = async (token) => {
+	try {
+		if (!token) {
+			return false; // Token is missing
+		}
+
+		// Basic validation: Ensure token is a string and not empty
+		if (typeof token !== "string" || token.trim() === "") {
+			return false;
+		}
+
+		// Send a request to your server's validation endpoint
+		const response = await axios.get("http://localhost:5000/protected-route", { token });
+
+		if (response.status === 200) {
+			// Server confirmed token validity
+			return true;
+		} else {
+			// Server rejected the token
+			return false;
+		}
+	} catch (error) {
+		// Handle errors during validation, such as network issues
+		console.error("Token validation error:", error);
+		return false; // Assume invalid token on error
+	}
+};
 
 const routes = [
 	{
