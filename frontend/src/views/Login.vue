@@ -251,7 +251,6 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router"; // Import useRouter from vue-router
 import axios from "axios";
-import { reactive } from "vue";
 
 export default {
 	setup() {
@@ -300,8 +299,8 @@ export default {
 		const signup = async () => {
 			try {
 				const response = await axios.post("http://localhost:5000/auth/signup", {
-					username: state.username,
-					password: state.password,
+					username: newLogin.username,
+					password: newLogin.password,
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration

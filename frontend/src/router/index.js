@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import store from "../store";
 import axios from "axios";
 import Login from "../views/Login.vue";
 import DashboardHome from "../views/DashboardHome.vue";
@@ -26,16 +25,56 @@ const routes = [
 		component: DashboardHome,
 		meta: {
 			title: "Menu.Haus Dashboard",
-			requiresAuth: true,
+			requiresAuth: false,
 		},
-		children: [
-			{ path: "tables", component: DashboardTables },
-			{ path: "menu-categories", component: DashboardMenuCategories },
-			{ path: "menu-items", component: DashboardMenuItems },
-			{ path: "team", component: DashboardTeam },
-			{ path: "settings", component: DashboardSettings },
-			{ path: "account", component: DashboardAccount },
-		],
+	},
+	{
+		path: "/dashboard/tables",
+		component: DashboardTables,
+		meta: {
+			title: "Menu.Haus Dashboard Tables",
+			requiresAuth: false,
+		},
+	},
+	{
+		path: "/dashboard/menu-categories",
+		component: DashboardMenuCategories,
+		meta: {
+			title: "Menu.Haus Dashboard Menu Categories",
+			requiresAuth: false,
+		},
+	},
+	{
+		path: "/dashboard/menu-items",
+		component: DashboardMenuItems,
+		meta: {
+			title: "Menu.Haus Dashboard Menu Items",
+			requiresAuth: false,
+		},
+	},
+	{
+		path: "/dashboard/team",
+		component: DashboardTeam,
+		meta: {
+			title: "Menu.Haus Dashboard Team",
+			requiresAuth: false,
+		},
+	},
+	{
+		path: "/dashboard/settings",
+		component: DashboardSettings,
+		meta: {
+			title: "Menu.Haus Dashboard Settings",
+			requiresAuth: false,
+		},
+	},
+	{
+		path: "/dashboard/account",
+		component: DashboardAccount,
+		meta: {
+			title: "Menu.Haus Dashboard Account",
+			requiresAuth: false,
+		},
 	},
 	{
 		path: "/",
@@ -58,17 +97,6 @@ const routes = [
 const router = createRouter({
 	history: createWebHistory(),
 	routes,
-});
-
-router.beforeEach((to, from, next) => {
-	const isAuthenticated = store.state.isAuthenticated;
-	const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-
-	if (requiresAuth && !isAuthenticated) {
-		next("/login");
-	} else {
-		next();
-	}
 });
 
 export default router;

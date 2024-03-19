@@ -24,7 +24,7 @@ export default {
 				console.log("Logout successful");
 				// Redirect to login or other route upon successful logout
 			} catch (error) {
-				console.error("Logout failed", error.response.data.message);
+				console.error("Logout failed", error);
 			}
 		};
 
