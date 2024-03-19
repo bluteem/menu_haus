@@ -63,9 +63,9 @@ app.post("/api/upload", upload.array("files"), (req, res) => {
 // Use the auth controller
 app.use("/auth", authController);
 // Protected route
-app.get("/protected-route", authMiddleware, (req, res) => {
+app.get("/auth/verify-token", authMiddleware, (req, res) => {
 	// Access user information from req.user
-	res.status(200).json({ message: "Access granted" });
+	res.status(200).json({ message: "Token is valid" });
 });
 
 // Use the menu item controller

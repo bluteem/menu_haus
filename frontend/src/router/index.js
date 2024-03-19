@@ -11,31 +11,19 @@ import DashboardAccount from "../views/DashboardAccount.vue";
 import FrontendHome from "../views/FrontendHome.vue";
 import NotFound from "../views/NotFound.vue";
 
-const isTokenValid = async (token) => {
+const isTokenValid = async () => {
 	try {
-		if (!token) {
-			return false; // Token is missing
-		}
+		// Send a request to your backend server to validate the token
+		const response = await axios.get("http://localhost:5000/auth/verify-token", {
+			withCredentials: true, // Include cookies in the request
+		});
 
-		// Basic validation: Ensure token is a string and not empty
-		if (typeof token !== "string" || token.trim() === "") {
-			return false;
-		}
-
-		// Send a request to your server's validation endpoint
-		const response = await axios.get("http://localhost:5000/protected-route", { token });
-
-		if (response.status === 200) {
-			// Server confirmed token validity
-			return true;
-		} else {
-			// Server rejected the token
-			return false;
-		}
+		// Check if the response indicates that the token is valid
+		return response.status === 200;
 	} catch (error) {
-		// Handle errors during validation, such as network issues
-		console.error("Token validation error:", error);
-		return false; // Assume invalid token on error
+		// If there's an error or the token is invalid, return false
+		console.error("Token validation failed:", error);
+		return false;
 	}
 };
 
@@ -98,14 +86,11 @@ router.beforeEach((to, from, next) => {
 
 	// Check if the route requires authentication
 	if (to.meta.requiresAuth) {
-		// Check if the user is authenticated (you can implement your own logic here)
-		const isAuthenticated = isTokenValid(localStorage.getItem("token")); // Implement token validation
+		const isAuthenticated = isTokenValid();
 
 		if (!isAuthenticated) {
-			// If the user is not authenticated, redirect to the login page
 			next("/login");
 		} else {
-			// If the user is authenticated, proceed to the route
 			next();
 		}
 	} else {

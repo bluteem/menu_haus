@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
 			// sameSite: 'None', secure: true
 		});
 
-		return res.status(200).json({ message: "Login successful" });
+		return res.status(200).json({ message: "Backend Login successful" });
 	} catch (error) {
 		console.error("Login failed", error);
 		res.status(500).json({ message: "Internal server error" });
@@ -42,25 +42,19 @@ router.post("/logout", (req, res) => {
 
 // Middleware to verify JWT token
 export const authMiddleware = async (req, res, next) => {
-	const token = req.cookies.token;
+	const { token } = req.cookies;
 
 	if (!token) {
-		return res.status(401).json({ message: "Unauthorized" });
+		return res.status(401).json({ message: "Missing authentication token" });
 	}
 
 	try {
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 		req.user = decoded; // Attach user information for further use
-
-		// Check if the token is sill valid based on expiration time (optional)
-		if (decoded.exp < Date.now() / 1000) {
-			return res.status(401).json({ message: "Token expired" });
-		}
-
 		next();
 	} catch (error) {
-		console.error("Invalid token", error);
-		return res.status(401).json({ message: "Unauthorized" });
+		console.error("Token verification failed", error.message);
+		return res.status(401).json({ message: "Invalid or expired authentication token" });
 	}
 };
 

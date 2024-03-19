@@ -271,21 +271,17 @@ export default {
 						password: newLogin.value.password,
 					},
 					{
-						withCredentials: true,
+						withCredentials: true, // Include cookies in the request
 					}
 				);
-				// Check if the login was successful (status code 200)
+
 				if (response.status === 200) {
-					localStorage.setItem("token", response.data.token); // Assuming token is in response.data.token
-					// Redirect to the dashboard
-					await router.push("/dashboard").catch((error) => {
-						// Handle potential authorization errors (e.g., 401 Unauthorized)
-						if (error.response && error.response.status === 401) {
-							console.error("Unauthorized access to protected route");
-							// Redirect to login or handle error message as needed
-						} else {
-							// Handle other navigation errors
-						}
+					console.log("Frontend Login successful:", response.data);
+
+					// Redirect to dashboard and handle potential errors
+					router.push("/dashboard").catch((error) => {
+						console.error("Navigation error:", error);
+						// Handle specific errors like 401 Unauthorized if needed
 					});
 				} else {
 					console.error("Login failed:", response.data.message);
