@@ -258,10 +258,7 @@ export default {
 		const router = useRouter(); // Initialize router
 
 		const activeTab = ref("login");
-		const state = reactive({
-			username: "",
-			password: "",
-		});
+
 		const newLogin = ref({
 			email: "",
 			password: "",
@@ -272,8 +269,8 @@ export default {
 				const response = await axios.post(
 					"http://localhost:5000/auth/login",
 					{
-						email: state.value.email,
-						password: state.value.password,
+						email: newLogin.value.email,
+						password: newLogin.value.password,
 					},
 					{
 						withCredentials: true, // Include cookies in the request
@@ -288,7 +285,15 @@ export default {
 					// Handle specific errors like 401 Unauthorized if needed
 				});
 			} catch (error) {
-				console.error("Login failed", error.response.data.message);
+				// Log the entire error object for debugging
+				console.error("Login failed", error);
+
+				// Check if error.response exists before accessing it
+				if (error?.response) {
+					console.error("Server error:", error.response.data);
+				} else {
+					console.error("Unexpected error:", error);
+				}
 			}
 		};
 
@@ -308,7 +313,6 @@ export default {
 		return {
 			activeTab,
 			newLogin,
-			state,
 			login,
 			signup,
 		};
