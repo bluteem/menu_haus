@@ -5,8 +5,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors"; // Cross-Origin Resource Sharing middleware for Express.js
 import multer from "multer"; // Middleware for handling file uploads
 import dotenv from "dotenv"; // Load environment variables from a .env file
-import path from "path"; // Import the 'path' module for file uploads
-import { fileURLToPath } from "url"; // Import 'fileURLToPath' function to handle __filename
 
 import authController, { authMiddleware } from "./controllers/authController.js";
 import tableController from "./controllers/tableController.js";
