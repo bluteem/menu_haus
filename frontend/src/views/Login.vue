@@ -276,8 +276,9 @@ export default {
 				);
 				// Check if the login was successful (status code 200)
 				if (response.status === 200) {
+					localStorage.setItem("token", response.data.token); // Assuming token is in response.data.token
 					// Redirect to the dashboard
-					router.push("/dashboard").catch((error) => {
+					await router.push("/dashboard").catch((error) => {
 						// Handle potential authorization errors (e.g., 401 Unauthorized)
 						if (error.response && error.response.status === 401) {
 							console.error("Unauthorized access to protected route");

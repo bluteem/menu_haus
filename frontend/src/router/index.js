@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
 	// Check if the route requires authentication
 	if (to.meta.requiresAuth) {
 		// Check if the user is authenticated (you can implement your own logic here)
-		const isAuthenticated = localStorage.getItem("token"); // Assuming you store the token in localStorage
+		const isAuthenticated = isTokenValid(localStorage.getItem("token")); // Implement token validation
 
 		if (!isAuthenticated) {
 			// If the user is not authenticated, redirect to the login page
