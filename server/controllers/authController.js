@@ -34,10 +34,16 @@ router.post("/login", async (req, res) => {
 });
 
 // Logout route
-router.post("/logout", (req, res) => {
-	// Clear the token cookie
-	res.clearCookie("token");
-	res.status(200).json({ message: "Logout successful" });
+router.post("/logout", async (req, res) => {
+	try {
+		// Clear the token cookie
+		res.clearCookie("token");
+		// Send a successful response with a message
+		res.status(200).json({ message: "Logged out successfully (backend)" });
+	} catch (error) {
+		console.error("Logout error:", error);
+		res.status(500).json({ message: "Logout failed (backend)" }); // Handle errors
+	}
 });
 
 // Register a new user

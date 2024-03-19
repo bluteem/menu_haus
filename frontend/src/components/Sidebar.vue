@@ -341,7 +341,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="ml-3 hidden md:block"><Logout /></span>
+						<span class="ml-3 hidden md:block"><logout /></span>
 					</a>
 				</li>
 			</ul>
@@ -350,11 +350,11 @@
 </template>
 
 <script>
-import Logout from "@/components/Logout.vue"; // Import the Logout component
+import logout from "@/components/Logout.vue"; // Import the Logout component
 
 export default {
 	components: {
-		Logout, // Register the Logout component
+		logout, // Register the Logout component
 	},
 };
 </script>
