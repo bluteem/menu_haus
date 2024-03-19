@@ -28,8 +28,12 @@ const requireAuth = async (to, from, next) => {
 		if (to.meta.requiresAuth) {
 			const isAuthenticated = await isTokenValid();
 			if (isAuthenticated) {
-				// If user is already authenticated, redirect to the dashboard
-				next("/dashboard");
+				// If user is already authenticated and trying to access the login page, redirect to dashboard
+				if (to.path === "/login") {
+					next("/dashboard");
+				} else {
+					next();
+				}
 			} else {
 				next("/login");
 			}
