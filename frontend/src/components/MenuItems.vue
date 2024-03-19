@@ -20,7 +20,7 @@
 				<div class="flex">
 					<!-- Left column for the image -->
 					<div class="xs:w-2/6 md:w-1/6 px-4">
-						<img :src="'/images/' + menuItem.images[0]" :alt="menuItem.name" class="w-full object-cover rounded-md" />
+						<img :src="'/uploads/' + menuItem.images[0]" :alt="menuItem.name" class="w-full object-cover rounded-md" />
 					</div>
 					<!-- Right column for the text content -->
 					<div class="xs:w-2/6 md:w-4/6 px-2">
@@ -177,7 +177,7 @@
 									<img
 										v-for="(image, index) in newMenuItem.images"
 										:key="index"
-										:src="'/images/' + image"
+										:src="'/uploads/' + image"
 										:alt="newMenuItem.name"
 										class="w-24 h-18 object-cover rounded-md mr-2" />
 								</div>

@@ -56,7 +56,7 @@ app.use(
 // Set up Multer storage for handling multiple files
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, "./frontend/public/images"); // Destination directory where files will be saved
+		cb(null, "./frontend/public/uploads"); // Destination directory where files will be saved
 	},
 	filename: function (req, file, cb) {
 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9); // Adding random suffix to avoid filename conflicts
