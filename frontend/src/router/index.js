@@ -123,6 +123,11 @@ const router = createRouter({
 
 // Vue Router's navigation guards to check if a route requires authentication and verify the user's authentication status before navigating to the route
 router.beforeEach(async (to, from, next) => {
+	// Check if the route has a meta title
+	if (to.meta.title) {
+		document.title = to.meta.title;
+	}
+
 	// Check if the route requires authentication
 	if (to.meta.requiresAuth) {
 		try {
