@@ -15,7 +15,6 @@ import NotFound from "../views/NotFound.vue";
 const isAuthenticated = async () => {
 	// Retrieve the token from local storage
 	const token = localStorage.getItem("token");
-	console.log(token);
 
 	if (!token) {
 		return false; // No token found, user is not authenticated

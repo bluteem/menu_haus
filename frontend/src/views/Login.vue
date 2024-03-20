@@ -291,7 +291,7 @@ export default {
 				const token = response.data.token;
 				localStorage.setItem("token", token);
 
-				console.log("Login successful", response.data);
+				console.log("Login successful");
 
 				// Redirect to dashboard and handle potential errors
 				router.push("/dashboard").catch((error) => {
