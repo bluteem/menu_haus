@@ -11,13 +11,37 @@ import DashboardAccount from "../views/DashboardAccount.vue";
 import FrontendHome from "../views/FrontendHome.vue";
 import NotFound from "../views/NotFound.vue";
 
+// Function to check if the user is authenticated
+const isAuthenticated = async () => {
+	// Retrieve the token from local storage
+	const token = localStorage.getItem("token");
+	console.log(token);
+
+	if (!token) {
+		return false; // No token found, user is not authenticated
+	}
+
+	try {
+		// Send the token to the server for verification
+		const response = await axios.get("http://localhost:5000/auth/verify-token", {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		return response.status === 200; // Return true if token is valid
+	} catch (error) {
+		console.error("Token verification failed", error.message);
+		return false; // Token verification failed, user is not authenticated
+	}
+};
+
 const routes = [
 	{
 		path: "/login",
 		component: Login,
 		meta: {
 			title: "Menu.Haus Login",
-			requiresAuth: false,
 		},
 	},
 	{
@@ -25,7 +49,7 @@ const routes = [
 		component: DashboardHome,
 		meta: {
 			title: "Menu.Haus Dashboard",
-			requiresAuth: false,
+			requiresAuth: true,
 		},
 	},
 	{
@@ -33,7 +57,7 @@ const routes = [
 		component: DashboardTables,
 		meta: {
 			title: "Menu.Haus Dashboard Tables",
-			requiresAuth: false,
+			requiresAuth: true,
 		},
 	},
 	{
@@ -41,7 +65,7 @@ const routes = [
 		component: DashboardMenuCategories,
 		meta: {
 			title: "Menu.Haus Dashboard Menu Categories",
-			requiresAuth: false,
+			requiresAuth: true,
 		},
 	},
 	{
@@ -49,7 +73,7 @@ const routes = [
 		component: DashboardMenuItems,
 		meta: {
 			title: "Menu.Haus Dashboard Menu Items",
-			requiresAuth: false,
+			requiresAuth: true,
 		},
 	},
 	{
@@ -57,7 +81,7 @@ const routes = [
 		component: DashboardTeam,
 		meta: {
 			title: "Menu.Haus Dashboard Team",
-			requiresAuth: false,
+			requiresAuth: true,
 		},
 	},
 	{
@@ -65,7 +89,7 @@ const routes = [
 		component: DashboardSettings,
 		meta: {
 			title: "Menu.Haus Dashboard Settings",
-			requiresAuth: false,
+			requiresAuth: true,
 		},
 	},
 	{
@@ -73,7 +97,7 @@ const routes = [
 		component: DashboardAccount,
 		meta: {
 			title: "Menu.Haus Dashboard Account",
-			requiresAuth: false,
+			requiresAuth: true,
 		},
 	},
 	{
@@ -81,7 +105,6 @@ const routes = [
 		component: FrontendHome,
 		meta: {
 			title: "Menu.Haus Home",
-			requiresAuth: false,
 		},
 	},
 	{
@@ -89,7 +112,6 @@ const routes = [
 		component: NotFound,
 		meta: {
 			title: "Page Not Found",
-			requiresAuth: false,
 		},
 	},
 ];
@@ -97,6 +119,52 @@ const routes = [
 const router = createRouter({
 	history: createWebHistory(),
 	routes,
+});
+
+// Vue Router's navigation guards to check if a route requires authentication and verify the user's authentication status before navigating to the route
+router.beforeEach(async (to, from, next) => {
+	// Check if the route requires authentication
+	if (to.meta.requiresAuth) {
+		try {
+			// Retrieve the token from local storage
+			const token = localStorage.getItem("token");
+
+			if (!token) {
+				// If there's no token and the route requires authentication, redirect to login
+				next("/login");
+				return;
+			}
+
+			// Send a GET request to the server to verify the token
+			const response = await axios.get("http://localhost:5000/auth/verify-token", {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+
+			if (response.status === 200) {
+				// Token is valid, proceed to the route
+				next();
+			} else {
+				// Token verification failed, redirect to login
+				next("/login");
+			}
+		} catch (error) {
+			console.error("Error checking authentication:", error);
+			next("/login"); // Redirect to login page if an error occurs during authentication check
+		}
+	} else if (to.path === "/login") {
+		// If the route is '/login' and the user is already authenticated, redirect to dashboard
+		const authenticated = await isAuthenticated();
+		if (authenticated) {
+			next("/dashboard");
+		} else {
+			next();
+		}
+	} else {
+		// Route does not require authentication, proceed to the route
+		next();
+	}
 });
 
 export default router;

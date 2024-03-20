@@ -265,16 +265,12 @@ export default {
 
 		const login = async () => {
 			try {
-				const response = await axios.post(
-					"http://localhost:5000/auth/login",
-					{
-						email: newLogin.value.email,
-						password: newLogin.value.password,
-					},
-					{
-						withCredentials: true, // Include cookies in the request
-					}
-				);
+				const response = await axios.post("http://localhost:5000/auth/login", {
+					email: newLogin.value.email,
+					password: newLogin.value.password,
+				});
+				const token = response.data.token;
+				localStorage.setItem("token", token);
 
 				console.log("Login successful", response.data);
 

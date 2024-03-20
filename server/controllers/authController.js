@@ -18,14 +18,7 @@ router.post("/login", async (req, res) => {
 		// Generate JWT token
 		const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
 
-		// Set HTTPOnly cookie
-		res.cookie("token", token, {
-			httpOnly: true,
-			sameSite: "Lax",
-			// If the application requires the cookie to be sent in cross-site requests initiated by third-party websites, we should set the SameSite attribute to "None"; also include the Secure attribute to ensure that the cookie is only sent over HTTPS connections.
-			// sameSite: 'None', secure: true
-		});
-
+		// Return token in JSON response
 		return res.status(200).json({ token });
 	} catch (error) {
 		console.error("Login failed", error);
@@ -74,14 +67,19 @@ router.post("/signup", async (req, res) => {
 
 // Middleware to verify JWT token
 export const authMiddleware = async (req, res, next) => {
-	const token = req.cookies.token;
+	const token = req.headers.authorization;
 
 	if (!token) {
 		return res.status(401).json({ message: "Missing authentication token" });
 	}
 
 	try {
-		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		// Extract the token from the "Bearer" scheme
+		const tokenParts = token.split(" ");
+		if (tokenParts.length !== 2 || tokenParts[0] !== "Bearer") {
+			throw new Error("Invalid token format");
+		}
+		const decoded = jwt.verify(tokenParts[1], process.env.JWT_SECRET);
 		req.userId = decoded.userId; // Attach user information for further use
 		next();
 	} catch (error) {

@@ -29,9 +29,6 @@ export default {
 					// Clear local storage or other mechanisms if needed
 					localStorage.removeItem("token"); // Replace with your token key
 
-					// Clear cookies on the client-side
-					document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
 					router.push("/login").catch((error) => {
 						console.error("Navigation error:", error);
 						// Handle specific errors like 401 Unauthorized if needed
