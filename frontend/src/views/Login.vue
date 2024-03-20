@@ -111,7 +111,7 @@
 					</div>
 
 					<div v-if="activeTab === 'signup'">
-						<form @submit.prevent="signUp">
+						<form @submit.prevent="signup">
 							<div class="mb-4">
 								<label for="name" class="block text-gray-700 font-semibold mb-2">Name</label>
 								<div class="relative">
