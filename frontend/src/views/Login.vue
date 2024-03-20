@@ -113,7 +113,7 @@
 					<div v-if="activeTab === 'signup'">
 						<form @submit.prevent="signup">
 							<div class="mb-4">
-								<label for="name" class="block text-gray-700 font-semibold mb-2">Name</label>
+								<label for="fullName" class="block text-gray-700 font-semibold mb-2">Full Name</label>
 								<div class="relative">
 									<svg
 										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
@@ -127,9 +127,10 @@
 									</svg>
 									<input
 										type="text"
-										id="name"
-										name="name"
-										autocomplete="name"
+										v-model="newSignupData.fullName"
+										id="fullName"
+										name="fullName"
+										autocomplete="fullName"
 										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 										placeholder="Enter your full name"
 										required />
@@ -163,6 +164,7 @@
 									</svg>
 									<input
 										type="email"
+										v-model="newSignupData.email"
 										id="email"
 										name="email"
 										autocomplete="email"
@@ -193,6 +195,7 @@
 									</svg>
 									<input
 										type="password"
+										v-model="newSignupData.password"
 										id="password"
 										name="password"
 										autocomplete="current-password"
@@ -263,6 +266,22 @@ export default {
 			password: "",
 		});
 
+		const newSignupData = ref([]);
+
+		const signup = async () => {
+			try {
+				const response = await axios.post("http://localhost:5000/auth/signup", {
+					fullName: newSignupData.value.fullName,
+					email: newSignupData.value.email,
+					password: newSignupData.value.password,
+				});
+				console.log("Registration successful", response.data);
+				// Redirect to login or other route upon successful registration
+			} catch (error) {
+				console.error("Registration failed", error.response.data.message);
+			}
+		};
+
 		const login = async () => {
 			try {
 				const response = await axios.post("http://localhost:5000/auth/login", {
@@ -292,22 +311,10 @@ export default {
 			}
 		};
 
-		const signup = async () => {
-			try {
-				const response = await axios.post("http://localhost:5000/auth/signup", {
-					email: newLogin.email,
-					password: newLogin.password,
-				});
-				console.log("Registration successful", response.data);
-				// Redirect to login or other route upon successful registration
-			} catch (error) {
-				console.error("Registration failed", error.response.data.message);
-			}
-		};
-
 		return {
 			activeTab,
 			newLogin,
+			newSignupData,
 			login,
 			signup,
 		};
