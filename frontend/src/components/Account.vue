@@ -29,7 +29,7 @@
 
 <script>
 import { ref } from "vue";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Alert from "@/components/Alert.vue";
 
@@ -78,18 +78,18 @@ export default {
 			try {
 				// Decode JWT token to extract user's ID
 				const token = localStorage.getItem("token");
-				const decodedToken = jwt_decode(token);
+				const decodedToken = jwtDecode(token);
 				const userId = decodedToken.userId;
 
 				// Send request to backend API to fetch user information
-				/* 				const response = await axios.get(`/api/users/${userId}`, {
+				const response = await axios.get(`http://localhost:5000/api/users/${userId}`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
-				}); */
+				});
 
 				// Return user information
-				return userId;
+				return response.data;
 			} catch (error) {
 				console.error("Error fetching user information:", error);
 				throw error; // Handle error appropriately in the calling code
