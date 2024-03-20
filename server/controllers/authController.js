@@ -45,10 +45,10 @@ router.post("/logout", async (req, res) => {
 // Register a new user
 router.post("/signup", async (req, res) => {
 	try {
-		// Check if username already exists
-		const existingUser = await User.findOne({ username: req.body.username });
+		// Check if user already exists
+		const existingUser = await User.findOne({ email: req.body.email });
 		if (existingUser) {
-			return res.status(400).json({ message: "Username already exists" });
+			return res.status(400).json({ message: "User already exists" });
 		}
 
 		// Hash the password
@@ -56,7 +56,7 @@ router.post("/signup", async (req, res) => {
 
 		// Create a new user
 		const newUser = new User({
-			username: req.body.username,
+			email: req.body.email,
 			password: hashedPassword,
 		});
 		await newUser.save();

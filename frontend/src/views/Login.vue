@@ -295,7 +295,7 @@ export default {
 		const signup = async () => {
 			try {
 				const response = await axios.post("http://localhost:5000/auth/signup", {
-					username: newLogin.username,
+					email: newLogin.email,
 					password: newLogin.password,
 				});
 				console.log("Registration successful", response.data);
