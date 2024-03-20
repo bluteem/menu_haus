@@ -13,6 +13,7 @@
 		"autoprefixer": "^10.4.17",
 		"axios": "^1.6.7",
 		"dropzone": "^6.0.0-beta.2",
+		"jwt-decode": "^4.0.0",
 		"postcss": "^8.4.33",
 		"qrcode-vue3": "^1.6.8",
 		"qrcode.vue": "^3.4.1",

@@ -29,6 +29,7 @@
 
 <script>
 import { ref, computed, onMounted } from "vue";
+import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Alert from "@/components/Alert.vue";
 
@@ -45,17 +46,17 @@ export default {
 		});
 
 		// Fetch menu items when the component is mounted
-		onMounted(async () => {
+		/* 		onMounted(async () => {
 			try {
 				const response = await axios.get(`http://localhost:5000/api/users/${currentUser.value._id}`);
 				allUserData.value = response.data.userData;
 			} catch (error) {
 				console.error("Error fetching user data:", error);
 			}
-		});
+		}); */
 
 		// Update a menu item
-		const updateUser = async (alertRef) => {
+		/* 		const updateUser = async (alertRef) => {
 			try {
 				const response = await axios.put(`http://localhost:5000/api/users/${currentUser.value._id}`, currentUser.value);
 				const updatedUser = response.data.menuItem;
@@ -70,11 +71,45 @@ export default {
 				// Show error alert if failed to update menu item
 				alertRef.showAlert("Failed to update user info. Please try again later.");
 			}
+		}; */
+
+		// Function to fetch user information based on the authenticated user's ID
+		const fetchUserInfo = async () => {
+			try {
+				// Decode JWT token to extract user's ID
+				const token = localStorage.getItem("token");
+				const decodedToken = jwt_decode(token);
+				const userId = decodedToken.userId;
+
+				// Send request to backend API to fetch user information
+				/* 				const response = await axios.get(`/api/users/${userId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}); */
+
+				// Return user information
+				return userId;
+			} catch (error) {
+				console.error("Error fetching user information:", error);
+				throw error; // Handle error appropriately in the calling code
+			}
 		};
+
+		// Example usage
+		fetchUserInfo()
+			.then((userInfo) => {
+				console.log("User information:", userInfo);
+				// Do something with user information
+			})
+			.catch((error) => {
+				// Handle error
+			});
 
 		return {
 			allUserData,
-			updateUser,
+			// updateUser,
+			fetchUserInfo,
 		};
 	},
 };
