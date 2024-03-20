@@ -47,7 +47,7 @@ export default {
 		// Fetch menu items when the component is mounted
 		onMounted(async () => {
 			try {
-				const response = await axios.get(`http://localhost:5000/api/users/menuitems/${currentUser.value._id}`);
+				const response = await axios.get(`http://localhost:5000/api/users/${currentUser.value._id}`);
 				allUserData.value = response.data.userData;
 			} catch (error) {
 				console.error("Error fetching user data:", error);
