@@ -31,6 +31,7 @@
 import { ref } from "vue";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import Alert from "@/components/Alert.vue";
 
 export default {
 	components: {
