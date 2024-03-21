@@ -3,7 +3,7 @@
 	<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden py-10 px-10">
 		<h1 class="text-3xl font-bold mb-4">Account</h1>
 
-		<div class="border-b border-gray-300 mt-6"></div>
+		<div class="border-b border-gray-300 my-6"></div>
 
 		<form>
 			<div class="mb-4">
@@ -121,7 +121,6 @@ export default {
 		return {
 			allUserData,
 			// updateUser,
-			fetchUserInfo,
 		};
 	},
 };
