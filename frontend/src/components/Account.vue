@@ -6,7 +6,7 @@
 		<div class="border-b border-gray-300 mb-6"></div>
 
 		<form>
-			<div class="grid grid-cols-2 gap-6">
+			<div class="grid grid-cols-2 gap-10">
 				<div>
 					<div class="mb-6">
 						<label for="email" class="block mb-1">Email:</label>
@@ -198,17 +198,11 @@
 				</div>
 				<div class="mb-6">
 					<label for="profilePicture" class="block mb-1">Profile Picture:</label>
-					<input
-						type="text"
-						id="profilePicture"
-						v-model="allUserData.profilePicture"
-						readonly
-						class="w-full px-3 py-2 border border-gray-400 rounded-md mb-6" />
-					<div class="w-full border border-gray-400 rounded-md bg-white p-6">
-						<div class="flex items-center mb-6">
+					<div class="w-full border border-gray-400 rounded-md bg-white p-8">
+						<div class="flex items-center mb-8">
 							<div
-								class="rounded-full w-28 h-28 mr-6 bg-cover bg-[url('../../public/images/no-profile.jpg')] border border-gray-400">
-								<img src="../../public/images/profile-photo.jpg" class="rounded-full" alt="" />
+								class="rounded-full w-28 h-28 mr-8 bg-cover bg-[url('../../public/images/no-profile.jpg')] border border-gray-400">
+								<img :src="'../../public/uploads/' + allUserData.profilePicture" class="rounded-full" alt="" />
 							</div>
 
 							<a
@@ -218,7 +212,7 @@
 							>
 						</div>
 						<div
-							class="w-full border-2 border-dashed border-sky-400 bg-sky-100 bg-opacity-50 rounded-xl p-6 mb-6 text-center">
+							class="w-full border-2 border-dashed border-sky-400 bg-sky-100 bg-opacity-50 rounded-xl p-6 mb-8 text-center">
 							<svg
 								class="h-9 w-9 mx-auto mb-6"
 								width="800px"
@@ -239,7 +233,7 @@
 							<a
 								href="#"
 								class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2"
-								>Upload</a
+								>Save</a
 							>
 						</div>
 					</div>
