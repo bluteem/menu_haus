@@ -6,7 +6,7 @@
 		<div class="border-b border-gray-300 mb-6"></div>
 
 		<form>
-			<div class="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-10">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-10">
 				<div>
 					<div class="mb-6">
 						<label for="email" class="block mb-1">Email:</label>
