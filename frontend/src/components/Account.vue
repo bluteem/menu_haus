@@ -6,7 +6,7 @@
 		<div class="border-b border-gray-300 mb-6"></div>
 
 		<form>
-			<div class="grid grid-cols-2 gap-10">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-10">
 				<div>
 					<div class="mb-6">
 						<label for="email" class="block mb-1">Email:</label>
@@ -196,13 +196,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="mb-6">
+				<div>
 					<label for="profilePicture" class="block mb-1">Profile Picture:</label>
 					<div class="w-full border border-gray-400 rounded-md bg-white p-8">
 						<div class="flex items-center mb-8">
 							<div
-								class="rounded-full w-28 h-28 mr-8 bg-cover bg-[url('../../public/images/no-profile.jpg')] border border-gray-400">
-								<img :src="'../../public/uploads/' + allUserData.profilePicture" class="rounded-full" alt="" />
+								class="rounded-full max-w-24 h-auto mr-8 bg-cover bg-[url('../../public/images/no-profile.jpg')] border border-gray-400">
+								<img
+									:src="'../../public/uploads/' + allUserData.profilePicture"
+									class="rounded-full max-w-24 h-auto"
+									alt="" />
 							</div>
 
 							<a
