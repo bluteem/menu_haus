@@ -5,30 +5,65 @@
 
 		<div class="border-b border-gray-300 mt-6"></div>
 
-		<ul>
-			<li
-				v-for="userData in allUserData"
-				:key="userData._id"
-				class="flex items-center border-b border-gray-300 pt-2 pb-4">
-				<div class="flex">
-					<div class="w-3/6 px-4"></div>
-					<div class="w-1/6">
-						<button
-							type="button"
-							class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
-							Edit
-						</button>
-					</div>
-				</div>
-			</li>
-		</ul>
+		<form>
+			<div class="mb-4">
+				<label for="email" class="block mb-1">Email:</label>
+				<input
+					type="text"
+					id="email"
+					v-model="allUserData.email"
+					readonly
+					class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+			</div>
+			<div class="mb-4">
+				<label for="password" class="block mb-1">Password:</label>
+				<input
+					type="password"
+					id="password"
+					v-model="allUserData.password"
+					readonly
+					class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+			</div>
+			<div class="mb-4">
+				<label for="fullName" class="block mb-1">Full Name:</label>
+				<input
+					type="text"
+					id="fullName"
+					v-model="allUserData.fullName"
+					readonly
+					class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+			</div>
+			<div class="mb-4">
+				<label for="profilePicture" class="block mb-1">Profile Picture:</label>
+				<input
+					type="text"
+					id="profilePicture"
+					v-model="allUserData.profilePicture"
+					readonly
+					class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+			</div>
+			<div class="mb-4">
+				<label for="profilePicture" class="block mb-1">Profile Picture:</label>
+				<input
+					type="text"
+					id="profilePicture"
+					v-model="allUserData.role"
+					readonly
+					class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+			</div>
+		</form>
+		<button
+			type="button"
+			class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
+			Edit
+		</button>
 	</main>
 
 	<Alert ref="Alert" />
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Alert from "@/components/Alert.vue";
@@ -42,18 +77,28 @@ export default {
 			email: "",
 			password: [],
 			fullName: "",
+			role: "",
 			profilePicture: "",
 		});
 
 		// Fetch menu items when the component is mounted
-		/* 		onMounted(async () => {
+		onMounted(async () => {
 			try {
-				const response = await axios.get(`http://localhost:5000/api/users/${currentUser.value._id}`);
+				// Decode JWT token to extract user's ID
+				const token = localStorage.getItem("token");
+				const decodedToken = jwtDecode(token);
+				const userId = decodedToken.userId;
+
+				const response = await axios.get(`http://localhost:5000/api/users/${userId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
 				allUserData.value = response.data.userData;
 			} catch (error) {
 				console.error("Error fetching user data:", error);
 			}
-		}); */
+		});
 
 		// Update a menu item
 		/* 		const updateUser = async (alertRef) => {
@@ -72,39 +117,6 @@ export default {
 				alertRef.showAlert("Failed to update user info. Please try again later.");
 			}
 		}; */
-
-		// Function to fetch user information based on the authenticated user's ID
-		const fetchUserInfo = async () => {
-			try {
-				// Decode JWT token to extract user's ID
-				const token = localStorage.getItem("token");
-				const decodedToken = jwtDecode(token);
-				const userId = decodedToken.userId;
-
-				// Send request to backend API to fetch user information
-				const response = await axios.get(`http://localhost:5000/api/users/${userId}`, {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
-
-				// Return user information
-				return response.data;
-			} catch (error) {
-				console.error("Error fetching user information:", error);
-				throw error; // Handle error appropriately in the calling code
-			}
-		};
-
-		// Example usage
-		fetchUserInfo()
-			.then((userInfo) => {
-				console.log("User information:", userInfo);
-				// Do something with user information
-			})
-			.catch((error) => {
-				// Handle error
-			});
 
 		return {
 			allUserData,
