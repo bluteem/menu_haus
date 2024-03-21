@@ -1,14 +1,14 @@
 <!-- MenuItems.vue -->
 <template>
 	<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden py-10 px-10">
-		<h1 class="text-3xl font-bold mb-4">Account</h1>
+		<h1 class="text-3xl font-bold mb-6">Account</h1>
 
 		<div class="border-b border-gray-300 mb-6"></div>
 
 		<form>
-			<div class="grid grid-cols-2 gap-4">
+			<div class="grid grid-cols-2 gap-6">
 				<div>
-					<div class="mb-4">
+					<div class="mb-6">
 						<label for="email" class="block mb-1">Email:</label>
 						<div class="relative">
 							<svg
@@ -39,13 +39,12 @@
 								v-model="allUserData.email"
 								id="email"
 								name="email"
-								autocomplete="email"
 								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 								placeholder="Enter your email"
 								required />
 						</div>
 					</div>
-					<div class="mb-4">
+					<div class="mb-6">
 						<label for="password" class="block mb-1">Password:</label>
 						<div class="relative">
 							<svg
@@ -69,13 +68,12 @@
 								type="password"
 								v-model="allUserData.password"
 								id="password"
-								autocomplete="current-password"
 								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 								placeholder="Enter your password"
 								required />
 						</div>
 					</div>
-					<div class="mb-4">
+					<div class="mb-6">
 						<label for="fullName" class="block mb-1">Full Name:</label>
 						<div class="relative">
 							<svg
@@ -98,7 +96,7 @@
 								required />
 						</div>
 					</div>
-					<div class="mb-4">
+					<div class="mb-6">
 						<label for="role" class="block mb-1">Role:</label>
 						<div class="relative">
 							<svg
@@ -148,7 +146,7 @@
 								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500" />
 						</div>
 					</div>
-					<div class="mb-4">
+					<div class="mb-6">
 						<label for="phone" class="block mb-1">Phone:</label>
 						<div class="relative">
 							<svg
@@ -198,21 +196,31 @@
 						</div>
 					</div>
 				</div>
-				<div class="mb-4">
+				<div class="mb-6">
 					<label for="profilePicture" class="block mb-1">Profile Picture:</label>
 					<input
 						type="text"
 						id="profilePicture"
 						v-model="allUserData.profilePicture"
 						readonly
-						class="w-full px-3 py-2 border border-gray-400 rounded-md" />
-					<div class="w-full border border-gray-400 rounded-md bg-white mt-4 p-6">
-						<div class="grid grid-col-2 gap-4">
-							<div><img src="../../public/images/" class="rounded-full w-5 h-5" alt="" /></div>
+						class="w-full px-3 py-2 border border-gray-400 rounded-md mb-6" />
+					<div class="w-full border border-gray-400 rounded-md bg-white p-6">
+						<div class="flex items-center mb-6">
+							<div
+								class="rounded-full w-28 h-28 mr-6 bg-cover bg-[url('../../public/images/no-profile.jpg')] border border-gray-400">
+								<img src="../../public/images/profile-photo.jpg" class="rounded-full" alt="" />
+							</div>
+
+							<a
+								href="#"
+								class="inline-block border border-gray-400 rounded-md hover:border-sky-400 hover:bg-sky-200 transition duration-300 px-4 py-2 mr-2"
+								>Delete</a
+							>
 						</div>
-						<div class="w-full border-2 border-dotted border-sky-400 rounded-xl p-6 text-center">
+						<div
+							class="w-full border-2 border-dashed border-sky-400 bg-sky-100 bg-opacity-50 rounded-xl p-6 mb-6 text-center">
 							<svg
-								class="h-7 w-7 mx-auto mb-4"
+								class="h-9 w-9 mx-auto mb-6"
 								width="800px"
 								height="800px"
 								viewBox="0 0 24 24"
@@ -226,6 +234,13 @@
 							</svg>
 							<p class="mb-1">Click to upload or drag and drop</p>
 							<p class="mb-1">SVG, PNG, JPG or GIF</p>
+						</div>
+						<div class="text-right">
+							<a
+								href="#"
+								class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2"
+								>Upload</a
+							>
 						</div>
 					</div>
 				</div>
