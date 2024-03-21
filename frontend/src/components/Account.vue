@@ -206,6 +206,8 @@
 						v-model="allUserData.profilePicture"
 						readonly
 						class="w-full px-3 py-2 border border-gray-400 rounded-md" />
+					<div
+						class="w-full border h-40 border-gray-400 rounded-md bg-white mt-4 pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"></div>
 				</div>
 			</div>
 		</form>
