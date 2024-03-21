@@ -1,6 +1,6 @@
 <template>
 	<div class="flex items-center justify-center h-screen bg-gray-200">
-		<div class="bg-white mx-8 rounded-lg shadow-lg w-full md:w-3/4 lg:w-1/2">
+		<div class="bg-white mx-8 rounded-lg shadow-lg w-full md:w-3/4 xl:w-1/2">
 			<div class="grid grid-cols-1 md:grid-cols-2">
 				<!-- Left Column - Image -->
 				<div class="hidden md:block">
