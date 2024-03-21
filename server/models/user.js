@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema(
 		profilePicture: {
 			type: String, // You may store the URL of the profile picture
 		},
+		phone: {
+			type: String,
+		},
 		accountStatus: {
 			type: String,
 			enum: ["active", "inactive", "suspended"],
