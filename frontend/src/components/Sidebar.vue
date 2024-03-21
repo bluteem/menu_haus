@@ -318,7 +318,8 @@
 				</li>
 				<li>
 					<a
-						href=""
+						href="#"
+						@click="logout"
 						class="relative flex items-center rounded-md py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
 						title="Logout">
 						<svg
@@ -341,7 +342,7 @@
 								</g>
 							</g>
 						</svg>
-						<span class="ml-3 hidden md:block"><logout /></span>
+						<span class="ml-3 hidden md:block">Logout</span>
 					</a>
 				</li>
 			</ul>
@@ -350,11 +351,29 @@
 </template>
 
 <script>
-import logout from "@/components/Logout.vue"; // Import the Logout component
+import { useRouter } from "vue-router";
 
 export default {
-	components: {
-		logout, // Register the Logout component
+	setup() {
+		const router = useRouter(); // Get the router instance
+
+		const logout = async () => {
+			try {
+				localStorage.removeItem("token"); // Replace with your token key
+
+				router.push("/login").catch((error) => {
+					console.error("Navigation error:", error);
+					// Handle specific errors like 401 Unauthorized if needed
+				});
+			} catch (error) {
+				console.error("Logout failed", error);
+				// Handle network errors or other exceptions
+			}
+		};
+
+		return {
+			logout,
+		};
 	},
 };
 </script>
