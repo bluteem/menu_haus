@@ -10,7 +10,7 @@
 				<div>
 					<div class="mb-6">
 						<label for="email" class="block mb-1">Email:</label>
-						<div class="flex items-center">
+						<div class="flex items-center mb-2">
 							<div class="relative w-full mr-6">
 								<svg
 									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
@@ -40,9 +40,11 @@
 									v-model="allUserData.email"
 									id="email"
 									name="email"
+									disabled
 									autocomplete="off"
-									class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+									class="w-full border border-gray-400 bg-gray-200 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 									placeholder="Enter your email"
+									aria-describedby="emailHelp"
 									required />
 							</div>
 							<button
@@ -50,10 +52,13 @@
 								Update
 							</button>
 						</div>
+						<div id="emailHelp" class="form-text text-gray-600 text-sm">
+							* A code will be sent to the current email to verify the new email.
+						</div>
 					</div>
 					<div class="mb-6">
 						<label for="password" class="block mb-1">Password:</label>
-						<div class="flex items-center">
+						<div class="flex items-center mb-2">
 							<div class="relative w-full mr-6">
 								<svg
 									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
@@ -76,9 +81,11 @@
 									type="password"
 									v-model="newPassword"
 									id="password"
+									disabled
 									autocomplete="off"
-									class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+									class="w-full border border-gray-400 bg-gray-200 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 									placeholder="Enter your password"
+									aria-describedby="passwordHelp"
 									required />
 							</div>
 							<button
@@ -86,29 +93,97 @@
 								Update
 							</button>
 						</div>
+						<div id="passwordHelp" class="form-text text-gray-600 text-sm">
+							* A code will be sent to the current email to verify the new password.
+						</div>
+					</div>
+					<div class="mb-6">
+						<label for="phone" class="block mb-1">Phone:</label>
+						<div class="flex items-center mb-2">
+							<div class="relative w-full mr-6">
+								<svg
+									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+									fill="#000000"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 512 512">
+									<g>
+										<g>
+											<path
+												d="M361.392,0H150.608c-27.686,0-50.216,22.564-50.216,50.294v411.412c0,27.731,22.529,50.294,50.216,50.294h210.784
+			c27.686,0,50.216-22.564,50.216-50.294V50.294C411.608,22.564,389.078,0,361.392,0z M391.529,461.706
+			c0,16.662-13.52,30.216-30.137,30.216H150.608c-16.618,0-30.137-13.554-30.137-30.216V50.294c0-16.662,13.52-30.216,30.137-30.216
+			h210.784c16.618,0,30.137,13.554,30.137,30.216V461.706z" />
+										</g>
+									</g>
+									<g>
+										<g>
+											<rect x="240.941" y="40.157" width="60.235" height="20.078" />
+										</g>
+									</g>
+									<g>
+										<g>
+											<rect x="190.745" y="40.157" width="30.118" height="20.078" />
+										</g>
+									</g>
+									<g>
+										<g>
+											<path
+												d="M256,411.608c-19.372,0-35.137,15.765-35.137,35.137c0,19.372,15.765,35.137,35.137,35.137
+			c19.373,0,35.137-15.765,35.137-35.137C291.137,427.372,275.373,411.608,256,411.608z M256,461.804
+			c-8.304,0-15.059-6.755-15.059-15.059c0-8.304,6.755-15.059,15.059-15.059s15.059,6.755,15.059,15.059
+			C271.059,455.049,264.304,461.804,256,461.804z" />
+										</g>
+									</g>
+								</svg>
+								<input
+									type="tel"
+									v-model="allUserData.phone"
+									@input="formatPhoneNumber"
+									id="phone"
+									disabled
+									autocomplete="off"
+									class="w-full border border-gray-400 bg-gray-200 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+									placeholder="Enter your phone number"
+									aria-describedby="phoneHelp"
+									required />
+							</div>
+							<button
+								class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
+								Update
+							</button>
+						</div>
+						<div id="phoneHelp" class="form-text text-gray-600 text-sm">
+							* A code will be sent to the current phone number to verify the new number.
+						</div>
 					</div>
 					<div class="border-b border-gray-300 mb-6"></div>
 					<div class="mb-6">
 						<label for="fullName" class="block mb-1">Full Name:</label>
-						<div class="relative">
-							<svg
-								class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-								fill="none"
-								stroke-width="4"
-								stroke="#4b5563"
-								viewBox="0 0 64 64"
-								xmlns="http://www.w3.org/2000/svg">
-								<circle cx="32" cy="18.14" r="11.14" />
-								<path d="M54.55,56.85A22.55,22.55,0,0,0,32,34.3h0A22.55,22.55,0,0,0,9.45,56.85Z" />
-							</svg>
-							<input
-								type="text"
-								v-model="allUserData.fullName"
-								id="fullName"
-								autocomplete="off"
-								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
-								placeholder="Enter your full name"
-								required />
+						<div class="flex items-center mb-2">
+							<div class="relative w-full mr-6">
+								<svg
+									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+									fill="none"
+									stroke-width="4"
+									stroke="#4b5563"
+									viewBox="0 0 64 64"
+									xmlns="http://www.w3.org/2000/svg">
+									<circle cx="32" cy="18.14" r="11.14" />
+									<path d="M54.55,56.85A22.55,22.55,0,0,0,32,34.3h0A22.55,22.55,0,0,0,9.45,56.85Z" />
+								</svg>
+								<input
+									type="text"
+									v-model="allUserData.fullName"
+									id="fullName"
+									autocomplete="off"
+									class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+									placeholder="Enter your full name"
+									required />
+							</div>
+							<button
+								class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
+								Update
+							</button>
 						</div>
 					</div>
 					<div class="mb-6">
@@ -158,56 +233,7 @@
 								id="role"
 								disabled
 								autocomplete="off"
-								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500" />
-						</div>
-					</div>
-					<div class="mb-6">
-						<label for="phone" class="block mb-1">Phone:</label>
-						<div class="relative">
-							<svg
-								class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-								fill="#000000"
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 512 512">
-								<g>
-									<g>
-										<path
-											d="M361.392,0H150.608c-27.686,0-50.216,22.564-50.216,50.294v411.412c0,27.731,22.529,50.294,50.216,50.294h210.784
-			c27.686,0,50.216-22.564,50.216-50.294V50.294C411.608,22.564,389.078,0,361.392,0z M391.529,461.706
-			c0,16.662-13.52,30.216-30.137,30.216H150.608c-16.618,0-30.137-13.554-30.137-30.216V50.294c0-16.662,13.52-30.216,30.137-30.216
-			h210.784c16.618,0,30.137,13.554,30.137,30.216V461.706z" />
-									</g>
-								</g>
-								<g>
-									<g>
-										<rect x="240.941" y="40.157" width="60.235" height="20.078" />
-									</g>
-								</g>
-								<g>
-									<g>
-										<rect x="190.745" y="40.157" width="30.118" height="20.078" />
-									</g>
-								</g>
-								<g>
-									<g>
-										<path
-											d="M256,411.608c-19.372,0-35.137,15.765-35.137,35.137c0,19.372,15.765,35.137,35.137,35.137
-			c19.373,0,35.137-15.765,35.137-35.137C291.137,427.372,275.373,411.608,256,411.608z M256,461.804
-			c-8.304,0-15.059-6.755-15.059-15.059c0-8.304,6.755-15.059,15.059-15.059s15.059,6.755,15.059,15.059
-			C271.059,455.049,264.304,461.804,256,461.804z" />
-									</g>
-								</g>
-							</svg>
-
-							<input
-								type="tel"
-								v-model="phoneNumber"
-								@input="formatPhoneNumber"
-								id="phone"
-								autocomplete="off"
-								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
-								placeholder="Enter your phone number"
-								required />
+								class="w-full border border-gray-400 bg-gray-200 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500" />
 						</div>
 					</div>
 				</div>
@@ -216,10 +242,10 @@
 					<div class="w-full border border-gray-400 rounded-md bg-white p-8">
 						<div class="flex items-center mb-8">
 							<div
-								class="rounded-full max-w-24 h-auto mr-8 bg-cover bg-[url('../../public/images/no-profile.jpg')] border border-gray-400">
+								class="rounded-full max-w-16 lg:max-w-24 h-auto mr-8 bg-cover bg-[url('../../public/images/no-profile.jpg')] border border-gray-400">
 								<img
 									:src="'../../public/uploads/' + allUserData.profilePicture"
-									class="rounded-full max-w-24 h-auto"
+									class="rounded-full max-w-16 lg:max-w-24 h-auto"
 									alt="" />
 							</div>
 
@@ -258,13 +284,6 @@
 				</div>
 			</div>
 		</form>
-		<div class="inline-block">
-			<button
-				type="button"
-				class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
-				Update
-			</button>
-		</div>
 	</main>
 
 	<Alert ref="Alert" />
