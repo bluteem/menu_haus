@@ -10,16 +10,17 @@
 				<div>
 					<div class="mb-6">
 						<label for="email" class="block mb-1">Email:</label>
-						<div class="relative">
-							<svg
-								class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-								fill="#4b5563"
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 512 512">
-								<g>
-									<path
-										class="st0"
-										d="M510.678,112.275c-2.308-11.626-7.463-22.265-14.662-31.054c-1.518-1.915-3.104-3.63-4.823-5.345
+						<div class="flex items-center">
+							<div class="relative w-full mr-6">
+								<svg
+									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+									fill="#4b5563"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 512 512">
+									<g>
+										<path
+											class="st0"
+											d="M510.678,112.275c-2.308-11.626-7.463-22.265-14.662-31.054c-1.518-1.915-3.104-3.63-4.823-5.345
                                                 c-12.755-12.818-30.657-20.814-50.214-20.814H71.021c-19.557,0-37.395,7.996-50.21,20.814c-1.715,1.715-3.301,3.43-4.823,5.345
                                                 C8.785,90.009,3.63,100.649,1.386,112.275C0.464,116.762,0,121.399,0,126.087V385.92c0,9.968,2.114,19.55,5.884,28.203
                                                 c3.497,8.26,8.653,15.734,14.926,22.001c1.59,1.586,3.169,3.044,4.892,4.494c12.286,10.175,28.145,16.32,45.319,16.32h369.958
@@ -32,47 +33,61 @@
                                                 l13.815,12.018c11.561,10.046,26.028,15.134,40.36,15.134c14.406,0,28.872-5.088,40.432-15.134l13.808-12.018l147.92,128.959
                                                 C453.137,418.946,447.26,420.597,440.979,420.597z M475.666,385.92c0,0.529,0,1.051-0.068,1.515L335.346,265.221L475.666,142.8
                                                 V385.92z" />
-								</g>
-							</svg>
-							<input
-								type="text"
-								v-model="allUserData.email"
-								id="email"
-								name="email"
-								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
-								placeholder="Enter your email"
-								required />
+									</g>
+								</svg>
+								<input
+									type="text"
+									v-model="allUserData.email"
+									id="email"
+									name="email"
+									autocomplete="off"
+									class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+									placeholder="Enter your email"
+									required />
+							</div>
+							<button
+								class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
+								Update
+							</button>
 						</div>
 					</div>
 					<div class="mb-6">
 						<label for="password" class="block mb-1">Password:</label>
-						<div class="relative">
-							<svg
-								class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-								fill="#4b5563"
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 203.096 203.096">
-								<g>
-									<path
-										d="M153.976,73.236h-3.308V49.115C150.669,22.033,128.634,0,101.549,0C74.465,0,52.43,22.033,52.43,49.115v24.121H49.12
+						<div class="flex items-center">
+							<div class="relative w-full mr-6">
+								<svg
+									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+									fill="#4b5563"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 203.096 203.096">
+									<g>
+										<path
+											d="M153.976,73.236h-3.308V49.115C150.669,22.033,128.634,0,101.549,0C74.465,0,52.43,22.033,52.43,49.115v24.121H49.12
                                                 c-9.649,0-17.5,7.851-17.5,17.5v94.859c0,9.649,7.851,17.5,17.5,17.5h104.856c9.649,0,17.5-7.851,17.5-17.5V90.736
                                                 C171.476,81.087,163.626,73.236,153.976,73.236z M67.43,49.115C67.43,30.304,82.736,15,101.549,15
                                                 c18.813,0,34.119,15.304,34.119,34.115v24.121H67.43V49.115z M156.476,185.596c0,1.355-1.145,2.5-2.5,2.5H49.12
                                                 c-1.355,0-2.5-1.145-2.5-2.5V90.736c0-1.355,1.145-2.5,2.5-2.5H59.93h83.238h10.808c1.355,0,2.5,1.145,2.5,2.5V185.596z" />
-									<path
-										d="M101.547,116.309c-4.142,0-7.5,3.357-7.5,7.5v28.715c0,4.143,3.358,7.5,7.5,7.5c4.142,0,7.5-3.357,7.5-7.5v-28.715
+										<path
+											d="M101.547,116.309c-4.142,0-7.5,3.357-7.5,7.5v28.715c0,4.143,3.358,7.5,7.5,7.5c4.142,0,7.5-3.357,7.5-7.5v-28.715
                                                 C109.047,119.666,105.689,116.309,101.547,116.309z" />
-								</g>
-							</svg>
-							<input
-								type="password"
-								v-model="allUserData.password"
-								id="password"
-								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
-								placeholder="Enter your password"
-								required />
+									</g>
+								</svg>
+								<input
+									type="password"
+									v-model="newPassword"
+									id="password"
+									autocomplete="off"
+									class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+									placeholder="Enter your password"
+									required />
+							</div>
+							<button
+								class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
+								Update
+							</button>
 						</div>
 					</div>
+					<div class="border-b border-gray-300 mb-6"></div>
 					<div class="mb-6">
 						<label for="fullName" class="block mb-1">Full Name:</label>
 						<div class="relative">
@@ -90,7 +105,7 @@
 								type="text"
 								v-model="allUserData.fullName"
 								id="fullName"
-								autocomplete="name"
+								autocomplete="off"
 								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 								placeholder="Enter your full name"
 								required />
@@ -142,7 +157,7 @@
 								v-model="allUserData.role"
 								id="role"
 								disabled
-								autocomplete="role"
+								autocomplete="off"
 								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500" />
 						</div>
 					</div>
@@ -189,7 +204,7 @@
 								v-model="phoneNumber"
 								@input="formatPhoneNumber"
 								id="phone"
-								autocomplete="phone"
+								autocomplete="off"
 								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
 								placeholder="Enter your phone number"
 								required />
