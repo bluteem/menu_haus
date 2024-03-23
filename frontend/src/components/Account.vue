@@ -406,12 +406,12 @@ export default {
 		// Update email
 		const updateEmail = async (alertRef) => {
 			try {
-				const response = await axios.put(`http://localhost:5000/api/users/${userId}`, currentUser.value);
+				const response = await axios.put(`http://localhost:5000/api/users/${userId}`, { email });
 				const updatedUser = response.data.menuItem;
 				const updatedItemIndex = menuItems.value.findIndex((item) => item._id === updatedMenuItem._id);
 				if (updatedItemIndex !== -1) {
 					menuItems.value.splice(updatedItemIndex, 1, updatedMenuItem);
-				} */
+				}
 				// Show success alert
 				alertRef.showAlert("User updated successfully!");
 			} catch (error) {
