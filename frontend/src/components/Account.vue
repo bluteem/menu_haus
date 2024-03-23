@@ -48,6 +48,7 @@
 									required />
 							</div>
 							<button
+								@click="showModal1 = true"
 								class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
 								Update
 							</button>
@@ -284,6 +285,49 @@
 				</div>
 			</div>
 		</form>
+
+		<!-- Modal for changing email -->
+		<div :style="{ display: showModal1 ? 'block' : 'none' }" class="fixed z-10 inset-0 overflow-y-auto">
+			<div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+				<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+				<div
+					class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+					<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+						<h3 class="text-lg leading-6 font-medium text-gray-900">Update Email</h3>
+						<div class="mt-5">
+							<form @submit.prevent="updateEmail($refs.Alert)">
+								<div class="mb-4">
+									<label for="newEmail" class="block font-medium text-gray-700">Email:</label>
+									<input
+										type="text"
+										v-model="newEmail.email"
+										id="newEmail"
+										required
+										class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+								</div>
+
+								<button
+									type="submit"
+									class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
+									Update
+								</button>
+							</form>
+						</div>
+					</div>
+					<div class="bg-gray-50 px-5 py-5 sm:px-6 sm:flex sm:flex-row-reverse">
+						<button
+							@click="
+								showModal1 = false;
+								resetForm();
+							"
+							type="button"
+							class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</main>
 
 	<Alert ref="Alert" />
@@ -301,6 +345,10 @@ export default {
 		Alert,
 	},
 	setup() {
+		const showModal1 = ref(false);
+		const newEmail = ref({
+			email: "",
+		});
 		const allUserData = ref({
 			email: "",
 			password: [],
@@ -336,15 +384,15 @@ export default {
 			}
 		};
 
-		// Update a menu item
-		/* 		const updateUser = async (alertRef) => {
+		// Update email
+		const updateEmail = async (alertRef) => {
 			try {
-				const response = await axios.put(`http://localhost:5000/api/users/${currentUser.value._id}`, currentUser.value);
+				/* const response = await axios.put(`http://localhost:5000/api/users/${currentUser.value._id}`, currentUser.value);
 				const updatedUser = response.data.menuItem;
 				const updatedItemIndex = menuItems.value.findIndex((item) => item._id === updatedMenuItem._id);
 				if (updatedItemIndex !== -1) {
 					menuItems.value.splice(updatedItemIndex, 1, updatedMenuItem);
-				}
+				} */
 				// Show success alert
 				alertRef.showAlert("User updated successfully!");
 			} catch (error) {
@@ -352,13 +400,16 @@ export default {
 				// Show error alert if failed to update menu item
 				alertRef.showAlert("Failed to update user info. Please try again later.");
 			}
-		}; */
+		};
 
 		return {
+			showModal1,
 			allUserData,
 			// updateUser,
 			phoneNumber,
 			formatPhoneNumber,
+			newEmail,
+			updateEmail,
 		};
 	},
 };
