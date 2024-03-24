@@ -403,8 +403,8 @@ export default {
 			try {
 				const emailData = {
 					to: newEmail.value,
-					subject: "Default Subject",
-					text: "Default Text",
+					subject: "Email Update",
+					text: "You have updated your email.",
 				};
 				const response = await axios.put(`http://localhost:5000/api/users/${userId}/update-email`, newEmail.value);
 				// Update the email in allUserData object
