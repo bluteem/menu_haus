@@ -319,7 +319,7 @@
 									</svg>
 									<input
 										type="text"
-										v-model="newEmail.email"
+										v-model="newEmail"
 										id="newEmail"
 										required
 										placeholder="Enter the new email"
@@ -370,9 +370,7 @@ export default {
 		const userId = decodedToken.userId;
 
 		const showModal1 = ref(false);
-		const newEmail = ref({
-			email: "",
-		});
+		const newEmail = ref("");
 		const allUserData = ref({
 			email: "",
 			password: [],
@@ -383,10 +381,7 @@ export default {
 
 		// Reset form fields
 		const resetForm = () => {
-			newEmail.value = {
-				_id: null,
-				email: "",
-			};
+			newEmail.value = "";
 		};
 
 		// Fetch menu items when the component is mounted
@@ -406,11 +401,16 @@ export default {
 		// Update email
 		const updateEmail = async (alertRef) => {
 			try {
+				const emailData = {
+					to: newEmail.value,
+					subject: "Default Subject",
+					text: "Default Text",
+				};
 				const response = await axios.put(`http://localhost:5000/api/users/${userId}/update-email`, newEmail.value);
 				// Update the email in allUserData object
-				allUserData.value.email = newEmail.value.email;
+				allUserData.value.email = newEmail.value;
 
-				const mailer = await axios.post("http://localhost:5000/api/send-email", newEmail.value);
+				const mailer = await axios.post("http://localhost:5000/api/email/send-email", emailData);
 				console.log(mailer.data);
 
 				showModal1.value = false;
