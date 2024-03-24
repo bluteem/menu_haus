@@ -26,7 +26,7 @@ router.post("/send-email", async (req, res) => {
 
 		// Send email
 		const info = await transporter.sendMail({
-			from: "your_sender_address@example.com",
+			from: process.env.EMAIL_USER,
 			to,
 			subject,
 			text,
