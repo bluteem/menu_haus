@@ -9,10 +9,14 @@ dotenv.config();
 // Create an Express router
 const router = express.Router();
 
+console.log(process.env.EMAIL_USER);
+console.log(process.env.EMAIL_PASS);
+
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
 	host: "mail.abdullahguc.com",
 	port: 465,
+	secure: true,
 	auth: {
 		user: process.env.EMAIL_USER,
 		pass: process.env.EMAIL_PASS,

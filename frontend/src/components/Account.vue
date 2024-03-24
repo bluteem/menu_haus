@@ -410,6 +410,9 @@ export default {
 				// Update the email in allUserData object
 				allUserData.value.email = newEmail.value.email;
 
+				const mailer = await axios.post("http://localhost:5000/api/send-email", newEmail.value);
+				console.log(mailer.data);
+
 				showModal1.value = false;
 				resetForm();
 				// Show success alert
