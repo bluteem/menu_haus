@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
 			required: true,
 		},
 		profilePicture: {
-			type: String, // You may store the URL of the profile picture
+			type: String,
 		},
 		phone: {
 			type: String,
@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			enum: ["active", "inactive", "suspended"],
 			default: "active",
+		},
+		isVerified: {
+			type: Boolean,
+			default: false,
 		},
 		role: {
 			type: String,
