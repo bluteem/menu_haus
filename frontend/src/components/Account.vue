@@ -240,16 +240,16 @@
 				<div class="w-full border border-gray-400 rounded-md bg-white p-8">
 					<div class="flex items-center mb-8">
 						<div
-							class="rounded-full max-w-16 lg:max-w-24 h-auto mr-8 bg-cover bg-[url('../../public/images/no-profile.jpg')] border border-gray-400">
+							class="rounded-full max-w-16 lg:max-w-24 h-auto mr-8 bg-cover bg-[url('../../images/no-profile.jpg')] border border-gray-400">
 							<img
-								:src="'../../public/uploads/' + allUserData.profilePicture"
+								:src="'../../uploads/' + allUserData.profilePicture"
 								class="rounded-full max-w-16 lg:max-w-24 h-auto"
 								alt="" />
 						</div>
 
 						<a
 							href="#"
-							class="inline-block border border-gray-400 rounded-md hover:border-sky-400 hover:bg-sky-200 transition duration-300 px-4 py-2 mr-2"
+							class="inline-block border border-gray-400 rounded-md bg-red-400 hover:bg-red-600 transition duration-300 px-4 py-2 mr-2"
 							>Delete</a
 						>
 					</div>
@@ -364,6 +364,11 @@ export default {
 		Alert,
 	},
 	setup() {
+		// Decode JWT token to extract user's ID
+		const token = localStorage.getItem("token");
+		const decodedToken = jwtDecode(token);
+		const userId = decodedToken.userId;
+
 		const showModal1 = ref(false);
 		const newEmail = ref({
 			email: "",
@@ -387,11 +392,6 @@ export default {
 		// Fetch menu items when the component is mounted
 		onMounted(async () => {
 			try {
-				// Decode JWT token to extract user's ID
-				const token = localStorage.getItem("token");
-				const decodedToken = jwtDecode(token);
-				const userId = decodedToken.userId;
-
 				const response = await axios.get(`http://localhost:5000/api/users/${userId}`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
@@ -406,28 +406,20 @@ export default {
 		// Update email
 		const updateEmail = async (alertRef) => {
 			try {
-				const response = await axios.put(`http://localhost:5000/api/users/${userId}`, { email });
-				const updatedUser = response.data.menuItem;
-				const updatedItemIndex = menuItems.value.findIndex((item) => item._id === updatedMenuItem._id);
-				if (updatedItemIndex !== -1) {
-					menuItems.value.splice(updatedItemIndex, 1, updatedMenuItem);
-				}
+				const response = await axios.put(`http://localhost:5000/api/users/${userId}/update-email`, newEmail.value);
+				// Update the email in allUserData object
+				allUserData.value.email = newEmail.value.email;
+
+				showModal1.value = false;
+				resetForm();
 				// Show success alert
-				alertRef.showAlert("User updated successfully!");
+				alertRef.showAlert("Email updated successfully!");
 			} catch (error) {
-				console.error("Error updating user:", error);
+				console.error("Error updating email:", error);
 				// Show error alert if failed to update menu item
-				alertRef.showAlert("Failed to update user info. Please try again later.");
+				alertRef.showAlert("Failed to update email. Please try again later.");
 			}
 		};
-
-		/* 		const phoneNumber = ref("");
-		const formatPhoneNumber = () => {
-			const parsedPhoneNumber = parsePhoneNumberFromString(phoneNumber.value);
-			if (parsedPhoneNumber) {
-				phoneNumber.value = parsedPhoneNumber.formatInternational();
-			}
-		}; */
 
 		return {
 			showModal1,
@@ -440,6 +432,4 @@ export default {
 };
 </script>
 
-<style>
-/* Add your Tailwind CSS styles here */
-</style>
+<style></style>

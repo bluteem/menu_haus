@@ -74,6 +74,26 @@ router.put("/:id", async (req, res) => {
 	}
 });
 
+router.put("/:id/update-email", async (req, res) => {
+	try {
+		const { email } = req.body;
+		const updatedUserData = await User.findByIdAndUpdate(
+			req.params.id,
+			{
+				email,
+			},
+			{ new: true }
+		); // { new: true } returns the updated document
+		if (!updatedUserData) {
+			return res.status(404).json({ error: "User not found" });
+		}
+		res.json({ message: "Email updated successfully", userData: updatedUserData });
+	} catch (error) {
+		console.error("Error updating user email:", error);
+		res.status(500).json({ error: "Server error" });
+	}
+});
+
 // Route: DELETE /api/menucategories/:id
 // Description: Delete a menu item by ID
 router.delete("/:id", async (req, res) => {
