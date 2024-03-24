@@ -1,17 +1,21 @@
 // Import required modules
 import express from "express";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Create an Express router
 const router = express.Router();
 
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
-	host: "smtp.ethereal.email",
-	port: 587,
+	host: "mail.abdullahguc.com",
+	port: 465,
 	auth: {
-		user: "your_ethereal_username",
-		pass: "your_ethereal_password",
+		user: process.env.EMAIL_USER,
+		pass: process.env.EMAIL_PASS,
 	},
 });
 
