@@ -5,9 +5,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors"; // Cross-Origin Resource Sharing middleware for Express.js
 import multer from "multer"; // Middleware for handling file uploads
 import dotenv from "dotenv"; // Load environment variables from a .env file
-import nodemailer from "nodemailer"; // Load Nodemailer
 
 import authController, { authMiddleware } from "./controllers/authController.js";
+import emailController from "./controllers/emailController.js";
 import tableController from "./controllers/tableController.js";
 import menuCategoryController from "./controllers/menuCategoryController.js";
 import menuItemController from "./controllers/menuItemController.js";
@@ -74,12 +74,14 @@ app.post("/api/upload", upload.array("files"), (req, res) => {
 
 // Use the auth controller
 app.use("/auth", authController);
-
 // Protected route
 app.get("/auth/verify-token", authMiddleware, (req, res) => {
 	// Access user information from req.user
 	res.status(200).json({ message: "Token is valid" });
 });
+
+// Use the email route
+app.use("/api/email", emailController);
 
 // Use other controllers
 app.use("/api/tables", tableController);
