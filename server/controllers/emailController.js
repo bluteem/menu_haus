@@ -36,13 +36,26 @@ function generateVerificationCode(length) {
 }
 
 // Define a POST endpoint for sending emails
-router.post("/verification", async (req, res) => {
+router.post("/verification/:id/", async (req, res) => {
 	try {
 		const { to, newEmail } = req.body;
 
 		// Generate a verification code
 		const verificationCode = generateVerificationCode();
 		// Save the verification code in the user document in DB
+
+		const updatedUserData = await User.findByIdAndUpdate(
+			req.params.id,
+			{
+				id,
+			},
+			{ new: true }
+		); // { new: true } returns the updated document
+		if (!updatedUserData) {
+			return res.status(404).json({ error: "User not found" });
+		}
+		res.json({ message: "Email updated successfully", userData: updatedUserData });
+
 		User.verificationCode = verificationCode;
 		await User.save();
 
