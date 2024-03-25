@@ -439,9 +439,9 @@ export default {
 			try {
 				const emailData = {
 					to: allUserData.value.email,
-					new: newEmail.value,
+					newEmail: newEmail.value,
 				};
-				const mailer = await axios.post("http://localhost:5000/api/email/verification/${userId}", emailData);
+				const mailer = await axios.post(`http://localhost:5000/api/email/verification/${userId}`, emailData);
 				console.log(mailer.data);
 
 				const response = await axios.put(`http://localhost:5000/api/users/${userId}/update-email`, emailData.value);

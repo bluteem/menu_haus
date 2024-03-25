@@ -36,7 +36,7 @@ function generateVerificationCode(length) {
 }
 
 // Define a POST endpoint for sending emails
-router.post("/verification/:id/", async (req, res) => {
+router.post("/verification/:id", async (req, res) => {
 	try {
 		const { to, newEmail } = req.body;
 
@@ -49,16 +49,16 @@ router.post("/verification/:id/", async (req, res) => {
 			{
 				verificationCodeHolder: verificationCode,
 				isVerified: false,
+				unverifiedEmail: newEmail,
 			},
 			{ new: true }
 		); // { new: true } returns the updated document
 		if (!updatedUserData) {
 			return res.status(404).json({ error: "User not found" });
 		}
-		res.json({ message: "Verification updated to false successfully", userData: updatedUserData });
 
 		// Send verification email
-		const info = await transporter.sendMail({
+		await transporter.sendMail({
 			from: process.env.EMAIL_USER,
 			to,
 			subject: "Email Verification",
@@ -66,8 +66,8 @@ router.post("/verification/:id/", async (req, res) => {
 		});
 
 		// Log email information
-		console.log("Verification email sent successfully");
-		console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+		// console.log("Verification email sent successfully");
+		// console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
 		// Send response
 		res.status(200).json({ message: "Verification email sent successfully" });
