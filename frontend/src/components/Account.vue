@@ -36,7 +36,7 @@
 							</svg>
 							<input
 								type="text"
-								v-model="allUserData.email"
+								v-model="emailModel"
 								id="email"
 								name="email"
 								disabled
@@ -390,7 +390,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Alert from "@/components/Alert.vue";
@@ -413,6 +413,14 @@ export default {
 			fullName: "",
 			role: "",
 			profilePicture: "",
+			unverifiedEmail: "",
+			isVerified: false,
+		});
+
+		const emailModel = computed(() => {
+			return allUserData.value.isVerified
+				? allUserData.value.email
+				: allUserData.value.unverifiedEmail + " (not verified)";
 		});
 
 		// Reset form fields
@@ -446,7 +454,7 @@ export default {
 
 				const response = await axios.put(`http://localhost:5000/api/users/${userId}/update-email`, emailData.value);
 				// Update the email in allUserData object
-				allUserData.value.email = newEmail.value;
+				// allUserData.value.email = newEmail.value;
 
 				showModal1.value = false;
 				resetForm();
@@ -465,6 +473,7 @@ export default {
 			newEmail,
 			updateEmail,
 			resetForm,
+			emailModel,
 		};
 	},
 };
