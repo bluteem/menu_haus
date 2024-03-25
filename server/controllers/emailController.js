@@ -47,17 +47,15 @@ router.post("/verification/:id/", async (req, res) => {
 		const updatedUserData = await User.findByIdAndUpdate(
 			req.params.id,
 			{
-				id,
+				verificationCodeHolder: verificationCode,
+				isVerified: false,
 			},
 			{ new: true }
 		); // { new: true } returns the updated document
 		if (!updatedUserData) {
 			return res.status(404).json({ error: "User not found" });
 		}
-		res.json({ message: "Email updated successfully", userData: updatedUserData });
-
-		User.verificationCode = verificationCode;
-		await User.save();
+		res.json({ message: "Verification updated to false successfully", userData: updatedUserData });
 
 		// Send verification email
 		const info = await transporter.sendMail({

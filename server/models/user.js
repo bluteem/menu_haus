@@ -27,6 +27,9 @@ const UserSchema = new mongoose.Schema(
 			enum: ["active", "inactive", "suspended"],
 			default: "active",
 		},
+		verificationCodeHolder: {
+			type: String,
+		},
 		isVerified: {
 			type: Boolean,
 			default: false,
