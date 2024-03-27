@@ -36,7 +36,7 @@
 							</svg>
 							<input
 								type="text"
-								v-model="emailModel"
+								v-model="allUserData.email"
 								id="email"
 								name="email"
 								disabled
@@ -53,7 +53,11 @@
 						</button>
 					</div>
 					<div id="emailHelp" class="form-text text-gray-600 text-sm">
-						* A code will be sent to the current email to verify the new email.
+						<p>* A code will be sent to the current email ({{ allUserData.email }}) to verify the new email.</p>
+						<p class="font-bold mt-2" v-if="!allUserData.isVerified">
+							(There is an email change to -{{ allUserData.unverifiedEmail }}- waiting for verification. Please confirm
+							this change from your email)
+						</p>
 					</div>
 				</div>
 				<div class="mb-6">
@@ -93,7 +97,7 @@
 						</button>
 					</div>
 					<div id="passwordHelp" class="form-text text-gray-600 text-sm">
-						* A code will be sent to the current email to verify the new password.
+						* A code will be sent to the current email ({{ allUserData.email }}) to verify the new password.
 					</div>
 				</div>
 				<div class="mb-6">
@@ -151,7 +155,7 @@
 						</button>
 					</div>
 					<div id="phoneHelp" class="form-text text-gray-600 text-sm">
-						* A code will be sent to the current phone number to verify the new number.
+						* A code will be sent to the current phone number ({{ allUserData.phone }}) to verify the new number.
 					</div>
 				</div>
 				<div class="border-b border-gray-300 mb-6"></div>
@@ -417,12 +421,6 @@ export default {
 			isVerified: false,
 		});
 
-		const emailModel = computed(() => {
-			return allUserData.value.isVerified
-				? allUserData.value.email
-				: allUserData.value.unverifiedEmail + " (not verified)";
-		});
-
 		// Reset form fields
 		const resetForm = () => {
 			newEmail.value = "";
@@ -452,12 +450,12 @@ export default {
 				const mailer = await axios.post(`http://localhost:5000/api/email/verification/${userId}`, emailData);
 				console.log(mailer.data);
 
-				const response = await axios.put(`http://localhost:5000/api/users/${userId}/update-email`, emailData.value);
 				// Update the email in allUserData object
 				// allUserData.value.email = newEmail.value;
 
 				showModal1.value = false;
 				resetForm();
+
 				// Show success alert
 				alertRef.showAlert("Verification email is sent successfully!");
 			} catch (error) {
@@ -473,7 +471,6 @@ export default {
 			newEmail,
 			updateEmail,
 			resetForm,
-			emailModel,
 		};
 	},
 };
