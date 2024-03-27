@@ -283,7 +283,7 @@ export default {
 
 		const signup = async () => {
 			try {
-				// localStorage.removeItem("token");
+				localStorage.removeItem("token");
 				const response = await axios.post("http://localhost:5000/auth/signup", {
 					fullName: newSignupData.value.fullName,
 					email: newSignupData.value.email,
@@ -298,7 +298,7 @@ export default {
 
 		const login = async () => {
 			try {
-				// localStorage.removeItem("token");
+				localStorage.removeItem("token");
 				const response = await axios.post("http://localhost:5000/auth/login", {
 					email: newLogin.value.email,
 					password: newLogin.value.password,

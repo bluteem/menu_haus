@@ -56,7 +56,7 @@
 						<p>* A code will be sent to the current email ({{ allUserData.email }}) to verify the new email.</p>
 						<p class="font-bold mt-2" v-if="!allUserData.isVerified">
 							(There is an email change to -{{ allUserData.unverifiedEmail }}- waiting for verification. Please confirm
-							this change from your email)
+							this change from your email.)
 						</p>
 					</div>
 				</div>
