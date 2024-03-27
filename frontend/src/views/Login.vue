@@ -140,7 +140,7 @@
 									</svg>
 									<input
 										type="text"
-										v-model="newSignupData.fullName"
+										v-model="newSignup.fullName"
 										id="fullName"
 										name="fullName"
 										autocomplete="fullName"
@@ -177,7 +177,7 @@
 									</svg>
 									<input
 										type="email"
-										v-model="newSignupData.email"
+										v-model="newSignup.email"
 										id="email"
 										name="email"
 										autocomplete="email"
@@ -208,7 +208,7 @@
 									</svg>
 									<input
 										type="password"
-										v-model="newSignupData.password"
+										v-model="newSignup.password"
 										id="password"
 										name="password"
 										autocomplete="current-password"
@@ -267,6 +267,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router"; // Import useRouter from vue-router
 import axios from "axios";
+import sha256 from "js-sha256";
 
 export default {
 	setup() {
@@ -274,20 +275,20 @@ export default {
 
 		const activeTab = ref("login");
 
-		const newLogin = ref({
-			email: "",
-			password: "",
-		});
-
-		const newSignupData = ref([]);
+		const newLogin = ref([]);
+		const newSignup = ref([]);
 
 		const signup = async () => {
 			try {
 				localStorage.removeItem("token");
+
+				// Hash the password using SHA-256
+				const hashedPassword = sha256(newSignup.value.password);
+
 				const response = await axios.post("http://localhost:5000/auth/signup", {
-					fullName: newSignupData.value.fullName,
-					email: newSignupData.value.email,
-					password: newSignupData.value.password,
+					fullName: newSignup.value.fullName,
+					email: newSignup.value.email,
+					password: hashedPassword,
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
@@ -299,9 +300,13 @@ export default {
 		const login = async () => {
 			try {
 				localStorage.removeItem("token");
+
+				// Hash the password using SHA-256
+				const hashedPassword = sha256(newLogin.value.password);
+
 				const response = await axios.post("http://localhost:5000/auth/login", {
 					email: newLogin.value.email,
-					password: newLogin.value.password,
+					password: hashedPassword,
 				});
 				const token = response.data.token;
 				localStorage.setItem("token", token);
@@ -329,7 +334,7 @@ export default {
 		return {
 			activeTab,
 			newLogin,
-			newSignupData,
+			newSignup,
 			login,
 			signup,
 		};
