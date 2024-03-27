@@ -5,30 +5,6 @@ import User from "../models/user.js";
 
 const router = express.Router();
 
-// Register a new user
-router.post("/signup", async (req, res) => {
-	try {
-		// Check if user already exists
-		const existingUser = await User.findOne({ email: req.body.email });
-		if (existingUser) {
-			return res.status(400).json({ message: "User already exists" });
-		}
-
-		// Create a new user
-		const newUser = new User({
-			fullName: req.body.fullName,
-			email: req.body.email,
-			password: req.body.password,
-		});
-		await newUser.save();
-
-		res.status(201).json({ message: "User registered successfully" });
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ message: "Internal server error" });
-	}
-});
-
 // Login endpoint
 router.post("/login", async (req, res) => {
 	try {
@@ -49,6 +25,30 @@ router.post("/login", async (req, res) => {
 		return res.status(200).json({ token });
 	} catch (error) {
 		console.error("Login failed", error);
+		res.status(500).json({ message: "Internal server error" });
+	}
+});
+
+// Signup endpoint
+router.post("/signup", async (req, res) => {
+	try {
+		// Check if user already exists
+		const existingUser = await User.findOne({ email: req.body.email });
+		if (existingUser) {
+			return res.status(400).json({ message: "User already exists" });
+		}
+
+		// Create a new user
+		const newUser = new User({
+			fullName: req.body.fullName,
+			email: req.body.email,
+			password: req.body.password,
+		});
+		await newUser.save();
+
+		res.status(201).json({ message: "User registered successfully" });
+	} catch (error) {
+		console.error(error);
 		res.status(500).json({ message: "Internal server error" });
 	}
 });

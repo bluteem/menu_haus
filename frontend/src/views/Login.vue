@@ -278,25 +278,6 @@ export default {
 		const newLogin = ref([]);
 		const newSignup = ref([]);
 
-		const signup = async () => {
-			try {
-				localStorage.removeItem("token");
-
-				// Hash the password using SHA-256
-				const hashedPassword = sha256(newSignup.value.password);
-
-				const response = await axios.post("http://localhost:5000/auth/signup", {
-					fullName: newSignup.value.fullName,
-					email: newSignup.value.email,
-					password: hashedPassword,
-				});
-				console.log("Registration successful", response.data);
-				// Redirect to login or other route upon successful registration
-			} catch (error) {
-				console.error("Registration failed", error.response.data.message);
-			}
-		};
-
 		const login = async () => {
 			try {
 				localStorage.removeItem("token");
@@ -328,6 +309,25 @@ export default {
 				} else {
 					console.error("Unexpected error:", error);
 				}
+			}
+		};
+
+		const signup = async () => {
+			try {
+				localStorage.removeItem("token");
+
+				// Hash the password using SHA-256
+				const hashedPassword = sha256(newSignup.value.password);
+
+				const response = await axios.post("http://localhost:5000/auth/signup", {
+					fullName: newSignup.value.fullName,
+					email: newSignup.value.email,
+					password: hashedPassword,
+				});
+				console.log("Registration successful", response.data);
+				// Redirect to login or other route upon successful registration
+			} catch (error) {
+				console.error("Registration failed", error.response.data.message);
 			}
 		};
 
