@@ -53,10 +53,10 @@
 						</button>
 					</div>
 					<div id="emailHelp" class="form-text text-gray-600 text-sm">
-						<p>* A code will be sent to the current email ({{ allUserData.email }}) to verify the new email.</p>
+						<p>* A code will be sent to the current email to verify the new email.</p>
 						<p class="font-bold mt-2" v-if="!allUserData.isVerified">
-							(There is an email change to -{{ allUserData.unverifiedEmail }}- waiting for verification. Please confirm
-							this change from your email.)
+							(There is a pending email change to -{{ allUserData.unverifiedEmail }}-. Go to your email to approve this
+							change.)
 						</p>
 					</div>
 				</div>
@@ -97,7 +97,7 @@
 						</button>
 					</div>
 					<div id="passwordHelp" class="form-text text-gray-600 text-sm">
-						* A code will be sent to the current email ({{ allUserData.email }}) to verify the new password.
+						* A code will be sent to the current email to verify the new password.
 					</div>
 				</div>
 				<div class="mb-6">
