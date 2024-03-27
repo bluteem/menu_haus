@@ -54,7 +54,7 @@
 					</div>
 					<div id="emailHelp" class="form-text text-gray-600 text-sm">
 						<p>* A code will be sent to the current email to verify the new email.</p>
-						<p class="font-bold mt-2" v-if="!allUserData.isVerified">
+						<p class="font-bold mt-2" v-if="allUserData.unverifiedEmail">
 							(There is a pending email change to -{{ allUserData.unverifiedEmail }}-. Go to your email to approve this
 							change.)
 						</p>
@@ -155,7 +155,7 @@
 						</button>
 					</div>
 					<div id="phoneHelp" class="form-text text-gray-600 text-sm">
-						* A code will be sent to the current phone number ({{ allUserData.phone }}) to verify the new number.
+						* A code will be sent to the current phone number to verify the new number.
 					</div>
 				</div>
 				<div class="border-b border-gray-300 mb-6"></div>
@@ -450,8 +450,7 @@ export default {
 				const mailer = await axios.post(`http://localhost:5000/api/email/verification/${userId}`, emailData);
 				console.log(mailer.data);
 
-				// Update the email in allUserData object
-				// allUserData.value.email = newEmail.value;
+				allUserData.unverifiedEmail = newEmail;
 
 				showModal1.value = false;
 				resetForm();
