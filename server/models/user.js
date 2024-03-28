@@ -15,6 +15,9 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		unverifiedPassword: {
+			type: String,
+		},
 		fullName: {
 			type: String,
 			required: true,
@@ -23,6 +26,9 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 		},
 		phone: {
+			type: String,
+		},
+		unverifiedPhone: {
 			type: String,
 		},
 		accountStatus: {
