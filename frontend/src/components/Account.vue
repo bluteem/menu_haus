@@ -87,17 +87,21 @@
 								disabled
 								autocomplete="off"
 								class="w-full border border-gray-400 bg-gray-200 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
-								placeholder="Enter your password"
+								placeholder="**********"
 								aria-describedby="passwordHelp"
 								required />
 						</div>
 						<button
+							@click="showModal1 = true"
 							class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
 							Update
 						</button>
 					</div>
 					<div id="passwordHelp" class="form-text text-gray-600 text-sm">
-						* A code will be sent to the current email to verify the new password.
+						<p>* A code will be sent to the current email to verify the new password.</p>
+						<p class="font-bold mt-2" v-if="allUserData.unverifiedPassword && !isLoading">
+							(There is a pending password change. Go to your email to approve this change.)
+						</p>
 					</div>
 				</div>
 				<div class="mb-6">
@@ -150,12 +154,16 @@
 								required />
 						</div>
 						<button
+							@click="showModal1 = true"
 							class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
 							Update
 						</button>
 					</div>
 					<div id="phoneHelp" class="form-text text-gray-600 text-sm">
-						* A code will be sent to the current phone number to verify the new number.
+						<p>* A code will be sent to the current phone number to verify the new number.</p>
+						<p class="font-bold mt-2" v-if="allUserData.unverifiedPhone && !isLoading">
+							(There is a pending phone number change to -{{ allUserData.unverifiedPhone }}-.)
+						</p>
 					</div>
 				</div>
 				<div class="border-b border-gray-300 mb-6"></div>
@@ -190,7 +198,7 @@
 				</div>
 				<div class="mb-6">
 					<label for="role" class="block mb-1">Role:</label>
-					<div class="relative">
+					<div class="relative mb-2">
 						<svg
 							class="h-4 w-4 text-gray-400 absolute left-3 top-3"
 							fill="#000000"
@@ -235,7 +243,11 @@
 							id="role"
 							disabled
 							autocomplete="off"
-							class="w-full border border-gray-400 bg-gray-200 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500" />
+							class="w-full border border-gray-400 bg-gray-200 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+							aria-describedby="roleHelp" />
+					</div>
+					<div id="roleHelp" class="form-text text-gray-600 text-sm">
+						<p>* Please contact your manager for a role change.</p>
 					</div>
 				</div>
 			</div>
