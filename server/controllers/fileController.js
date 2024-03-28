@@ -4,13 +4,16 @@ import File from "../models/file.js";
 import fs from "fs";
 import path from "path";
 
+const __dirname = path.resolve();
+
 const router = express.Router();
 
 // Set up multer storage to define where to store uploaded files
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		// Define the folder where uploaded files will be stored
-		cb(null, "uploads/");
+		// Define the absolute path to the uploads folder
+		const uploadFolderPath = path.join(__dirname, "uploads");
+		cb(null, uploadFolderPath);
 	},
 	filename: function (req, file, cb) {
 		// Adding random suffix to avoid filename conflicts
@@ -24,7 +27,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Controller function to upload file
-export const uploadFile = async (req, res) => {
+const uploadFile = async (req, res) => {
 	try {
 		const { fileName, fileType, filePath } = req.file;
 
@@ -58,7 +61,7 @@ router.get("/", async (req, res) => {
 });
 
 // Controller function to get file by ID
-export const getFileById = async (req, res) => {
+const getFileById = async (req, res) => {
 	try {
 		const fileId = req.params.id;
 		const file = await File.findById(fileId);
@@ -67,7 +70,7 @@ export const getFileById = async (req, res) => {
 		}
 
 		// Stream file to client
-		const fileStream = fs.createReadStream(file.storagePath);
+		const fileStream = fs.createReadStream(file.filePath);
 		fileStream.pipe(res);
 	} catch (error) {
 		console.error("Error fetching file:", error);
@@ -78,7 +81,7 @@ export const getFileById = async (req, res) => {
 router.get("/:id", getFileById);
 
 // Controller function to delete file by ID
-export const deleteFileById = async (req, res) => {
+const deleteFileById = async (req, res) => {
 	try {
 		const fileId = req.params.id;
 		const file = await File.findByIdAndDelete(fileId);
@@ -87,7 +90,7 @@ export const deleteFileById = async (req, res) => {
 		}
 
 		// Delete file from disk
-		fs.unlinkSync(file.storagePath);
+		fs.unlinkSync(file.filePath);
 
 		res.json({ message: "File deleted successfully" });
 	} catch (error) {
