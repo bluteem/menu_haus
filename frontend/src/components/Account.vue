@@ -168,33 +168,36 @@
 				</div>
 				<div class="border-b border-gray-300 mb-6"></div>
 				<div class="mb-6">
-					<label for="fullName" class="block mb-1">Full Name:</label>
-					<div class="flex items-center mb-2">
-						<div class="relative w-full mr-6">
-							<svg
-								class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-								fill="none"
-								stroke-width="4"
-								stroke="#4b5563"
-								viewBox="0 0 64 64"
-								xmlns="http://www.w3.org/2000/svg">
-								<circle cx="32" cy="18.14" r="11.14" />
-								<path d="M54.55,56.85A22.55,22.55,0,0,0,32,34.3h0A22.55,22.55,0,0,0,9.45,56.85Z" />
-							</svg>
-							<input
-								type="text"
-								v-model="allUserData.fullName"
-								id="fullName"
-								autocomplete="off"
-								class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
-								placeholder="Enter your full name"
-								required />
+					<form @submit.prevent="updateFullName($refs.Alert)">
+						<label for="fullName" class="block mb-1">Full Name:</label>
+						<div class="flex items-center mb-2">
+							<div class="relative w-full mr-6">
+								<svg
+									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+									fill="none"
+									stroke-width="4"
+									stroke="#4b5563"
+									viewBox="0 0 64 64"
+									xmlns="http://www.w3.org/2000/svg">
+									<circle cx="32" cy="18.14" r="11.14" />
+									<path d="M54.55,56.85A22.55,22.55,0,0,0,32,34.3h0A22.55,22.55,0,0,0,9.45,56.85Z" />
+								</svg>
+								<input
+									type="text"
+									v-model="allUserData.fullName"
+									id="fullName"
+									autocomplete="off"
+									class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+									placeholder="Enter your full name"
+									required />
+							</div>
+							<button
+								type="submit"
+								class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
+								Update
+							</button>
 						</div>
-						<button
-							class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
-							Update
-						</button>
-					</div>
+					</form>
 				</div>
 				<div class="mb-6">
 					<label for="role" class="block mb-1">Role:</label>
@@ -614,10 +617,9 @@ export default {
 		// Update email
 		const updateFullName = async (alertRef) => {
 			try {
-				const mailer = await axios.poddjjpottt0ıouuqwst(
-					`http://localhost:5000/api/password/verification/${userId}`,
-					allUserData.value.fullName
-				);
+				const mailer = await axios.put(`http://localhost:5000/api/users/${userId}`, {
+					fullName: allUserData.value.fullName,
+				});
 
 				// Show success alert
 				alertRef.showAlert("Full name is updated successfully!");
