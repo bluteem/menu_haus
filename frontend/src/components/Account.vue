@@ -92,7 +92,7 @@
 								required />
 						</div>
 						<button
-							@click="showModal1 = true"
+							@click="modalForPassword = true"
 							class="inline-block text-white border bg-sky-400 rounded-md hover:bg-sky-500 transition duration-300 px-4 py-2 whitespace-nowrap">
 							Update
 						</button>
@@ -412,34 +412,6 @@
 						<div class="mt-5">
 							<form @submit.prevent="updatePassword($refs.Alert)">
 								<div class="mb-4">
-									<label for="password" class="block font-medium text-gray-700">Current Password:</label>
-									<div class="relative w-full mb-4">
-										<svg
-											class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-											fill="#4b5563"
-											xmlns="http://www.w3.org/2000/svg"
-											viewBox="0 0 203.096 203.096">
-											<g>
-												<path
-													d="M153.976,73.236h-3.308V49.115C150.669,22.033,128.634,0,101.549,0C74.465,0,52.43,22.033,52.43,49.115v24.121H49.12
-                                                c-9.649,0-17.5,7.851-17.5,17.5v94.859c0,9.649,7.851,17.5,17.5,17.5h104.856c9.649,0,17.5-7.851,17.5-17.5V90.736
-                                                C171.476,81.087,163.626,73.236,153.976,73.236z M67.43,49.115C67.43,30.304,82.736,15,101.549,15
-                                                c18.813,0,34.119,15.304,34.119,34.115v24.121H67.43V49.115z M156.476,185.596c0,1.355-1.145,2.5-2.5,2.5H49.12
-                                                c-1.355,0-2.5-1.145-2.5-2.5V90.736c0-1.355,1.145-2.5,2.5-2.5H59.93h83.238h10.808c1.355,0,2.5,1.145,2.5,2.5V185.596z" />
-												<path
-													d="M101.547,116.309c-4.142,0-7.5,3.357-7.5,7.5v28.715c0,4.143,3.358,7.5,7.5,7.5c4.142,0,7.5-3.357,7.5-7.5v-28.715
-                                                C109.047,119.666,105.689,116.309,101.547,116.309z" />
-											</g>
-										</svg>
-										<input
-											type="password"
-											id="password"
-											disabled
-											placeholder="Enter the new password"
-											class="w-full border border-gray-400 bg-gray-200 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500" />
-									</div>
-								</div>
-								<div class="mb-4">
 									<label for="newPassword" class="block font-medium text-gray-700">New Password:</label>
 									<div class="relative w-full mb-4">
 										<svg
@@ -464,6 +436,7 @@
 											v-model="newPassword"
 											id="newPassword"
 											required
+											autocomplete="off"
 											placeholder="Enter the new password"
 											class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500" />
 									</div>
@@ -499,6 +472,7 @@
 import { ref, onMounted, computed } from "vue";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import sha256 from "js-sha256";
 import Alert from "@/components/Alert.vue";
 
 export default {
@@ -513,11 +487,12 @@ export default {
 
 		const allUserData = ref({
 			email: "",
-			password: [],
+			unverifiedEmail: "",
+			password: "",
+			unverifiedPassword: "",
 			fullName: "",
 			role: "",
 			profilePicture: "",
-			unverifiedEmail: "",
 			isVerified: false,
 		});
 
@@ -560,7 +535,7 @@ export default {
 
 				allUserData.unverifiedEmail = newEmail;
 
-				showModal1.value = false;
+				modalForEmail.value = false;
 				resetForm();
 
 				// Show loading effect
@@ -595,16 +570,16 @@ export default {
 		// Update email
 		const updatePassword = async (alertRef) => {
 			try {
+				const hashedPassword = sha256(newPassword.value);
+
 				const passwordData = {
-					to: allUserData.value.password,
-					newPassword: newPassword.value,
+					to: allUserData.value.email,
+					newPassword: hashedPassword,
 				};
-				const mailer = await axios.post(`http://localhost:5000/api/email/verification/${userId}`, emailData);
+				const mailer = await axios.post(`http://localhost:5000/api/password/verification/${userId}`, passwordData);
 				console.log(mailer.data);
 
-				allUserData.unverifiedEmail = newEmail;
-
-				showModal1.value = false;
+				modalForPassword.value = false;
 				resetForm();
 
 				// Show loading effect

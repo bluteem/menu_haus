@@ -66,7 +66,7 @@ router.post("/verification/:id", async (req, res) => {
 				<p>Hi,</p>
 				<p>You have requested to change your email address to ${newEmail}. </p>
 				<p>Please use the link below to verify the change.</p>
-				<p><a href="http://localhost:5000/api/email/verification/${verificationCode}">Verify the Change</a></p>
+				<p><a href="http://localhost:5000/api/email/verification/${verificationCode}">Verify</a></p>
 				<p>If you haven't made this request, you can ignore this email.</p>
 				<p>Have a wonderful day!!</p>
 				<p>- Menu Haus Team</p>
