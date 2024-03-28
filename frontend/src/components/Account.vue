@@ -35,7 +35,7 @@
 								</g>
 							</svg>
 							<input
-								type="text"
+								type="email"
 								v-model="allUserData.email"
 								id="email"
 								name="email"
@@ -54,7 +54,7 @@
 					</div>
 					<div id="emailHelp" class="form-text text-gray-600 text-sm">
 						<p>* A code will be sent to the current email to verify the new email.</p>
-						<p class="font-bold mt-2" v-if="allUserData.unverifiedEmail">
+						<p class="font-bold mt-2" v-if="allUserData.unverifiedEmail && !isLoading">
 							(There is a pending email change to -{{ allUserData.unverifiedEmail }}-. Go to your email to approve this
 							change.)
 						</p>
@@ -323,7 +323,7 @@
 											</g>
 										</svg>
 										<input
-											type="text"
+											type="email"
 											v-model="allUserData.email"
 											id="newEmail"
 											disabled
@@ -358,7 +358,7 @@
 											</g>
 										</svg>
 										<input
-											type="text"
+											type="email"
 											v-model="newEmail"
 											id="newEmail"
 											required
@@ -388,13 +388,20 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Loading effect -->
+		<div class="loading" v-if="isLoading">
+			<!-- Loading spinner -->
+			<div class="spinner"></div>
+			<p>Loading...</p>
+		</div>
 	</main>
 
 	<Alert ref="Alert" />
 </template>
 
 <script>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Alert from "@/components/Alert.vue";
@@ -426,6 +433,9 @@ export default {
 			newEmail.value = "";
 		};
 
+		// Reactive variable to control loading state
+		const isLoading = ref(false);
+
 		// Fetch menu items when the component is mounted
 		onMounted(async () => {
 			try {
@@ -455,6 +465,26 @@ export default {
 				showModal1.value = false;
 				resetForm();
 
+				// Show loading effect
+				isLoading.value = true;
+
+				try {
+					const response = await axios.get(`http://localhost:5000/api/users/${userId}`, {
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					});
+					allUserData.value = response.data.userData;
+
+					// Hide loading effect
+					isLoading.value = false;
+				} catch (error) {
+					console.error("Error loading data:", error);
+					// Handle error (e.g., show error message)
+					// Hide loading effect
+					isLoading.value = false;
+				}
+
 				// Show success alert
 				alertRef.showAlert("Verification email is sent successfully!");
 			} catch (error) {
@@ -470,9 +500,36 @@ export default {
 			newEmail,
 			updateEmail,
 			resetForm,
+			isLoading,
 		};
 	},
 };
 </script>
 
-<style></style>
+<style>
+/* Loading spinner styles */
+.loading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.spinner {
+	border: 8px solid #f3f3f3; /* Light grey */
+	border-top: 8px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+</style>
