@@ -7,6 +7,7 @@ import multer from "multer"; // Middleware for handling file uploads
 import dotenv from "dotenv"; // Load environment variables from a .env file
 
 import authController, { authMiddleware } from "./controllers/authController.js";
+import fileController from "./controllers/fileController.js";
 import emailVerificationController from "./controllers/emailVerificationController.js";
 import passwordVerificationController from "./controllers/passwordVerificationController.js";
 import tableController from "./controllers/tableController.js";
@@ -52,33 +53,34 @@ app.use(
 	})
 );
 
-// Set up Multer storage for handling multiple files
-const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, "./frontend/public/uploads"); // Destination directory where files will be saved
-	},
-	filename: function (req, file, cb) {
-		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9); // Adding random suffix to avoid filename conflicts
-		cb(null, uniqueSuffix + "-" + file.originalname); // File naming strategy
-	},
-});
-
-// Initialize Multer with the defined storage configuration
-const upload = multer({ storage: storage });
-
-// Define route to handle file uploads
-app.post("/api/upload", upload.array("files"), (req, res) => {
-	// Handle file upload here
-	const fileNames = req.files.map((file) => file.filename); // Extract file names from uploaded files
-	res.status(200).json({ fileNames: fileNames }); // Respond with JSON containing uploaded file names
-});
-
 // Use the auth controller
 app.use("/auth", authController);
 // Protected route
 app.get("/auth/verify-token", authMiddleware, (req, res) => {
 	// Access user information from req.user
 	res.status(200).json({ message: "Token is valid" });
+});
+
+// Use the file controller
+app.use("/file", fileController);
+
+/* const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, "./frontend/public/uploads"); // 
+	},
+	filename: function (req, file, cb) {
+		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+		cb(null, uniqueSuffix + "-" + file.originalname);
+	},
+}); 
+
+const upload = multer({ storage: storage }); */
+
+// Define route to handle file uploads
+app.post("/api/upload", upload.array("files"), (req, res) => {
+	// Handle file upload here
+	const fileNames = req.files.map((file) => file.filename); // Extract file names from uploaded files
+	res.status(200).json({ fileNames: fileNames }); // Respond with JSON containing uploaded file names
 });
 
 // Use the email verification controller

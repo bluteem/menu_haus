@@ -1,3 +1,5 @@
+import express from "express";
+import multer from "multer"; // For handling multipart/form-data
 import File from "../models/file.js";
 import fs from "fs";
 import path from "path";
@@ -58,3 +60,33 @@ export const deleteFileById = async (req, res) => {
 		res.status(500).json({ error: "Failed to delete file" });
 	}
 };
+
+const router = express.Router();
+
+// Set up multer storage to define where to store uploaded files
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		// Define the folder where uploaded files will be stored
+		cb(null, "uploads/");
+	},
+	filename: function (req, file, cb) {
+		// Adding random suffix to avoid filename conflicts
+		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+		// Define the filename of the uploaded file
+		cb(null, uniqueSuffix + "-" + file.originalname);
+	},
+});
+
+// Set up multer middleware
+const upload = multer({ storage: storage });
+
+// POST endpoint to upload a file
+router.post("/upload", upload.single("file"), uploadFile);
+
+// GET endpoint to retrieve a file by ID
+router.get("/:id", getFileById);
+
+// DELETE endpoint to delete a file by ID
+router.delete("/:id", deleteFileById);
+
+export default router;
