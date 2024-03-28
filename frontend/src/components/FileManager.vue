@@ -216,26 +216,26 @@ export default {
 			}
 		};
 
-		// Update a user info
+		// Update a file info
 		const updateFile = async (alertRef) => {
 			try {
-				// Send a PUT request to update user info
+				// Send a PUT request to update file info
 				const response = await axios.put(`http://localhost:5000/api/files/${newFile.value._id}`, newFile.value);
-				// Extract updated user data from the response
+				// Extract updated file data from the response
 				const updatedFile = response.data.fileData;
-				// Find the index of the updated user in the users array
+				// Find the index of the updated file in the files array
 				const updatedFileIndex = allFilesData.value.findIndex((item) => item._id === updatedFile._id);
-				// If the updated user index is found
+				// If the updated file index is found
 				if (updatedFileIndex !== -1) {
 					allFilesData.value.splice(updatedFileIndex, 1, updatedFile);
 				}
-				// Hide the modal for editing user info
+				// Hide the modal for editing file info
 				showModal2.value = false;
 				resetForm();
 				// Show success alert
 				alertRef.showAlert("File info updated successfully!");
 			} catch (error) {
-				console.error("Error updating user info:", error);
+				console.error("Error updating file info:", error);
 				// Show error alert if failed to update menu item
 				alertRef.showAlert("Failed to update file info. Please try again later.");
 			}
@@ -257,7 +257,7 @@ export default {
 
 		// Reset form fields
 		const resetForm = () => {
-			newUser.value = {
+			newFile.value = {
 				_id: null,
 				originalName: "",
 				mimeType: "",
