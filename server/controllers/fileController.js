@@ -12,7 +12,7 @@ const router = express.Router();
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		// Define the absolute path to the uploads folder
-		const uploadFolderPath = path.join(__dirname, "../uploads");
+		const uploadFolderPath = path.join(__dirname, "./server/uploads");
 		cb(null, uploadFolderPath);
 	},
 	filename: function (req, file, cb) {

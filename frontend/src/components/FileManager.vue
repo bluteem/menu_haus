@@ -199,6 +199,7 @@ export default {
 				formData.append("file", selectedFile.value);
 				formData.append("fileName", selectedFile.value.name); // Append file name to FormData
 				formData.append("fileType", selectedFile.value.type); // Append file type to FormData
+				formData.append("filePath", selectedFile.value.name); // Append file path to FormData
 				const response = await axios.post("http://localhost:5000/api/files/upload", formData, {
 					headers: {
 						"Content-Type": "multipart/form-data",
