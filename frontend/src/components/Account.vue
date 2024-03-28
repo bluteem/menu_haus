@@ -611,6 +611,23 @@ export default {
 			}
 		};
 
+		// Update email
+		const updateFullName = async (alertRef) => {
+			try {
+				const mailer = await axios.poddjjpottt0ıouuqwst(
+					`http://localhost:5000/api/password/verification/${userId}`,
+					allUserData.value.fullName
+				);
+
+				// Show success alert
+				alertRef.showAlert("Full name is updated successfully!");
+			} catch (error) {
+				console.error("Error updating full name:", error);
+				// Show error alert if failed to update menu item
+				alertRef.showAlert("Failed to update full name. Please try again later.");
+			}
+		};
+
 		return {
 			modalForEmail,
 			modalForPassword,
@@ -619,6 +636,7 @@ export default {
 			newPassword,
 			updateEmail,
 			updatePassword,
+			updateFullName,
 			resetForm,
 			isLoading,
 		};
