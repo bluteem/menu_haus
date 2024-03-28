@@ -62,7 +62,7 @@ app.get("/auth/verify-token", authMiddleware, (req, res) => {
 });
 
 // Use the file controller
-app.use("/file", fileController);
+app.use("/api/file", fileController);
 
 /* const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -77,11 +77,11 @@ app.use("/file", fileController);
 const upload = multer({ storage: storage }); */
 
 // Define route to handle file uploads
-app.post("/api/upload", upload.array("files"), (req, res) => {
+/* app.post("/api/upload", upload.array("files"), (req, res) => {
 	// Handle file upload here
 	const fileNames = req.files.map((file) => file.filename); // Extract file names from uploaded files
 	res.status(200).json({ fileNames: fileNames }); // Respond with JSON containing uploaded file names
-});
+}); */
 
 // Use the email verification controller
 app.use("/api/email", emailVerificationController);
