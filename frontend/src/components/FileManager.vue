@@ -17,34 +17,32 @@
 						<table class="min-w-full border text-center font-light border-neutral-300">
 							<thead class="border-b font-medium border-neutral-300">
 								<tr>
-									<th scope="col" class="border-r px-6 py-4 border-neutral-300">Full Name</th>
-									<th scope="col" class="border-r px-6 py-4 border-neutral-300">Email</th>
-									<th scope="col" class="border-r px-6 py-4 border-neutral-300">Role</th>
+									<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Name</th>
+									<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Type</th>
+									<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Path</th>
 									<th scope="col" class="px-6 py-4"></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="user in allUsersData" :key="user._id" class="border-b border-neutral-300">
+								<tr v-for="file in allFilesData" :key="file._id" class="border-b border-neutral-300">
 									<td class="border-r px-6 py-4 border-neutral-300">
-										<div class="text-gray-900">{{ user.fullName }}</div>
+										<div class="text-gray-900">{{ file.originalName }}</div>
 									</td>
 									<td class="border-r px-6 py-4 border-neutral-300">
-										<div class="text-gray-900">{{ user.email }}</div>
+										<div class="text-gray-900">{{ file.mimeType }}</div>
 									</td>
 									<td class="border-r px-6 py-4 border-neutral-300">
-										<span class="px-2 inline-flex leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{
-											user.role
-										}}</span>
+										<div class="text-gray-900">{{ file.storagePath }}</div>
 									</td>
 									<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
 										<button
-											@click="getUser(user._id, $refs.Alert)"
+											@click="getFile(file._id, $refs.Alert)"
 											type="button"
 											class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
 											Edit
 										</button>
 										<button
-											@click="deleteUser(user._id, $refs.Alert)"
+											@click="deleteFile(file._id, $refs.Alert)"
 											class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
 											Delete
 										</button>
@@ -58,7 +56,7 @@
 		</div>
 
 		<!-- Show message if there are no menu items -->
-		<p v-if="allUsersData.length === 0" class="text-gray-600 mt-3">No user available</p>
+		<p v-if="allFilesData.length === 0" class="text-gray-600 mt-3">No file available</p>
 	</main>
 
 	<!-- Modal for adding -->
@@ -69,53 +67,22 @@
 			<div
 				class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 				<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-					<h3 class="text-lg leading-6 font-medium text-gray-900">Add New User</h3>
+					<h3 class="text-lg leading-6 font-medium text-gray-900">Add New File</h3>
 					<div class="mt-5">
-						<form @submit.prevent="addUser($refs.Alert)">
+						<form @submit.prevent="addFile($refs.Alert)">
 							<div class="mb-4">
-								<label for="newName" class="block font-medium text-gray-700">Full Name:</label>
+								<label for="newFileName" class="block font-medium text-gray-700">New File Name:</label>
 								<input
 									type="text"
-									v-model="newUser.fullName"
+									v-model="newFile.originalName"
 									id="newName"
 									required
 									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
 							</div>
-
-							<div class="mb-4">
-								<label for="newEmail" class="block font-medium text-gray-700">Email:</label>
-								<input
-									type="email"
-									v-model="newUser.email"
-									id="newEmail"
-									required
-									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
-							</div>
-
-							<div class="mb-4">
-								<label for="newRole" class="block font-medium text-gray-700">Role:</label>
-								<select v-model="newUser.role" id="newRole" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
-									<option disabled selected>Select Role</option>
-									<option v-for="roleOption in roleOptions" :key="roleOption" :value="roleOption">
-										{{ roleOption }}
-									</option>
-								</select>
-							</div>
-
-							<div class="mb-4">
-								<label for="newPassword" class="block font-medium text-gray-700">Password:</label>
-								<input
-									type="password"
-									v-model="newUser.password"
-									id="newPassword"
-									required
-									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
-							</div>
-
 							<button
 								type="submit"
 								class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
-								Add Item
+								Add File
 							</button>
 						</form>
 					</div>
@@ -142,50 +109,18 @@
 			<div
 				class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
 				<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-					<h3 class="text-lg leading-6 font-medium text-gray-900">Edit User Info</h3>
+					<h3 class="text-lg leading-6 font-medium text-gray-900">Edit File Info</h3>
 					<div class="mt-5">
-						<form @submit.prevent="updateUser($refs.Alert)">
+						<form @submit.prevent="updateFile($refs.Alert)">
 							<div class="mb-4">
-								<label for="editName" class="block font-medium text-gray-700">Full Name:</label>
+								<label for="editFileName" class="block font-medium text-gray-700">File Name:</label>
 								<input
 									type="text"
-									v-model="newUser.fullName"
+									v-model="newFile.originalName"
 									id="editName"
 									required
 									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
 							</div>
-
-							<div class="mb-4">
-								<label for="editEmail" class="block font-medium text-gray-700">Email:</label>
-								<input
-									type="email"
-									v-model="newUser.email"
-									id="editEmail"
-									required
-									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
-							</div>
-
-							<div class="mb-4">
-								<label for="editRole" class="block font-medium text-gray-700">Role:</label>
-
-								<select v-model="newUser.role" id="editRole" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
-									<option disabled selected>Select Role</option>
-									<option v-for="roleOption in roleOptions" :key="roleOption" :value="roleOption">
-										{{ roleOption }}
-									</option>
-								</select>
-							</div>
-
-							<div class="mb-4">
-								<label for="editPassword" class="block font-medium text-gray-700">Password:</label>
-								<input
-									type="password"
-									v-model.number="newUser.password"
-									id="editPassword"
-									required
-									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
-							</div>
-
 							<button
 								type="submit"
 								class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
@@ -238,92 +173,85 @@ export default {
 				const response = await axios.get("http://localhost:5000/api/files");
 				allFilesData.value = response.data.fileData;
 			} catch (error) {
-				console.error("Error fetching users:", error);
+				console.error("Error fetching files:", error);
 			}
-		});
-
-		// Define a computed property to return the array of available roles
-		const roleOptions = computed(() => {
-			return ["Admin", "Team"];
 		});
 
 		// Add a new menu item
-		const addUser = async (alertRef) => {
+		const addFile = async (alertRef) => {
 			try {
-				const response = await axios.post("http://localhost:5000/api/users", {
-					email: newUser.value.email,
-					password: newUser.value.password,
-					fullName: newUser.value.fullName,
-					role: newUser.value.role,
+				const response = await axios.post("http://localhost:5000/api/files/upload", {
+					originalName: newFile.value.originalName,
+					mimeType: newFile.value.mimeType,
+					storagePath: newFile.value.storagePath,
 				});
-				allUsersData.value.push(response.data.userData);
+				allFilesData.value.push(response.data.fileData);
 				showModal1.value = false;
 				resetForm();
 				// Show success alert using the passed alertRef
-				alertRef.showAlert("User added successfully!");
+				alertRef.showAlert("File added successfully!");
 			} catch (error) {
-				console.error("Error adding user:", error);
+				console.error("Error adding file:", error);
 				// Show error alert using the passed alertRef if failed to add menu item
-				alertRef.showAlert("Failed to add user. Please try again later.");
+				alertRef.showAlert("Failed to add file. Please try again later.");
 			}
 		};
 
-		// Fetch a single menu item
-		const getUser = async (itemId, alertRef) => {
+		// Fetch a single file
+		const getFile = async (itemId, alertRef) => {
 			try {
-				const response = await axios.get(`http://localhost:5000/api/users/${itemId}`);
-				const variable = response.data.userData;
-				newUser.value = {
+				const response = await axios.get(`http://localhost:5000/api/files/${itemId}`);
+				const variable = response.data.fileData;
+				newFile.value = {
 					_id: variable._id,
-					email: variable.email,
-					password: variable.password,
-					fullName: variable.fullName,
-					role: variable.role,
+					originalName: variable.originalName,
+					mimeType: variable.mimeType,
+					storagePath: variable.storagePath,
 				};
 				showModal2.value = true;
 			} catch (error) {
-				console.error("Error fetching user:", error);
-				// Show alert if failed to fetch menu item details
-				alertRef.showAlert("Failed to fetch user details. Please try again later.");
+				console.error("Error fetching file:", error);
+				// Show alert if failed to fetch file details
+				alertRef.showAlert("Failed to fetch file details. Please try again later.");
 			}
 		};
 
 		// Update a user info
-		const updateUser = async (alertRef) => {
+		const updateFile = async (alertRef) => {
 			try {
 				// Send a PUT request to update user info
-				const response = await axios.put(`http://localhost:5000/api/users/${newUser.value._id}`, newUser.value);
+				const response = await axios.put(`http://localhost:5000/api/files/${newFile.value._id}`, newFile.value);
 				// Extract updated user data from the response
-				const updatedUser = response.data.userData;
+				const updatedFile = response.data.fileData;
 				// Find the index of the updated user in the users array
-				const updatedUserIndex = allUsersData.value.findIndex((item) => item._id === updatedUser._id);
+				const updatedFileIndex = allFilesData.value.findIndex((item) => item._id === updatedFile._id);
 				// If the updated user index is found
-				if (updatedUserIndex !== -1) {
-					allUsersData.value.splice(updatedUserIndex, 1, updatedUser);
+				if (updatedFileIndex !== -1) {
+					allFilesData.value.splice(updatedFileIndex, 1, updatedFile);
 				}
 				// Hide the modal for editing user info
 				showModal2.value = false;
 				resetForm();
 				// Show success alert
-				alertRef.showAlert("User info updated successfully!");
+				alertRef.showAlert("File info updated successfully!");
 			} catch (error) {
 				console.error("Error updating user info:", error);
 				// Show error alert if failed to update menu item
-				alertRef.showAlert("Failed to update user info. Please try again later.");
+				alertRef.showAlert("Failed to update file info. Please try again later.");
 			}
 		};
 
 		// Delete a menu item
-		const deleteUser = async (itemId, alertRef) => {
+		const deleteFile = async (itemId, alertRef) => {
 			try {
-				await axios.delete(`http://localhost:5000/api/users/${itemId}`);
-				allUsersData.value = allUsersData.value.filter((item) => item._id !== itemId);
+				await axios.delete(`http://localhost:5000/api/files/${itemId}`);
+				allFilesData.value = allFilesData.value.filter((item) => item._id !== itemId);
 				// Show success alert
-				alertRef.showAlert("User deleted successfully!");
+				alertRef.showAlert("File deleted successfully!");
 			} catch (error) {
-				console.error("Error deleting user:", error);
+				console.error("Error deleting file:", error);
 				// Show error alert if failed to delete menu item
-				alertRef.showAlert("Failed to delete user. Please try again later.");
+				alertRef.showAlert("Failed to delete file. Please try again later.");
 			}
 		};
 
@@ -331,10 +259,9 @@ export default {
 		const resetForm = () => {
 			newUser.value = {
 				_id: null,
-				email: "",
-				password: "",
-				fullName: "",
-				role: "",
+				originalName: "",
+				mimeType: "",
+				storagePath: "",
 			};
 		};
 
@@ -343,17 +270,14 @@ export default {
 			showModal2,
 			newFile,
 			allFilesData,
-			roleOptions,
-			getUser,
-			updateUser,
-			addUser,
-			deleteUser,
+			getFile,
+			updateFile,
+			addFile,
+			deleteFile,
 			resetForm,
 		};
 	},
 };
 </script>
 
-<style>
-/* Add your Tailwind CSS styles here */
-</style>
+<style></style>
