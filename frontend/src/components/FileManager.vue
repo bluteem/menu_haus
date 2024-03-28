@@ -17,22 +17,24 @@
 						<table class="min-w-full border text-center font-light border-neutral-300">
 							<thead class="border-b font-medium border-neutral-300">
 								<tr>
+									<th scope="col" class="border-r px-6 py-4 border-neutral-300">Thumbnail</th>
 									<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Name</th>
 									<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Type</th>
-									<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Path</th>
 									<th scope="col" class="px-6 py-4"></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="file in allFilesData" :key="file._id" class="border-b border-neutral-300">
 									<td class="border-r px-6 py-4 border-neutral-300">
+										<div class="text-gray-900 w-40">
+											<img :src="file.storagePath" alt="" class="w-full object-cover rounded-md" />
+										</div>
+									</td>
+									<td class="border-r px-6 py-4 border-neutral-300">
 										<div class="text-gray-900">{{ file.originalName }}</div>
 									</td>
 									<td class="border-r px-6 py-4 border-neutral-300">
 										<div class="text-gray-900">{{ file.mimeType }}</div>
-									</td>
-									<td class="border-r px-6 py-4 border-neutral-300">
-										<div class="text-gray-900">{{ file.storagePath }}</div>
 									</td>
 									<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
 										<button
@@ -71,12 +73,12 @@
 					<div class="mt-5">
 						<form @submit.prevent="addFile($refs.Alert)">
 							<div class="mb-4">
-								<label for="newFileName" class="block font-medium text-gray-700">New File Name:</label>
+								<label for="file" class="block font-medium text-gray-700">New File:</label>
 								<input
-									type="text"
-									v-model="newFile.originalName"
-									id="newName"
-									required
+									type="file"
+									ref="fileInput"
+									@change="handleFileUpload"
+									id="file"
 									class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
 							</div>
 							<button
@@ -160,6 +162,7 @@ export default {
 		// Reactive variables
 		const showModal1 = ref(false);
 		const showModal2 = ref(false);
+
 		const newFile = ref({
 			originalName: "",
 			mimeType: "",
@@ -177,15 +180,31 @@ export default {
 			}
 		});
 
+		const fileInput = ref(null);
+		const selectedFile = ref(null);
+
+		const handleFileUpload = () => {
+			const file = fileInput.value.files[0];
+			selectedFile.value = file;
+		};
+
 		// Add a new menu item
 		const addFile = async (alertRef) => {
+			if (!selectedFile.value) {
+				console.error("No file selected");
+				return;
+			}
 			try {
-				const response = await axios.post("http://localhost:5000/api/files/upload", {
-					originalName: newFile.value.originalName,
-					mimeType: newFile.value.mimeType,
-					storagePath: newFile.value.storagePath,
+				const formData = new FormData();
+				formData.append("file", selectedFile.value);
+				formData.append("fileName", selectedFile.value.name); // Append file name to FormData
+				formData.append("fileType", selectedFile.value.type); // Append file type to FormData
+				const response = await axios.post("http://localhost:5000/api/files/upload", formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
 				});
-				allFilesData.value.push(response.data.fileData);
+				// allFilesData.value.push(response.data.fileData);
 				showModal1.value = false;
 				resetForm();
 				// Show success alert using the passed alertRef
@@ -270,6 +289,9 @@ export default {
 			showModal2,
 			newFile,
 			allFilesData,
+			fileInput,
+			selectedFile,
+			handleFileUpload,
 			getFile,
 			updateFile,
 			addFile,

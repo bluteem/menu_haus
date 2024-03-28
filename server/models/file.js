@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const fileSchema = new mongoose.Schema(
 	{
-		originalName: {
+		fileName: {
 			type: String,
 			required: true,
 		},
-		mimeType: {
+		fileType: {
 			type: String,
 			required: true,
 		},
-		storagePath: {
+		filePath: {
 			type: String,
 			required: true,
 		},
