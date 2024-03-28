@@ -7,7 +7,8 @@ import multer from "multer"; // Middleware for handling file uploads
 import dotenv from "dotenv"; // Load environment variables from a .env file
 
 import authController, { authMiddleware } from "./controllers/authController.js";
-import emailController from "./controllers/emailController.js";
+import emailVerificationController from "./controllers/emailVerificationController.js";
+import passwordVerificationController from "./controllers/passwordVerificationController.js";
 import tableController from "./controllers/tableController.js";
 import menuCategoryController from "./controllers/menuCategoryController.js";
 import menuItemController from "./controllers/menuItemController.js";
@@ -80,8 +81,10 @@ app.get("/auth/verify-token", authMiddleware, (req, res) => {
 	res.status(200).json({ message: "Token is valid" });
 });
 
-// Use the email route
-app.use("/api/email", emailController);
+// Use the email verification controller
+app.use("/api/email", emailVerificationController);
+// Use the email verification controller
+app.use("/api/password", passwordVerificationController);
 
 // Use other controllers
 app.use("/api/tables", tableController);
