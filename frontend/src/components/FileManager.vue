@@ -225,19 +225,18 @@ export default {
 		// Reactive variables
 		const showModal1 = ref(false);
 		const showModal2 = ref(false);
-		const newUser = ref({
-			email: "",
-			password: "",
-			fullName: "",
-			role: "",
+		const newFile = ref({
+			originalName: "",
+			mimeType: "",
+			storagePath: "",
 		});
-		const allUsersData = ref([]);
+		const allFilesData = ref([]);
 
-		// Fetch menu items when the component is mounted
+		// Fetch files when the component is mounted
 		onMounted(async () => {
 			try {
-				const response = await axios.get("http://localhost:5000/api/users");
-				allUsersData.value = response.data.userData;
+				const response = await axios.get("http://localhost:5000/api/files");
+				allFilesData.value = response.data.fileData;
 			} catch (error) {
 				console.error("Error fetching users:", error);
 			}
@@ -342,8 +341,8 @@ export default {
 		return {
 			showModal1,
 			showModal2,
-			newUser,
-			allUsersData,
+			newFile,
+			allFilesData,
 			roleOptions,
 			getUser,
 			updateUser,

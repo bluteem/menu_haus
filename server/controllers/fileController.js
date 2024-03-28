@@ -45,6 +45,18 @@ export const uploadFile = async (req, res) => {
 // POST endpoint to upload a file
 router.post("/upload", upload.single("file"), uploadFile);
 
+// Route: GET /api/files
+// Description: Get all files
+router.get("/", async (req, res) => {
+	try {
+		const fileData = await File.find();
+		res.status(200).json({ fileData });
+	} catch (error) {
+		console.error("Error fetching files:", error);
+		res.status(500).json({ error: "Server error" });
+	}
+});
+
 // Controller function to get file by ID
 export const getFileById = async (req, res) => {
 	try {

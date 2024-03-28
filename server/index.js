@@ -62,7 +62,7 @@ app.get("/auth/verify-token", authMiddleware, (req, res) => {
 });
 
 // Use the file controller
-app.use("/api/file", fileController);
+app.use("/api/files", fileController);
 
 /* const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
