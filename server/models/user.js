@@ -59,24 +59,14 @@ const UserSchema = new mongoose.Schema(
 // Hash password before saving to the database
 UserSchema.pre("save", async function (next) {
 	try {
-		if (!this.isModified("password") && !this.isModified("unverifiedPassword")) {
-			// If neither password nor unverifiedPassword is modified, move to the next middleware
+		if (!this.isModified("password")) {
+			// If password is not modified, move to the next middleware
 			return next();
 		}
 
 		const salt = await bcrypt.genSalt(10);
-
-		// Hash the password if modified
-		if (this.isModified("password")) {
-			const hashedPassword = await bcrypt.hash(this.password, salt);
-			this.password = hashedPassword;
-		}
-
-		// Hash the unverifiedPassword if modified
-		if (this.isModified("unverifiedPassword")) {
-			const hashedUnverifiedPassword = await bcrypt.hash(this.unverifiedPassword, salt);
-			this.unverifiedPassword = hashedUnverifiedPassword;
-		}
+		const hashedPassword = await bcrypt.hash(this.password, salt);
+		this.password = hashedPassword;
 		next();
 	} catch (error) {
 		next(error);
