@@ -6,6 +6,7 @@ import DashboardTables from "../views/DashboardTables.vue";
 import DashboardMenuCategories from "../views/DashboardMenuCategories.vue";
 import DashboardMenuItems from "../views/DashboardMenuItems.vue";
 import DashboardTeam from "../views/DashboardTeam.vue";
+import DashboardFileManager from "../views/DashboardFileManager.vue";
 import DashboardSettings from "../views/DashboardSettings.vue";
 import DashboardAccount from "../views/DashboardAccount.vue";
 import FrontendHome from "../views/FrontendHome.vue";
@@ -80,6 +81,14 @@ const routes = [
 		component: DashboardTeam,
 		meta: {
 			title: "Menu.Haus Dashboard Team",
+			requiresAuth: true,
+		},
+	},
+	{
+		path: "/dashboard/file-manager",
+		component: DashboardFileManager,
+		meta: {
+			title: "Menu.Haus Dashboard File Manager",
 			requiresAuth: true,
 		},
 	},
