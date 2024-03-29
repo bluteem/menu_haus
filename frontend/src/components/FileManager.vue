@@ -10,54 +10,56 @@
 			Add New File
 		</button>
 
-		<div class="flex flex-col">
-			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-				<div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-					<div class="overflow-hidden">
-						<table class="min-w-full border text-center font-light border-neutral-300">
-							<thead class="border-b font-medium border-neutral-300">
-								<tr>
-									<th scope="col" class="border-r px-6 py-4 border-neutral-300">Thumbnail</th>
-									<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Name</th>
-									<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Type</th>
-									<th scope="col" class="px-6 py-4"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr v-for="file in allFilesData" :key="file._id" class="border-b border-neutral-300">
-									<td class="border-r px-6 py-4 border-neutral-300">
-										<div class="text-gray-900 w-40">
-											<img
-												:src="'http://localhost:5000/uploads/' + file.filePath"
-												alt=""
-												class="w-full object-cover rounded-md" />
-										</div>
-									</td>
-									<td class="border-r px-6 py-4 border-neutral-300">
-										<div class="text-gray-900">{{ file.fileName }}</div>
-									</td>
-									<td class="border-r px-6 py-4 border-neutral-300">
-										<div class="text-gray-900">{{ file.fileType }}</div>
-									</td>
-									<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
-										<button
-											@click="getFile(file._id, $refs.Alert)"
-											type="button"
-											class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
-											Edit
-										</button>
-										<button
-											@click="deleteFile(file._id, $refs.Alert)"
-											class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
-											Delete
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+		<!-- Display style toggle buttons -->
+		<div class="flex justify-end mb-4">
+			<button
+				@click="setDisplayStyle('grid')"
+				:class="{
+					'bg-blue-500 text-white': displayStyle === 'grid',
+					'bg-gray-200 text-gray-700': displayStyle !== 'grid',
+				}"
+				class="px-4 py-2 rounded-l-md focus:outline-none">
+				Grid View
+			</button>
+			<button
+				@click="setDisplayStyle('list')"
+				:class="{
+					'bg-blue-500 text-white': displayStyle === 'list',
+					'bg-gray-200 text-gray-700': displayStyle !== 'list',
+				}"
+				class="px-4 py-2 rounded-r-md focus:outline-none">
+				List View
+			</button>
+		</div>
+
+		<!-- Display files based on selected style -->
+		<div v-if="displayStyle === 'grid'" class="grid grid-cols-3 gap-4">
+			<!-- Grid view -->
+			<div v-for="file in allFilesData" :key="file._id" class="bg-white p-4 shadow-md rounded-md">
+				<img :src="'http://localhost:5000/uploads/' + file.filePath" alt="File" class="w-full h-32 object-cover mb-2" />
+				<p class="font-semibold text-gray-800">file.fileName</p>
+				<p class="text-sm text-gray-600">file.fileSize</p>
 			</div>
+		</div>
+
+		<div v-else-if="displayStyle === 'list'">
+			<!-- List view -->
+			<ul class="divide-y divide-gray-200">
+				<li v-for="file in allFilesData" :key="file._id" class="py-4">
+					<div class="flex items-center space-x-4">
+						<div class="flex-shrink-0">
+							<img
+								:src="'http://localhost:5000/uploads/' + file.filePath"
+								alt="File"
+								class="w-12 h-12 object-cover rounded-md" />
+						</div>
+						<div>
+							<p class="font-semibold text-gray-800">{{ file.fileName }}</p>
+							<p class="text-sm text-gray-600">{{ file.fileSize }}</p>
+						</div>
+					</div>
+				</li>
+			</ul>
 		</div>
 
 		<!-- Show message if there are no menu items -->
@@ -215,6 +217,12 @@ export default {
 			}
 		};
 
+		const displayStyle = ref("grid");
+		// Method to set display style
+		const setDisplayStyle = (style) => {
+			displayStyle.value = style;
+		};
+
 		// Fetch a single file
 		const getFile = async (itemId, alertRef) => {
 			try {
@@ -296,6 +304,8 @@ export default {
 			addFile,
 			deleteFile,
 			resetForm,
+			displayStyle,
+			setDisplayStyle,
 		};
 	},
 };
