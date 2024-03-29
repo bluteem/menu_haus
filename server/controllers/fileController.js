@@ -70,7 +70,7 @@ const getFileById = async (req, res) => {
 		}
 
 		// Stream file to client
-		const fileStream = fs.createReadStream(file.filePath);
+		const fileStream = fs.createReadStream(path.join(__dirname, "./server/uploads", file.filePath));
 		fileStream.pipe(res);
 	} catch (error) {
 		console.error("Error fetching file:", error);

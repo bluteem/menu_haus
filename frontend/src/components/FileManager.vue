@@ -222,9 +222,9 @@ export default {
 				const variable = response.data.fileData;
 				newFile.value = {
 					_id: variable._id,
-					originalName: variable.originalName,
-					mimeType: variable.mimeType,
-					storagePath: variable.storagePath,
+					fileName: variable.fileName,
+					fileType: variable.fileType,
+					filePath: variable.filePath,
 				};
 				showModal2.value = true;
 			} catch (error) {
