@@ -29,12 +29,12 @@ const upload = multer({ storage: storage });
 // Controller function to upload file
 const uploadFile = async (req, res) => {
 	try {
-		const { fileName, fileType, filePath } = req.file;
+		const { originalname, mimetype, filename: filePath } = req.file;
 
 		// Save file details to database
 		const file = new File({
-			fileName: fileName,
-			fileType: fileType,
+			fileName: originalname,
+			fileType: mimetype,
 			filePath: filePath,
 		});
 		await file.save();

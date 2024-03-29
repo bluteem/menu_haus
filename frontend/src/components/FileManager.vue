@@ -27,14 +27,17 @@
 								<tr v-for="file in allFilesData" :key="file._id" class="border-b border-neutral-300">
 									<td class="border-r px-6 py-4 border-neutral-300">
 										<div class="text-gray-900 w-40">
-											<img :src="file.storagePath" alt="" class="w-full object-cover rounded-md" />
+											<img
+												:src="'http://localhost:5000/uploads/' + file.filePath"
+												alt=""
+												class="w-full object-cover rounded-md" />
 										</div>
 									</td>
 									<td class="border-r px-6 py-4 border-neutral-300">
-										<div class="text-gray-900">{{ file.originalName }}</div>
+										<div class="text-gray-900">{{ file.fileName }}</div>
 									</td>
 									<td class="border-r px-6 py-4 border-neutral-300">
-										<div class="text-gray-900">{{ file.mimeType }}</div>
+										<div class="text-gray-900">{{ file.fileType }}</div>
 									</td>
 									<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
 										<button
@@ -164,9 +167,9 @@ export default {
 		const showModal2 = ref(false);
 
 		const newFile = ref({
-			originalName: "",
-			mimeType: "",
-			storagePath: "",
+			fileName: "",
+			fileType: "",
+			filePath: "",
 		});
 		const allFilesData = ref([]);
 
@@ -190,16 +193,9 @@ export default {
 
 		// Add a new menu item
 		const addFile = async (alertRef) => {
-			if (!selectedFile.value) {
-				console.error("No file selected");
-				return;
-			}
 			try {
 				const formData = new FormData();
 				formData.append("file", selectedFile.value);
-				formData.append("fileName", selectedFile.value.name); // Append file name to FormData
-				formData.append("fileType", selectedFile.value.type); // Append file type to FormData
-				formData.append("filePath", selectedFile.value.name); // Append file path to FormData
 				const response = await axios.post("http://localhost:5000/api/files/upload", formData, {
 					headers: {
 						"Content-Type": "multipart/form-data",

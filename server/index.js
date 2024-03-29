@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors"; // Cross-Origin Resource Sharing middleware for Express.js
 import multer from "multer"; // Middleware for handling file uploads
 import dotenv from "dotenv"; // Load environment variables from a .env file
+import path from "path";
 
 import authController, { authMiddleware } from "./controllers/authController.js";
 import fileController from "./controllers/fileController.js";
@@ -36,6 +37,8 @@ connectToDatabase();
 // Create an instance of Express
 const app = express();
 
+const __dirname = path.resolve();
+
 // Set the port number from environment variable or default to 5000
 const port = process.env.PORT || 5000;
 
@@ -63,6 +66,8 @@ app.get("/auth/verify-token", authMiddleware, (req, res) => {
 
 // Use the file controller
 app.use("/api/files", fileController);
+// Serve static files from the uploads directory
+app.use("/uploads", express.static(path.join(__dirname, "./server/uploads")));
 
 /* const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
