@@ -15,8 +15,8 @@
 			<button
 				@click="setDisplayStyle('grid')"
 				:class="{
-					'bg-blue-500 text-white': displayStyle === 'grid',
-					'bg-gray-200 text-gray-700': displayStyle !== 'grid',
+					'bg-blue-500 text-white border-y border-l border-gray-600': displayStyle === 'grid',
+					'bg-gray-200 text-gray-700 border-y border-l border-gray-600': displayStyle !== 'grid',
 				}"
 				class="px-4 py-2 rounded-l-md focus:outline-none">
 				Grid View
@@ -24,8 +24,8 @@
 			<button
 				@click="setDisplayStyle('list')"
 				:class="{
-					'bg-blue-500 text-white': displayStyle === 'list',
-					'bg-gray-200 text-gray-700': displayStyle !== 'list',
+					'bg-blue-500 text-white border-y border-r border-gray-600': displayStyle === 'list',
+					'bg-gray-200 text-gray-700 border-y border-r border-gray-600': displayStyle !== 'list',
 				}"
 				class="px-4 py-2 rounded-r-md focus:outline-none">
 				List View
@@ -37,8 +37,19 @@
 			<!-- Grid view -->
 			<div v-for="file in allFilesData" :key="file._id" class="bg-white p-4 shadow-md rounded-md">
 				<img :src="'http://localhost:5000/uploads/' + file.filePath" alt="File" class="w-full h-32 object-cover mb-2" />
-				<p class="font-semibold text-gray-800">file.fileName</p>
-				<p class="text-sm text-gray-600">file.fileSize</p>
+				<p class="font-semibold text-gray-800">{{ file.fileName }}</p>
+				<p class="text-sm text-gray-600">{{ file.fileSize }}</p>
+				<button
+					@click="getFile(file._id, $refs.Alert)"
+					type="button"
+					class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
+					Edit
+				</button>
+				<button
+					@click="deleteFile(file._id, $refs.Alert)"
+					class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
+					Delete
+				</button>
 			</div>
 		</div>
 
@@ -56,6 +67,19 @@
 						<div>
 							<p class="font-semibold text-gray-800">{{ file.fileName }}</p>
 							<p class="text-sm text-gray-600">{{ file.fileSize }}</p>
+						</div>
+						<div>
+							<button
+								@click="getFile(file._id, $refs.Alert)"
+								type="button"
+								class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
+								Edit
+							</button>
+							<button
+								@click="deleteFile(file._id, $refs.Alert)"
+								class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
+								Delete
+							</button>
 						</div>
 					</div>
 				</li>
