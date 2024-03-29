@@ -201,7 +201,9 @@ export default {
 						"Content-Type": "multipart/form-data",
 					},
 				});
-				// allFilesData.value.push(response.data.fileData);
+
+				const response2 = await axios.get("http://localhost:5000/api/files");
+				allFilesData.value = response2.data.fileData;
 				showModal1.value = false;
 				resetForm();
 				// Show success alert using the passed alertRef

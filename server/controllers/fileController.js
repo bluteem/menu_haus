@@ -90,7 +90,7 @@ const deleteFileById = async (req, res) => {
 		}
 
 		// Delete file from disk
-		fs.unlinkSync(file.filePath);
+		fs.unlinkSync(path.join(__dirname, "./server/uploads", file.filePath));
 
 		res.json({ message: "File deleted successfully" });
 	} catch (error) {
