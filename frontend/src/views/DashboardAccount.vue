@@ -261,7 +261,7 @@
 					<div class="w-full border border-gray-400 rounded-md bg-white p-8">
 						<div class="flex items-center mb-8">
 							<div
-								class="rounded-full max-w-16 lg:max-w-24 h-auto mr-8 bg-cover bg-[url('/public/images/no-profile.jpg')] border border-gray-400">
+								class="rounded-full max-w-16 lg:max-w-24 h-auto mr-8 bg-cover bg-[url('/images/no-profile.jpg')] border border-gray-400">
 								<img
 									:src="'http://localhost:5000/uploads/' + allUserData.profilePicture"
 									class="rounded-full max-w-16 lg:max-w-24 h-auto"
