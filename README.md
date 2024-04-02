@@ -18,6 +18,6 @@ Menu Haus allows your guests to:
 
 ## Technology:
 
-Frontend: Vue.js
-Backend: Node.js (Express.js)
-Database: MongoDB
+- Frontend: Vue.js
+- Backend: Node.js (Express.js)
+- Database: MongoDB
