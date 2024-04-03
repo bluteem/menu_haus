@@ -2,14 +2,14 @@
 	<div
 		v-if="alertMessage"
 		class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-20 sm:items-start sm:justify-end z-50">
-		<div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto">
+		<div class="max-w-sm w-full bg-indigo-100 shadow-lg rounded-lg pointer-events-auto">
 			<div class="rounded-lg shadow-xs overflow-hidden">
 				<div class="p-4">
 					<div class="flex items-start">
 						<div class="flex-shrink-0">
 							<svg
-								class="h-6 w-6"
-								fill="#3b82f6"
+								class="h-5 w-5"
+								fill="#f7761c"
 								height="800px"
 								width="800px"
 								xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ export default {
 			this.alertMessage = message;
 			setTimeout(() => {
 				this.dismissAlert();
-			}, 2000); // 5000 milliseconds = 5 seconds
+			}, 50000); // 5000 milliseconds = 5 seconds
 		},
 
 		dismissAlert() {
