@@ -2,7 +2,7 @@
 	<button
 		v-show="showScrollButton"
 		@click="scrollToTop"
-		class="fixed bottom-4 right-4 bg-blue-500 text-white p-4 rounded-full shadow hover:bg-blue-600 transition-opacity duration-300">
+		class="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-full shadow hover:bg-green-600 transition-opacity duration-300">
 		<svg
 			fill="#fff"
 			width="800px"
