@@ -1,4 +1,6 @@
 <template>
+	<FrontendNavbar />
+
 	<!-- Category links -->
 	<div class="sticky top-0 w-full bg-white shadow-md menu-nav px-8 py-6 flex overflow-x-auto">
 		<a
@@ -165,10 +167,12 @@ import { ref, onMounted, nextTick, computed } from "vue";
 import axios from "axios";
 import { Carousel, initTE } from "tw-elements";
 import ScrollUpButton from "@/components/ScrollUpButton.vue";
+import FrontendNavbar from "@/components/FrontendNavbar.vue";
 
 export default {
 	components: {
 		ScrollUpButton,
+		FrontendNavbar,
 	},
 	setup() {
 		const allMenuCategoriesData = ref([]);
