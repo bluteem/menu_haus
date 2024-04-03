@@ -34,7 +34,7 @@
 
 					<!-- Tab Contents -->
 					<div v-if="activeTab === 'login'">
-						<form @submit.prevent="login">
+						<form @submit.prevent="login($refs.Alert)">
 							<div class="mb-4">
 								<label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
 								<div class="relative">
@@ -179,7 +179,7 @@
 					</div>
 
 					<div v-if="activeTab === 'signup'">
-						<form @submit.prevent="signup">
+						<form @submit.prevent="signup($refs.Alert)">
 							<div class="mb-4">
 								<label for="fullName" class="block text-gray-700 font-semibold mb-2">Full Name</label>
 								<div class="relative">
@@ -426,6 +426,8 @@
 			</div>
 		</div>
 	</div>
+
+	<Alert ref="Alert" />
 </template>
 
 <script>
@@ -433,8 +435,12 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import sha256 from "js-sha256";
+import Alert from "@/components/Alert.vue";
 
 export default {
+	components: {
+		Alert,
+	},
 	setup() {
 		const router = useRouter(); // Initialize router
 
@@ -443,7 +449,7 @@ export default {
 		const newLogin = ref([]);
 		const newSignup = ref([]);
 
-		const login = async () => {
+		const login = async (alertRef) => {
 			try {
 				localStorage.removeItem("token");
 
@@ -457,25 +463,33 @@ export default {
 				const token = response.data.token;
 				localStorage.setItem("token", token);
 
-				// Redirect to dashboard and handle potential errors
-				router.push("/dashboard").catch((error) => {
-					console.error("Navigation error:", error);
-					// Handle specific errors like 401 Unauthorized if needed
-				});
+				alertRef.showAlert("Login successful!");
+
+				// execute after 3 seconds
+				setTimeout(() => {
+					// Redirect to dashboard and handle potential errors
+					router.push("/dashboard").catch((error) => {
+						console.error("Navigation error:", error);
+						// Handle specific errors like 401 Unauthorized if needed
+					});
+				}, 3000); // 3000 milliseconds = 3 seconds
 			} catch (error) {
 				// Log the entire error object for debugging
 				console.error("Login failed", error);
+				alertRef.showAlert("Failed to login!");
 
 				// Check if error.response exists before accessing it
 				if (error?.response) {
 					console.error("Server error:", error.response.data);
+					alertRef.showAlert("Server error!");
 				} else {
 					console.error("Unexpected error:", error);
+					alertRef.showAlert("Unexptected error!");
 				}
 			}
 		};
 
-		const signup = async () => {
+		const signup = async (alertRef) => {
 			try {
 				localStorage.removeItem("token");
 
@@ -489,8 +503,10 @@ export default {
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
+				alertRef.showAlert("Registration successful!");
 			} catch (error) {
 				console.error("Registration failed", error.response.data.message);
+				alertRef.showAlert("Registration failed");
 			}
 		};
 
