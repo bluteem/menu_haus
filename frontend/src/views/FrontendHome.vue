@@ -156,14 +156,20 @@
 			</div>
 		</div>
 	</div>
+
+	<ScrollUpButton />
 </template>
 
 <script>
 import { ref, onMounted, nextTick, computed } from "vue";
 import axios from "axios";
 import { Carousel, initTE } from "tw-elements";
+import ScrollUpButton from "@/components/ScrollUpButton.vue";
 
 export default {
+	components: {
+		ScrollUpButton,
+	},
 	setup() {
 		const allMenuCategoriesData = ref([]);
 		const allMenuItemsData = ref([]);
