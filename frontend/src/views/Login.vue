@@ -160,7 +160,11 @@
 							</div>
 							<div class="flex items-center justify-between mb-4">
 								<div class="flex items-center">
-									<input type="checkbox" id="remember" name="remember" class="mr-2" />
+									<input
+										type="checkbox"
+										id="remember"
+										name="remember"
+										class="mr-2 appearance-none border-2 border-gray-400 h-4 w-4 rounded-md bg-white checked:bg-blue-500" />
 									<label for="remember" class="text-gray-700">Remember me</label>
 								</div>
 								<div>
