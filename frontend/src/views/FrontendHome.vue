@@ -30,7 +30,7 @@
 					class="flex items-center mb-4 border-2 border-orange-500 rounded-xl hover:bg-gray-200 transition duration-300 p-4">
 					<div class="w-32 mr-4">
 						<img
-							:src="'/images/' + menuItem.images[0]"
+							:src="'http://localhost:5000/uploads/' + menuItem.images[0]"
 							:alt="menuItem.name"
 							class="w-full h-full object-cover rounded-md" />
 					</div>
