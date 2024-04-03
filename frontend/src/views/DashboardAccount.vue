@@ -420,6 +420,61 @@
 										<label for="newPassword" class="block font-medium text-gray-700">New Password:</label>
 										<div class="relative w-full mb-4">
 											<svg
+												class="h-4 w-4 text-gray-400 absolute right-3 top-3.5 cursor-pointer"
+												viewBox="0 0 64 64"
+												enable-background="new 0 0 64 64"
+												xmlns="http://www.w3.org/2000/svg"
+												@mousedown="showPassword = true"
+												@mouseup="showPassword = false"
+												@mouseleave="showPassword = false">
+												<!-- Conditional rendering for eye icon -->
+												<template v-if="showPassword">
+													<!-- Icon when password is visible -->
+													<path
+														fill="none"
+														stroke="#777e7b"
+														stroke-width="4"
+														stroke-miterlimit="10"
+														d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z" />
+													<circle
+														fill="none"
+														stroke="#777e7b"
+														stroke-width="4"
+														stroke-miterlimit="10"
+														cx="32"
+														cy="32"
+														r="7" />
+												</template>
+												<template v-else>
+													<!-- Icon when password is hidden -->
+													<path
+														fill="none"
+														stroke="#000000"
+														stroke-width="2"
+														stroke-miterlimit="10"
+														d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z" />
+													<circle
+														fill="none"
+														stroke="#777e7b"
+														stroke-width="4"
+														stroke-miterlimit="10"
+														cx="32"
+														cy="32"
+														r="7" />
+													<line
+														fill="none"
+														stroke="#777e7b"
+														stroke-width="4"
+														stroke-miterlimit="10"
+														x1="9"
+														y1="55"
+														x2="55"
+														y2="9" />
+												</template>
+											</svg>
+											<svg
 												class="h-4 w-4 text-gray-400 absolute left-3 top-3"
 												fill="#4b5563"
 												xmlns="http://www.w3.org/2000/svg"
@@ -437,7 +492,7 @@
 												</g>
 											</svg>
 											<input
-												type="password"
+												:type="showPassword ? 'text' : 'password'"
 												v-model="newPassword"
 												id="newPassword"
 												required
@@ -635,6 +690,11 @@ export default {
 			}
 		};
 
+		// toggle between showing and displaying the password
+		const password = ref("");
+		const showPassword = ref(false);
+		const showConfirmPassword = ref(false);
+
 		return {
 			modalForEmail,
 			modalForPassword,
@@ -646,6 +706,8 @@ export default {
 			updateFullName,
 			resetForm,
 			isLoading,
+			password,
+			showPassword,
 		};
 	},
 };
