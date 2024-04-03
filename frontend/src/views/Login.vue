@@ -76,6 +76,61 @@
 								<label for="password" class="block text-gray-700 font-semibold mb-2">Password</label>
 								<div class="relative">
 									<svg
+										class="h-4 w-4 text-gray-400 absolute right-3 top-3.5 cursor-pointer"
+										viewBox="0 0 64 64"
+										enable-background="new 0 0 64 64"
+										xmlns="http://www.w3.org/2000/svg"
+										@mousedown="showPassword = true"
+										@mouseup="showPassword = false"
+										@mouseleave="showPassword = false">
+										<!-- Conditional rendering for eye icon -->
+										<template v-if="showPassword">
+											<!-- Icon when password is visible -->
+											<path
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z" />
+											<circle
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												cx="32"
+												cy="32"
+												r="7" />
+										</template>
+										<template v-else>
+											<!-- Icon when password is hidden -->
+											<path
+												fill="none"
+												stroke="#000000"
+												stroke-width="2"
+												stroke-miterlimit="10"
+												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z" />
+											<circle
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												cx="32"
+												cy="32"
+												r="7" />
+											<line
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												x1="9"
+												y1="55"
+												x2="55"
+												y2="9" />
+										</template>
+									</svg>
+									<svg
 										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
 										fill="#4b5563"
 										xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +148,7 @@
 										</g>
 									</svg>
 									<input
-										type="password"
+										:type="showPassword ? 'text' : 'password'"
 										v-model="newLogin.password"
 										id="password"
 										name="password"
@@ -190,36 +245,60 @@
 								<label for="password" class="block text-gray-700 font-semibold mb-2">Password</label>
 								<div class="relative">
 									<svg
-										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-										fill="#4b5563"
+										class="h-4 w-4 text-gray-400 absolute right-3 top-3.5 cursor-pointer"
+										viewBox="0 0 64 64"
+										enable-background="new 0 0 64 64"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 203.096 203.096">
-										<g>
+										@mousedown="showPassword = true"
+										@mouseup="showPassword = false"
+										@mouseleave="showPassword = false">
+										<!-- Conditional rendering for eye icon -->
+										<template v-if="showPassword">
+											<!-- Icon when password is visible -->
 											<path
-												d="M153.976,73.236h-3.308V49.115C150.669,22.033,128.634,0,101.549,0C74.465,0,52.43,22.033,52.43,49.115v24.121H49.12
-                                                c-9.649,0-17.5,7.851-17.5,17.5v94.859c0,9.649,7.851,17.5,17.5,17.5h104.856c9.649,0,17.5-7.851,17.5-17.5V90.736
-                                                C171.476,81.087,163.626,73.236,153.976,73.236z M67.43,49.115C67.43,30.304,82.736,15,101.549,15
-                                                c18.813,0,34.119,15.304,34.119,34.115v24.121H67.43V49.115z M156.476,185.596c0,1.355-1.145,2.5-2.5,2.5H49.12
-                                                c-1.355,0-2.5-1.145-2.5-2.5V90.736c0-1.355,1.145-2.5,2.5-2.5H59.93h83.238h10.808c1.355,0,2.5,1.145,2.5,2.5V185.596z" />
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z" />
+											<circle
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												cx="32"
+												cy="32"
+												r="7" />
+										</template>
+										<template v-else>
+											<!-- Icon when password is hidden -->
 											<path
-												d="M101.547,116.309c-4.142,0-7.5,3.357-7.5,7.5v28.715c0,4.143,3.358,7.5,7.5,7.5c4.142,0,7.5-3.357,7.5-7.5v-28.715
-                                                C109.047,119.666,105.689,116.309,101.547,116.309z" />
-										</g>
+												fill="none"
+												stroke="#000000"
+												stroke-width="2"
+												stroke-miterlimit="10"
+												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z" />
+											<circle
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												cx="32"
+												cy="32"
+												r="7" />
+											<line
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												x1="9"
+												y1="55"
+												x2="55"
+												y2="9" />
+										</template>
 									</svg>
-									<input
-										type="password"
-										v-model="newSignup.password"
-										id="password"
-										name="password"
-										autocomplete="current-password"
-										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
-										placeholder="Enter your password"
-										required />
-								</div>
-							</div>
-							<div class="mb-4">
-								<label for="confirmPassword" class="block text-gray-700 font-semibold mb-2">Confirm Password</label>
-								<div class="relative">
 									<svg
 										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
 										fill="#4b5563"
@@ -238,7 +317,93 @@
 										</g>
 									</svg>
 									<input
-										type="password"
+										:type="showPassword ? 'text' : 'password'"
+										v-model="newSignup.password"
+										id="password"
+										name="password"
+										autocomplete="current-password"
+										class="w-full border border-gray-400 rounded-md pl-10 pr-3 py-2 focus:outline-none focus:border-blue-500"
+										placeholder="Enter your password"
+										required />
+								</div>
+							</div>
+							<div class="mb-4">
+								<label for="confirmPassword" class="block text-gray-700 font-semibold mb-2">Confirm Password</label>
+								<div class="relative">
+									<svg
+										class="h-4 w-4 text-gray-400 absolute right-3 top-3.5 cursor-pointer"
+										viewBox="0 0 64 64"
+										enable-background="new 0 0 64 64"
+										xmlns="http://www.w3.org/2000/svg"
+										@mousedown="showConfirmPassword = true"
+										@mouseup="showConfirmPassword = false"
+										@mouseleave="showConfirmPassword = false">
+										<!-- Conditional rendering for eye icon -->
+										<template v-if="showConfirmPassword">
+											<!-- Icon when password is visible -->
+											<path
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z" />
+											<circle
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												cx="32"
+												cy="32"
+												r="7" />
+										</template>
+										<template v-else>
+											<!-- Icon when password is hidden -->
+											<path
+												fill="none"
+												stroke="#000000"
+												stroke-width="2"
+												stroke-miterlimit="10"
+												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
+	S1,32,1,32z" />
+											<circle
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												cx="32"
+												cy="32"
+												r="7" />
+											<line
+												fill="none"
+												stroke="#777e7b"
+												stroke-width="4"
+												stroke-miterlimit="10"
+												x1="9"
+												y1="55"
+												x2="55"
+												y2="9" />
+										</template>
+									</svg>
+									<svg
+										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+										fill="#4b5563"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 203.096 203.096">
+										<g>
+											<path
+												d="M153.976,73.236h-3.308V49.115C150.669,22.033,128.634,0,101.549,0C74.465,0,52.43,22.033,52.43,49.115v24.121H49.12
+                                                c-9.649,0-17.5,7.851-17.5,17.5v94.859c0,9.649,7.851,17.5,17.5,17.5h104.856c9.649,0,17.5-7.851,17.5-17.5V90.736
+                                                C171.476,81.087,163.626,73.236,153.976,73.236z M67.43,49.115C67.43,30.304,82.736,15,101.549,15
+                                                c18.813,0,34.119,15.304,34.119,34.115v24.121H67.43V49.115z M156.476,185.596c0,1.355-1.145,2.5-2.5,2.5H49.12
+                                                c-1.355,0-2.5-1.145-2.5-2.5V90.736c0-1.355,1.145-2.5,2.5-2.5H59.93h83.238h10.808c1.355,0,2.5,1.145,2.5,2.5V185.596z" />
+											<path
+												d="M101.547,116.309c-4.142,0-7.5,3.357-7.5,7.5v28.715c0,4.143,3.358,7.5,7.5,7.5c4.142,0,7.5-3.357,7.5-7.5v-28.715
+                                                C109.047,119.666,105.689,116.309,101.547,116.309z" />
+										</g>
+									</svg>
+									<input
+										:type="showConfirmPassword ? 'text' : 'password'"
 										id="confirmPassword"
 										name="confirmPassword"
 										autocomplete="current-password"
@@ -265,7 +430,7 @@
 
 <script>
 import { ref } from "vue";
-import { useRouter } from "vue-router"; // Import useRouter from vue-router
+import { useRouter } from "vue-router";
 import axios from "axios";
 import sha256 from "js-sha256";
 
@@ -329,12 +494,20 @@ export default {
 			}
 		};
 
+		// toggle between showing and displaying the password
+		const password = ref("");
+		const showPassword = ref(false);
+		const showConfirmPassword = ref(false);
+
 		return {
 			activeTab,
 			newLogin,
 			newSignup,
 			login,
 			signup,
+			password,
+			showPassword,
+			showConfirmPassword,
 		};
 	},
 };
