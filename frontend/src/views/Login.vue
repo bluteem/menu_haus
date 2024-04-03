@@ -173,7 +173,7 @@
 								Login
 							</button>
 						</form>
-						<div class="text-sm text-center text-gray-600 mt-4">
+						<div class="text-center text-gray-600 mt-4">
 							Don't have an account? <a href="#" @click="activeTab = 'signup'" class="text-blue-500">Sign Up</a>
 						</div>
 					</div>
@@ -418,7 +418,7 @@
 								Create account
 							</button>
 						</form>
-						<div class="text-sm text-center text-gray-600 mt-4">
+						<div class="text-center text-gray-600 mt-4">
 							Already have an account? <a href="#" @click="activeTab = 'login'" class="text-blue-500">Login</a>
 						</div>
 					</div>
