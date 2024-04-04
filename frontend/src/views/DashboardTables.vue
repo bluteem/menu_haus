@@ -117,11 +117,7 @@
 														mode: 'Byte',
 														errorCorrectionLevel: 'H',
 													}"
-													:imageOptions="{
-														hideBackgroundDots: true,
-														imageSize: 0.4,
-														margin: 10,
-													}"
+													:imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
 													:dotsOptions="{
 														type: 'extra-rounded',
 														color: '#6A1A4C',
@@ -141,7 +137,8 @@
 													:download="true"
 													myclass="my-qur mb-4"
 													imgclass="img-qr"
-													downloadButton="my-button px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+													downloadButton="my-button px-4 py-2 bg-blue-500 text-white rounded-md
+												hover:bg-blue-600 transition duration-300"
 													:downloadOptions="{ name: 'qr-for-table', extension: 'png' }" />
 											</div>
 										</div>
@@ -232,7 +229,7 @@
 import { ref, computed, onMounted, onBeforeMount } from "vue";
 import axios from "axios";
 import Alert from "@/components/Alert.vue";
-import c from "qrcode-vue3";
+import QRCodeVue3 from "qrcode-vue3";
 import Sidebar from "../components/Sidebar.vue";
 
 export default {
