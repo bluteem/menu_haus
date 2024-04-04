@@ -476,7 +476,7 @@ export default {
 						console.error("Navigation error:", error);
 						// Handle specific errors like 401 Unauthorized if needed
 					});
-				}, 3000); // 3000 milliseconds = 3 seconds
+				}, 2000); // 3000 milliseconds = 3 seconds
 			} catch (error) {
 				// Log the entire error object for debugging
 				console.error("Login failed", error);

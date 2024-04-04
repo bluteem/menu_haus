@@ -342,11 +342,11 @@ export default {
 		};
 
 		const showQRCode = ref(false);
-		const urlForQrCode = ref("https://example.com");
+		const urlForQrCode = ref("https://maps.app.goo.gl/wkmvfL5Dq8XvimCh6");
 
 		const generateQrCode = () => {
 			// Set qrValue based on your logic, e.g., fetch from an API
-			urlForQrCode.value = "https://example.com";
+			urlForQrCode.value = "https://maps.app.goo.gl/wkmvfL5Dq8XvimCh6";
 			showQRCode.value = true; // Show the QR code
 		};
 
