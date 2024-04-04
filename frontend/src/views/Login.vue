@@ -416,7 +416,7 @@
 										required />
 								</div>
 							</div>
-							<div class="flex items-center justify-between mb-4">
+							<div class="mb-4">
 								<input
 									type="checkbox"
 									id="privacy"
@@ -426,13 +426,13 @@
 									>Aydınlatma metni kapsamında elektronik ileti almak istiyorum.</label
 								>
 							</div>
-							<div class="flex items-center justify-between mb-4">
+							<div class="mb-4">
 								<input
 									type="checkbox"
 									id="agreement"
 									name="agreement"
 									class="mr-2 appearance-none border-2 border-gray-400 h-4 w-4 rounded-md bg-white checked:bg-blue-500" />
-								<label for="agreement" class="text-gray-700"
+								<label for="agreement" class="text-gray-700 leading-4"
 									>Üyelik Sözleşmesi Koşulları ve Kişisel Verilerimin Korunması Hakkında bilgilendirmeyi okudum ve
 									onaylıyorum.</label
 								>
