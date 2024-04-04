@@ -19,8 +19,9 @@
 				<li>
 					<a
 						href="/"
+						target="_blank"
 						class="relative flex items-center rounded-md border border-gray-700 bg-gray-900 py-2 px-2 duration-300 ease-in-out hover:bg-gray-700"
-						title="Tables">
+						title="Live Menu">
 						<svg
 							class="w-5 h-5"
 							fill="#ffffff"
