@@ -130,7 +130,7 @@
 															],
 														},
 													}"
-													:backgroundOptions="{ color: '#ffffff' }"
+													:backgroundOptions="{ color: 'transparent' }"
 													:cornersSquareOptions="{ type: 'extra-rounded', color: '#000000' }"
 													:cornersDotOptions="{ type: 'extra-rounded', color: '#000000' }"
 													fileExt="png"
