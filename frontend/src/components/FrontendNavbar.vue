@@ -9,8 +9,16 @@
 					<div class="hidden sm:ml-6 sm:block">
 						<div class="flex space-x-4">
 							<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-							<a href="#" class="text-gray-300 bg-sky-700 hover:text-white rounded-md px-3 py-2 font-medium"
-								>Call a Waiter</a
+							<a href="#" class="text-gray-300 bg-sky-700 hover:text-white rounded-md px-3 py-2 flex items-center">
+								<svg class="h-6 w-6 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+									<path
+										d="M6 18V14M6 14H8L13 17V7L8 10H5C3.89543 10 3 10.8954 3 12V12C3 13.1046 3.89543 14 5 14H6ZM17 7L19 5M17 17L19 19M19 12H21"
+										stroke="currentColor"
+										stroke-width="1"
+										stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+								<span class="align-middle">Call a Waiter</span></a
 							>
 						</div>
 					</div>
@@ -147,10 +155,8 @@
 		<div class="sm:hidden" id="mobile-menu">
 			<div class="space-y-1 px-2 pb-3 pt-2">
 				<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-				<a
-					href="#"
-					class="text-gray-300 bg-sky-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium text-center"
-					>Call a Waiter</a
+				<a href="#" class="text-gray-300 bg-sky-700 hover:text-white block rounded-md px-3 py-2 text-base text-center">
+					Call a Waiter</a
 				>
 			</div>
 		</div>
