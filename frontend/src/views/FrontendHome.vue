@@ -85,7 +85,10 @@
 									data-te-carousel-fade
 									data-te-carousel-item
 									:data-te-carousel-active="index === 0 ? '' : null">
-									<img :src="'/images/' + image" class="block w-full" alt="{{ selectedMenuItem.name }}" />
+									<img
+										:src="'http://localhost:5000/uploads/' + image"
+										class="block w-full"
+										alt="{{ selectedMenuItem.name }}" />
 								</div>
 							</div>
 
