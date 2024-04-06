@@ -34,7 +34,7 @@
 
 					<!-- Tab Contents -->
 					<div v-if="activeTab === 'login'">
-						<form @submit.prevent="login">
+						<form @submit.prevent="login($refs.Alert)">
 							<div class="mb-4">
 								<label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
 								<div class="relative">
@@ -183,7 +183,7 @@
 					</div>
 
 					<div v-if="activeTab === 'signup'">
-						<form @submit.prevent="signup">
+						<form @submit.prevent="signup($refs.Alert)">
 							<div class="mb-4">
 								<label for="fullName" class="block text-gray-700 font-semibold mb-2">Full Name</label>
 								<div class="relative">
@@ -452,7 +452,7 @@
 		</div>
 	</div>
 
-	<Alert ref="alertRef" />
+	<Alert ref="Alert" />
 </template>
 
 <script>
@@ -470,7 +470,6 @@ export default {
 		const activeTab = ref("login");
 
 		const router = useRouter();
-		const alertRef = ref(null);
 
 		const newLogin = ref([]);
 		const login = async () => {
@@ -487,7 +486,9 @@ export default {
 				const token = response.data.token;
 				localStorage.setItem("token", token);
 
-				alertRef.value.showAlert("Login successful!", "success");
+				alertType.value = "success";
+				alertMessage.value = "Login successful!";
+				showAlert(alertType, alertMessage);
 
 				// execute after 3 seconds
 				setTimeout(() => {
@@ -500,15 +501,21 @@ export default {
 			} catch (error) {
 				// Log the entire error object for debugging
 				console.error("Login failed", error);
-				alertRef.value.showAlert("Failed to login!", "error");
+				alertType.value = "error";
+				alertMessage.value = "Failed to login!";
+				showAlert(alertType, alertMessage);
 
 				// Check if error.response exists before accessing it
 				if (error?.response) {
 					console.error("Server error:", error.response.data);
-					alertRef.value.showAlert("Invalid email or password!", "error");
+					alertType.value = "error";
+					alertMessage.value = "Invalid email or password!";
+					showAlert(alertType, alertMessage);
 				} else {
 					console.error("Unexpected error:", error);
-					alertRef.value.showAlert("Unexpected error!", "error");
+					alertType.value = "error";
+					alertMessage.value = "Unexpected error!";
+					showAlert(alertType, alertMessage);
 				}
 			}
 		};
@@ -528,10 +535,14 @@ export default {
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
-				alertRef.value.showAlert("Registration successful!", "success");
+				alertType.value = "success";
+				alertMessage.value = "Registration successful!";
+				showAlert(alertType, alertMessage);
 			} catch (error) {
 				console.error("Registration failed", error.response.data.message);
-				alertRef.value.showAlert("Registration failed", "error");
+				alertType.value = "error";
+				alertMessage.value = "Registration failed!";
+				showAlert(alertType, alertMessage);
 			}
 		};
 
@@ -541,7 +552,6 @@ export default {
 		const showConfirmPassword = ref(false);
 
 		return {
-			alertRef,
 			activeTab,
 			newLogin,
 			newSignup,
