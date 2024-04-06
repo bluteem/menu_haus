@@ -22,13 +22,13 @@
 				stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 			</svg>
-			<p class="font-medium text-gray-800">{{ message }}</p>
+			<p class="text-sm font-medium text-gray-800">{{ message }}</p>
 		</div>
 	</div>
 </template>
 
 <script>
-import { ref, computed, watch } from "vue";
+import { ref } from "vue";
 
 export default {
 	name: "Alert",
@@ -38,20 +38,20 @@ export default {
 	},
 	setup(props) {
 		const isVisible = ref(false);
-		const isSuccess = computed(() => props.type === "success");
-		const isError = computed(() => props.type === "error");
+		const isSuccess = ref(false);
+		const isError = ref(false);
 
-		watch(
-			() => props.message,
-			() => {
-				if (props.message) {
-					isVisible.value = true;
-					setTimeout(() => {
-						isVisible.value = false;
-					}, 1500); // Hide after 1.5 seconds
-				}
-			}
-		);
+		if (props.type === "success") {
+			isSuccess.value = true;
+			isError.value = false;
+		} else if (props.type === "error") {
+			isSuccess.value = false;
+			isError.value = true;
+		}
+		isVisible.value = true;
+		setTimeout(() => {
+			isVisible.value = false;
+		}, 3000); // Hide after 3 seconds
 
 		return {
 			isVisible,

@@ -510,6 +510,7 @@ export default {
 				console.error("Login failed", error);
 				// alertRef.$refs.showAlert("Failed to login!", "error");
 				alertMessage.value = "Login failed!";
+				alertType.value = "error";
 
 				// alertMessage.value = "Invalid email or password!";
 
@@ -518,12 +519,13 @@ export default {
 					console.error("Server error:", error.response.data);
 					// alertRef.$refs.showAlert("Invalid email or password!", "error");
 					alertMessage.value = "Server error!";
+					alertType.value = "error";
 				} else {
 					console.error("Unexpected error:", error);
 					// alertRef.$refs.showAlert("Unexpected error!", "error");
 					alertMessage.value = "Unexpected error!";
+					alertType.value = "error";
 				}
-				alertType.value = "error";
 			}
 		};
 
