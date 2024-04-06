@@ -467,15 +467,12 @@ export default {
 		Alert,
 	},
 	setup() {
-		const router = useRouter(); // Initialize router
-
 		const activeTab = ref("login");
 
-		const newLogin = ref([]);
-		const newSignup = ref([]);
-
+		const router = useRouter();
 		const alertRef = ref(null);
 
+		const newLogin = ref([]);
 		const login = async () => {
 			try {
 				localStorage.removeItem("token");
@@ -516,6 +513,7 @@ export default {
 			}
 		};
 
+		const newSignup = ref([]);
 		const signup = async () => {
 			try {
 				localStorage.removeItem("token");
