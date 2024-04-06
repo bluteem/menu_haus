@@ -34,7 +34,7 @@
 
 					<!-- Tab Contents -->
 					<div v-if="activeTab === 'login'">
-						<form @submit.prevent="login($refs.Alert)">
+						<form @submit.prevent="login">
 							<div class="mb-4">
 								<label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
 								<div class="relative">
@@ -183,7 +183,7 @@
 					</div>
 
 					<div v-if="activeTab === 'signup'">
-						<form @submit.prevent="signup($refs.Alert)">
+						<form @submit.prevent="signup">
 							<div class="mb-4">
 								<label for="fullName" class="block text-gray-700 font-semibold mb-2">Full Name</label>
 								<div class="relative">
@@ -452,7 +452,7 @@
 		</div>
 	</div>
 
-	<Alert ref="Alert" />
+	<Alert ref="alertRef" />
 </template>
 
 <script>
@@ -474,7 +474,9 @@ export default {
 		const newLogin = ref([]);
 		const newSignup = ref([]);
 
-		const login = async (alertRef) => {
+		const alertRef = ref(null);
+
+		const login = async () => {
 			try {
 				localStorage.removeItem("token");
 
@@ -488,7 +490,7 @@ export default {
 				const token = response.data.token;
 				localStorage.setItem("token", token);
 
-				alertRef.showAlert("Login successful!");
+				alertRef.value.showAlert("Login successful!", "success");
 
 				// execute after 3 seconds
 				setTimeout(() => {
@@ -501,20 +503,20 @@ export default {
 			} catch (error) {
 				// Log the entire error object for debugging
 				console.error("Login failed", error);
-				alertRef.showAlert("Failed to login!");
+				alertRef.value.showAlert("Failed to login!", "error");
 
 				// Check if error.response exists before accessing it
 				if (error?.response) {
 					console.error("Server error:", error.response.data);
-					alertRef.showAlert("Server error!");
+					alertRef.value.showAlert("Invalid email or password!", "error");
 				} else {
 					console.error("Unexpected error:", error);
-					alertRef.showAlert("Unexptected error!");
+					alertRef.value.showAlert("Unexpected error!", "error");
 				}
 			}
 		};
 
-		const signup = async (alertRef) => {
+		const signup = async () => {
 			try {
 				localStorage.removeItem("token");
 
@@ -528,10 +530,10 @@ export default {
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
-				alertRef.showAlert("Registration successful!");
+				alertRef.value.showAlert("Registration successful!", "success");
 			} catch (error) {
 				console.error("Registration failed", error.response.data.message);
-				alertRef.showAlert("Registration failed");
+				alertRef.value.showAlert("Registration failed", "error");
 			}
 		};
 
@@ -541,6 +543,7 @@ export default {
 		const showConfirmPassword = ref(false);
 
 		return {
+			alertRef,
 			activeTab,
 			newLogin,
 			newSignup,
