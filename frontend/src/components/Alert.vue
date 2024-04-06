@@ -22,7 +22,7 @@
 				stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 			</svg>
-			<p class="text-sm font-medium text-gray-800">{{ message }}</p>
+			<p class="font-medium text-gray-800">{{ message }}</p>
 		</div>
 	</div>
 </template>

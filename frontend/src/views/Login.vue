@@ -452,8 +452,7 @@
 		</div>
 	</div>
 
-	<Alert ref="Alert" />
-	<Alertic :message="alertMessage" :type="alertType" />
+	<Alert :message="alertMessage" :type="alertType" />
 </template>
 
 <script>
@@ -462,12 +461,10 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 import sha256 from "js-sha256";
 import Alert from "@/components/Alert.vue";
-import Alertic from "@/components/Alertic.vue";
 
 export default {
 	components: {
 		Alert,
-		Alertic,
 	},
 	setup() {
 		const activeTab = ref("login");
