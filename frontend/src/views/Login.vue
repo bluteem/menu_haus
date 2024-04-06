@@ -34,7 +34,7 @@
 
 					<!-- Tab Contents -->
 					<div v-if="activeTab === 'login'">
-						<form @submit.prevent="login($refs.Alert)">
+						<form @submit.prevent="login">
 							<div class="mb-4">
 								<label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
 								<div class="relative">
@@ -453,6 +453,7 @@
 	</div>
 
 	<Alert ref="Alert" />
+	<Alertic :message="alertMessage" :type="alertType" />
 </template>
 
 <script>
@@ -461,18 +462,23 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 import sha256 from "js-sha256";
 import Alert from "@/components/Alert.vue";
+import Alertic from "@/components/Alertic.vue";
 
 export default {
 	components: {
 		Alert,
+		Alertic,
 	},
 	setup() {
 		const activeTab = ref("login");
 
 		const router = useRouter();
 
+		const alertMessage = ref("");
+		const alertType = ref("");
+
 		const newLogin = ref([]);
-		const login = async (alertRef) => {
+		const login = async () => {
 			try {
 				localStorage.removeItem("token");
 
@@ -484,9 +490,15 @@ export default {
 					password: hashedPassword,
 				});
 				const token = response.data.token;
+
+				// Set success message
+				alertMessage.value = "Login successful!";
+				alertType.value = "success";
+
+				// Set token to local storage
 				localStorage.setItem("token", token);
 
-				alertRef.$refs.showAlert("Login successful!", "success");
+				// alertRef.$refs.showAlert("Login successful!", "success");
 
 				// execute after 3 seconds
 				setTimeout(() => {
@@ -499,21 +511,27 @@ export default {
 			} catch (error) {
 				// Log the entire error object for debugging
 				console.error("Login failed", error);
-				alertRef.$refs.showAlert("Failed to login!", "error");
+				// alertRef.$refs.showAlert("Failed to login!", "error");
+				alertMessage.value = "Login failed!";
+
+				// alertMessage.value = "Invalid email or password!";
 
 				// Check if error.response exists before accessing it
 				if (error?.response) {
 					console.error("Server error:", error.response.data);
-					alertRef.$refs.showAlert("Invalid email or password!", "error");
+					// alertRef.$refs.showAlert("Invalid email or password!", "error");
+					alertMessage.value = "Server error!";
 				} else {
 					console.error("Unexpected error:", error);
-					alertRef.$refs.showAlert("Unexpected error!", "error");
+					// alertRef.$refs.showAlert("Unexpected error!", "error");
+					alertMessage.value = "Unexpected error!";
 				}
+				alertType.value = "error";
 			}
 		};
 
 		const newSignup = ref([]);
-		const signup = async (alertRef) => {
+		const signup = async () => {
 			try {
 				localStorage.removeItem("token");
 
@@ -527,10 +545,10 @@ export default {
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
-				alertRef.$refs.showAlert("Registration successful!", "success");
+				// alertRef.$refs.showAlert("Registration successful!", "success");
 			} catch (error) {
 				console.error("Registration failed", error.response.data.message);
-				alertRef.$refs.showAlert("Registration failed!", "success");
+				// alertRef.$refs.showAlert("Registration failed!", "success");
 			}
 		};
 
@@ -548,6 +566,8 @@ export default {
 			password,
 			showPassword,
 			showConfirmPassword,
+			alertMessage,
+			alertType,
 		};
 	},
 };
