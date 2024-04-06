@@ -62,7 +62,10 @@ export default {
 	props: {
 		alertType: {
 			type: String,
-			default: "error",
+			default: "success",
+		},
+		message: {
+			type: String,
 		},
 	},
 	data() {
@@ -71,8 +74,8 @@ export default {
 		};
 	},
 	methods: {
-		showAlert(message) {
-			this.alertMessage = message;
+		showAlert(alertType, alertMessage) {
+			this.alertMessage = alertMessage;
 			setTimeout(() => {
 				this.dismissAlert();
 			}, 2000); // 5000 milliseconds = 5 seconds

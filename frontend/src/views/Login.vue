@@ -486,7 +486,7 @@ export default {
 				const token = response.data.token;
 				localStorage.setItem("token", token);
 
-				alertRef.showAlert("Login successful!");
+				alertRef.$refs.showAlert("Login successful!", "success");
 
 				// execute after 3 seconds
 				setTimeout(() => {
@@ -499,21 +499,21 @@ export default {
 			} catch (error) {
 				// Log the entire error object for debugging
 				console.error("Login failed", error);
-				alertRef.showAlert("Failed to login!");
+				alertRef.$refs.showAlert("Failed to login!", "error");
 
 				// Check if error.response exists before accessing it
 				if (error?.response) {
 					console.error("Server error:", error.response.data);
-					alertRef.showAlert("Invalid email or password!");
+					alertRef.$refs.showAlert("Invalid email or password!", "error");
 				} else {
 					console.error("Unexpected error:", error);
-					alertRef.showAlert("Unexpected error!");
+					alertRef.$refs.showAlert("Unexpected error!", "error");
 				}
 			}
 		};
 
 		const newSignup = ref([]);
-		const signup = async () => {
+		const signup = async (alertRef) => {
 			try {
 				localStorage.removeItem("token");
 
@@ -527,10 +527,10 @@ export default {
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
-				alertRef.showAlert("Registration successful!");
+				alertRef.$refs.showAlert("Registration successful!", "success");
 			} catch (error) {
 				console.error("Registration failed", error.response.data.message);
-				alertRef.showAlert("Registration failed!");
+				alertRef.$refs.showAlert("Registration failed!", "success");
 			}
 		};
 
