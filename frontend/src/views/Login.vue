@@ -472,7 +472,7 @@ export default {
 		const router = useRouter();
 
 		const newLogin = ref([]);
-		const login = async () => {
+		const login = async (alertRef) => {
 			try {
 				localStorage.removeItem("token");
 
@@ -486,9 +486,7 @@ export default {
 				const token = response.data.token;
 				localStorage.setItem("token", token);
 
-				alertType.value = "success";
-				alertMessage.value = "Login successful!";
-				showAlert(alertType, alertMessage);
+				alertRef.showAlert("Login successful!");
 
 				// execute after 3 seconds
 				setTimeout(() => {
@@ -501,21 +499,15 @@ export default {
 			} catch (error) {
 				// Log the entire error object for debugging
 				console.error("Login failed", error);
-				alertType.value = "error";
-				alertMessage.value = "Failed to login!";
-				showAlert(alertType, alertMessage);
+				alertRef.showAlert("Failed to login!");
 
 				// Check if error.response exists before accessing it
 				if (error?.response) {
 					console.error("Server error:", error.response.data);
-					alertType.value = "error";
-					alertMessage.value = "Invalid email or password!";
-					showAlert(alertType, alertMessage);
+					alertRef.showAlert("Invalid email or password!");
 				} else {
 					console.error("Unexpected error:", error);
-					alertType.value = "error";
-					alertMessage.value = "Unexpected error!";
-					showAlert(alertType, alertMessage);
+					alertRef.showAlert("Unexpected error!");
 				}
 			}
 		};
@@ -535,14 +527,10 @@ export default {
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
-				alertType.value = "success";
-				alertMessage.value = "Registration successful!";
-				showAlert(alertType, alertMessage);
+				alertRef.showAlert("Registration successful!");
 			} catch (error) {
 				console.error("Registration failed", error.response.data.message);
-				alertType.value = "error";
-				alertMessage.value = "Registration failed!";
-				showAlert(alertType, alertMessage);
+				alertRef.showAlert("Registration failed!");
 			}
 		};
 

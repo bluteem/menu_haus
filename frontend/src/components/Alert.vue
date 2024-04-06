@@ -66,7 +66,6 @@ export default {
 	},
 	methods: {
 		showAlert(type, message) {
-			this.alertType = type;
 			this.alertMessage = message;
 			setTimeout(() => {
 				this.dismissAlert();
