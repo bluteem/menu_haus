@@ -59,13 +59,19 @@
 <script>
 export default {
 	name: "Alert",
+	props: {
+		alertType: {
+			type: String,
+			default: "error",
+		},
+	},
 	data() {
 		return {
 			alertMessage: "",
 		};
 	},
 	methods: {
-		showAlert(type, message) {
+		showAlert(message) {
 			this.alertMessage = message;
 			setTimeout(() => {
 				this.dismissAlert();
