@@ -39,21 +39,15 @@ export default {
 	setup(props) {
 		const isVisible = ref(false);
 
-		// Make the alert visible when a new message is received
-		isVisible.value = true;
-
-		// Hide the alert after 3 seconds
-		setTimeout(() => {
-			isVisible.value = false;
-		}, 3000);
-
-		/* 		const showAlert = () => {
-			isVisible.value = true;
-
-			setTimeout(() => {
-				isVisible.value = false;
-			}, 3000);
-		}; */
+		watch(
+			() => props.message,
+			() => {
+				isVisible.value = true;
+				setTimeout(() => {
+					isVisible.value = false;
+				}, 1500);
+			}
+		);
 
 		return {
 			isVisible,

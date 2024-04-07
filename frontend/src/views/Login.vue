@@ -457,7 +457,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import sha256 from "js-sha256";
@@ -475,6 +475,11 @@ export default {
 		const alertMessage = ref("");
 		const alertType = ref("");
 
+		const showAlert = ({ message, type }) => {
+			alertMessage.value = message;
+			alertType.value = type;
+		};
+
 		const newLogin = ref([]);
 		const login = async () => {
 			try {
@@ -489,9 +494,7 @@ export default {
 				});
 				const token = response.data.token;
 
-				// Set success message
-				alertMessage.value = "Login successful!";
-				alertType.value = "success";
+				showAlert({ message: "Login successful", type: "success" });
 
 				// Set token to local storage
 				localStorage.setItem("token", token);
@@ -509,11 +512,11 @@ export default {
 				console.error("Error details:", error);
 				// Set error message
 				if (error.response) {
-					alertMessage.value = "Invalid email or password!";
+					showAlert({ message: "Incorrect username or password", type: "error" });
+					alertType.value = "error";
 				} else {
-					alertMessage.value = "Unexpected error!";
+					showAlert({ message: "An error occurred during login", type: "error" });
 				}
-				alertType.value = "error";
 			}
 		};
 
@@ -553,8 +556,7 @@ export default {
 			password,
 			showPassword,
 			showConfirmPassword,
-			alertMessage,
-			alertType,
+			showAlert,
 		};
 	},
 };
