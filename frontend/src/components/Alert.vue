@@ -2,7 +2,8 @@
 	<div
 		v-if="isVisible"
 		:class="{ 'bg-green-200': type === 'success', 'bg-red-200': type === 'error' }"
-		class="fixed bottom-0 left-0 w-full p-4 flex justify-center items-center z-50">
+		class="fixed bottom-0 left-0 w-full p-4 flex justify-center items-center z-50"
+		:key="alertKey">
 		<div class="flex items-center">
 			<svg
 				v-if="type === 'success'"
@@ -38,11 +39,13 @@ export default {
 	},
 	setup(props) {
 		const isVisible = ref(false);
+		const alertKey = ref(0);
 
 		watch(
 			() => props.message,
 			() => {
 				isVisible.value = true;
+				alertKey.value++;
 				setTimeout(() => {
 					isVisible.value = false;
 				}, 1500);
@@ -51,6 +54,7 @@ export default {
 
 		return {
 			isVisible,
+			alertKey,
 		};
 	},
 };
