@@ -272,11 +272,11 @@ export default {
 				showModal1.value = false;
 				resetForm();
 				// Show success alert using the passed alertRef
-				alertRef.showAlert("Table added successfully!");
+				alertRef.showAlert("Table added successfully!", "success");
 			} catch (error) {
 				console.error("Error adding table:", error);
 				// Show error alert using the passed alertRef if failed to add menu item
-				alertRef.showAlert("Failed to add table. Please try again later.");
+				alertRef.showAlert("Failed to add table. Please try again later.", "error");
 			}
 		};
 
@@ -295,7 +295,7 @@ export default {
 			} catch (error) {
 				console.error("Error fetching table:", error);
 				// Show alert if failed to fetch menu item details
-				alertRef.showAlert("Failed to fetch table details. Please try again later.");
+				alertRef.showAlert("Failed to fetch table details. Please try again later.", "error");
 			}
 		};
 
@@ -316,11 +316,11 @@ export default {
 				showModal2.value = false;
 				resetForm();
 				// Show success alert
-				alertRef.showAlert("Table info updated successfully!");
+				alertRef.showAlert("Table info updated successfully!", "success");
 			} catch (error) {
 				console.error("Error updating table info:", error);
 				// Show error alert if failed to update menu item
-				alertRef.showAlert("Failed to update table info. Please try again later.");
+				alertRef.showAlert("Failed to update table info. Please try again later.", "error");
 			}
 		};
 
@@ -330,11 +330,11 @@ export default {
 				await axios.delete(`http://localhost:5000/api/tables/${itemId}`);
 				allTablesData.value = allTablesData.value.filter((item) => item._id !== itemId);
 				// Show success alert
-				alertRef.showAlert("Table deleted successfully!");
+				alertRef.showAlert("Table deleted successfully!", "success");
 			} catch (error) {
 				console.error("Error deleting table:", error);
 				// Show error alert if failed to delete menu item
-				alertRef.showAlert("Failed to delete table. Please try again later.");
+				alertRef.showAlert("Failed to delete table. Please try again later.", "error");
 			}
 		};
 

@@ -241,11 +241,11 @@ export default {
 				showModal1.value = false;
 				resetForm();
 				// Show success alert using the passed alertRef
-				alertRef.showAlert("File added successfully!");
+				alertRef.showAlert("File added successfully!", "success");
 			} catch (error) {
 				console.error("Error adding file:", error);
 				// Show error alert using the passed alertRef if failed to add menu item
-				alertRef.showAlert("Failed to add file. Please try again later.");
+				alertRef.showAlert("Failed to add file. Please try again later.", "error");
 			}
 		};
 
@@ -270,7 +270,7 @@ export default {
 			} catch (error) {
 				console.error("Error fetching file:", error);
 				// Show alert if failed to fetch file details
-				alertRef.showAlert("Failed to fetch file details. Please try again later.");
+				alertRef.showAlert("Failed to fetch file details. Please try again later.", "error");
 			}
 		};
 
@@ -291,11 +291,11 @@ export default {
 				showModal2.value = false;
 				resetForm();
 				// Show success alert
-				alertRef.showAlert("File info updated successfully!");
+				alertRef.showAlert("File info updated successfully!", "success");
 			} catch (error) {
 				console.error("Error updating file info:", error);
 				// Show error alert if failed to update menu item
-				alertRef.showAlert("Failed to update file info. Please try again later.");
+				alertRef.showAlert("Failed to update file info. Please try again later.", "error");
 			}
 		};
 
@@ -305,11 +305,11 @@ export default {
 				await axios.delete(`http://localhost:5000/api/files/${itemId}`);
 				allFilesData.value = allFilesData.value.filter((item) => item._id !== itemId);
 				// Show success alert
-				alertRef.showAlert("File deleted successfully!");
+				alertRef.showAlert("File deleted successfully!", "success");
 			} catch (error) {
 				console.error("Error deleting file:", error);
 				// Show error alert if failed to delete menu item
-				alertRef.showAlert("Failed to delete file. Please try again later.");
+				alertRef.showAlert("Failed to delete file. Please try again later.", "error");
 			}
 		};
 

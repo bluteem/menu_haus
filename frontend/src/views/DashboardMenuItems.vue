@@ -327,11 +327,11 @@ export default {
 				showModal1.value = false;
 				resetForm();
 				// Show success alert using the passed alertRef
-				alertRef.showAlert("Menu item added successfully!");
+				alertRef.showAlert("Menu item added successfully!", "success");
 			} catch (error) {
 				console.error("Error adding menu item:", error);
 				// Show error alert using the passed alertRef if failed to add menu item
-				alertRef.showAlert("Failed to add menu item. Please try again later.");
+				alertRef.showAlert("Failed to add menu item. Please try again later.", "error");
 			}
 		};
 
@@ -352,7 +352,7 @@ export default {
 			} catch (error) {
 				console.error("Error fetching menu item:", error);
 				// Show alert if failed to fetch menu item details
-				alertRef.showAlert("Failed to fetch menu item details. Please try again later.");
+				alertRef.showAlert("Failed to fetch menu item details. Please try again later.", "error");
 			}
 		};
 
@@ -371,11 +371,11 @@ export default {
 				showModal2.value = false;
 				resetForm();
 				// Show success alert
-				alertRef.showAlert("Menu item updated successfully!");
+				alertRef.showAlert("Menu item updated successfully!", "success");
 			} catch (error) {
 				console.error("Error updating menu item:", error);
 				// Show error alert if failed to update menu item
-				alertRef.showAlert("Failed to update menu item. Please try again later.");
+				alertRef.showAlert("Failed to update menu item. Please try again later.", "error");
 			}
 		};
 
@@ -385,11 +385,11 @@ export default {
 				await axios.delete(`http://localhost:5000/api/menuitems/${itemId}`);
 				allMenuItemsData.value = allMenuItemsData.value.filter((item) => item._id !== itemId);
 				// Show success alert
-				alertRef.showAlert("Menu item deleted successfully!");
+				alertRef.showAlert("Menu item deleted successfully!", "success");
 			} catch (error) {
 				console.error("Error deleting menu item:", error);
 				// Show error alert if failed to delete menu item
-				alertRef.showAlert("Failed to delete menu item. Please try again later.");
+				alertRef.showAlert("Failed to delete menu item. Please try again later.", "error");
 			}
 		};
 

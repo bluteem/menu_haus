@@ -213,11 +213,11 @@ export default {
 				showModal1.value = false;
 				resetForm();
 				// Show success alert using the passed alertRef
-				alertRef.showAlert("Menu category added successfully!");
+				alertRef.showAlert("Menu category added successfully!", "success");
 			} catch (error) {
 				console.error("Error adding menu category:", error);
 				// Show error alert using the passed alertRef if failed to add menu item
-				alertRef.showAlert("Failed to add menu category. Please try again later.");
+				alertRef.showAlert("Failed to add menu category. Please try again later.", "error");
 			}
 		};
 
@@ -235,7 +235,7 @@ export default {
 			} catch (error) {
 				console.error("Error fetching menu category:", error);
 				// Show alert if failed to fetch menu category details
-				alertRef.showAlert("Failed to fetch menu categroy details. Please try again later.");
+				alertRef.showAlert("Failed to fetch menu categroy details. Please try again later.", "error");
 			}
 		};
 
@@ -261,11 +261,11 @@ export default {
 				showModal2.value = false;
 				resetForm();
 				// Show success alert
-				alertRef.showAlert("Menu category info updated successfully!");
+				alertRef.showAlert("Menu category info updated successfully!", "success");
 			} catch (error) {
 				console.error("Error updating menu category info:", error);
 				// Show error alert if failed to update menu category
-				alertRef.showAlert("Failed to update menu category info. Please try again later.");
+				alertRef.showAlert("Failed to update menu category info. Please try again later.", "error");
 			}
 		};
 
@@ -275,11 +275,11 @@ export default {
 				await axios.delete(`http://localhost:5000/api/menucategories/${itemId}`);
 				allMenuCategoriesData.value = allMenuCategoriesData.value.filter((item) => item._id !== itemId);
 				// Show success alert
-				alertRef.showAlert("Menu category deleted successfully!");
+				alertRef.showAlert("Menu category deleted successfully!", "success");
 			} catch (error) {
 				console.error("Error deleting menu category:", error);
 				// Show error alert if failed to delete menu category
-				alertRef.showAlert("Failed to delete menu category. Please try again later.");
+				alertRef.showAlert("Failed to delete menu category. Please try again later.", "error");
 			}
 		};
 
