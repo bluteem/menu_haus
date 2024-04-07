@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 export default {
 	name: "Alert",
@@ -41,15 +41,24 @@ export default {
 		const isSuccess = ref(false);
 		const isError = ref(false);
 
-		const toggleAlert = () => {
-			if (props.type === "success") {
-				isSuccess.value = true;
-				isError.value = false;
-			} else if (props.type === "error") {
-				isSuccess.value = false;
-				isError.value = true;
-			}
+		// Watch for changes in props.type
+		watch(
+			() => props.type,
+			(newValue) => {
+				if (newValue === "success") {
+					isSuccess.value = true;
+					isError.value = false;
+				} else if (newValue === "error") {
+					isSuccess.value = false;
+					isError.value = true;
+				}
 
+				// Make the alert visible
+				showAlert();
+			}
+		);
+
+		const showAlert = () => {
 			// Make the alert visible
 			isVisible.value = true;
 
@@ -63,7 +72,7 @@ export default {
 			isVisible,
 			isSuccess,
 			isError,
-			toggleAlert,
+			showAlert,
 		};
 	},
 };
