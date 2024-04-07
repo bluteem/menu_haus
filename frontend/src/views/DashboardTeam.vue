@@ -42,13 +42,13 @@
 										</td>
 										<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
 											<button
-												@click="getUser(user._id, $refs.Alert)"
+												@click="getUser(user._id)"
 												type="button"
 												class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
 												Edit
 											</button>
 											<button
-												@click="deleteUser(user._id, $refs.Alert)"
+												@click="deleteUser(user._id)"
 												class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
 												Delete
 											</button>
@@ -75,7 +75,7 @@
 					<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 						<h3 class="text-lg leading-6 font-medium text-gray-900">Add New User</h3>
 						<div class="mt-5">
-							<form @submit.prevent="addUser($refs.Alert)">
+							<form @submit.prevent="addUser">
 								<div class="mb-4">
 									<label for="newName" class="block font-medium text-gray-700">Full Name:</label>
 									<input
@@ -148,7 +148,7 @@
 					<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 						<h3 class="text-lg leading-6 font-medium text-gray-900">Edit User Info</h3>
 						<div class="mt-5">
-							<form @submit.prevent="updateUser($refs.Alert)">
+							<form @submit.prevent="updateUser">
 								<div class="mb-4">
 									<label for="editName" class="block font-medium text-gray-700">Full Name:</label>
 									<input
@@ -322,7 +322,6 @@ export default {
 				showModal2.value = false;
 				resetForm();
 
-				alertRef.showAlert("User info updated successfully!");
 				showAlert({ message: "User info updated successfully!", type: "success" });
 			} catch (error) {
 				console.error("Error updating user info:", error);

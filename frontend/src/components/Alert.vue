@@ -2,7 +2,7 @@
 	<div
 		v-if="isVisible"
 		:class="{ 'bg-green-200': type === 'success', 'bg-red-200': type === 'error' }"
-		class="fixed bottom-0 left-0 w-full p-4 flex justify-center items-center">
+		class="fixed bottom-0 left-0 w-full p-4 flex justify-center items-center z-50">
 		<div class="flex items-center">
 			<svg
 				v-if="type === 'success'"
