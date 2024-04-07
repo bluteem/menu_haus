@@ -216,7 +216,7 @@
 			</div>
 		</div>
 
-		<Alert ref="Alert" />
+		<Alert :message="alertMessage" :type="alertType" />
 	</div>
 </template>
 
@@ -243,6 +243,13 @@ export default {
 		});
 		const allUsersData = ref([]);
 
+		const alertMessage = ref("");
+		const alertType = ref("");
+		const showAlert = ({ message, type }) => {
+			alertMessage.value = message;
+			alertType.value = type;
+		};
+
 		// Fetch menu items when the component is mounted
 		onMounted(async () => {
 			try {
@@ -259,7 +266,7 @@ export default {
 		});
 
 		// Add a new menu item
-		const addUser = async (alertRef) => {
+		const addUser = async () => {
 			try {
 				const response = await axios.post("http://localhost:5000/api/users", {
 					email: newUser.value.email,
@@ -270,17 +277,16 @@ export default {
 				allUsersData.value.push(response.data.userData);
 				showModal1.value = false;
 				resetForm();
-				// Show success alert using the passed alertRef
-				alertRef.showAlert("User added successfully!");
+
+				showAlert({ message: "User added successfully!", type: "success" });
 			} catch (error) {
 				console.error("Error adding user:", error);
-				// Show error alert using the passed alertRef if failed to add menu item
-				alertRef.showAlert("Failed to add user. Please try again later.");
+				showAlert({ message: "Failed to add user. Please try again later.", type: "error" });
 			}
 		};
 
 		// Fetch a single menu item
-		const getUser = async (itemId, alertRef) => {
+		const getUser = async (itemId) => {
 			try {
 				const response = await axios.get(`http://localhost:5000/api/users/${itemId}`);
 				const variable = response.data.userData;
@@ -294,13 +300,13 @@ export default {
 				showModal2.value = true;
 			} catch (error) {
 				console.error("Error fetching user:", error);
-				// Show alert if failed to fetch menu item details
-				alertRef.showAlert("Failed to fetch user details. Please try again later.");
+
+				showAlert({ message: "Failed to fetch user details. Please try again later.", type: "error" });
 			}
 		};
 
 		// Update a user info
-		const updateUser = async (alertRef) => {
+		const updateUser = async () => {
 			try {
 				// Send a PUT request to update user info
 				const response = await axios.put(`http://localhost:5000/api/users/${newUser.value._id}`, newUser.value);
@@ -315,26 +321,24 @@ export default {
 				// Hide the modal for editing user info
 				showModal2.value = false;
 				resetForm();
-				// Show success alert
+
 				alertRef.showAlert("User info updated successfully!");
+				showAlert({ message: "User info updated successfully!", type: "success" });
 			} catch (error) {
 				console.error("Error updating user info:", error);
-				// Show error alert if failed to update menu item
-				alertRef.showAlert("Failed to update user info. Please try again later.");
+				showAlert({ message: "Failed to update user info. Please try again later.", type: "error" });
 			}
 		};
 
 		// Delete a menu item
-		const deleteUser = async (itemId, alertRef) => {
+		const deleteUser = async (itemId) => {
 			try {
 				await axios.delete(`http://localhost:5000/api/users/${itemId}`);
 				allUsersData.value = allUsersData.value.filter((item) => item._id !== itemId);
-				// Show success alert
-				alertRef.showAlert("User deleted successfully!");
+				showAlert({ message: "User deleted successfully!", type: "success" });
 			} catch (error) {
 				console.error("Error deleting user:", error);
-				// Show error alert if failed to delete menu item
-				alertRef.showAlert("Failed to delete user. Please try again later.");
+				showAlert({ message: "Failed to delete user. Please try again later.", type: "error" });
 			}
 		};
 
@@ -360,6 +364,9 @@ export default {
 			addUser,
 			deleteUser,
 			resetForm,
+			showAlert,
+			alertMessage,
+			alertType,
 		};
 	},
 };
