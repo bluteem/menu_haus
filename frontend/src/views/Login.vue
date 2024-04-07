@@ -496,8 +496,6 @@ export default {
 				// Set token to local storage
 				localStorage.setItem("token", token);
 
-				// alertRef.$refs.showAlert("Login successful!", "success");
-
 				// execute after 3 seconds
 				setTimeout(() => {
 					// Redirect to dashboard and handle potential errors
@@ -508,9 +506,7 @@ export default {
 				}, 1500); // 3000 milliseconds = 3 seconds
 			} catch (error) {
 				// Log the entire error object for debugging
-				console.error("Login failed", error);
-				// alertRef.$refs.showAlert("Failed to login!", "error");
-
+				console.error("Error details:", error);
 				// Set error message
 				if (error.response) {
 					alertMessage.value = "Invalid email or password!";
@@ -518,9 +514,6 @@ export default {
 					alertMessage.value = "Unexpected error!";
 				}
 				alertType.value = "error";
-
-				// Display the alert
-				toggleAlert();
 			}
 		};
 
@@ -544,12 +537,6 @@ export default {
 				console.error("Registration failed", error.response.data.message);
 				// alertRef.$refs.showAlert("Registration failed!", "success");
 			}
-		};
-
-		const toggleAlert = () => {
-			// Trigger the alert to be displayed
-			// By calling toggleAlert here, the alert will be displayed each time the login button is clicked
-			alertMessage.value = alertMessage.value; // To trigger reactivity
 		};
 
 		// toggle between showing and displaying the password

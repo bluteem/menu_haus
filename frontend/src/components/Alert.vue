@@ -1,11 +1,11 @@
 <template>
 	<div
 		v-if="isVisible"
-		:class="{ 'bg-green-100': isSuccess, 'bg-red-100': isError }"
+		:class="{ 'bg-green-100': type === 'success', 'bg-red-100': type === 'error' }"
 		class="fixed bottom-0 left-0 w-full p-4 flex justify-center items-center">
 		<div class="flex items-center">
 			<svg
-				v-if="isSuccess"
+				v-if="type === 'success'"
 				class="h-6 w-6 text-green-600 mr-2"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -14,7 +14,7 @@
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 			</svg>
 			<svg
-				v-if="isError"
+				v-if="type === 'error'"
 				class="h-6 w-6 text-red-600 mr-2"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -38,41 +38,25 @@ export default {
 	},
 	setup(props) {
 		const isVisible = ref(false);
-		const isSuccess = ref(false);
-		const isError = ref(false);
 
-		// Watch for changes in props.type
-		watch(
-			() => props.type,
-			(newValue) => {
-				if (newValue === "success") {
-					isSuccess.value = true;
-					isError.value = false;
-				} else if (newValue === "error") {
-					isSuccess.value = false;
-					isError.value = true;
-				}
+		// Make the alert visible when a new message is received
+		isVisible.value = true;
 
-				// Make the alert visible
-				showAlert();
-			}
-		);
+		// Hide the alert after 3 seconds
+		setTimeout(() => {
+			isVisible.value = false;
+		}, 3000);
 
-		const showAlert = () => {
-			// Make the alert visible
+		/* 		const showAlert = () => {
 			isVisible.value = true;
 
-			// Hide the alert after 3 seconds
 			setTimeout(() => {
 				isVisible.value = false;
 			}, 3000);
-		};
+		}; */
 
 		return {
 			isVisible,
-			isSuccess,
-			isError,
-			showAlert,
 		};
 	},
 };
