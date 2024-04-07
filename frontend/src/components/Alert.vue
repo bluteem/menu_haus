@@ -41,22 +41,29 @@ export default {
 		const isSuccess = ref(false);
 		const isError = ref(false);
 
-		if (props.type === "success") {
-			isSuccess.value = true;
-			isError.value = false;
-		} else if (props.type === "error") {
-			isSuccess.value = false;
-			isError.value = true;
-		}
-		isVisible.value = true;
-		setTimeout(() => {
-			isVisible.value = false;
-		}, 3000); // Hide after 3 seconds
+		const toggleAlert = () => {
+			if (props.type === "success") {
+				isSuccess.value = true;
+				isError.value = false;
+			} else if (props.type === "error") {
+				isSuccess.value = false;
+				isError.value = true;
+			}
+
+			// Make the alert visible
+			isVisible.value = true;
+
+			// Hide the alert after 3 seconds
+			setTimeout(() => {
+				isVisible.value = false;
+			}, 3000);
+		};
 
 		return {
 			isVisible,
 			isSuccess,
 			isError,
+			toggleAlert,
 		};
 	},
 };

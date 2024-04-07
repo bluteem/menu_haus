@@ -173,6 +173,7 @@
 							</div>
 							<button
 								type="submit"
+								@click="toggleAlert"
 								class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
 								Login
 							</button>
@@ -509,23 +510,17 @@ export default {
 				// Log the entire error object for debugging
 				console.error("Login failed", error);
 				// alertRef.$refs.showAlert("Failed to login!", "error");
-				alertMessage.value = "Login failed!";
+
+				// Set error message
+				if (error.response) {
+					alertMessage.value = "Invalid email or password!";
+				} else {
+					alertMessage.value = "Unexpected error!";
+				}
 				alertType.value = "error";
 
-				// alertMessage.value = "Invalid email or password!";
-
-				// Check if error.response exists before accessing it
-				if (error?.response) {
-					console.error("Server error:", error.response.data);
-					// alertRef.$refs.showAlert("Invalid email or password!", "error");
-					alertMessage.value = "Server error!";
-					alertType.value = "error";
-				} else {
-					console.error("Unexpected error:", error);
-					// alertRef.$refs.showAlert("Unexpected error!", "error");
-					alertMessage.value = "Unexpected error!";
-					alertType.value = "error";
-				}
+				// Display the alert
+				toggleAlert();
 			}
 		};
 
@@ -549,6 +544,12 @@ export default {
 				console.error("Registration failed", error.response.data.message);
 				// alertRef.$refs.showAlert("Registration failed!", "success");
 			}
+		};
+
+		const toggleAlert = () => {
+			// Trigger the alert to be displayed
+			// By calling toggleAlert here, the alert will be displayed each time the login button is clicked
+			alertMessage.value = alertMessage.value; // To trigger reactivity
 		};
 
 		// toggle between showing and displaying the password
