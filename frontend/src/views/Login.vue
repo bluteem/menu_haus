@@ -173,7 +173,6 @@
 							</div>
 							<button
 								type="submit"
-								@click="toggleAlert"
 								class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">
 								Login
 							</button>
@@ -184,7 +183,7 @@
 					</div>
 
 					<div v-if="activeTab === 'signup'">
-						<form @submit.prevent="signup($refs.Alert)">
+						<form @submit.prevent="signup">
 							<div class="mb-4">
 								<label for="fullName" class="block text-gray-700 font-semibold mb-2">Full Name</label>
 								<div class="relative">
@@ -457,7 +456,7 @@
 </template>
 
 <script>
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import sha256 from "js-sha256";
@@ -474,7 +473,6 @@ export default {
 
 		const alertMessage = ref("");
 		const alertType = ref("");
-
 		const showAlert = ({ message, type }) => {
 			alertMessage.value = message;
 			alertType.value = type;
@@ -513,7 +511,6 @@ export default {
 				// Set error message
 				if (error.response) {
 					showAlert({ message: "Incorrect username or password", type: "error" });
-					alertType.value = "error";
 				} else {
 					showAlert({ message: "An error occurred during login", type: "error" });
 				}
@@ -557,6 +554,8 @@ export default {
 			showPassword,
 			showConfirmPassword,
 			showAlert,
+			alertMessage,
+			alertType,
 		};
 	},
 };

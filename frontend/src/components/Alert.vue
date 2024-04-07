@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="isVisible"
-		:class="{ 'bg-green-100': type === 'success', 'bg-red-100': type === 'error' }"
+		:class="{ 'bg-green-200': type === 'success', 'bg-red-200': type === 'error' }"
 		class="fixed bottom-0 left-0 w-full p-4 flex justify-center items-center">
 		<div class="flex items-center">
 			<svg
@@ -22,7 +22,7 @@
 				stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 			</svg>
-			<p class="text-sm font-medium text-gray-800">{{ message }}</p>
+			<p class="text-xl text-gray-800">{{ message }}</p>
 		</div>
 	</div>
 </template>
