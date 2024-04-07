@@ -34,7 +34,7 @@
 
 					<!-- Tab Contents -->
 					<div v-if="activeTab === 'login'">
-						<form @submit.prevent="login">
+						<form @submit.prevent="login($refs.Alert)">
 							<div class="mb-4">
 								<label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
 								<div class="relative">
@@ -183,7 +183,7 @@
 					</div>
 
 					<div v-if="activeTab === 'signup'">
-						<form @submit.prevent="signup">
+						<form @submit.prevent="signup($refs.Alert)">
 							<div class="mb-4">
 								<label for="fullName" class="block text-gray-700 font-semibold mb-2">Full Name</label>
 								<div class="relative">
@@ -452,7 +452,7 @@
 		</div>
 	</div>
 
-	<Alert :message="alertMessage" :type="alertType" />
+	<Alert ref="Alert" />
 </template>
 
 <script>
@@ -471,15 +471,8 @@ export default {
 
 		const router = useRouter();
 
-		const alertMessage = ref("");
-		const alertType = ref("");
-		const showAlert = ({ message, type }) => {
-			alertMessage.value = message;
-			alertType.value = type;
-		};
-
 		const newLogin = ref([]);
-		const login = async () => {
+		const login = async (alertRef) => {
 			try {
 				localStorage.removeItem("token");
 
@@ -492,7 +485,7 @@ export default {
 				});
 				const token = response.data.token;
 
-				showAlert({ message: "Login successful", type: "success" });
+				alertRef.showAlert("Login successful", "success");
 
 				// Set token to local storage
 				localStorage.setItem("token", token);
@@ -510,15 +503,15 @@ export default {
 				console.error("Error details:", error);
 				// Set error message
 				if (error.response) {
-					showAlert({ message: "Incorrect username or password", type: "error" });
+					alertRef.showAlert("Incorrect username or password", "error");
 				} else {
-					showAlert({ message: "An error occurred during login", type: "error" });
+					alertRef.showAlert("An error occurred during login", "error");
 				}
 			}
 		};
 
 		const newSignup = ref([]);
-		const signup = async () => {
+		const signup = async (alertRef) => {
 			try {
 				localStorage.removeItem("token");
 
@@ -532,11 +525,10 @@ export default {
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
-				showAlert({ message: "Registration successful. Check your email!", type: "success" });
+				alertRef.showAlert("Registration successful. Check your email!", "success");
 			} catch (error) {
 				console.error("Registration failed", error.response.data.message);
-				// alertRef.$refs.showAlert("Registration failed!", "success");
-				showAlert({ message: "Registration failed!", type: "error" });
+				alertRef.showAlert("Registration failed!", "error");
 			}
 		};
 
@@ -554,9 +546,6 @@ export default {
 			password,
 			showPassword,
 			showConfirmPassword,
-			showAlert,
-			alertMessage,
-			alertType,
 		};
 	},
 };

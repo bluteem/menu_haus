@@ -1,12 +1,11 @@
 <template>
 	<div
-		v-if="isVisible"
-		:class="{ 'bg-green-200': type === 'success', 'bg-red-200': type === 'error' }"
-		class="fixed bottom-0 left-0 w-full p-4 flex justify-center items-center z-50"
-		:key="alertKey">
-		<div class="flex items-center">
+		v-if="alertMessage"
+		:class="{ 'bg-green-200': alertType === 'success', 'bg-red-200': alertType === 'error' }"
+		class="fixed bottom-0 left-0 w-full p-4 z-50">
+		<div class="flex items-center justify-center">
 			<svg
-				v-if="type === 'success'"
+				v-if="alertType === 'success'"
 				class="h-6 w-6 text-green-600 mr-2"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -15,7 +14,7 @@
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 			</svg>
 			<svg
-				v-if="type === 'error'"
+				v-if="alertType === 'error'"
 				class="h-6 w-6 text-red-600 mr-2"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -23,39 +22,48 @@
 				stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 			</svg>
-			<p class="text-xl text-gray-800">{{ message }}</p>
+			<p class="inline text-xl text-gray-800" v-html="alertMessage"></p>
+		</div>
+
+		<div class="absolute right-5">
+			<button
+				@click="dismissAlert"
+				class="text-gray-400 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150">
+				<svg
+					class="h-6 w-6 text-gray-700 mr-2"
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
 		</div>
 	</div>
 </template>
 
 <script>
-import { ref, watch } from "vue";
-
 export default {
 	name: "Alert",
-	props: {
-		message: String,
-		type: String,
-	},
-	setup(props) {
-		const isVisible = ref(false);
-		const alertKey = ref(0);
-
-		watch(
-			() => props.message,
-			() => {
-				isVisible.value = true;
-				alertKey.value++;
-				setTimeout(() => {
-					isVisible.value = false;
-				}, 1500);
-			}
-		);
-
+	data() {
 		return {
-			isVisible,
-			alertKey,
+			alertMessage: "",
+			alertType: "",
 		};
+	},
+	methods: {
+		showAlert(message, type) {
+			this.alertMessage = message;
+			this.alertType = type;
+			setTimeout(() => {
+				this.dismissAlert();
+			}, 20000); // 5000 milliseconds = 5 seconds
+		},
+
+		dismissAlert() {
+			this.alertMessage = "";
+			this.alertType = "";
+		},
 	},
 };
 </script>
