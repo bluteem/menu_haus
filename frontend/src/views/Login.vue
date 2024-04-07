@@ -532,10 +532,11 @@ export default {
 				});
 				console.log("Registration successful", response.data);
 				// Redirect to login or other route upon successful registration
-				// alertRef.$refs.showAlert("Registration successful!", "success");
+				showAlert({ message: "Registration successful. Check your email!", type: "success" });
 			} catch (error) {
 				console.error("Registration failed", error.response.data.message);
 				// alertRef.$refs.showAlert("Registration failed!", "success");
+				showAlert({ message: "Registration failed!", type: "error" });
 			}
 		};
 
