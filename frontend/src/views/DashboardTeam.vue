@@ -48,7 +48,7 @@
 												Edit
 											</button>
 											<button
-												@click="deleteUser(user._id)"
+												@click="deleteUser(user._id, $refs.Alert)"
 												class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
 												Delete
 											</button>
@@ -75,7 +75,7 @@
 					<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 						<h3 class="text-lg leading-6 font-medium text-gray-900">Add New User</h3>
 						<div class="mt-5">
-							<form @submit.prevent="addUser">
+							<form @submit.prevent="addUser($refs.Alert)">
 								<div class="mb-4">
 									<label for="newName" class="block font-medium text-gray-700">Full Name:</label>
 									<input
@@ -148,7 +148,7 @@
 					<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 						<h3 class="text-lg leading-6 font-medium text-gray-900">Edit User Info</h3>
 						<div class="mt-5">
-							<form @submit.prevent="updateUser">
+							<form @submit.prevent="updateUser($refs.Alert)">
 								<div class="mb-4">
 									<label for="editName" class="block font-medium text-gray-700">Full Name:</label>
 									<input
@@ -216,7 +216,7 @@
 			</div>
 		</div>
 
-		<Alert :message="alertMessage" :type="alertType" />
+		<Alert ref="Alert" />
 	</div>
 </template>
 
@@ -243,13 +243,6 @@ export default {
 		});
 		const allUsersData = ref([]);
 
-		const alertMessage = ref("");
-		const alertType = ref("");
-		const showAlert = ({ message, type }) => {
-			alertMessage.value = message;
-			alertType.value = type;
-		};
-
 		// Fetch menu items when the component is mounted
 		onMounted(async () => {
 			try {
@@ -266,7 +259,7 @@ export default {
 		});
 
 		// Add a new menu item
-		const addUser = async () => {
+		const addUser = async (alertRef) => {
 			try {
 				const response = await axios.post("http://localhost:5000/api/users", {
 					email: newUser.value.email,
@@ -278,15 +271,15 @@ export default {
 				showModal1.value = false;
 				resetForm();
 
-				showAlert({ message: "User added successfully!", type: "success" });
+				alertRef.showAlert("User added successfully!", "success");
 			} catch (error) {
 				console.error("Error adding user:", error);
-				showAlert({ message: "Failed to add user. Please try again later.", type: "error" });
+				alertRef.showAlert("Failed to add user. Please try again later.", "error");
 			}
 		};
 
 		// Fetch a single menu item
-		const getUser = async (itemId) => {
+		const getUser = async (itemId, alertRef) => {
 			try {
 				const response = await axios.get(`http://localhost:5000/api/users/${itemId}`);
 				const variable = response.data.userData;
@@ -300,13 +293,12 @@ export default {
 				showModal2.value = true;
 			} catch (error) {
 				console.error("Error fetching user:", error);
-
-				showAlert({ message: "Failed to fetch user details. Please try again later.", type: "error" });
+				alertRef.showAlert("Failed to fetch user details. Please try again later.", "error");
 			}
 		};
 
 		// Update a user info
-		const updateUser = async () => {
+		const updateUser = async (alertRef) => {
 			try {
 				// Send a PUT request to update user info
 				const response = await axios.put(`http://localhost:5000/api/users/${newUser.value._id}`, newUser.value);
@@ -322,22 +314,22 @@ export default {
 				showModal2.value = false;
 				resetForm();
 
-				showAlert({ message: "User info updated successfully!", type: "success" });
+				alertRef.showAlert("User info updated successfully!", "success");
 			} catch (error) {
 				console.error("Error updating user info:", error);
-				showAlert({ message: "Failed to update user info. Please try again later.", type: "error" });
+				alertRef.showAlert("Failed to update user info. Please try again later.", "error");
 			}
 		};
 
 		// Delete a menu item
-		const deleteUser = async (itemId) => {
+		const deleteUser = async (itemId, alertRef) => {
 			try {
 				await axios.delete(`http://localhost:5000/api/users/${itemId}`);
 				allUsersData.value = allUsersData.value.filter((item) => item._id !== itemId);
-				showAlert({ message: "User deleted successfully!", type: "success" });
+				alertRef.showAlert("User deleted successfully!", "success");
 			} catch (error) {
 				console.error("Error deleting user:", error);
-				showAlert({ message: "Failed to delete user. Please try again later.", type: "error" });
+				alertRef.showAlert("Failed to delete user. Please try again later.", "error");
 			}
 		};
 
@@ -363,9 +355,6 @@ export default {
 			addUser,
 			deleteUser,
 			resetForm,
-			showAlert,
-			alertMessage,
-			alertType,
 		};
 	},
 };

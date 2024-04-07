@@ -56,7 +56,7 @@ export default {
 			this.alertType = type;
 			setTimeout(() => {
 				this.dismissAlert();
-			}, 20000); // 5000 milliseconds = 5 seconds
+			}, 1500); // 5000 milliseconds = 5 seconds
 		},
 
 		dismissAlert() {
