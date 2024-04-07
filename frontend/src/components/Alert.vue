@@ -2,8 +2,8 @@
 	<div
 		v-if="alertMessage"
 		:class="{ 'bg-green-200': alertType === 'success', 'bg-red-200': alertType === 'error' }"
-		class="fixed bottom-0 left-0 w-full p-4 z-50">
-		<div class="flex items-center justify-center">
+		class="fixed bottom-0 w-full p-4 z-50">
+		<div class="flex justify-center items-center">
 			<svg
 				v-if="alertType === 'success'"
 				class="h-6 w-6 text-green-600 mr-2"
@@ -24,8 +24,7 @@
 			</svg>
 			<p class="inline text-xl text-gray-800" v-html="alertMessage"></p>
 		</div>
-
-		<div class="absolute right-5">
+		<div class="absolute right-5 bottom-0 flex items-center h-full">
 			<button
 				@click="dismissAlert"
 				class="text-gray-400 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150">
