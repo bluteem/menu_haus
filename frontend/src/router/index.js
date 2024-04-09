@@ -11,8 +11,8 @@ import DashboardFileManager from "../views/DashboardFileManager.vue";
 import DashboardSettings from "../views/DashboardSettings.vue";
 import DashboardAccount from "../views/DashboardAccount.vue";
 import FrontendHome from "../views/FrontendHome.vue";
-import Verification from "../views/Verification.vue";
-import NotFound from "../views/NotFound.vue";
+import VerificationView from "../views/VerificationView.vue";
+import NotFoundView from "../views/NotFoundView.vue";
 
 // Function to check if the user is authenticated
 const isAuthenticated = async () => {
@@ -119,14 +119,14 @@ const routes = [
 	},
 	{
 		path: "/verification",
-		component: Verification,
+		component: VerificationView,
 		meta: {
 			title: "Menu.Haus Verification",
 		},
 	},
 	{
 		path: "/:catchAll(.*)",
-		component: NotFound,
+		component: NotFoundView,
 		meta: {
 			title: "Page Not Found",
 		},
