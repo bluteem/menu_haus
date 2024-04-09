@@ -13,9 +13,16 @@
 						<p class="text-sm text-gray-500 font-semibold">Tables</p>
 					</div>
 					<div class="rounded-full bg-gray-200 p-3">
-						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 50 50">
-							<path
-								d="M17.965 41.737L15.309 32H16c.552 0 1-.447 1-1s-.448-1-1-1H9.432c-1.491 0-2.738-1.069-2.965-2.544l-1.478-9.608c-.084-.546-.601-.919-1.14-.836-.546.084-.92.595-.836 1.141l1.478 9.608c.289 1.88 1.578 3.357 3.28 3.951L5.035 41.737c-.145.532.169 1.082.702 1.228C5.825 42.989 5.914 43 6 43c.44 0 .843-.292.964-.737L9.764 32h3.473l2.799 10.263C16.157 42.708 16.56 43 17 43c.087 0 .176-.011.264-.035C17.796 42.819 18.11 42.27 17.965 41.737zM40 28H45V43H40zM20 28H25V43H20zM46 22h-1-4.953c.099-.651.38-1.287.845-1.862C41.606 19.253 42 18.139 42 17c0-1.579-.743-3.055-2-3.998V9h-6v4.002c-1.257.943-2 2.419-2 3.998h3v3.5c0 .54-.135 1.044-.354 1.5H31.5c.827 0 1.5-.673 1.5-1.5V19h-8v1.5c0 .827.673 1.5 1.5 1.5H20h-1c-.552 0-1 .447-1 1s.448 1 1 1h1v2h25v-2h1c.552 0 1-.447 1-1S46.552 22 46 22z" />
+						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 26 26">
+							<g>
+								<path
+									d="M25.484,7.114l-4.278-3.917C21.034,3.069,20.825,3,20.61,3H5.38C5.165,3,4.956,3.069,4.783,3.197
+		l-4.38,4C0.403,7.197,0,7.453,0,8v2c0,0.551,0.449,1,1,1h24c0.551,0,1-0.449,1-1V8C26,7.469,25.484,7.114,25.484,7.114z" />
+								<path d="M2,23c-0.551,0-1-0.449-1-1V10h3v12c0,0.551-0.449,1-1,1H2z" />
+								<path d="M23,23c-0.551,0-1-0.449-1-1V10h3v12c0,0.551-0.449,1-1,1H23z" />
+								<path d="M20,18c-0.551,0-1-0.449-1-1v-5h2v5C21,17.551,20.551,18,20,18L20,18z" />
+								<path d="M6,18c-0.551,0-1-0.449-1-1v-5h2v5C7,17.551,6.551,18,6,18L6,18z" />
+							</g>
 						</svg>
 					</div>
 				</div>
@@ -27,18 +34,12 @@
 						<p class="text-sm text-gray-500 font-semibold">Menu Categories</p>
 					</div>
 					<div class="rounded-full bg-gray-200 p-3">
-						<svg
-							class="w-7 h-7"
-							fill="#3C50E0"
-							height="24"
-							width="24"
-							viewBox="0 0 48 48"
-							xmlns="http://www.w3.org/2000/svg">
-							<g id="Layer_2" data-name="Layer 2">
-								<g id="invisible_box" data-name="invisible box">
+						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 48 48">
+							<g>
+								<g>
 									<rect width="48" height="48" fill="none" />
 								</g>
-								<g id="icons_Q2" data-name="icons Q2">
+								<g>
 									<path d="M24,10h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,10Z" />
 									<path d="M24,24h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,24Z" />
 									<path d="M24,38h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,38Z" />
@@ -61,7 +62,7 @@
 					<div class="rounded-full bg-gray-200 p-3">
 						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 576.3 576.301">
 							<g>
-								<g id="Layer_1_144_">
+								<g>
 									<g>
 										<path
 											d="M264.563,494.699c7.65,1.275,15.3,1.275,24.225,1.275s17.85,0,26.775-1.275l3.825-124.949
@@ -112,14 +113,7 @@
 						<p class="text-sm text-gray-500 font-semibold">Users</p>
 					</div>
 					<div class="rounded-full bg-gray-200 p-3">
-						<svg
-							class="w-7 h-7"
-							fill="#3C50E0"
-							height="24"
-							width="24"
-							xmlns="http://www.w3.org/2000/svg"
-							xmlns:xlink="http://www.w3.org/1999/xlink"
-							viewBox="0 0 460.067 460.067">
+						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 460.067 460.067">
 							<g>
 								<path
 									d="M454.165,154.398c-0.111-22.012-18.11-39.92-40.122-39.92c-7.096,0-67.007,0-73.949,0
