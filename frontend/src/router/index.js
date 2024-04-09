@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import axios from "axios";
+// custom pages
 import Login from "../views/Login.vue";
 import DashboardHome from "../views/DashboardHome.vue";
 import DashboardTables from "../views/DashboardTables.vue";
@@ -10,6 +11,7 @@ import DashboardFileManager from "../views/DashboardFileManager.vue";
 import DashboardSettings from "../views/DashboardSettings.vue";
 import DashboardAccount from "../views/DashboardAccount.vue";
 import FrontendHome from "../views/FrontendHome.vue";
+import Verification from "../views/Verification.vue";
 import NotFound from "../views/NotFound.vue";
 
 // Function to check if the user is authenticated
@@ -113,6 +115,13 @@ const routes = [
 		component: FrontendHome,
 		meta: {
 			title: "Menu.Haus Home",
+		},
+	},
+	{
+		path: "/verification",
+		component: Verification,
+		meta: {
+			title: "Menu.Haus Verification",
 		},
 	},
 	{
