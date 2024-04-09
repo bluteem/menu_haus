@@ -2,21 +2,13 @@
 	<button
 		v-show="showScrollButton"
 		@click="scrollToTop"
-		class="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-full shadow hover:bg-green-600 transition-opacity duration-300">
-		<svg
-			fill="#fff"
-			width="800px"
-			height="800px"
-			viewBox="0 0 24 24"
-			data-name="Flat Line"
-			xmlns="http://www.w3.org/2000/svg"
-			class="w-5 h-5">
+		class="fixed bottom-4 right-4 bg-green-500 p-4 rounded-full shadow hover:bg-green-600 transition-opacity duration-300">
+		<svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5 text-white">
 			<polyline
-				id="primary"
 				points="21 18 12 6 3 18"
 				style="
 					fill: none;
-					stroke: rgb(255, 255, 255);
+					stroke: currentColor;
 					stroke-linecap: round;
 					stroke-linejoin: round;
 					stroke-width: 4;
