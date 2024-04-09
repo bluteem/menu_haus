@@ -9,7 +9,11 @@
 
 				<!-- Right Column - Tabs -->
 				<div class="flex flex-col justify-center p-8">
-					<h1 class="text-center mb-12 font-bold text-2xl border-2 py-6 px-2">Menu Haus</h1>
+					<div class="mb-12 border-2 border-gray-400 bg-gray-200 rounded-md py-6 px-2 flex items-center justify-center">
+						<img :src="logo" class="h-20 w-20 inline-block mr-6" alt="" />
+						<h1 class="text-center font-bold text-2xl inline-block">Menu Haus</h1>
+					</div>
+
 					<!-- Tab Buttons -->
 					<div class="flex justify-between mb-8 border-b">
 						<button
@@ -356,8 +360,14 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 import sha256 from "js-sha256";
 import Alert from "@/components/Alert.vue";
+import logo from "@/assets/logo.svg";
 
 export default {
+	data() {
+		return {
+			logo: logo,
+		};
+	},
 	components: {
 		Alert,
 	},
