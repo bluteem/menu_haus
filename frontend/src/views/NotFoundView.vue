@@ -1,10 +1,9 @@
 <template>
-	<!-- component -->
 	<div class="min-h-screen flex items-center justify-center w-10/12 m-auto">
 		<!-- Left Layout (Desktop) -->
 		<div class="hidden md:flex md:w-1/2 p-8">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-				<g id="freepik--background-complete--inject-63" class="w-full rounded-lg shadow-lg">
+			<svg viewBox="0 0 500 500">
+				<g class="w-full rounded-lg shadow-lg">
 					<path
 						d="M238.4,445.05H45.3a5.71,5.71,0,0,1-5.71-5.71V60.66A5.71,5.71,0,0,1,45.3,55H238.4a5.71,5.71,0,0,1,5.71,5.71V439.34A5.71,5.71,0,0,1,238.4,445.05ZM45.3,55.2a5.47,5.47,0,0,0-5.46,5.46V439.34a5.47,5.47,0,0,0,5.46,5.46H238.4a5.47,5.47,0,0,0,5.46-5.46V60.66a5.47,5.47,0,0,0-5.46-5.46Z"
 						style="fill: #ebebeb"></path>
@@ -44,7 +43,7 @@
 						d="M204.6,411.09a7.09,7.09,0,0,0-4.19,1.36,7.34,7.34,0,0,0,10.5,9.23s0,0,0,0a7.17,7.17,0,0,0-6.31-10.58Z"
 						style="fill: #e6e6e6"></path>
 				</g>
-				<g id="freepik--404--inject-63">
+				<g>
 					<path
 						d="M147.68,287.64H86.83V260.17l60.85-72.34H176.8v73.9h15.09v25.91H176.8v22.48H147.68Zm0-25.91V223.89l-32.16,37.84Z"
 						style="fill: #407bff"></path>
@@ -55,7 +54,7 @@
 						d="M371.74,287.64H310.89V260.17l60.85-72.34h29.12v73.9H416v25.91H400.86v22.48H371.74Zm0-25.91V223.89l-32.15,37.84Z"
 						style="fill: #407bff"></path>
 				</g>
-				<g id="freepik--Planets--inject-63">
+				<g>
 					<g style="opacity: 0.30000000000000004">
 						<path d="M201,145.62a1.87,1.87,0,1,1-1.86-1.87A1.86,1.86,0,0,1,201,145.62Z" style="fill: #407bff"></path>
 						<circle cx="72.97" cy="216.13" r="1.32" style="fill: #407bff"></circle>
@@ -99,7 +98,7 @@
 						d="M363.83,382c-20.53,9.66-5.22,17.11,23.71,6.71,26.79-9.63,37-21.77,13-18C401.83,375.76,368.28,388.83,363.83,382Z"
 						style="fill: #407bff"></path>
 				</g>
-				<g id="freepik--Astronaut--inject-63">
+				<g>
 					<path
 						d="M394.1,187.83C367.21,206,332.4,230,322.79,287.64h-2.05c9.35-57,42.89-81.57,69.79-99.81Z"
 						style="opacity: 0.2"></path>
@@ -207,7 +206,7 @@
 						points="318.29 118.19 309.04 121.84 308.49 120.02 317.73 116.37 318.29 118.19"
 						style="fill: #407bff; opacity: 0.5"></polygon>
 				</g>
-				<g id="freepik--Rocket--inject-63">
+				<g>
 					<path
 						d="M267.26,257.17a94,94,0,0,1-1.68,17.35q-1.77,7.71-5.5,11.28a12.3,12.3,0,0,1-8.81,3.57q-7.71,0-11.77-8.41a23.79,23.79,0,0,1-1.21-3.11,144.31,144.31,0,0,0-15.92,16l-5.31,6.26a38.62,38.62,0,0,0,9.77,7.19q9.34,4.83,24.52,4.84c1.78,0,3.5-.05,5.17-.15a143.39,143.39,0,0,0,15.1-29l14.85-38.72Z"
 						style="opacity: 0.2"></path>
@@ -241,23 +240,19 @@
 
 		<!-- Right Layout (Both Mobile and Desktop) -->
 		<div class="w-full md:w-1/2 p-4 md:p-8">
-			<h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">404 Not Found</h1>
+			<h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Not Found</h1>
 			<p class="text-lg md:text-xl text-gray-600 mb-8">Oops! The page you are looking for could not be found.</p>
 			<a
 				href="/"
 				class="px-6 py-3 bg-blue-500 text-white rounded-lg inline-block hover:bg-blue-600 transition duration-300 ease-in-out"
-				>Go to Home</a
+				>Go Back Home</a
 			>
 		</div>
 	</div>
 </template>
 
 <script>
-export default {
-	// Add component logic here if needed
-};
+export default {};
 </script>
 
-<style>
-/* Add custom styles for your 404 page */
-</style>
+<style></style>
