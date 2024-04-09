@@ -13,14 +13,9 @@
 						<label for="email" class="block mb-1">Email:</label>
 						<div class="flex items-center mb-2">
 							<div class="relative w-full mr-6">
-								<svg
-									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-									fill="#4b5563"
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 512 512">
+								<svg class="h-4 w-4 text-gray-600 absolute left-3 top-3" fill="currentColor" viewBox="0 0 512 512">
 									<g>
 										<path
-											class="st0"
 											d="M510.678,112.275c-2.308-11.626-7.463-22.265-14.662-31.054c-1.518-1.915-3.104-3.63-4.823-5.345
                                                 c-12.755-12.818-30.657-20.814-50.214-20.814H71.021c-19.557,0-37.395,7.996-50.21,20.814c-1.715,1.715-3.301,3.43-4.823,5.345
                                                 C8.785,90.009,3.63,100.649,1.386,112.275C0.464,116.762,0,121.399,0,126.087V385.92c0,9.968,2.114,19.55,5.884,28.203
@@ -67,9 +62,8 @@
 						<div class="flex items-center mb-2">
 							<div class="relative w-full mr-6">
 								<svg
-									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-									fill="#4b5563"
-									xmlns="http://www.w3.org/2000/svg"
+									class="h-4 w-4 text-gray-600 absolute left-3 top-3"
+									fill="currentColor"
 									viewBox="0 0 203.096 203.096">
 									<g>
 										<path
@@ -110,11 +104,7 @@
 						<label for="phone" class="block mb-1">Phone:</label>
 						<div class="flex items-center mb-2">
 							<div class="relative w-full mr-6">
-								<svg
-									class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-									fill="#000000"
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 512 512">
+								<svg class="h-4 w-4 text-gray-600 absolute left-3 top-3" fill="currentColor" viewBox="0 0 512 512">
 									<g>
 										<g>
 											<path
@@ -175,7 +165,7 @@
 							<div class="flex items-center mb-2">
 								<div class="relative w-full mr-6">
 									<svg
-										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+										class="h-4 w-4 text-gray-600 absolute left-3 top-3"
 										fill="none"
 										stroke-width="4"
 										stroke="#4b5563"
@@ -204,13 +194,7 @@
 					<div class="mb-6">
 						<label for="role" class="block mb-1">Role:</label>
 						<div class="relative mb-2">
-							<svg
-								class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-								fill="#000000"
-								height="800px"
-								width="800px"
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 485 485">
+							<svg class="h-4 w-4 text-gray-600 absolute left-3 top-3" fill="currentColor" viewBox="0 0 485 485">
 								<g>
 									<g>
 										<g>
@@ -276,18 +260,11 @@
 						</div>
 						<div
 							class="w-full border-2 border-dashed border-sky-400 bg-sky-100 bg-opacity-50 rounded-xl p-6 mb-8 text-center">
-							<svg
-								class="h-9 w-9 mx-auto mb-6"
-								width="800px"
-								height="800px"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg">
+							<svg class="h-9 w-9 text-gray-600 mx-auto mb-6" viewBox="0 0 24 24" fill="currentColor">
 								<path
 									fill-rule="evenodd"
 									clip-rule="evenodd"
-									d="M12 3C12.2652 3 12.5195 3.10536 12.7071 3.29289L16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711C16.3166 9.09763 15.6834 9.09763 15.2929 8.70711L13 6.41421L13 15C13 15.5523 12.5523 16 12 16C11.4477 16 11 15.5523 11 15L11 6.41421L8.70708 8.70711C8.31656 9.09763 7.68339 9.09763 7.29287 8.70711C6.90235 8.31658 6.90234 7.68342 7.29287 7.29289L11.2929 3.29289C11.4804 3.10536 11.7348 3 12 3ZM3.99998 14C4.55226 14 4.99998 14.4477 4.99998 15C4.99998 15.9772 5.00482 16.3198 5.05762 16.5853C5.29434 17.7753 6.22463 18.7056 7.41471 18.9424C7.68015 18.9952 8.02273 19 8.99998 19H15C15.9772 19 16.3198 18.9952 16.5852 18.9424C17.7753 18.7056 18.7056 17.7753 18.9423 16.5853C18.9951 16.3198 19 15.9772 19 15C19 14.4477 19.4477 14 20 14C20.5523 14 21 14.4477 21 15C21 15.0392 21 15.0777 21 15.1157C21.0002 15.9334 21.0003 16.4906 20.9039 16.9755C20.5094 18.9589 18.9589 20.5094 16.9754 20.9039C16.4906 21.0004 15.9333 21.0002 15.1158 21C15.0777 21 15.0391 21 15 21H8.99998C8.96081 21 8.92222 21 8.8842 21C8.06661 21.0002 7.50932 21.0004 7.02452 20.9039C5.04107 20.5094 3.49058 18.9589 3.09605 16.9755C2.99962 16.4906 2.99975 15.9334 2.99996 15.1158C2.99997 15.0777 2.99998 15.0392 2.99998 15C2.99998 14.4477 3.44769 14 3.99998 14Z"
-									fill="#0F1729" />
+									d="M12 3C12.2652 3 12.5195 3.10536 12.7071 3.29289L16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711C16.3166 9.09763 15.6834 9.09763 15.2929 8.70711L13 6.41421L13 15C13 15.5523 12.5523 16 12 16C11.4477 16 11 15.5523 11 15L11 6.41421L8.70708 8.70711C8.31656 9.09763 7.68339 9.09763 7.29287 8.70711C6.90235 8.31658 6.90234 7.68342 7.29287 7.29289L11.2929 3.29289C11.4804 3.10536 11.7348 3 12 3ZM3.99998 14C4.55226 14 4.99998 14.4477 4.99998 15C4.99998 15.9772 5.00482 16.3198 5.05762 16.5853C5.29434 17.7753 6.22463 18.7056 7.41471 18.9424C7.68015 18.9952 8.02273 19 8.99998 19H15C15.9772 19 16.3198 18.9952 16.5852 18.9424C17.7753 18.7056 18.7056 17.7753 18.9423 16.5853C18.9951 16.3198 19 15.9772 19 15C19 14.4477 19.4477 14 20 14C20.5523 14 21 14.4477 21 15C21 15.0392 21 15.0777 21 15.1157C21.0002 15.9334 21.0003 16.4906 20.9039 16.9755C20.5094 18.9589 18.9589 20.5094 16.9754 20.9039C16.4906 21.0004 15.9333 21.0002 15.1158 21C15.0777 21 15.0391 21 15 21H8.99998C8.96081 21 8.92222 21 8.8842 21C8.06661 21.0002 7.50932 21.0004 7.02452 20.9039C5.04107 20.5094 3.49058 18.9589 3.09605 16.9755C2.99962 16.4906 2.99975 15.9334 2.99996 15.1158C2.99997 15.0777 2.99998 15.0392 2.99998 15C2.99998 14.4477 3.44769 14 3.99998 14Z" />
 							</svg>
 							<p class="mb-1">Click to upload or drag and drop</p>
 							<p class="mb-1">SVG, PNG, JPG or GIF</p>
@@ -317,7 +294,7 @@
 										<label for="newEmail" class="block font-medium text-gray-700">Current Email:</label>
 										<div class="relative w-full mb-4">
 											<svg
-												class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+												class="h-4 w-4 text-gray-600 absolute left-3 top-3"
 												fill="#4b5563"
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512">
@@ -352,7 +329,7 @@
 										<label for="newEmail" class="block font-medium text-gray-700">New Email:</label>
 										<div class="relative w-full mb-4">
 											<svg
-												class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+												class="h-4 w-4 text-gray-600 absolute left-3 top-3"
 												fill="#4b5563"
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512">
@@ -420,10 +397,8 @@
 										<label for="newPassword" class="block font-medium text-gray-700">New Password:</label>
 										<div class="relative w-full mb-4">
 											<svg
-												class="h-4 w-4 text-gray-400 absolute right-3 top-3.5 cursor-pointer"
-												viewBox="0 0 64 64"
-												enable-background="new 0 0 64 64"
-												xmlns="http://www.w3.org/2000/svg"
+												class="h-4 w-4 text-gray-600 absolute right-3 top-3.5 cursor-pointer"
+												viewBox="0 0 24 24"
 												@mousedown="showPassword = true"
 												@mouseup="showPassword = false"
 												@mouseleave="showPassword = false">
@@ -431,51 +406,22 @@
 												<template v-if="showPassword">
 													<!-- Icon when password is visible -->
 													<path
-														fill="none"
-														stroke="#777e7b"
-														stroke-width="4"
-														stroke-miterlimit="10"
-														d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
-	S1,32,1,32z" />
-													<circle
-														fill="none"
-														stroke="#777e7b"
-														stroke-width="4"
-														stroke-miterlimit="10"
-														cx="32"
-														cy="32"
-														r="7" />
+														d="M4 12C4 12 5.6 7 12 7M12 7C18.4 7 20 12 20 12M12 7V4M18 5L16 7.5M6 5L8 7.5M15 13C15 14.6569 13.6569 16 12 16C10.3431 16 9 14.6569 9 13C9 11.3431 10.3431 10 12 10C13.6569 10 15 11.3431 15 13Z"
+														stroke="currentColor"
+														stroke-linecap="round"
+														stroke-linejoin="round" />
 												</template>
 												<template v-else>
 													<!-- Icon when password is hidden -->
 													<path
-														fill="none"
-														stroke="#000000"
-														stroke-width="2"
-														stroke-miterlimit="10"
-														d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
-	S1,32,1,32z" />
-													<circle
-														fill="none"
-														stroke="#777e7b"
-														stroke-width="4"
-														stroke-miterlimit="10"
-														cx="32"
-														cy="32"
-														r="7" />
-													<line
-														fill="none"
-														stroke="#777e7b"
-														stroke-width="4"
-														stroke-miterlimit="10"
-														x1="9"
-														y1="55"
-														x2="55"
-														y2="9" />
+														d="M4 10C4 10 5.6 15 12 15M12 15C18.4 15 20 10 20 10M12 15V18M18 17L16 14.5M6 17L8 14.5"
+														stroke="currentColor"
+														stroke-linecap="round"
+														stroke-linejoin="round" />
 												</template>
 											</svg>
 											<svg
-												class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+												class="h-4 w-4 text-gray-600 absolute left-3 top-3"
 												fill="#4b5563"
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 203.096 203.096">
@@ -538,7 +484,7 @@
 										<label for="newPhone" class="block font-medium text-gray-700">Current Phone:</label>
 										<div class="relative w-full mb-4">
 											<svg
-												class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+												class="h-4 w-4 text-gray-600 absolute left-3 top-3"
 												fill="#4b5563"
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512">
@@ -573,7 +519,7 @@
 										<label for="newPhone" class="block font-medium text-gray-700">New Phone:</label>
 										<div class="relative w-full mb-4">
 											<svg
-												class="h-4 w-4 text-gray-400 absolute left-3 top-3"
+												class="h-4 w-4 text-gray-600 absolute left-3 top-3"
 												fill="#4b5563"
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512">

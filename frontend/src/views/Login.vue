@@ -38,14 +38,9 @@
 							<div class="mb-4">
 								<label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
 								<div class="relative">
-									<svg
-										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-										fill="#4b5563"
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 512 512">
+									<svg class="h-4 w-4 text-gray-600 absolute left-3 top-3" fill="currentColor" viewBox="0 0 512 512">
 										<g>
 											<path
-												class="st0"
 												d="M510.678,112.275c-2.308-11.626-7.463-22.265-14.662-31.054c-1.518-1.915-3.104-3.63-4.823-5.345
                                                 c-12.755-12.818-30.657-20.814-50.214-20.814H71.021c-19.557,0-37.395,7.996-50.21,20.814c-1.715,1.715-3.301,3.43-4.823,5.345
                                                 C8.785,90.009,3.63,100.649,1.386,112.275C0.464,116.762,0,121.399,0,126.087V385.92c0,9.968,2.114,19.55,5.884,28.203
@@ -76,10 +71,8 @@
 								<label for="password" class="block text-gray-700 font-semibold mb-2">Password</label>
 								<div class="relative">
 									<svg
-										class="h-4 w-4 text-gray-400 absolute right-3 top-3.5 cursor-pointer"
-										viewBox="0 0 64 64"
-										enable-background="new 0 0 64 64"
-										xmlns="http://www.w3.org/2000/svg"
+										class="h-5 w-5 text-gray-600 absolute right-3 top-3.5 cursor-pointer"
+										viewBox="0 0 24 24"
 										@mousedown="showPassword = true"
 										@mouseup="showPassword = false"
 										@mouseleave="showPassword = false">
@@ -87,53 +80,23 @@
 										<template v-if="showPassword">
 											<!-- Icon when password is visible -->
 											<path
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
-	S1,32,1,32z" />
-											<circle
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												cx="32"
-												cy="32"
-												r="7" />
+												d="M4 12C4 12 5.6 7 12 7M12 7C18.4 7 20 12 20 12M12 7V4M18 5L16 7.5M6 5L8 7.5M15 13C15 14.6569 13.6569 16 12 16C10.3431 16 9 14.6569 9 13C9 11.3431 10.3431 10 12 10C13.6569 10 15 11.3431 15 13Z"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round" />
 										</template>
 										<template v-else>
 											<!-- Icon when password is hidden -->
 											<path
-												fill="none"
-												stroke="#000000"
-												stroke-width="2"
-												stroke-miterlimit="10"
-												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
-	S1,32,1,32z" />
-											<circle
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												cx="32"
-												cy="32"
-												r="7" />
-											<line
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												x1="9"
-												y1="55"
-												x2="55"
-												y2="9" />
+												d="M4 10C4 10 5.6 15 12 15M12 15C18.4 15 20 10 20 10M12 15V18M18 17L16 14.5M6 17L8 14.5"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round" />
 										</template>
 									</svg>
 									<svg
-										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-										fill="#4b5563"
-										xmlns="http://www.w3.org/2000/svg"
+										class="h-4 w-4 text-gray-600 absolute left-3 top-3"
+										fill="currentColor"
 										viewBox="0 0 203.096 203.096">
 										<g>
 											<path
@@ -188,12 +151,11 @@
 								<label for="fullName" class="block text-gray-700 font-semibold mb-2">Full Name</label>
 								<div class="relative">
 									<svg
-										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-										fill="none"
+										class="h-4 w-4 text-gray-600 absolute left-3 top-3"
+										fill="currentColor"
 										stroke-width="4"
-										stroke="#4b5563"
-										viewBox="0 0 64 64"
-										xmlns="http://www.w3.org/2000/svg">
+										stroke="currentColor"
+										viewBox="0 0 64 64">
 										<circle cx="32" cy="18.14" r="11.14" />
 										<path d="M54.55,56.85A22.55,22.55,0,0,0,32,34.3h0A22.55,22.55,0,0,0,9.45,56.85Z" />
 									</svg>
@@ -211,11 +173,7 @@
 							<div class="mb-4">
 								<label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
 								<div class="relative">
-									<svg
-										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-										fill="#4b5563"
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 512 512">
+									<svg class="h-4 w-4 text-gray-600 absolute left-3 top-3" fill="currentColor" viewBox="0 0 512 512">
 										<g>
 											<path
 												class="st0"
@@ -249,10 +207,8 @@
 								<label for="password" class="block text-gray-700 font-semibold mb-2">Password</label>
 								<div class="relative">
 									<svg
-										class="h-4 w-4 text-gray-400 absolute right-3 top-3.5 cursor-pointer"
-										viewBox="0 0 64 64"
-										enable-background="new 0 0 64 64"
-										xmlns="http://www.w3.org/2000/svg"
+										class="h-5 w-5 text-gray-600 absolute right-3 top-3.5 cursor-pointer"
+										viewBox="0 0 24 24"
 										@mousedown="showPassword = true"
 										@mouseup="showPassword = false"
 										@mouseleave="showPassword = false">
@@ -260,47 +216,18 @@
 										<template v-if="showPassword">
 											<!-- Icon when password is visible -->
 											<path
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
-	S1,32,1,32z" />
-											<circle
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												cx="32"
-												cy="32"
-												r="7" />
+												d="M4 12C4 12 5.6 7 12 7M12 7C18.4 7 20 12 20 12M12 7V4M18 5L16 7.5M6 5L8 7.5M15 13C15 14.6569 13.6569 16 12 16C10.3431 16 9 14.6569 9 13C9 11.3431 10.3431 10 12 10C13.6569 10 15 11.3431 15 13Z"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round" />
 										</template>
 										<template v-else>
 											<!-- Icon when password is hidden -->
 											<path
-												fill="none"
-												stroke="#000000"
-												stroke-width="2"
-												stroke-miterlimit="10"
-												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
-	S1,32,1,32z" />
-											<circle
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												cx="32"
-												cy="32"
-												r="7" />
-											<line
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												x1="9"
-												y1="55"
-												x2="55"
-												y2="9" />
+												d="M4 10C4 10 5.6 15 12 15M12 15C18.4 15 20 10 20 10M12 15V18M18 17L16 14.5M6 17L8 14.5"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round" />
 										</template>
 									</svg>
 									<svg
@@ -335,64 +262,32 @@
 								<label for="confirmPassword" class="block text-gray-700 font-semibold mb-2">Confirm Password</label>
 								<div class="relative">
 									<svg
-										class="h-4 w-4 text-gray-400 absolute right-3 top-3.5 cursor-pointer"
-										viewBox="0 0 64 64"
-										enable-background="new 0 0 64 64"
-										xmlns="http://www.w3.org/2000/svg"
+										class="h-5 w-5 text-gray-600 absolute right-3 top-3.5 cursor-pointer"
+										viewBox="0 0 24 24"
 										@mousedown="showConfirmPassword = true"
 										@mouseup="showConfirmPassword = false"
 										@mouseleave="showConfirmPassword = false">
 										<!-- Conditional rendering for eye icon -->
-										<template v-if="showConfirmPassword">
+										<template v-if="showPassword">
 											<!-- Icon when password is visible -->
 											<path
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
-	S1,32,1,32z" />
-											<circle
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												cx="32"
-												cy="32"
-												r="7" />
+												d="M4 12C4 12 5.6 7 12 7M12 7C18.4 7 20 12 20 12M12 7V4M18 5L16 7.5M6 5L8 7.5M15 13C15 14.6569 13.6569 16 12 16C10.3431 16 9 14.6569 9 13C9 11.3431 10.3431 10 12 10C13.6569 10 15 11.3431 15 13Z"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round" />
 										</template>
 										<template v-else>
 											<!-- Icon when password is hidden -->
 											<path
-												fill="none"
-												stroke="#000000"
-												stroke-width="2"
-												stroke-miterlimit="10"
-												d="M1,32c0,0,11,15,31,15s31-15,31-15S52,17,32,17
-	S1,32,1,32z" />
-											<circle
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												cx="32"
-												cy="32"
-												r="7" />
-											<line
-												fill="none"
-												stroke="#777e7b"
-												stroke-width="4"
-												stroke-miterlimit="10"
-												x1="9"
-												y1="55"
-												x2="55"
-												y2="9" />
+												d="M4 10C4 10 5.6 15 12 15M12 15C18.4 15 20 10 20 10M12 15V18M18 17L16 14.5M6 17L8 14.5"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round" />
 										</template>
 									</svg>
 									<svg
-										class="h-4 w-4 text-gray-400 absolute left-3 top-3"
-										fill="#4b5563"
-										xmlns="http://www.w3.org/2000/svg"
+										class="h-4 w-4 text-gray-600 absolute left-3 top-3"
+										fill="currentColor"
 										viewBox="0 0 203.096 203.096">
 										<g>
 											<path
