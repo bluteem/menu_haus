@@ -60,7 +60,7 @@
 
 			<div v-else-if="displayStyle === 'list'">
 				<!-- List view -->
-				<table class="min-w-full border text-center font-light border-neutral-300">
+				<table class="min-w-full border text-center border-neutral-300">
 					<thead class="border-b font-medium border-neutral-300">
 						<tr>
 							<th scope="col" class="border-r px-6 py-4 border-neutral-300">Thumbnail</th>
