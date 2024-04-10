@@ -35,30 +35,8 @@
 			</div>
 
 			<!-- Display files based on selected style -->
-			<div v-if="displayStyle === 'grid'" class="grid grid-cols-3 gap-4">
-				<!-- Grid view -->
-				<div v-for="file in allFilesData" :key="file._id" class="bg-white p-4 shadow-md rounded-md">
-					<img
-						:src="'http://localhost:5000/uploads/' + file.filePath"
-						alt="File"
-						class="w-full h-32 object-cover mb-2" />
-					<p class="font-semibold text-gray-800">{{ file.fileName }}</p>
-					<p class="text-sm text-gray-600">{{ file.fileSize }}</p>
-					<button
-						@click="getFile(file._id, $refs.Alert)"
-						type="button"
-						class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
-						Edit
-					</button>
-					<button
-						@click="deleteFile(file._id, $refs.Alert)"
-						class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
-						Delete
-					</button>
-				</div>
-			</div>
 
-			<div v-else-if="displayStyle === 'list'">
+			<div v-if="displayStyle === 'list'">
 				<!-- List view -->
 				<table class="min-w-full border text-center border-neutral-300">
 					<thead class="border-b font-medium border-neutral-300">
@@ -103,6 +81,29 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+
+			<div v-else-if="displayStyle === 'grid'" class="grid grid-cols-3 gap-4">
+				<!-- Grid view -->
+				<div v-for="file in allFilesData" :key="file._id" class="bg-white p-4 shadow-md rounded-md">
+					<img
+						:src="'http://localhost:5000/uploads/' + file.filePath"
+						alt="File"
+						class="w-full h-32 object-cover mb-2" />
+					<p class="font-semibold text-gray-800">{{ file.fileName }}</p>
+					<p class="text-sm text-gray-600">{{ file.fileSize }}</p>
+					<button
+						@click="getFile(file._id, $refs.Alert)"
+						type="button"
+						class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
+						Edit
+					</button>
+					<button
+						@click="deleteFile(file._id, $refs.Alert)"
+						class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
+						Delete
+					</button>
+				</div>
 			</div>
 
 			<!-- Show message if there are no menu items -->
@@ -199,7 +200,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import Alert from "@/components/Alert.vue";
 import Sidebar from "../components/Sidebar.vue";
@@ -271,7 +272,7 @@ export default {
 			}
 		};
 
-		const displayStyle = ref("grid");
+		const displayStyle = ref("list");
 		// Method to set display style
 		const setDisplayStyle = (style) => {
 			displayStyle.value = style;
