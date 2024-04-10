@@ -31,11 +31,15 @@ const uploadFile = async (req, res) => {
 	try {
 		const { originalname, mimetype, filename: filePath } = req.file;
 
+		// Get the file size
+		const fileSize = req.file.size; // Assuming 'size' property is available on req.file
+
 		// Save file details to database
 		const file = new File({
 			fileName: originalname,
 			fileType: mimetype,
 			filePath: filePath,
+			fileSize,
 		});
 		await file.save();
 
