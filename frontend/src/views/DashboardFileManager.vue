@@ -60,20 +60,30 @@
 
 			<div v-else-if="displayStyle === 'list'">
 				<!-- List view -->
-				<ul class="divide-y divide-gray-200">
-					<li v-for="file in allFilesData" :key="file._id" class="py-4">
-						<div class="flex items-center space-x-4">
-							<div class="flex-shrink-0">
+				<table class="min-w-full border text-center font-light border-neutral-300">
+					<thead class="border-b font-medium border-neutral-300">
+						<tr>
+							<th scope="col" class="border-r px-6 py-4 border-neutral-300">Thumbnail</th>
+							<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Name</th>
+							<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Type</th>
+							<th scope="col" class="px-6 py-4"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="file in allFilesData" :key="file._id" class="border-b border-neutral-300">
+							<td class="border-r px-6 py-4 border-neutral-300">
 								<img
 									:src="'http://localhost:5000/uploads/' + file.filePath"
 									alt="File"
-									class="w-12 h-12 object-cover rounded-md" />
-							</div>
-							<div>
-								<p class="font-semibold text-gray-800">{{ file.fileName }}</p>
-								<p class="text-sm text-gray-600">{{ file.fileSize }}</p>
-							</div>
-							<div>
+									class="w-full h-12 object-cover rounded-md" />
+							</td>
+							<td class="border-r px-6 py-4 border-neutral-300">
+								<div class="text-gray-900">{{ file.fileName }}</div>
+							</td>
+							<td class="border-r px-6 py-4 border-neutral-300">
+								<div class="text-gray-900">{{ file.fileSize }}</div>
+							</td>
+							<td class="border-r px-6 py-4 border-neutral-300">
 								<button
 									@click="getFile(file._id, $refs.Alert)"
 									type="button"
@@ -85,10 +95,10 @@
 									class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
 									Delete
 								</button>
-							</div>
-						</div>
-					</li>
-				</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 
 			<!-- Show message if there are no menu items -->
