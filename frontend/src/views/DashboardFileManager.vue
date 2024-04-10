@@ -65,7 +65,8 @@
 						<tr>
 							<th scope="col" class="border-r px-6 py-4 border-neutral-300">Thumbnail</th>
 							<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Name</th>
-							<th scope="col" class="border-r px-6 py-4 border-neutral-300">File Type</th>
+							<th scope="col" class="border-r px-6 py-4 border-neutral-300">Type</th>
+							<th scope="col" class="border-r px-6 py-4 border-neutral-300">Size</th>
 							<th scope="col" class="px-6 py-4"></th>
 						</tr>
 					</thead>
@@ -79,6 +80,9 @@
 							</td>
 							<td class="border-r px-6 py-4 border-neutral-300">
 								<div class="text-gray-900">{{ file.fileName }}</div>
+							</td>
+							<td class="border-r px-6 py-4 border-neutral-300">
+								<div class="text-gray-900">{{ file.fileType }}</div>
 							</td>
 							<td class="border-r px-6 py-4 border-neutral-300">
 								<div class="text-gray-900">{{ file.fileSize }}</div>
