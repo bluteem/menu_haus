@@ -236,7 +236,7 @@
 								aria-describedby="roleHelp" />
 						</div>
 						<div id="roleHelp" class="form-text text-gray-600 text-sm">
-							<p>* Please contact your manager for a role change.</p>
+							<p>* Please contact system administrator for a role change.</p>
 						</div>
 					</div>
 				</div>
