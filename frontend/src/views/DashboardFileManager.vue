@@ -15,22 +15,22 @@
 			<!-- Display style toggle buttons -->
 			<div class="flex justify-end mb-4">
 				<button
-					@click="setDisplayStyle('grid')"
-					:class="{
-						'bg-blue-500 text-white border-y border-l border-gray-600': displayStyle === 'grid',
-						'bg-gray-200 text-gray-700 border-y border-l border-gray-600': displayStyle !== 'grid',
-					}"
-					class="px-4 py-2 rounded-l-md focus:outline-none">
-					Grid View
-				</button>
-				<button
 					@click="setDisplayStyle('list')"
 					:class="{
-						'bg-blue-500 text-white border-y border-r border-gray-600': displayStyle === 'list',
-						'bg-gray-200 text-gray-700 border-y border-r border-gray-600': displayStyle !== 'list',
+						'bg-blue-500 text-white border-y border-l border-gray-600': displayStyle === 'list',
+						'bg-gray-200 text-gray-700 border-y border-l border-gray-600': displayStyle !== 'list',
+					}"
+					class="px-4 py-2 rounded-l-md focus:outline-none">
+					List View
+				</button>
+				<button
+					@click="setDisplayStyle('grid')"
+					:class="{
+						'bg-blue-500 text-white border-y border-r border-gray-600': displayStyle === 'grid',
+						'bg-gray-200 text-gray-700 border-y border-r border-gray-600': displayStyle !== 'grid',
 					}"
 					class="px-4 py-2 rounded-r-md focus:outline-none">
-					List View
+					Grid View
 				</button>
 			</div>
 
@@ -90,8 +90,6 @@
 						:src="'http://localhost:5000/uploads/' + file.filePath"
 						alt="File"
 						class="w-full h-32 object-cover mb-2" />
-					<p class="font-semibold text-gray-800">{{ file.fileName }}</p>
-					<p class="text-sm text-gray-600">{{ file.fileSize }}</p>
 					<button
 						@click="getFile(file._id, $refs.Alert)"
 						type="button"
