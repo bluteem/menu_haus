@@ -22,9 +22,9 @@
 		v-for="(categoryItems, categoryName) in groupedMenuItems"
 		:key="categoryName"
 		:id="toFriendlyURL(categoryName)"
-		class="mx-auto max-w-xl px-6 pt-40 mb-4">
+		class="mx-auto max-w-xl px-6 mb-4">
 		<div>
-			<h2 class="text-xl font-bold mb-4">{{ categoryName }}</h2>
+			<h2 class="text-2xl text-center font-bold mt-8 mb-4">{{ categoryName }}</h2>
 			<ul>
 				<li
 					v-for="menuItem in categoryItems"
