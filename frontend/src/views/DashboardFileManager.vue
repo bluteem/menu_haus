@@ -85,7 +85,7 @@
 								<div class="text-gray-900">{{ file.fileType }}</div>
 							</td>
 							<td class="border-r px-6 py-4 border-neutral-300">
-								<div class="text-gray-900">{{ file.fileSize }}</div>
+								<div class="text-gray-900">{{ formattedFileSize(file.fileSize) }}</div>
 							</td>
 							<td class="border-r px-6 py-4 border-neutral-300">
 								<button
@@ -203,13 +203,14 @@ import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import Alert from "@/components/Alert.vue";
 import Sidebar from "../components/Sidebar.vue";
+import prettyBytes from "pretty-bytes";
 
 export default {
 	components: {
 		Sidebar,
 		Alert,
 	},
-	setup() {
+	setup(props) {
 		// Reactive variables
 		const showModal1 = ref(false);
 		const showModal2 = ref(false);
@@ -220,6 +221,13 @@ export default {
 			filePath: "",
 		});
 		const allFilesData = ref([]);
+
+		const formattedFileSize = (fileSize) => {
+			if (fileSize === null || fileSize === undefined) {
+				return "N/A"; // Return black if size is null or undefined
+			}
+			return prettyBytes(fileSize, { locale: "en" }); // Use prettyBytes if value is present
+		};
 
 		// Fetch files when the component is mounted
 		onMounted(async () => {
@@ -342,6 +350,7 @@ export default {
 			showModal2,
 			newFile,
 			allFilesData,
+			formattedFileSize,
 			fileInput,
 			selectedFile,
 			handleFileUpload,
