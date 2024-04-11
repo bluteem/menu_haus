@@ -5,61 +5,10 @@
 		<main class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden py-10 px-10 bg-gray-200">
 			<h1 class="text-3xl font-bold mb-4">Dashboard</h1>
 
-			<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-				<!-- Box for Number of Tables -->
-				<div class="bg-white px-6 py-6 rounded-md shadow-md flex items-center justify-between">
-					<div>
-						<span class="font-bold text-3xl">{{ numberOfTables }}</span>
-						<p class="text-sm text-gray-500 font-semibold">Tables</p>
-					</div>
-					<div class="rounded-full bg-gray-200 p-3">
-						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 26 26">
-							<g>
-								<path
-									d="M25.484,7.114l-4.278-3.917C21.034,3.069,20.825,3,20.61,3H5.38C5.165,3,4.956,3.069,4.783,3.197
-		l-4.38,4C0.403,7.197,0,7.453,0,8v2c0,0.551,0.449,1,1,1h24c0.551,0,1-0.449,1-1V8C26,7.469,25.484,7.114,25.484,7.114z" />
-								<path d="M2,23c-0.551,0-1-0.449-1-1V10h3v12c0,0.551-0.449,1-1,1H2z" />
-								<path d="M23,23c-0.551,0-1-0.449-1-1V10h3v12c0,0.551-0.449,1-1,1H23z" />
-								<path d="M20,18c-0.551,0-1-0.449-1-1v-5h2v5C21,17.551,20.551,18,20,18L20,18z" />
-								<path d="M6,18c-0.551,0-1-0.449-1-1v-5h2v5C7,17.551,6.551,18,6,18L6,18z" />
-							</g>
-						</svg>
-					</div>
-				</div>
-
-				<!-- Box for Number of Menu Categories -->
-				<div class="bg-white px-6 py-6 rounded-md shadow-md flex items-center justify-between">
-					<div>
-						<span class="font-bold text-3xl">{{ numberOfMenuCategories }}</span>
-						<p class="text-sm text-gray-500 font-semibold">Menu Categories</p>
-					</div>
-					<div class="rounded-full bg-gray-200 p-3">
-						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 48 48">
-							<g>
-								<g>
-									<rect width="48" height="48" fill="none" />
-								</g>
-								<g>
-									<path d="M24,10h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,10Z" />
-									<path d="M24,24h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,24Z" />
-									<path d="M24,38h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,38Z" />
-									<path
-										d="M12,2a2.1,2.1,0,0,0-1.7,1L4.2,13a2.3,2.3,0,0,0,0,2,1.9,1.9,0,0,0,1.7,1H18a2.1,2.1,0,0,0,1.7-1,1.8,1.8,0,0,0,0-2l-6-10A1.9,1.9,0,0,0,12,2Z" />
-									<path d="M12,30a6,6,0,1,1,6-6A6,6,0,0,1,12,30Z" />
-									<path d="M16,44H8a2,2,0,0,1-2-2V34a2,2,0,0,1,2-2h8a2,2,0,0,1,2,2v8A2,2,0,0,1,16,44Z" />
-								</g>
-							</g>
-						</svg>
-					</div>
-				</div>
-
-				<!-- Box for Number of Menu Items -->
-				<div class="bg-white px-6 py-6 rounded-md shadow-md flex items-center justify-between">
-					<div>
-						<span class="font-bold text-3xl">{{ numberOfMenuItems }}</span>
-						<p class="text-sm text-gray-500 font-semibold">Menu Items</p>
-					</div>
-					<div class="rounded-full bg-gray-200 p-3">
+			<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+				<!-- Box for Number of Orders -->
+				<div class="bg-white px-6 py-6 rounded-md shadow-md">
+					<div class="inline-block rounded-r-2xl bg-gray-200 p-3 mb-2">
 						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 576.3 576.301">
 							<g>
 								<g>
@@ -104,15 +53,94 @@
 							</g>
 						</svg>
 					</div>
+					<div>
+						<span class="font-bold text-3xl">{{ numberOfOrders }}</span>
+						<p class="text-gray-500 font-semibold">Orders (Today)</p>
+					</div>
+				</div>
+
+				<!-- Box for Number of Tables -->
+				<div class="bg-white px-6 py-6 rounded-md shadow-md">
+					<div class="inline-block rounded-r-2xl bg-gray-200 p-3 mb-2">
+						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 26 26">
+							<g>
+								<path
+									d="M25.484,7.114l-4.278-3.917C21.034,3.069,20.825,3,20.61,3H5.38C5.165,3,4.956,3.069,4.783,3.197
+		l-4.38,4C0.403,7.197,0,7.453,0,8v2c0,0.551,0.449,1,1,1h24c0.551,0,1-0.449,1-1V8C26,7.469,25.484,7.114,25.484,7.114z" />
+								<path d="M2,23c-0.551,0-1-0.449-1-1V10h3v12c0,0.551-0.449,1-1,1H2z" />
+								<path d="M23,23c-0.551,0-1-0.449-1-1V10h3v12c0,0.551-0.449,1-1,1H23z" />
+								<path d="M20,18c-0.551,0-1-0.449-1-1v-5h2v5C21,17.551,20.551,18,20,18L20,18z" />
+								<path d="M6,18c-0.551,0-1-0.449-1-1v-5h2v5C7,17.551,6.551,18,6,18L6,18z" />
+							</g>
+						</svg>
+					</div>
+					<div>
+						<span class="font-bold text-3xl">{{ numberOfTables }}</span>
+						<p class="text-gray-500 font-semibold">Tables</p>
+					</div>
+				</div>
+
+				<!-- Box for Number of Menu Categories -->
+				<div class="bg-white px-6 py-6 rounded-md shadow-md">
+					<div class="inline-block rounded-r-2xl bg-gray-200 p-3 mb-2">
+						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 48 48">
+							<g>
+								<g>
+									<rect width="48" height="48" fill="none" />
+								</g>
+								<g>
+									<path d="M24,10h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,10Z" />
+									<path d="M24,24h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,24Z" />
+									<path d="M24,38h0a2,2,0,0,1,2-2H42a2,2,0,0,1,2,2h0a2,2,0,0,1-2,2H26A2,2,0,0,1,24,38Z" />
+									<path
+										d="M12,2a2.1,2.1,0,0,0-1.7,1L4.2,13a2.3,2.3,0,0,0,0,2,1.9,1.9,0,0,0,1.7,1H18a2.1,2.1,0,0,0,1.7-1,1.8,1.8,0,0,0,0-2l-6-10A1.9,1.9,0,0,0,12,2Z" />
+									<path d="M12,30a6,6,0,1,1,6-6A6,6,0,0,1,12,30Z" />
+									<path d="M16,44H8a2,2,0,0,1-2-2V34a2,2,0,0,1,2-2h8a2,2,0,0,1,2,2v8A2,2,0,0,1,16,44Z" />
+								</g>
+							</g>
+						</svg>
+					</div>
+					<div>
+						<span class="font-bold text-3xl">{{ numberOfMenuCategories }}</span>
+						<p class="text-gray-500 font-semibold">Menu Categories</p>
+					</div>
+				</div>
+
+				<!-- Box for Number of Menu Items -->
+				<div class="bg-white px-6 py-6 rounded-md shadow-md">
+					<div class="inline-block rounded-r-2xl bg-gray-200 p-3 mb-2">
+						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 512 512">
+							<g>
+								<path
+									d="M495.957,390.227H16.044C7.185,390.227,0,397.401,0,406.249v26.685c0,54.749,114.619,47.804,256,47.804
+		s256-2.185,256-47.804v-26.685C512,397.401,504.815,390.227,495.957,390.227z" />
+								<path
+									d="M42.934,353.858h426.13c15.913,0,28.794-12.891,28.794-28.794v-25.272c0-15.891-12.881-28.771-28.794-28.771
+		H430.37l-61.163,61.152c-15.652,15.662-41.033,15.662-56.696,0l-61.152-61.152H42.934c-15.913,0-28.793,12.88-28.793,28.771v25.272
+		C14.141,340.967,27.022,353.858,42.934,353.858z" />
+								<path
+									d="M256,30.977c-141.38,0-256,74.13-256,172.554v20.739c0,8.848,7.185,16.032,16.044,16.032h479.913
+		c8.858,0,16.043-7.185,16.043-16.032v-20.739C512,105.107,397.38,30.977,256,30.977z M128.706,144.118
+		c-9.38,0-16.967-7.586-16.967-16.967c0-9.37,7.587-16.978,16.967-16.978c9.37,0,16.978,7.609,16.978,16.978
+		C145.684,136.532,138.076,144.118,128.706,144.118z M205.076,93.205c-9.37,0-16.967-7.598-16.967-16.967
+		c0-9.381,7.598-16.967,16.967-16.967c9.38,0,16.978,7.586,16.978,16.967C222.054,85.608,214.456,93.205,205.076,93.205z
+		 M256,161.097c-9.37,0-16.978-7.609-16.978-16.978c0-9.37,7.609-16.967,16.978-16.967c9.37,0,16.978,7.598,16.978,16.967
+		C272.978,153.488,265.369,161.097,256,161.097z M306.924,93.205c-9.38,0-16.978-7.598-16.978-16.967
+		c0-9.381,7.598-16.967,16.978-16.967c9.37,0,16.967,7.586,16.967,16.967C323.891,85.608,316.293,93.205,306.924,93.205z
+		 M383.293,144.118c-9.37,0-16.978-7.586-16.978-16.967c0-9.37,7.609-16.978,16.978-16.978c9.381,0,16.967,7.609,16.967,16.978
+		C400.26,136.532,392.674,144.118,383.293,144.118z" />
+							</g>
+						</svg>
+					</div>
+					<div>
+						<span class="font-bold text-3xl">{{ numberOfMenuItems }}</span>
+						<p class="text-gray-500 font-semibold">Menu Items</p>
+					</div>
 				</div>
 
 				<!-- Box for Number of Users -->
-				<div class="bg-white px-6 py-6 rounded-md shadow-md flex items-center justify-between">
-					<div>
-						<span class="font-bold text-3xl">{{ numberOfUsers }}</span>
-						<p class="text-sm text-gray-500 font-semibold">Users</p>
-					</div>
-					<div class="rounded-full bg-gray-200 p-3">
+				<div class="bg-white px-6 py-6 rounded-md shadow-md">
+					<div class="inline-block rounded-r-2xl bg-gray-200 p-3 mb-2">
 						<svg class="w-7 h-7 text-sky-600" fill="currentColor" viewBox="0 0 460.067 460.067">
 							<g>
 								<path
@@ -151,11 +179,16 @@
 							</g>
 						</svg>
 					</div>
+					<div>
+						<span class="font-bold text-3xl">{{ numberOfUsers }}</span>
+						<p class="text-gray-500 font-semibold">Users</p>
+					</div>
 				</div>
 			</div>
 
-			<div class="flex justify-center items-center h-screen">
-				<line-chart :chart-data="data" :options="options"></line-chart>
+			<div class="flex justify-center items-center mt-6 p-12 bg-white rounded-md shadow-md">
+				<p class="block">Orders</p>
+				<BarChart />
 			</div>
 		</main>
 	</div>
@@ -165,11 +198,12 @@
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import Sidebar from "../components/Sidebar.vue";
-import LineChart from "../components/LineChart.vue";
+import BarChart from "../components/BarChart.vue";
 
 export default {
 	components: {
 		Sidebar,
+		BarChart,
 	},
 	setup() {
 		const allTablesData = ref([]);
@@ -179,6 +213,12 @@ export default {
 
 		// Fetch menu items when the component is mounted
 		onMounted(async () => {
+			try {
+				const response = await axios.get("http://localhost:5000/api/orders");
+				allOrdersData.value = response.data.orderData;
+			} catch (error) {
+				console.error("Error:", error);
+			}
 			try {
 				const response = await axios.get("http://localhost:5000/api/tables");
 				allTablesData.value = response.data.tableData;
@@ -206,6 +246,7 @@ export default {
 		});
 
 		// Computed property to calculate the numbers
+		const numberOfOrders = computed(() => allOrdersData.value.length);
 		const numberOfTables = computed(() => allTablesData.value.length);
 		const numberOfMenuCategories = computed(() => allMenuCategoriesData.value.length);
 		const numberOfMenuItems = computed(() => allMenuItemsData.value.length);
@@ -229,10 +270,12 @@ export default {
 		};
 
 		return {
+			allOrdersData,
 			allTablesData,
 			allMenuCategoriesData,
 			allMenuItemsData,
 			allUsersData,
+			numberOfOrders,
 			numberOfTables,
 			numberOfMenuCategories,
 			numberOfMenuItems,
