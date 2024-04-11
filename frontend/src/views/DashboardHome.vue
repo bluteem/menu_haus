@@ -187,7 +187,6 @@
 			</div>
 
 			<div class="flex justify-center items-center mt-6 p-12 bg-white rounded-md shadow-md">
-				<p class="block">Orders</p>
 				<BarChart />
 			</div>
 		</main>
