@@ -34,7 +34,7 @@
 						<img
 							:src="'http://localhost:5000/uploads/' + menuItem.images[0]"
 							:alt="menuItem.name"
-							class="w-full h-full object-cover rounded-md" />
+							class="w-full h-auto object-cover rounded-md" />
 					</div>
 					<div class="flex-grow">
 						<h2 class="text-xl font-semibold mb-2">{{ menuItem.name }}</h2>
@@ -50,6 +50,12 @@
 								type="button"
 								class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
 								Details
+							</button>
+							<button
+								@click="getMenuItem(menuItem._id)"
+								type="button"
+								class="mt-2 mr-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
+								Add to Cart
 							</button>
 						</div>
 					</div>

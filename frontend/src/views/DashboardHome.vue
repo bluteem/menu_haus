@@ -153,6 +153,10 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="flex justify-center items-center h-screen">
+				<line-chart :chart-data="data" :options="options"></line-chart>
+			</div>
 		</main>
 	</div>
 </template>
@@ -161,6 +165,7 @@
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import Sidebar from "../components/Sidebar.vue";
+import LineChart from "../components/LineChart.vue";
 
 export default {
 	components: {
@@ -206,6 +211,23 @@ export default {
 		const numberOfMenuItems = computed(() => allMenuItemsData.value.length);
 		const numberOfUsers = computed(() => allUsersData.value.length);
 
+		const data = {
+			labels: ["January", "February", "March", "April", "May", "June", "July"],
+			datasets: [
+				{
+					label: "Sales",
+					backgroundColor: "#f87979",
+					data: [40, 20, 30, 50, 35, 25, 45],
+				},
+			],
+		};
+
+		const options = {
+			responsive: true,
+			maintainAspectRatio: false,
+			// Other options for styling and customization
+		};
+
 		return {
 			allTablesData,
 			allMenuCategoriesData,
@@ -215,6 +237,8 @@ export default {
 			numberOfMenuCategories,
 			numberOfMenuItems,
 			numberOfUsers,
+			data,
+			options,
 		};
 	},
 };
