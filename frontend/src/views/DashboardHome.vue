@@ -206,6 +206,7 @@ export default {
 		BarChart,
 	},
 	setup() {
+		const allOrdersData = ref([]);
 		const allTablesData = ref([]);
 		const allMenuCategoriesData = ref([]);
 		const allMenuItemsData = ref([]);

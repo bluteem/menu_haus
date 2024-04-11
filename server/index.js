@@ -11,6 +11,7 @@ import authController, { authMiddleware } from "./controllers/authController.js"
 import fileController from "./controllers/fileController.js";
 import emailVerificationController from "./controllers/emailVerificationController.js";
 import passwordVerificationController from "./controllers/passwordVerificationController.js";
+import orderController from "./controllers/orderController.js";
 import tableController from "./controllers/tableController.js";
 import menuCategoryController from "./controllers/menuCategoryController.js";
 import menuItemController from "./controllers/menuItemController.js";
@@ -94,6 +95,7 @@ app.use("/api/email", emailVerificationController);
 app.use("/api/password", passwordVerificationController);
 
 // Use other controllers
+app.use("/api/orders", orderController);
 app.use("/api/tables", tableController);
 app.use("/api/menuitems", menuItemController);
 app.use("/api/menucategories", menuCategoryController);
