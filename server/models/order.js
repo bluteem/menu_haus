@@ -6,8 +6,9 @@ const OrderSchema = new mongoose.Schema(
 		// Order details
 		items: [
 			{
-				name: {
-					type: String,
+				menuItem: {
+					type: mongoose.Schema.Types.ObjectId,
+					ref: "MenuItem", // Reference to the MenuItem model
 					required: true,
 				},
 				quantity: {
@@ -16,7 +17,8 @@ const OrderSchema = new mongoose.Schema(
 					min: 1,
 				},
 				price: {
-					type: Number,
+					type: mongoose.Schema.Types.ObjectId,
+					ref: "MenuItem", // Reference to the MenuItem model
 					required: true,
 					min: 0,
 				},
@@ -36,6 +38,11 @@ const OrderSchema = new mongoose.Schema(
 		updatedAt: {
 			type: Date,
 			default: Date.now,
+		},
+		table: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Table",
+			required: true,
 		},
 	},
 	{ collection: "orders" }
