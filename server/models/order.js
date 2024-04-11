@@ -3,20 +3,6 @@ import mongoose from "mongoose";
 // Define the schema for the order
 const OrderSchema = new mongoose.Schema(
 	{
-		// Customer information
-		customerName: {
-			type: String,
-			required: true,
-		},
-		customerEmail: {
-			type: String,
-			required: true,
-			lowercase: true,
-		},
-		customerPhone: {
-			type: String,
-			required: true,
-		},
 		// Order details
 		items: [
 			{
