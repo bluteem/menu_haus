@@ -23,7 +23,6 @@ const menuItemSchema = new mongoose.Schema(
 			default: false, // Set the default value to false
 		},
 		categoryId: {
-			// type: String,
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "MenuCategory", // Reference to the Category model
 			required: true,
