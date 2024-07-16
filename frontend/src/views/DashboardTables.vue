@@ -28,7 +28,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="table in allTablesData" :key="table._id" class="border-b border-neutral-300">
+									<tr
+										v-for="table in allTablesData"
+										:key="table._id"
+										class="border-b border-neutral-300">
 										<td class="whitespace-nowrap border-r px-6 py-4 border-neutral-300">
 											<div class="text-gray-900">{{ table.tableName }}</div>
 										</td>
@@ -74,7 +77,9 @@
 						<div class="mt-5">
 							<form @submit.prevent="addTable($refs.Alert)">
 								<div class="mb-4">
-									<label for="newTableName" class="block font-medium text-gray-700">Table Name:</label>
+									<label for="newTableName" class="block font-medium text-gray-700"
+										>Table Name:</label
+									>
 									<input
 										type="text"
 										v-model="newTable.tableName"
@@ -84,7 +89,9 @@
 								</div>
 
 								<div class="mb-4">
-									<label for="newTableNumber" class="block font-medium text-gray-700">Table Number:</label>
+									<label for="newTableNumber" class="block font-medium text-gray-700"
+										>Table Number:</label
+									>
 									<input
 										type="text"
 										v-model="newTable.tableNumber"
@@ -117,7 +124,11 @@
 														mode: 'Byte',
 														errorCorrectionLevel: 'H',
 													}"
-													:imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
+													:imageOptions="{
+														hideBackgroundDots: true,
+														imageSize: 0.4,
+														margin: 0,
+													}"
 													:dotsOptions="{
 														type: 'extra-rounded',
 														color: '#6A1A4C',
@@ -179,7 +190,9 @@
 						<div class="mt-5">
 							<form @submit.prevent="updateTable($refs.Alert)">
 								<div class="mb-4">
-									<label for="editTableName" class="block font-medium text-gray-700">Table Name:</label>
+									<label for="editTableName" class="block font-medium text-gray-700"
+										>Table Name:</label
+									>
 									<input
 										type="text"
 										v-model="newTable.tableName"
@@ -189,7 +202,9 @@
 								</div>
 
 								<div class="mb-4">
-									<label for="editTableNumber" class="block font-medium text-gray-700">Table Number:</label>
+									<label for="editTableNumber" class="block font-medium text-gray-700"
+										>Table Number:</label
+									>
 									<input
 										type="text"
 										v-model="newTable.tableNumber"
@@ -303,7 +318,10 @@ export default {
 		const updateTable = async (alertRef) => {
 			try {
 				// Send a PUT request to update table info
-				const response = await axios.put(`http://localhost:5000/api/tables/${newTable.value._id}`, newTable.value);
+				const response = await axios.put(
+					`http://localhost:5000/api/tables/${newTable.value._id}`,
+					newTable.value
+				);
 				// Extract updated table data from the response
 				const updatedTable = response.data.tableData;
 				// Find the index of the updated table in the tables array
@@ -339,11 +357,11 @@ export default {
 		};
 
 		const showQRCode = ref(false);
-		const urlForQrCode = ref("https://maps.app.goo.gl/wkmvfL5Dq8XvimCh6");
+		const urlForQrCode = ref("https://kafemuhendis.com");
 
 		const generateQrCode = () => {
 			// Set qrValue based on your logic, e.g., fetch from an API
-			urlForQrCode.value = "https://maps.app.goo.gl/wkmvfL5Dq8XvimCh6";
+			urlForQrCode.value = "https://kafemuhendis.com";
 			showQRCode.value = true; // Show the QR code
 		};
 
