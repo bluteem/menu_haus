@@ -357,11 +357,11 @@ export default {
 		};
 
 		const showQRCode = ref(false);
-		const urlForQrCode = ref("https://kafemuhendis.com");
+		const urlForQrCode = ref("https://bluteem.com");
 
 		const generateQrCode = () => {
 			// Set qrValue based on your logic, e.g., fetch from an API
-			urlForQrCode.value = "https://kafemuhendis.com";
+			urlForQrCode.value = "https://bluteem.com";
 			showQRCode.value = true; // Show the QR code
 		};
 
